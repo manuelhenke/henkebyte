@@ -8,6 +8,8 @@ import VueAnalytics from 'vue-analytics';
 
 Amplify.configure(awsconfig);
 
+Vue.config.productionTip = false;
+
 Vue.use(AmplifyPlugin, AmplifyModules);
 Vue.use(VueAnalytics, {
   id: 'UA-140895510-1 '
