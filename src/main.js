@@ -20,5 +20,5 @@ const logger = new Logger("vue-logger");
 logger.info("App initialized");
 
 new Vue({
-  render: h => h(App);
+  render: h => h(App)
 }).$mount('#app');
