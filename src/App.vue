@@ -5,7 +5,7 @@
       <p class="app-header-subtitle">
         <span class="message">Comming soon&hellip;</span>
         <span class="contact">
-          <a href="mailto:manuel.henke@yahoo.d">Contact</a>
+          <a href="mailto:manuel.henke@yahoo.de">Contact</a>
         </span>
       </p>
     </div>
