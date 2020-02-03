@@ -73,7 +73,7 @@ body {
       font-weight: 100;
 
       .message {
-        color: #666666;
+        color: #333;
       }
 
       .contact {
