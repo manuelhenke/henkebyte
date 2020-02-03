@@ -1,10 +1,7 @@
 <template>
   <div class="app">
     <div class="app-header">
-      <h1 class="app-header-title">
-        <span>Henke</span>
-        <strong>byte</strong>
-      </h1>
+      <h1 class="app-header-title">Henkebyte</h1>
       <div class="line"></div>
       <div class="app-header-subtitle">
         <span class="message">Comming soon&hellip;</span>
@@ -62,10 +59,10 @@ body {
 
   .app-header {
     padding: 30px;
-    background-color: rgba(240, 240, 240, 0.25);
-    -webkit-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+    background-color: rgba(240, 240, 240, 0.5);
+    -webkit-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.25);
 
     color: #000;
     .app-header-title {
