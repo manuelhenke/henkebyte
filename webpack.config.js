@@ -47,8 +47,7 @@ module.exports = {
                 'file-loader',
             ],
             exclude: [
-                /node_modules/,
-                /static/
+                /node_modules/
             ]
         },
         ]
@@ -59,7 +58,7 @@ module.exports = {
         hot: true
     },
     plugins: [
-        new CopyWebpackPlugin(['index.html']),
+        new CopyWebpackPlugin(['public']),
         new webpack.HotModuleReplacementPlugin(),
         new VueLoaderPlugin()
     ]

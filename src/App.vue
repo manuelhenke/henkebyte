@@ -1,7 +1,8 @@
 <template>
   <div class="app">
     <div class="app-header">
-      <h1 class="app-header-title">Henkebyte</h1>
+      <!-- <h1 class="app-header-title">Henkebyte</h1> -->
+      <img src="henkebyte-logo.png" alt="henkebyte-logo">
       <div class="line"></div>
       <div class="app-header-subtitle">
         <span class="message">Comming soon&hellip;</span>
@@ -64,7 +65,7 @@ body {
     -moz-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.25);
     box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.25);
 
-    color: #000;
+    color: #139187;
     .app-header-title {
       margin: 0;
 
@@ -75,7 +76,7 @@ body {
 
     .line {
       margin: 30px -30px;
-      border-top: black solid 2px;
+      border-top: #139187 solid 2px;
     }
 
     .app-header-subtitle {
