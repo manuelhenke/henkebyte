@@ -1,14 +1,18 @@
 <template>
   <div class="app">
     <div class="app-header">
-      <h1 class="app-header-title">Henkebyte</h1>
-      <p class="app-header-subtitle">
+      <h1 class="app-header-title">
+        <span>Henke</span>
+        <strong>byte</strong>
+      </h1>
+      <div class="line"></div>
+      <div class="app-header-subtitle">
         <span class="message">Comming soon&hellip;</span>
-        <span class="contact">
-          <a href="mailto:contact@henkebyte.com">Contact</a>
-        </span>
-      </p>
+      </div>
     </div>
+    <span class="app-contact">
+      <a href="mailto:contact@henkebyte.com">Contact</a>
+    </span>
   </div>
 </template>
 
@@ -21,7 +25,7 @@ export default {
     ...components
   },
   mounted() {
-    this.$ga.page('/');
+    this.$ga.page("/");
   }
 };
 </script>
@@ -54,33 +58,53 @@ body {
   align-items: center;
   justify-content: center;
 
+  font-family: "Courier New";
+
   .app-header {
-    font-family: "Courier New";
+    padding: 30px;
+    background-color: rgba(240, 240, 240, 0.25);
+    -webkit-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+
+    color: #000;
     .app-header-title {
       margin: 0;
-      text-align: center;
 
+      line-height: 100%;
       font-size: 72px;
       font-weight: 500;
-      color: #000;
     }
+
+    .line {
+      margin: 30px 0;
+      border-top: black solid 2px;
+    }
+
     .app-header-subtitle {
-      margin: 0;
-
       display: flex;
-      justify-content: space-between;
-
-      font-weight: 100;
+      justify-content: center;
 
       .message {
-        color: #333;
+        font-weight: 100;
+        font-size: 22px;
       }
+    }
+  }
 
-      .contact {
+  .app-contact {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    a {
+      color: black;
+      font-weight: bold;
+      padding: 10px 16px;
+      display: inline-block;
+      text-decoration: none;
 
-        a {
-          text-decoration: none;
-        }
+      &:hover {
+        background: rgba(240, 240, 240, 0.25);
       }
     }
   }
