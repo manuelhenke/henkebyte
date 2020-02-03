@@ -2,14 +2,16 @@
   <div class="app">
     <div class="app-header">
       <!-- <h1 class="app-header-title">Henkebyte</h1> -->
-      <img src="henkebyte-logo.png" alt="henkebyte-logo">
+      <img src="henkebyte-logo.png" alt="henkebyte-logo" />
       <div class="line"></div>
       <div class="app-header-subtitle">
         <span class="message">Comming soon&hellip;</span>
       </div>
     </div>
     <span class="app-contact">
-      <a href="mailto:contact@henkebyte.com">Contact</a>
+      <b-button variant="outline-dark" class="" href="mailto:contact@henkebyte.com">
+        <b-icon icon="envelope"></b-icon> Contact
+      </b-button>
     </span>
   </div>
 </template>
@@ -94,17 +96,6 @@ body {
     position: fixed;
     bottom: 15px;
     right: 15px;
-    a {
-      color: black;
-      font-weight: bold;
-      padding: 10px 16px;
-      display: inline-block;
-      text-decoration: none;
-
-      &:hover {
-        background: rgba(240, 240, 240, 0.25);
-      }
-    }
   }
 }
 </style>

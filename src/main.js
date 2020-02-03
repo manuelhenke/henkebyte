@@ -5,11 +5,18 @@ import awsconfig from './aws-exports';
 import Vue from 'vue';
 import App from './App.vue';
 import VueAnalytics from 'vue-analytics';
+import PortalVue from 'portal-vue'
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
+
+import './custom.scss'
 
 Amplify.configure(awsconfig);
 
 Vue.config.productionTip = false;
 
+Vue.use(BootstrapVue)
+Vue.use(BootstrapVueIcons)
+Vue.use(PortalVue)
 Vue.use(AmplifyPlugin, AmplifyModules);
 Vue.use(VueAnalytics, {
   id: 'UA-140895510-1 '
