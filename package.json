@@ -1,5 +1,28 @@
 {
-  "name": "henkebyte-website",
-  "version": "1.0.0",
-  "description": "henkebyte.com website"
+    "name": "henkebyte-website",
+    "version": "1.0.0",
+    "description": "henkebyte.com website",
+    "dependencies": {
+        "@aws-amplify/api": "latest",
+        "@aws-amplify/pubsub": "latest"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.8.4",
+        "@babel/preset-env": "^7.8.4",
+        "aws-amplify": "^2.2.2",
+        "aws-amplify-vue": "^1.1.2",
+        "babel-loader": "^8.0.6",
+        "copy-webpack-plugin": "^4.5.2",
+        "css-loader": "^3.4.2",
+        "file-loader": "^5.0.2",
+        "vue-loader": "^15.8.3",
+        "vue-template-compiler": "^2.6.11",
+        "webpack": "^4.41.5",
+        "webpack-cli": "^3.1.0",
+        "webpack-dev-server": "^3.1.5"
+    },
+    "scripts": {
+        "start": "webpack && webpack-dev-server --mode development",
+        "build": "webpack"
+    }
 }
