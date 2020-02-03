@@ -34,6 +34,12 @@ body {
   border: 0;
   min-width: auto;
   height: 100%;
+  background: rgb(170, 233, 4);
+  background: linear-gradient(
+    180deg,
+    rgba(170, 233, 4, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  );
 }
 
 * {
@@ -43,12 +49,6 @@ body {
 
 <style lang="scss" scoped>
 .app {
-  background: rgb(170, 233, 4);
-  background: linear-gradient(
-    180deg,
-    rgba(170, 233, 4, 1) 0%,
-    rgba(0, 212, 255, 1) 100%
-  );
   height: 100%;
   display: flex;
   align-items: center;
