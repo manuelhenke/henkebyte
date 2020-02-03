@@ -5,9 +5,10 @@
         Henke
         <strong>byte</strong>
       </h1>
-      <p class="app-header-subtitle">
+      <div class="line"></div>
+      <div class="app-header-subtitle">
         <span class="message">Comming soon&hellip;</span>
-      </p>
+      </div>
     </div>
     <span class="app-contact">
       <a href="mailto:contact@henkebyte.com">Contact</a>
@@ -60,24 +61,33 @@ body {
   font-family: "Courier New";
 
   .app-header {
+    padding: 30px;
+    background-color: rgba(240, 240, 240, 0.25);
+    -webkit-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+
+    color: #000;
     .app-header-title {
       margin: 0;
-      text-align: center;
 
+      line-height: 100%;
       font-size: 72px;
       font-weight: 500;
-      color: #000;
     }
+
+    .line {
+      margin: 30px 0;
+      border-top: black solid 2px;
+    }
+
     .app-header-subtitle {
-      margin: 0;
-
       display: flex;
-      justify-content: space-between;
-
-      font-weight: 100;
+      justify-content: center;
 
       .message {
-        color: #333;
+        font-weight: 100;
+        font-size: 22px;
       }
     }
   }
@@ -94,7 +104,7 @@ body {
       text-decoration: none;
 
       &:hover {
-        background: rgba(240,240,240,0.25);
+        background: rgba(240, 240, 240, 0.25);
       }
     }
   }
