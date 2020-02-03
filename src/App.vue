@@ -1,14 +1,17 @@
 <template>
   <div class="app">
     <div class="app-header">
-      <h1 class="app-header-title">Henkebyte</h1>
+      <h1 class="app-header-title">
+        Henke
+        <strong>byte</strong>
+      </h1>
       <p class="app-header-subtitle">
         <span class="message">Comming soon&hellip;</span>
-        <span class="contact">
-          <a href="mailto:contact@henkebyte.com">Contact</a>
-        </span>
       </p>
     </div>
+    <span class="app-contact">
+      <a href="mailto:contact@henkebyte.com">Contact</a>
+    </span>
   </div>
 </template>
 
@@ -21,7 +24,7 @@ export default {
     ...components
   },
   mounted() {
-    this.$ga.page('/');
+    this.$ga.page("/");
   }
 };
 </script>
@@ -54,8 +57,9 @@ body {
   align-items: center;
   justify-content: center;
 
+  font-family: "Courier New";
+
   .app-header {
-    font-family: "Courier New";
     .app-header-title {
       margin: 0;
       text-align: center;
@@ -75,12 +79,22 @@ body {
       .message {
         color: #333;
       }
+    }
+  }
 
-      .contact {
+  .app-contact {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    a {
+      color: black;
+      font-weight: bold;
+      padding: 10px 16px;
+      display: inline-block;
+      text-decoration: none;
 
-        a {
-          text-decoration: none;
-        }
+      &:hover {
+        background: rgba(240,240,240,0.25);
       }
     }
   }
