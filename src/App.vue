@@ -2,7 +2,7 @@
   <div class="app">
     <div class="app-header">
       <h1 class="app-header-title">
-        Henke
+        <span>Henke</span>
         <strong>byte</strong>
       </h1>
       <div class="line"></div>
