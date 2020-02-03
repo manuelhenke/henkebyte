@@ -58,7 +58,7 @@ body {
   font-family: "Courier New";
 
   .app-header {
-    padding: 30px;
+    padding: 30px 60px;
     background-color: rgba(240, 240, 240, 0.5);
     -webkit-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.25);
@@ -74,7 +74,7 @@ body {
     }
 
     .line {
-      margin: 30px 0;
+      margin: 30px -30px;
       border-top: black solid 2px;
     }
 
