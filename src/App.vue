@@ -9,7 +9,7 @@
       </div>
     </div>
     <span class="app-contact">
-      <b-button pill variant="primary" href="mailto:contact@henkebyte.com">
+      <b-button variant="link" class="text-decoration-none" href="mailto:contact@henkebyte.com">
         <b-icon icon="envelope" scale="1.5"></b-icon>
         <span class="button-text">Contact</span>
       </b-button>
@@ -88,8 +88,7 @@ export default {
         display: inline-block;
         opacity: 0;
         width: 0;
-        transition: all 1.5s;
-        overflow-y: hidden;
+        transition: all 0.5s;
       }
     }
   }
