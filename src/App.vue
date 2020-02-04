@@ -9,8 +9,8 @@
       </div>
     </div>
     <span class="app-contact">
-      <b-button variant="outline-dark" class="" href="mailto:contact@henkebyte.com">
-        <b-icon icon="envelope"></b-icon> Contact
+      <b-button pill variant="primary" href="mailto:contact@henkebyte.com">
+        <b-icon icon="envelope" scale="1.5"></b-icon>
       </b-button>
     </span>
   </div>
@@ -30,27 +30,6 @@ export default {
 };
 </script>
 
-<style>
-html,
-body {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  min-width: auto;
-  height: 100%;
-  background: rgb(170, 233, 4);
-  background: linear-gradient(
-    180deg,
-    rgba(170, 233, 4, 1) 0%,
-    rgba(0, 212, 255, 1) 100%
-  );
-}
-
-* {
-  box-sizing: border-box;
-}
-</style>
-
 <style lang="scss" scoped>
 .app {
   height: 100%;
@@ -58,7 +37,6 @@ body {
   align-items: center;
   justify-content: center;
 
-  font-family: "Courier New";
 
   .app-header {
     padding: 30px 60px;

@@ -1,2 +1,22 @@
+$primary: #139187;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-width: auto;
+  height: 100%;
+  background: rgb(170, 233, 4);
+  background: linear-gradient(
+    30deg,
+    rgba(170, 233, 4, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
+* {
+  box-sizing: border-box;
+}
+
 @import '~bootstrap';
 @import '~bootstrap-vue';
