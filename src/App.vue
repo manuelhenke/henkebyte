@@ -11,6 +11,7 @@
     <span class="app-contact">
       <b-button pill variant="primary" href="mailto:contact@henkebyte.com">
         <b-icon icon="envelope" scale="1.5"></b-icon>
+        <span class="button-text">Contact</span>
       </b-button>
     </span>
   </div>
@@ -36,7 +37,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-
 
   .app-header {
     padding: 30px 60px;
@@ -74,6 +74,24 @@ export default {
     position: fixed;
     bottom: 15px;
     right: 15px;
+
+    .btn {
+      &:hover {
+        .button-text {
+          margin-left: 5px;
+          width: 60px;
+          opacity: 1;
+        }
+      }
+
+      .button-text {
+        display: inline-block;
+        opacity: 0;
+        width: 0;
+        transition: all 1.5s;
+        overflow-y: hidden;
+      }
+    }
   }
 }
 </style>
