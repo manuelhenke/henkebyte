@@ -1,9 +1,5 @@
 import Vue from 'vue';
 
-console.log(process.env.NODE_ENV);
-console.log(Vue.config);
-
-
 import Amplify, * as AmplifyModules from 'aws-amplify';
 import { Logger } from 'aws-amplify';
 import { AmplifyPlugin } from 'aws-amplify-vue';
