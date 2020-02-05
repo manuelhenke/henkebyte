@@ -1,10 +1,9 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
-    mode: 'development',
     entry: './src/main.js',
     output: {
         filename: '[name].bundle.js',
@@ -52,14 +51,9 @@ module.exports = {
         },
         ]
     },
-    devServer: {
-        contentBase: './dist',
-        overlay: true,
-        hot: true
-    },
     plugins: [
+        new CleanWebpackPlugin(),
         new CopyWebpackPlugin(['public']),
-        new webpack.HotModuleReplacementPlugin(),
         new VueLoaderPlugin()
     ]
 };

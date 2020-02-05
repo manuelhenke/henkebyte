@@ -1,26 +1,21 @@
 <template>
-  <div class="app container">
-    <WelcomeCard/>
+  <b-container fluid class="app">
+    <router-view class="view"></router-view>
     <div class="contact-button-container">
-      <ContactButton/>
+      <ContactButton />
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>
 import { components } from "aws-amplify-vue";
-import WelcomeCard from "./components/WelcomeCard.vue";
 import ContactButton from "./components/ContactButton.vue";
 
 export default {
   name: "app",
   components: {
     ...components,
-    WelcomeCard,
     ContactButton
-  },
-  mounted() {
-    this.$ga.page("/");
   }
 };
 </script>
