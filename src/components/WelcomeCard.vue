@@ -6,7 +6,10 @@
     </div>
     <div class="welcome-card-line border-primary"></div>
     <div class="welcome-card-message-container">
-      <span>Comming soon&hellip;</span>
+      <ul>
+        <li><router-link to="ios-calculator">iOS-Calculator ></router-link></li>
+        <li><router-link to="minesweeper">Minesweeper ></router-link></li>
+      </ul>
     </div>
   </div>
 </template>
@@ -65,15 +68,18 @@ export default {
   .welcome-card-message-container {
     display: flex;
     justify-content: center;
+    font-weight: 100;
+    font-size: 22px;
+    font-style: italic;
 
-    span {
-      font-weight: 100;
-      font-size: 22px;
-      font-style: italic;
-      
-      @media (max-width: 600px) {
-        font-size: 16px;
-      }
+    @media (max-width: 600px) {
+      font-size: 16px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
   }
 }

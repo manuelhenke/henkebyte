@@ -1,6 +1,7 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { ProvidePlugin } = require('webpack');
 
 module.exports = {
     entry: './src/main.js',
@@ -48,7 +49,14 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new CopyWebpackPlugin(['public']),
+        new CopyWebpackPlugin([
+            'public',
+            'node_modules/minesweeper-for-web/dist/assets'
+        ]),
+        new ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+        }),
         new VueLoaderPlugin()
     ]
 };

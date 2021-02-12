@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="app">
+  <b-container class="app">
     <router-view class="view"></router-view>
     <div class="contact-button-container">
       <ContactButton />

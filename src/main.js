@@ -7,8 +7,8 @@ Vue.use(AmplifyPlugin, AmplifyModules)
 Vue.use(new Logger("amplify-logger"))
 
 
-import awsconfig from './aws-exports';
-Amplify.configure(awsconfig);
+import awsConfig from './aws-exports';
+Amplify.configure(awsConfig);
 
 
 import PortalVue from 'portal-vue'
@@ -18,17 +18,11 @@ Vue.use(PortalVue)
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 
+import $ from 'jquery';
+import jQuery from 'jquery';
+window.$ = $;
 
-import VueRouter from 'vue-router'
-import WelcomeCard from "./components/WelcomeCard.vue";
-Vue.use(VueRouter)
-const router = new VueRouter({
-  mode: 'history',
-  base: __dirname,
-  routes: [
-    { path: '/', component: WelcomeCard }
-  ]
-})
+import router from './router';
 
 
 import VueAnalytics from 'vue-analytics';
