@@ -1,16 +1,5 @@
 import Vue from 'vue';
 
-import Amplify, * as AmplifyModules from 'aws-amplify';
-import { Logger } from 'aws-amplify';
-import { AmplifyPlugin } from 'aws-amplify-vue';
-Vue.use(AmplifyPlugin, AmplifyModules)
-Vue.use(new Logger("amplify-logger"))
-
-
-import awsConfig from './aws-exports';
-Amplify.configure(awsConfig);
-
-
 import PortalVue from 'portal-vue'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import './custom.scss'
