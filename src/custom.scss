@@ -1,23 +1,26 @@
 $primary: #139187;
 $secondary: #f8f818;
+$link-decoration: none;
+
+@import "~bootstrap";
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 
 html,
 body {
+  scroll-behavior: smooth;
   margin: 0;
   padding: 0;
-  min-width: auto;
-  height: 100%;
-  background: rgb(170, 233, 4);
-  background: linear-gradient(
-    30deg,
-    rgba(170, 233, 4, 1) 0%,
-    rgba(0, 212, 255, 1) 100%
-  );
+  background-color: rgb(85,223,130);
 }
 
-* {
-  box-sizing: border-box;
+a:not(.btn) {
+  &[target="_blank"], &[target="_window"] {
+    &::after {
+      font-family: bootstrap-icons !important;
+      content: "\F1C5"; // box-arrow-up-right
+      display: inline;
+      text-decoration: none;
+      margin-left: 0.25em;
+    }
+  }
 }
-
-@import "~bootstrap";
-@import "~bootstrap-vue";

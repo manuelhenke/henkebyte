@@ -1,36 +1,38 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import WelcomeCard from "../components/WelcomeCard.vue";
-
-Vue.use(VueRouter)
+import { createWebHistory, createRouter } from "vue-router";
+import Home from "../pages/Home.vue";
+import PageNotFound from "../pages/PageNotFound.vue";
 
 const routes = [
     {
         path: '/',
-        name: 'WelcomeCard',
-        component: WelcomeCard
+        name: 'home',
+        component: Home
     },
     {
         path: '/ios-calculator',
-        name: 'Calculator',
+        name: 'calculator',
         // route level code-splitting
-        // this generates a separate chunk (profile.[hash].js) for this route
+        // this generates a separate chunk (calculator.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "ios-calculator" */ '../components/Calculator.vue')
+        component: () => import(/* webpackChunkName: "calculator" */ '../pages/Calculator.vue')
     },
     {
         path: '/minesweeper',
-        name: 'Minesweeper',
+        name: 'minesweeper',
         // route level code-splitting
-        // this generates a separate chunk (profile.[hash].js) for this route
+        // this generates a separate chunk (minesweeper.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "minesweeper" */ '../components/Minesweeper.vue')
+        component: () => import(/* webpackChunkName: "minesweeper" */ '../pages/Minesweeper.vue')
+    },
+    { 
+        path: '/:pathMatch(.*)*', 
+        name: 'page-not-found',
+        component: PageNotFound 
     }
 ]
 
-const router = new VueRouter({
-    mode: 'history',
-    base: __dirname,
+const router = createRouter({
+    history: createWebHistory(),
     routes
 })
 

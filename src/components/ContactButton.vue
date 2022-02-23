@@ -1,9 +1,9 @@
 <template>
   <span class="app-contact">
-    <b-button pill variant="primary" class="text-decoration-none" :href="'mailto:' + this.mail">
-      <b-icon icon="envelope" scale="1.5"></b-icon>
-      <span class="button-text">Contact</span>
-    </b-button>
+    <a pill class="btn btn-primary text-light text-decoration-none" :href="href" target="_blank">
+      <i :class="icon"></i>
+      <span class="button-text">{{ text }}</span>
+    </a>
   </span>
 </template>
 
@@ -11,11 +11,21 @@
 <script>
 export default {
   name: "ContactButton",
-  data() {
-    return {
-      mail: "contact@henkebyte.com"
-    };
-  }
+  props: {
+    href: {
+      type: String,
+      required: true,
+    },
+    icon: {
+      type: String,
+      required: true,
+    },
+    text: {
+      type: String,
+      required: true,
+    }
+  },
+  data: () => ({})
 };
 </script>
 
@@ -27,11 +37,13 @@ export default {
     align-items: center;
     overflow: hidden;
 
-    &:hover {
-      .button-text {
-        margin-left: 5px;
-        opacity: 1;
-        width: 60px;
+    @media (hover: hover) {
+      &:hover {
+        .button-text {
+          margin-left: 5px;
+          opacity: 1;
+          width: 60px;
+        }
       }
     }
 
@@ -39,6 +51,7 @@ export default {
       display: inline-block;
       line-height: 1;
 
+      white-space: nowrap;
       opacity: 0;
       width: 0;
       transition: all 0.5s;
