@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import PageTemplate from "./PageTemplate.vue";
+import PageTemplate from "@/pages/PageTemplate.vue";
 export default {
   name: "PageNotFound",
   components: {

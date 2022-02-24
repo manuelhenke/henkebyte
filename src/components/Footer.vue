@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import ContactButton from "./ContactButton.vue";
+import ContactButton from "@/components/ContactButton.vue";
 export default {
   name: "Footer",
   components: {

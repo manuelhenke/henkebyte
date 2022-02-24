@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import WelcomeCard from '../components/WelcomeCard.vue';
+import WelcomeCard from '@/components/WelcomeCard.vue';
 export default {
   name: "Home",
   components: {

@@ -143,8 +143,8 @@
 </template>
 
 <script>
-import PageTemplate from "./PageTemplate.vue";
-import StopWatch from "../components/StopWatch.vue";
+import PageTemplate from "@/pages/PageTemplate.vue";
+import StopWatch from "@/components/StopWatch.vue";
 import Platform from "platform-detect";
 import { Fireworks } from "fireworks-js";
 

@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Home from "../pages/Home.vue";
-import PageNotFound from "../pages/PageNotFound.vue";
+import Home from "@/pages/Home.vue";
+import PageNotFound from "@/pages/PageNotFound.vue";
 
 const routes = [
     {
@@ -14,7 +14,7 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (calculator.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "calculator" */ '../pages/Calculator.vue')
+        component: () => import(/* webpackChunkName: "calculator" */ '@/pages/Calculator.vue')
     },
     {
         path: '/minesweeper',
@@ -22,7 +22,7 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (minesweeper.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "minesweeper" */ '../pages/Minesweeper.vue')
+        component: () => import(/* webpackChunkName: "minesweeper" */ '@/pages/Minesweeper.vue')
     },
     { 
         path: '/:pathMatch(.*)*', 

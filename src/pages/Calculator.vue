@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import PageTemplate from "./PageTemplate.vue";
+import PageTemplate from "@/pages/PageTemplate.vue";
 import "ios-calculator-for-web";
 
 export default {

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import ContactButton from "./components/ContactButton.vue";
+import ContactButton from "@/components/ContactButton.vue";
 
 export default {
   name: "app",

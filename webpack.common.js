@@ -1,9 +1,11 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const path = require("path");
 
 module.exports = {
-  entry: "./src/main.js",
+  entry: "./src/main.js",  
+  node: false,
   module: {
     rules: [
       {
@@ -53,6 +55,16 @@ module.exports = {
         exclude: [/node_modules/],
       },
     ],
+  },
+  resolve: {
+    extensions: [
+      '.js',
+      '.vue',
+      '.json'
+    ],
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
   },
   plugins: [
     new CleanWebpackPlugin(),
