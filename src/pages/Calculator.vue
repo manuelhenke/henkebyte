@@ -4,7 +4,7 @@
     <template v-slot:lead>
       This is an implementation of the iOS Calculator, which is available at
         <a href="https://github.com/manuelhenke/ios-calculator-for-web" target="_blank">GitHub</a>
-        or at
+        or
         <a href="https://www.npmjs.com/package/ios-calculator-for-web" target="_blank">npm</a>.
     </template>
     <div class="text-center mt-3">

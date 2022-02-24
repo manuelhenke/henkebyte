@@ -2,13 +2,19 @@
   <PageTemplate new-badge>
     <template v-slot:title>Minesweeper</template>
     <template v-slot:lead>
-      This is an implementation of the game, which is available at
+      This is an implementation of the game
+      <a
+        href="https://www.instructables.com/id/How-to-beat-Minesweeper/"
+        target="_blank"
+        title="Minesweeper Tutorial"
+        >Minesweeper</a
+      >, which is available at
       <a
         href="https://github.com/manuelhenke/minesweeper-for-web"
         target="_blank"
         >GitHub</a
       >
-      or at
+      or
       <a
         href="https://www.npmjs.com/package/minesweeper-for-web"
         target="_blank"
@@ -233,15 +239,21 @@ export default {
       this.isEnded = false;
     },
     handleMinesweeperClick() {
-      if(!this.$refs["stopwatch"].isRunning && !this.isEnded) {
+      if (!this.$refs["stopwatch"].isRunning && !this.isEnded) {
         this.$refs["stopwatch"].start();
       }
-    }
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@media (max-width: 768px) {
+  #minesweeper {
+    border-width: 4px;
+  }
+}
+
 .firework-container {
   position: absolute;
   inset: 0;

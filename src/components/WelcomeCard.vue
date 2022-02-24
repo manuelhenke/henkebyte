@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3 p-sm-4 p-md-5 bg-light rounded-3 shadow-lg welcome-card text-primary text-center">
+  <div class="p-3 p-sm-4 p-md-5 bg-light rounded-3 shadow-lg welcome-card text-center">
     <h1 class="display-5">Welcome to <span class="d-none">HenkeByte</span></h1>
     <div class="welcome-card-image-container">
       <img src="images/henkebyte-logo.png" class="img-fluid" alt="henkebyte-logo">
