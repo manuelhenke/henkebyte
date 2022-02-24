@@ -10,6 +10,7 @@
     "@popperjs/core": "^2.11.2",
     "bootstrap": "^5.1.3",
     "bootstrap-icons": "^1.8.1",
+    "fireworks-js": "^1.3.5",
     "ios-calculator-for-web": "^1.2.3",
     "minesweeper-for-web": "^2.0.3",
     "platform-detect": "^3.0.1",

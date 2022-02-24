@@ -3,17 +3,21 @@
     <template v-slot:title>Minesweeper</template>
     <template v-slot:lead>
       This is an implementation of the game, which is available at
-      <a href="https://github.com/manuelhenke/minesweeper-for-web" target="_blank">GitHub</a>
+      <a
+        href="https://github.com/manuelhenke/minesweeper-for-web"
+        target="_blank"
+        >GitHub</a
+      >
       or at
-      <a href="https://www.npmjs.com/package/minesweeper-for-web" target="_blank">npm</a>.
+      <a
+        href="https://www.npmjs.com/package/minesweeper-for-web"
+        target="_blank"
+        >npm</a
+      >.
     </template>
 
     <div class="d-grid gap-2 col-12 col-md-6 col-lg-4 mx-auto my-3 text-center">
-      <select
-        class="form-select text-center"
-        name="gamemode"
-        ref="gamemode"
-      >
+      <select class="form-select text-center" name="gamemode" ref="gamemode">
         <option value="easy" selected>Easy - 9x9 / 10 Mines</option>
         <option value="normal">Normal - 16x16 / 40 Mines</option>
         <option value="hard">Hard - 16x30 / 99 Mines</option>
@@ -37,15 +41,24 @@
         ref="minesweeper"
         class="d-inline-block"
         bomb-counter-selector="#bomb-counter"
+        @field-click="handleMinesweeperClick"
       ></minesweeper-game>
     </div>
-    <div class="text-center mb-3">
+    <div class="my-3 d-flex gap-3 align-items-center justify-content-center">
+      <span>
+        <i class="bi bi-stopwatch"></i> <StopWatch ref="stopwatch"></StopWatch>
+      </span>
       <span class="badge rounded-pill bg-danger"
         ><span id="bomb-counter"></span> Mines left</span
       >
     </div>
 
-    <div ref="windows-info" class="alert alert-primary d-flex align-items-center d-none" role="alert" hidden>
+    <div
+      ref="windows-info"
+      class="alert alert-primary d-flex align-items-center d-none"
+      role="alert"
+      hidden
+    >
       <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
       <div>
         To place a flag just hold <kbd>Ctrl</kbd> or <kbd>Alt</kbd> while
@@ -53,19 +66,28 @@
       </div>
     </div>
 
-    <div ref="mac-info" class="alert alert-primary d-flex align-items-center d-none" role="alert" hidden>
+    <div
+      ref="mac-info"
+      class="alert alert-primary d-flex align-items-center d-none"
+      role="alert"
+      hidden
+    >
       <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
       <div>
-        To place a flag just hold <kbd>Cmd <i class="bi bi-command"></i></kbd> or <kbd>Opt <i class="bi bi-option"></i></kbd> while
-        clicking on a field.
+        To place a flag just hold
+        <kbd>Cmd <i class="bi bi-command"></i></kbd> or
+        <kbd>Opt <i class="bi bi-option"></i></kbd> while clicking on a field.
       </div>
     </div>
-    
-    <div ref="mobile-info" class="alert alert-primary d-flex align-items-center d-none" role="alert" hidden>
+
+    <div
+      ref="mobile-info"
+      class="alert alert-primary d-flex align-items-center d-none"
+      role="alert"
+      hidden
+    >
       <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
-      <div>
-        Just hold a field to place a flag.
-      </div>
+      <div>Just hold a field to place a flag.</div>
     </div>
 
     <div
@@ -110,12 +132,15 @@
         </div>
       </div>
     </div>
+    <div class="firework-container" ref="firework"></div>
   </PageTemplate>
 </template>
 
 <script>
 import PageTemplate from "./PageTemplate.vue";
-import Platform from 'platform-detect'
+import StopWatch from "../components/StopWatch.vue";
+import Platform from "platform-detect";
+import { Fireworks } from "fireworks-js";
 
 import "minesweeper-for-web";
 //import { Modal } from 'bootstrap'
@@ -124,9 +149,12 @@ export default {
   name: "Minesweeper",
   components: {
     PageTemplate,
+    StopWatch,
   },
   data: () => ({
     isEnded: false,
+    /** @type {Fireworks} */
+    fireworks: null,
   }),
   mounted() {
     function getGameModeConfiguration(currentGameMode) {
@@ -162,25 +190,35 @@ export default {
 
     this.$refs["minesweeper"].addEventListener("game-won", () => {
       this.isEnded = true;
-      console.log("win");
+      this.$refs["stopwatch"].stop();
+      this.fireworks.start();
+      window.setTimeout(() => {
+        this.fireworks.stop();
+      }, 10000);
     });
 
     this.$refs["minesweeper"].addEventListener("game-lost", () => {
       this.isEnded = true;
+      this.$refs["stopwatch"].stop();
       console.log("lose");
     });
 
-    if(Platform.mouse) {
-      if(Platform.macos) {
+    if (Platform.mouse) {
+      if (Platform.macos) {
         this.$refs["mac-info"].classList.remove("d-none");
       } else {
         this.$refs["windows-info"].classList.remove("d-none");
       }
-    } 
-    
-    if(Platform.touch) {
+    }
+
+    if (Platform.touch) {
       this.$refs["mobile-info"].classList.remove("d-none");
     }
+
+    this.fireworks = new Fireworks(this.$refs["firework"], {
+      particles: 200,
+      explosion: 10,
+    });
   },
   methods: {
     clickedRestart() {
@@ -189,11 +227,29 @@ export default {
       }
     },
     restartGame() {
+      this.fireworks.stop();
+      this.$refs["stopwatch"].reset();
       this.$refs["minesweeper"].restartGame();
       this.isEnded = false;
     },
+    handleMinesweeperClick() {
+      if(!this.$refs["stopwatch"].isRunning && !this.isEnded) {
+        this.$refs["stopwatch"].start();
+      }
+    }
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.firework-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  > * {
+    height: 100%;
+    width: 100%;
+  }
+}
+</style>

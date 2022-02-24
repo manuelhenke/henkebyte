@@ -1,5 +1,5 @@
 <template>
-  <div id="page-template" class="p-3 p-sm-4 p-md-5 bg-light rounded-3 shadow">
+  <div id="page-template" class="p-3 px-0 p-sm-4 p-md-5 bg-light rounded-3 shadow position-relative">
     <div class="d-flex justify-content-between align-items-center mb-2">
       <router-link tag="button" to="/" class="btn btn-link text-decoration-none">
         <i class="bi bi-chevron-left"></i>{{ backButtonText }}
