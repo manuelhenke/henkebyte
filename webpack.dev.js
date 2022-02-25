@@ -1,7 +1,6 @@
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
 const { HotModuleReplacementPlugin } = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = merge(common, {
@@ -21,10 +20,5 @@ module.exports = merge(common, {
   },
   plugins: [
     new HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      title: "Dev - Henke Byte",
-      filename: "index.html",
-      template: "./src/template.html",
-    }),
   ],
 });

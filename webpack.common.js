@@ -1,10 +1,12 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const SitemapPlugin = require("sitemap-webpack-plugin").default;
 const path = require("path");
 
 module.exports = {
-  entry: "./src/main.js",  
+  entry: "./src/main.js",
   node: false,
   module: {
     rules: [
@@ -57,20 +59,43 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [
-      '.js',
-      '.vue',
-      '.json'
-    ],
+    extensions: [".js", ".vue", ".json"],
     alias: {
-      '@': path.resolve(__dirname, 'src')
-    }
+      "@": path.resolve(__dirname, "src"),
+    },
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new VueLoaderPlugin(),
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: "./src/template.html",
+    }),
     new CopyWebpackPlugin({
       patterns: [{ from: "public" }],
     }),
-    new VueLoaderPlugin(),
+    new SitemapPlugin({
+      base: "https://henkebyte.com",
+      paths: [
+        {
+          path: "/",
+          priority: 1,
+        },
+        {
+          path: "/minesweeper",
+          priority: 0.9,
+        },
+        {
+          path: "/ios-calculator",
+          priority: 0.8,
+        },
+      ],
+      options: {
+        filename: "sitemap.xml",
+        lastmod: true,
+        changefreq: "daily",
+        priority: 0.5,
+      },
+    }),
   ],
 };

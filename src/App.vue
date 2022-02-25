@@ -27,7 +27,7 @@
 import ContactButton from "@/components/ContactButton.vue";
 
 export default {
-  name: "app",
+  name: "App",
   components: {
     ContactButton,
   },
