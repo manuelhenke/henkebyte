@@ -1,11 +1,14 @@
 import { createApp } from "vue";
 import router from "./router";
 import App from "./App.vue";
+import VueCountdown from '@chenfengyuan/vue-countdown';
+
 import VueGtag from "vue-gtag";
 import "./custom.scss";
 import 'bootstrap';
 
 const vueApp = createApp(App).use(router);
+vueApp.component(VueCountdown.name, VueCountdown);
 
 if (process.env.NODE_ENV === "production" && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {

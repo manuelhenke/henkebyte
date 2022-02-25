@@ -74,6 +74,25 @@ const routes = [
       import(/* webpackChunkName: "minesweeper" */ "@/pages/Minesweeper.vue"),
   },
   {
+    path: "/f1-countdown",
+    name: "f1-countdown",
+    meta: {
+      title: "F1 Countdown - HenkeByte",
+      metaTags: [
+        {
+          name: "title",
+          property: "og:title",
+          content: "F1 Countdown - HenkeByte",
+        },
+      ],
+    },
+    // route level code-splitting
+    // this generates a separate chunk (minesweeper.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "minesweeper" */ "@/pages/F1Countdown.vue"),
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "page-not-found",
     meta: {
