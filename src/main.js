@@ -1,6 +1,6 @@
 import { createApp } from "vue";
-import router from "./router";
-import App from "./App.vue";
+import router from "@/router";
+import App from "@/App.vue";
 import VueGtag from "vue-gtag";
 import "./custom.scss";
 import 'bootstrap';
