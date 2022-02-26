@@ -1,0 +1,30 @@
+$primary: #139187;
+$secondary: #f8f818;
+$link-decoration: none;
+$enable-negative-margins: true;
+
+@import '~bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+html,
+body {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  background-color: #55df82;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+a:not(.btn) {
+  &[target='_blank'],
+  &[target='_window'] {
+    &::after {
+      font-family: bootstrap-icons !important;
+      content: '\F1C5'; // box-arrow-up-right
+      display: inline;
+      text-decoration: none;
+      margin-left: 0.25em;
+    }
+  }
+}
