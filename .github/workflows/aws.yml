@@ -6,9 +6,9 @@ on:
       - main
 
 env:
-  TARGET_FOLDER: ./dist/
+  TARGET_FOLDER: ./dist
   AWS_REGION: eu-central-1
-  AWS_S3_BUCKET_NAME: arn:aws:s3:::henkebyte.com
+  AWS_S3_BUCKET_URI: s3://henkebyte.com
   AWS_CLOUDFRONT_DISTRIBUTION_ID: E1GEYIE2ZCH07U
 
 jobs:
@@ -61,7 +61,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Deploy
-        run: aws s3 sync ${{ env.TARGET_FOLDER }} ${{ env.AWS_S3_BUCKET_NAME }}
+        run: aws s3 sync ${{ env.TARGET_FOLDER }} ${{ env.AWS_S3_BUCKET_URI }}
 
       - name: Invalidate
         run: aws cloudfront create-invalidation --distribution-id ${{ env.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
