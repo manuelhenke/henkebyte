@@ -3,7 +3,7 @@
 
 # Henkebyte
 
-Website hosted on www.henkebyte.com
+Website hosted on [henkebyte.com](https://henkebyte.com)
 
 ## Build Setup
 
