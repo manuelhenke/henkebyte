@@ -7,7 +7,9 @@
       </main>
       <TheFooter class="mt-5" />
     </div>
-    <FloatingContactButtons />
+    <aside>
+      <FloatingContactButtons />
+    </aside>
   </div>
 </template>
 

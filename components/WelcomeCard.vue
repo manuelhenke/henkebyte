@@ -8,6 +8,8 @@
         src="~/assets/images/henkebyte-logo.png"
         class="img-fluid"
         alt="henkebyte-logo"
+        height="200"
+        width="200"
       />
     </div>
     <hr class="welcome-card-line" />
