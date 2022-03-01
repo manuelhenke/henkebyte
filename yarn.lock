@@ -7489,9 +7489,9 @@ min-indent@^1.0.0:
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
 minesweeper-for-web@^2.1.6:
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/minesweeper-for-web/-/minesweeper-for-web-2.1.8.tgz#6f47c3f8209c1101c9cec1f0df88198049bf9422"
-  integrity sha512-s6lnQpUGJOVCYp2CjB4X05q2sPRmRp3lSbZGrjjpITKFz4qE1NpWX36tVtDLgEsx4xCCNg5cy65izZLy9Gdkjg==
+  version "2.1.9"
+  resolved "https://registry.yarnpkg.com/minesweeper-for-web/-/minesweeper-for-web-2.1.9.tgz#aecdfbd72aa459f34c7ae91b3ac6f859cabaf616"
+  integrity sha512-CsciwYDGBfvRar3U0PLFJC2Vbq1XixaKg/sYsjNIF6wqB/ST7+CNRgf+UGSn7UQDwMDo1PxuzSyJCl+OdCg9HA==
   dependencies:
     lit "^2.2.0"
 
