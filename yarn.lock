@@ -972,7 +972,7 @@
     "@babel/helper-validator-option" "^7.16.7"
     "@babel/plugin-transform-typescript" "^7.16.7"
 
-"@babel/runtime@^7.14.0", "@babel/runtime@^7.15.4", "@babel/runtime@^7.16.7", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.14.0", "@babel/runtime@^7.15.4", "@babel/runtime@^7.17.2", "@babel/runtime@^7.8.4":
   version "7.17.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.2.tgz#66f68591605e59da47523c631416b18508779941"
   integrity sha512-hzeyJyMA1YGdJTuWU0e/j4wKXrU4OMFvY2MSlaI9B7VQb0r5cxTE3EAIS2Q7Tn2RIcDkRvTA/v2JsAEhxe99uw==
@@ -4329,9 +4329,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.4.71:
-  version "1.4.74"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.74.tgz#f444036a90ffe75f6423b635e77edd4cc9e6cb2f"
-  integrity sha512-DvQ20M0I4dIH8KcAo7n7E4OEeNafZ1N8z6g6ck+ALCM0ZoV6mpjaX6ekjs31zKlqPzacU3lmjG9PZEa1mQhEpQ==
+  version "1.4.75"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.75.tgz#d1ad9bb46f2f1bf432118c2be21d27ffeae82fdd"
+  integrity sha512-LxgUNeu3BVU7sXaKjUDD9xivocQLxFtq6wgERrutdY/yIOps3ODOZExK1jg8DTEg4U8TUCb5MLGeWFOYuxjF3Q==
 
 elliptic@^6.5.3:
   version "6.5.4"
@@ -5143,7 +5143,7 @@ form-data@^3.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
-fraction.js@^4.1.2:
+fraction.js@^4.1.3:
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.1.3.tgz#be65b0f20762ef27e1e793860bc2dfb716e99e65"
   integrity sha512-pUHWWt6vHzZZiQJcM6S/0PXfS+g6FM4BF5rj9wZyreivhQPdsh5PpE25VtSNxq80wHS5RfY51Ii+8Z0Zl/pmzg==
@@ -5488,9 +5488,9 @@ has-flag@^4.0.0:
   integrity sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==
 
 has-symbols@^1.0.1, has-symbols@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/has-symbols/-/has-symbols-1.0.2.tgz#165d3070c00309752a1236a479331e3ac56f1423"
-  integrity sha512-chXa79rL/UC2KlX17jo3vRGz0azaWEx5tGqZg5pO3NUyEJVB17dMruQlzCCOfUvElghKcm5194+BCRvi2Rv/Gw==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/has-symbols/-/has-symbols-1.0.3.tgz#bb7b2c4349251dce87b125f7bdf874aa7c8b39f8"
+  integrity sha512-l3LCuF6MgDNwTDKkdYGEihYjt5pRPbEg46rtlmnSPlUbgmB8LOIrKJbYYFBSbnPaJexMKtiPO8hmeRjRz2Td+A==
 
 has-tostringtag@^1.0.0:
   version "1.0.0"
@@ -5936,9 +5936,9 @@ internal-slot@^1.0.3:
     side-channel "^1.0.4"
 
 ios-calculator-for-web@^1.2.4:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/ios-calculator-for-web/-/ios-calculator-for-web-1.2.5.tgz#4ae935355d2fffbae769cd063dcb7b5a09916cc5"
-  integrity sha512-owN6Ri05BekoKBN5r45LSq1lckBrtNibFx9tPwpEsc9aYej/JLQE2GiYa7J9Se7m5pX2/NHPk0XIGxThFWA7tA==
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/ios-calculator-for-web/-/ios-calculator-for-web-1.2.6.tgz#81acbc5db2bc91e098fd80a7a9c9612dfb13916d"
+  integrity sha512-MfQM793vG1cn3wc//S5JLW1SAssBZCOAhTLhbW+glpPnIugjuzfkH3/qcLLmw0WGqjTrcrNDmFrR/DwFIYg9WQ==
   dependencies:
     mathjs "^10.0.0"
 
@@ -7292,15 +7292,15 @@ map-visit@^1.0.0:
     object-visit "^1.0.0"
 
 mathjs@^10.0.0:
-  version "10.1.1"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.1.1.tgz#99b647387b65c4b5c47b71e11d59481473ccfa0d"
-  integrity sha512-4QJP8a0Vy90ajFYESnITSluCrQBZnI+2XQhKJIRdo/6t95oupffS5qA4MTWnLGm5GsEZF179JSMjST7wCdZQkA==
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.2.0.tgz#d75af9f1fd0232f950b57fd8127a33ab04ecd2ac"
+  integrity sha512-SSr0E069ZePcqxlxG9QnPYFk+JZbY9L1d7bm/C/ySsOEvHvDGixTtlXwYXvkCWX+mtk1KmlluB6ShpXu53TEvw==
   dependencies:
-    "@babel/runtime" "^7.16.7"
+    "@babel/runtime" "^7.17.2"
     complex.js "^2.0.15"
     decimal.js "^10.3.1"
     escape-latex "^1.2.0"
-    fraction.js "^4.1.2"
+    fraction.js "^4.1.3"
     javascript-natural-sort "^0.7.1"
     seedrandom "^3.0.5"
     tiny-emitter "^2.1.0"
@@ -7489,9 +7489,9 @@ min-indent@^1.0.0:
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
 minesweeper-for-web@^2.1.6:
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/minesweeper-for-web/-/minesweeper-for-web-2.1.9.tgz#aecdfbd72aa459f34c7ae91b3ac6f859cabaf616"
-  integrity sha512-CsciwYDGBfvRar3U0PLFJC2Vbq1XixaKg/sYsjNIF6wqB/ST7+CNRgf+UGSn7UQDwMDo1PxuzSyJCl+OdCg9HA==
+  version "2.1.10"
+  resolved "https://registry.yarnpkg.com/minesweeper-for-web/-/minesweeper-for-web-2.1.10.tgz#ffc50081c9d2d70345dc5abdd873a140f1819454"
+  integrity sha512-ejRauMfqfdrmAyl9ml84sekKer60Z/fpGHqxuVZ+YFR+G+oqrmQ+1gbq89L0852Fm6HbN82VWrCMJxL8tROliw==
   dependencies:
     lit "^2.2.0"
 
@@ -10651,9 +10651,9 @@ terser@^4.1.2, terser@^4.6.3:
     source-map-support "~0.5.12"
 
 terser@^5.3.4:
-  version "5.11.0"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-5.11.0.tgz#2da5506c02e12cd8799947f30ce9c5b760be000f"
-  integrity sha512-uCA9DLanzzWSsN1UirKwylhhRz3aKPInlfmpGfw8VN6jHsAtu8HJtIpeeHHK23rxnE/cDc+yvmq5wqkIC6Kn0A==
+  version "5.12.0"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-5.12.0.tgz#728c6bff05f7d1dcb687d8eace0644802a9dae8a"
+  integrity sha512-R3AUhNBGWiFc77HXag+1fXpAxTAFRQTJemlJKjAgD9r8xXTpjNKqIXwHM/o7Rh+O0kUJtS3WQVdBeMKFk5sw9A==
   dependencies:
     acorn "^8.5.0"
     commander "^2.20.0"
