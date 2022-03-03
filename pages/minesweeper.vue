@@ -43,7 +43,7 @@
       </button>
     </div>
 
-    <div class="text-center mt-3">
+    <div class="text-center my-3 position-relative">
       <minesweeper-game
         id="minesweeper"
         ref="minesweeper"
@@ -51,7 +51,17 @@
         bomb-counter-selector="#bomb-counter"
         @field-click="handleMinesweeperClick"
       ></minesweeper-game>
+      <div v-if="!isEnded && !isStopwatchRunning" class="overlay">
+        <button
+          v-if="!isEnded"
+          class="btn btn-link btn-icon btn-lg"
+          @click="toggleStopWatch"
+        >
+          <i class="bi bi-play-circle-fill"></i>
+        </button>
+      </div>
     </div>
+
     <div class="my-3 d-flex gap-5 align-items-center justify-content-center">
       <div class="d-flex gap-2 align-items-center justify-content-center">
         <span>
@@ -59,12 +69,11 @@
           <StopWatch ref="stopwatch"></StopWatch>
         </span>
         <button
-          v-if="!isEnded"
+          v-if="!isEnded && isStopwatchRunning"
           class="btn btn-link btn-icon btn-lg"
           @click="toggleStopWatch"
         >
-          <i v-if="isStopwatchRunning" class="bi bi-pause-circle-fill"></i>
-          <i v-else class="bi bi-play-circle-fill"></i>
+          <i class="bi bi-pause-circle-fill"></i>
         </button>
       </div>
       <span class="badge rounded-pill bg-danger"
@@ -146,7 +155,7 @@ export default {
   layout: 'default-centered',
   data: () => ({
     isMounted: false,
-    isEnded: false,
+    isEnded: true,
     /** @type {Fireworks} */
     fireworks: null,
   }),
@@ -219,6 +228,7 @@ export default {
 
       const gameModeConfiguration = getGameModeConfiguration(e.target.value)
       this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration)
+      this.restartGame()
     })
 
     this.$refs.minesweeper.addEventListener('game-won', () => {
@@ -231,9 +241,23 @@ export default {
         Date.now()
       ) */
 
+      let fireworkDuration
+      switch (this.$refs.gamemode.value) {
+        case 'hard':
+          fireworkDuration = 20000
+          break
+        case 'normal':
+          fireworkDuration = 15000
+          break
+        case 'easy':
+        default:
+          fireworkDuration = 10000
+          break
+      }
+
       window.setTimeout(() => {
         this.fireworks.stop()
-      }, 10000)
+      }, fireworkDuration)
     })
 
     this.$refs.minesweeper.addEventListener('game-lost', () => {
@@ -254,13 +278,14 @@ export default {
       }
     },
     restartGame() {
+      this.isEnded = true
       this.fireworks.stop()
       this.$refs.stopwatch.reset()
       this.$refs.minesweeper.restartGame()
-      this.isEnded = false
     },
     handleMinesweeperClick() {
-      if (!this.$refs.stopwatch.isRunning && !this.isEnded) {
+      this.isEnded = false
+      if (!this.$refs.stopwatch.isRunning) {
         this.$refs.stopwatch.start()
       }
     },
@@ -291,6 +316,19 @@ export default {
   > * {
     height: 100%;
     width: 100%;
+  }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(var(--bs-light-rgb), 0.975);
+  display: flex;
+  place-content: center;
+  place-items: center;
+
+  .btn {
+    font-size: 3rem;
   }
 }
 </style>
