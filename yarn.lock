@@ -2009,9 +2009,9 @@
     source-map "^0.6.0"
 
 "@types/yargs-parser@*":
-  version "20.2.1"
-  resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-20.2.1.tgz#3b9ce2489919d9e4fea439b76916abc34b2df129"
-  integrity sha512-7tFImggNeNBVMsn0vLrpn1H1uPrUBdnARPTpZoitY37ZrdJREzf7I16tMrlK3hen349gr1NYh8CmZQa7CTG6Aw==
+  version "21.0.0"
+  resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-21.0.0.tgz#0c60e537fa790f5f9472ed2776c2b71ec117351b"
+  integrity sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==
 
 "@types/yargs@^16.0.0":
   version "16.0.4"
@@ -4496,9 +4496,9 @@ escodegen@^2.0.0:
     source-map "~0.6.1"
 
 eslint-config-prettier@^8.3.0:
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.4.0.tgz#8e6d17c7436649e98c4c2189868562921ef563de"
-  integrity sha512-CFotdUcMY18nGRo5KGsnNxpznzhkopOcOo0InID+sgQssPrzjvsyKZPvOgymTFeHrFuC3Tzdf2YndhXtULK9Iw==
+  version "8.5.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz#5a81680ec934beca02c7b1a61cf8ca34b66feab1"
+  integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
 
 eslint-config-standard@^16.0.3:
   version "16.0.3"
@@ -7292,9 +7292,9 @@ map-visit@^1.0.0:
     object-visit "^1.0.0"
 
 mathjs@^10.0.0:
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.2.0.tgz#d75af9f1fd0232f950b57fd8127a33ab04ecd2ac"
-  integrity sha512-SSr0E069ZePcqxlxG9QnPYFk+JZbY9L1d7bm/C/ySsOEvHvDGixTtlXwYXvkCWX+mtk1KmlluB6ShpXu53TEvw==
+  version "10.3.0"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.3.0.tgz#24424e6820299b6d2144d6b5f33a3819b1338de5"
+  integrity sha512-SHWkCPOMYNUyBc4FW27dg/s3P7iWBF9fmhAsIKxEyDRilymtPKhm4QVvdDP9TvXPn3w8J1pHhfNoC/b606H2ng==
   dependencies:
     "@babel/runtime" "^7.17.2"
     complex.js "^2.0.15"
@@ -7489,9 +7489,9 @@ min-indent@^1.0.0:
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
 minesweeper-for-web@^2.1.6:
-  version "2.1.10"
-  resolved "https://registry.yarnpkg.com/minesweeper-for-web/-/minesweeper-for-web-2.1.10.tgz#ffc50081c9d2d70345dc5abdd873a140f1819454"
-  integrity sha512-ejRauMfqfdrmAyl9ml84sekKer60Z/fpGHqxuVZ+YFR+G+oqrmQ+1gbq89L0852Fm6HbN82VWrCMJxL8tROliw==
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/minesweeper-for-web/-/minesweeper-for-web-2.1.11.tgz#28836a1669fe44b2dd299af25bc281ab81387633"
+  integrity sha512-OfGyw29syHnInIonz/Mc9C9WCCG4NnBCr1ya8nG+OjUXLam7KHo7n+GqvCpnuQdTFlHven5gylsMRp68Sc+GDA==
   dependencies:
     lit "^2.2.0"
 

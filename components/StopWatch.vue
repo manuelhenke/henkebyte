@@ -22,6 +22,7 @@ export default {
   },
   methods: {
     start() {
+      clearInterval(this.timer)
       this.timer = setInterval(() => {
         this.elapsedTime += 1000
       }, 1000)
@@ -31,6 +32,7 @@ export default {
       this.timer = undefined
     },
     reset() {
+      this.stop()
       this.elapsedTime = 0
     },
   },

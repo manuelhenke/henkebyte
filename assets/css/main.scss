@@ -7,6 +7,13 @@ $enable-negative-margins: true;
 @import '~bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
+.btn-icon {
+  padding: 0;
+  &:focus {
+    box-shadow: none;
+  }
+}
+
 html,
 body {
   scroll-behavior: smooth;

@@ -52,10 +52,21 @@
         @field-click="handleMinesweeperClick"
       ></minesweeper-game>
     </div>
-    <div class="my-3 d-flex gap-3 align-items-center justify-content-center">
-      <span>
-        <i class="bi bi-stopwatch"></i> <StopWatch ref="stopwatch"></StopWatch>
-      </span>
+    <div class="my-3 d-flex gap-5 align-items-center justify-content-center">
+      <div class="d-flex gap-2 align-items-center justify-content-center">
+        <span>
+          <i class="bi bi-stopwatch"></i>
+          <StopWatch ref="stopwatch"></StopWatch>
+        </span>
+        <button
+          v-if="!isEnded"
+          class="btn btn-link btn-icon btn-lg"
+          @click="toggleStopWatch"
+        >
+          <i v-if="isStopwatchRunning" class="bi bi-pause-circle-fill"></i>
+          <i v-else class="bi bi-play-circle-fill"></i>
+        </button>
+      </div>
       <span class="badge rounded-pill bg-danger"
         ><span id="bomb-counter"></span> Mines left</span
       >
@@ -134,6 +145,7 @@ export default {
   name: 'MinesweeperPage',
   layout: 'default-centered',
   data: () => ({
+    isMounted: false,
     isEnded: false,
     /** @type {Fireworks} */
     fireworks: null,
@@ -168,8 +180,16 @@ export default {
 
       return 'hold'
     },
+    isStopwatchRunning() {
+      if (!this.isMounted) return
+
+      // this.$refs is available
+      return this.$refs.stopwatch.isRunning
+    },
   },
   mounted() {
+    this.isMounted = true
+
     function getGameModeConfiguration(currentGameMode) {
       switch (currentGameMode) {
         case 'hard':
@@ -205,6 +225,12 @@ export default {
       this.isEnded = true
       this.$refs.stopwatch.stop()
       this.fireworks.start()
+      /* console.log(
+        this.$refs.stopwatch.formattedElapsedTime,
+        this.$refs.gamemode.value,
+        Date.now()
+      ) */
+
       window.setTimeout(() => {
         this.fireworks.stop()
       }, 10000)
@@ -235,6 +261,13 @@ export default {
     },
     handleMinesweeperClick() {
       if (!this.$refs.stopwatch.isRunning && !this.isEnded) {
+        this.$refs.stopwatch.start()
+      }
+    },
+    toggleStopWatch() {
+      if (this.isStopwatchRunning) {
+        this.$refs.stopwatch.stop()
+      } else {
         this.$refs.stopwatch.start()
       }
     },

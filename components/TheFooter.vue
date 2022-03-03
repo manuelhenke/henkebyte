@@ -22,7 +22,7 @@
     <div class="d-flex gap-2 small">
       <!-- <nuxt-link to="/imprint">Imprint</nuxt-link>
       <i class="bi bi-slash"></i> -->
-      <span>&copy; 2022 Copyright Manuel Henke</span>
+      <span>&copy; {{ currentYear }} Copyright Manuel Henke</span>
     </div>
   </footer>
 </template>
@@ -30,5 +30,10 @@
 <script>
 export default {
   name: 'TheFooter',
+  computed: {
+    currentYear() {
+      return new Date().getFullYear()
+    },
+  },
 }
 </script>
