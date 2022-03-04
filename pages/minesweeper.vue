@@ -117,7 +117,10 @@
         </thead>
         <tbody>
           <tr
-            v-for="(game, index) in currentGamemodeScoreboard.slice(0, 3)"
+            v-for="(game, index) in currentGamemodeScoreboard.slice(
+              0,
+              maxScoreboardGamesVisible
+            )"
             :key="index"
             class="scoreboard-row"
           >
@@ -135,11 +138,15 @@
               </button>
             </td>
           </tr>
-          <tr v-if="currentGamemodeScoreboard.length > 3">
+          <tr
+            v-if="currentGamemodeScoreboard.length > maxScoreboardGamesVisible"
+          >
             <th colspan="4" scope="row">...</th>
           </tr>
         </tbody>
-        <tfoot v-if="currentGamemodeScoreboard.length > 3">
+        <tfoot
+          v-if="currentGamemodeScoreboard.length > maxScoreboardGamesVisible"
+        >
           <tr>
             <td colspan="4">
               {{ currentGamemodeScoreboard.length }} games in total
@@ -212,6 +219,7 @@ export default {
     fireworks: null,
     currentGamemode: 'easy',
     games: [],
+    maxScoreboardGamesVisible: 10,
   }),
   head: {
     title: 'Minesweeper - HenkeByte',
