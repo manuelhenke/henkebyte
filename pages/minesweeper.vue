@@ -25,7 +25,12 @@
     <hr class="my-4" />
 
     <div class="d-grid gap-2 col-12 col-md-6 col-lg-4 mx-auto my-3 text-center">
-      <select ref="gamemode" class="form-select text-center" name="gamemode">
+      <select
+        ref="gamemode"
+        v-model="currentGamemode"
+        class="form-select text-center"
+        name="gamemode"
+      >
         <option value="easy" selected>Easy - 9x9 / 10 Mines</option>
         <option value="normal">Normal - 16x16 / 40 Mines</option>
         <option value="hard">Hard - 16x30 / 99 Mines</option>
@@ -99,6 +104,51 @@
       <div v-else>Just hold a field to place a flag.</div>
     </div>
 
+    <section v-if="currentGamemodeScoreboard.length">
+      <h2>Personal Scoreboard</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Game Duration</th>
+            <th scope="col">Played on</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="(game, index) in currentGamemodeScoreboard.slice(0, 3)"
+            :key="index"
+            class="scoreboard-row"
+          >
+            <th scope="row">{{ index + 1 }}</th>
+            <td>{{ game.gameDuration }}</td>
+            <td>
+              {{ toDateString(game.gameCompletionTimestamp) }}
+            </td>
+            <td class="scoreboard-action">
+              <button
+                class="btn btn-link btn-icon btn-lg"
+                @click="removeScoreboardEntry(game.id)"
+              >
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </td>
+          </tr>
+          <tr v-if="currentGamemodeScoreboard.length > 3">
+            <th colspan="4" scope="row">...</th>
+          </tr>
+        </tbody>
+        <tfoot v-if="currentGamemodeScoreboard.length > 3">
+          <tr>
+            <td colspan="4">
+              {{ currentGamemodeScoreboard.length }} games in total
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </section>
+
     <div
       id="restart-modal"
       class="modal fade"
@@ -148,6 +198,8 @@
 <script>
 import Platform from 'platform-detect'
 import { Fireworks } from 'fireworks-js'
+import { liveQuery } from 'dexie'
+import { db } from '~/middleware/db'
 import 'minesweeper-for-web'
 
 export default {
@@ -158,6 +210,8 @@ export default {
     isEnded: true,
     /** @type {Fireworks} */
     fireworks: null,
+    currentGamemode: 'easy',
+    games: [],
   }),
   head: {
     title: 'Minesweeper - HenkeByte',
@@ -195,6 +249,9 @@ export default {
       // this.$refs is available
       return this.$refs.stopwatch.isRunning
     },
+    currentGamemodeScoreboard() {
+      return this.games.filter((game) => game.gamemode === this.currentGamemode)
+    },
   },
   mounted() {
     this.isMounted = true
@@ -225,24 +282,29 @@ export default {
 
     this.$refs.gamemode.addEventListener('change', (e) => {
       e.preventDefault()
-
-      const gameModeConfiguration = getGameModeConfiguration(e.target.value)
+      const gameModeConfiguration = getGameModeConfiguration(
+        this.currentGamemode
+      )
       this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration)
       this.restartGame()
     })
 
-    this.$refs.minesweeper.addEventListener('game-won', () => {
+    const gameModeConfiguration = getGameModeConfiguration(this.currentGamemode)
+    this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration)
+
+    this.$refs.minesweeper.addEventListener('game-won', async () => {
       this.isEnded = true
       this.$refs.stopwatch.stop()
       this.fireworks.start()
-      /* console.log(
-        this.$refs.stopwatch.formattedElapsedTime,
-        this.$refs.gamemode.value,
-        Date.now()
-      ) */
+
+      await db.games.add({
+        gamemode: this.currentGamemode,
+        gameDuration: this.$refs.stopwatch.formattedElapsedTime,
+        gameCompletionTimestamp: Date.now(),
+      })
 
       let fireworkDuration
-      switch (this.$refs.gamemode.value) {
+      switch (this.currentGamemode) {
         case 'hard':
           fireworkDuration = 20000
           break
@@ -270,6 +332,15 @@ export default {
       explosion: 10,
       sound: false,
     })
+
+    liveQuery(() => db.games.toArray()).subscribe((games) => {
+      this.games = games.sort((gameA, gameB) =>
+        gameA.gameDuration.localeCompare(gameB.gameDuration, undefined, {
+          numeric: true,
+          sensitivity: 'base',
+        })
+      )
+    })
   },
   methods: {
     clickedRestart() {
@@ -295,6 +366,19 @@ export default {
       } else {
         this.$refs.stopwatch.start()
       }
+    },
+    toDateString(timestamp) {
+      const event = new Date(timestamp)
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }
+      return event.toLocaleDateString('en-EN', options)
+    },
+    removeScoreboardEntry(gameId) {
+      db.games.delete(gameId)
     },
   },
 }
@@ -329,6 +413,12 @@ export default {
 
   .btn {
     font-size: 3rem;
+  }
+}
+
+@media (hover: hover) {
+  .scoreboard-row:not(:hover) .scoreboard-action > * {
+    visibility: hidden;
   }
 }
 </style>
