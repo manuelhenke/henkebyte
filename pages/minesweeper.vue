@@ -104,56 +104,75 @@
       <div v-else>Just hold a field to place a flag.</div>
     </div>
 
-    <section v-if="currentGamemodeScoreboard.length">
-      <h2>Personal Scoreboard</h2>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Game Duration</th>
-            <th scope="col">Played on</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="(game, index) in currentGamemodeScoreboard.slice(
-              0,
-              maxScoreboardGamesVisible
-            )"
-            :key="index"
-            class="scoreboard-row"
-          >
-            <th scope="row">{{ index + 1 }}</th>
-            <td>{{ game.gameDuration }}</td>
-            <td>
-              {{ toDateString(game.gameCompletionTimestamp) }}
-            </td>
-            <td class="scoreboard-action">
-              <button
-                class="btn btn-link btn-icon btn-lg"
-                @click="removeScoreboardEntry(game.id)"
-              >
-                <i class="bi bi-trash-fill"></i>
-              </button>
-            </td>
-          </tr>
-          <tr
-            v-if="currentGamemodeScoreboard.length > maxScoreboardGamesVisible"
-          >
-            <th colspan="4" scope="row">...</th>
-          </tr>
-        </tbody>
-        <tfoot
-          v-if="currentGamemodeScoreboard.length > maxScoreboardGamesVisible"
+    <section v-show="currentGamemodeScoreboardEntries.length">
+      <div class="d-flex gap-2 align-items-center justify-content-between">
+        <h2>Personal Scoreboard</h2>
+        <button
+          class="btn btn-outline-danger"
+          data-bs-toggle="modal"
+          data-bs-target="#reset-game-history-modal"
         >
-          <tr>
-            <td colspan="4">
-              {{ currentGamemodeScoreboard.length }} games in total
-            </td>
-          </tr>
-        </tfoot>
-      </table>
+          Reset
+        </button>
+      </div>
+      <div class="row">
+        <div class="col">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Game Duration</th>
+                <th scope="col">Played on</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(game, index) in currentGamemodeScoreboardEntries.slice(
+                  0,
+                  maxScoreboardGamesVisible
+                )"
+                :key="index"
+                class="scoreboard-row"
+              >
+                <th scope="row">{{ index + 1 }}</th>
+                <td>
+                  <TimeString :milliseconds="game.gameDuration" />
+                </td>
+                <td>
+                  {{ toDateString(game.gameCompletionTimestamp) }}
+                </td>
+                <td class="scoreboard-action">
+                  <button
+                    class="btn btn-link btn-icon btn-lg"
+                    @click="removeScoreboardEntry(game.id)"
+                  >
+                    <i class="bi bi-trash-fill"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                v-if="currentGamemodeGames.length > maxScoreboardGamesVisible"
+              >
+                <th colspan="4" scope="row">...</th>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th scope="row">Avg.</th>
+                <td>
+                  ~<TimeString :milliseconds="currentGamemodeAverageDuration" />
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="col col-md-4">
+          <canvas ref="game-history-chart"></canvas>
+        </div>
+      </div>
     </section>
 
     <div
@@ -198,6 +217,51 @@
         </div>
       </div>
     </div>
+
+    <div
+      id="reset-game-history-modal"
+      class="modal fade"
+      tabindex="-1"
+      aria-labelledby="resetGameHistoryModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="resetGameHistoryModalLabel" class="modal-title">
+              Reset game history
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Are you sure, that you want to reset the entire history (including
+            every gamemode)? This action is irreversible.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              @click="resetGameHistory"
+            >
+              Yes, reset
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div ref="firework" class="firework-container"></div>
   </div>
 </template>
@@ -206,8 +270,18 @@
 import Platform from 'platform-detect'
 import { Fireworks } from 'fireworks-js'
 import { liveQuery } from 'dexie'
+import {
+  Chart,
+  ArcElement,
+  DoughnutController,
+  Title,
+  Legend,
+  Tooltip,
+} from 'chart.js'
 import { db } from '~/middleware/db'
 import 'minesweeper-for-web'
+
+Chart.register(ArcElement, DoughnutController, Legend, Title, Tooltip)
 
 export default {
   name: 'MinesweeperPage',
@@ -220,6 +294,7 @@ export default {
     currentGamemode: 'easy',
     games: [],
     maxScoreboardGamesVisible: 10,
+    gamesHistoryChart: null,
   }),
   head: {
     title: 'Minesweeper - HenkeByte',
@@ -257,8 +332,66 @@ export default {
       // this.$refs is available
       return this.$refs.stopwatch.isRunning
     },
-    currentGamemodeScoreboard() {
+    currentGamemodeGames() {
       return this.games.filter((game) => game.gamemode === this.currentGamemode)
+    },
+    currentGamemodeScoreboardEntries() {
+      return this.currentGamemodeGames.filter((game) => game.gameIsWon)
+    },
+    currentGamemodeAverageDuration() {
+      const sum = this.currentGamemodeScoreboardEntries
+        .map((game) => game.gameDuration)
+        .reduce((a, b) => a + b, 0)
+      const avg = sum / this.currentGamemodeScoreboardEntries.length || 0
+      return avg
+    },
+  },
+  watch: {
+    currentGamemodeGames() {
+      if (
+        this.currentGamemodeGames.length &&
+        this.$refs['game-history-chart']
+      ) {
+        const wonGames = this.currentGamemodeGames.filter(
+          (game) => game.gameIsWon
+        ).length
+        const lostGames = this.currentGamemodeGames.length - wonGames
+
+        if (this.gamesHistoryChart) {
+          this.gamesHistoryChart.data.datasets[0].data = [wonGames, lostGames]
+          this.gamesHistoryChart.options.plugins.title.text = `${this.currentGamemodeGames.length} game(s) played in total`
+          this.gamesHistoryChart.update()
+        } else {
+          const config = {
+            type: 'doughnut',
+            data: {
+              labels: ['Won', 'Lost'],
+              datasets: [
+                {
+                  label: 'Games History',
+                  data: [wonGames, lostGames],
+                  backgroundColor: ['#198754', '#dc3545'],
+                  hoverOffset: 4,
+                },
+              ],
+            },
+            options: {
+              plugins: {
+                title: {
+                  text: `${this.currentGamemodeGames.length} game(s) played in total`,
+                  display: true,
+                  position: 'bottom',
+                },
+              },
+            },
+          }
+
+          this.gamesHistoryChart = new Chart(
+            this.$refs['game-history-chart'],
+            config
+          )
+        }
+      }
     },
   },
   mounted() {
@@ -300,16 +433,12 @@ export default {
     const gameModeConfiguration = getGameModeConfiguration(this.currentGamemode)
     this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration)
 
-    this.$refs.minesweeper.addEventListener('game-won', async () => {
+    this.$refs.minesweeper.addEventListener('game-won', () => {
       this.isEnded = true
       this.$refs.stopwatch.stop()
       this.fireworks.start()
 
-      await db.games.add({
-        gamemode: this.currentGamemode,
-        gameDuration: this.$refs.stopwatch.formattedElapsedTime,
-        gameCompletionTimestamp: Date.now(),
-      })
+      this.addDbEntry(true)
 
       let fireworkDuration
       switch (this.currentGamemode) {
@@ -333,6 +462,8 @@ export default {
     this.$refs.minesweeper.addEventListener('game-lost', () => {
       this.isEnded = true
       this.$refs.stopwatch.stop()
+
+      this.addDbEntry(false)
     })
 
     this.fireworks = new Fireworks(this.$refs.firework, {
@@ -342,11 +473,8 @@ export default {
     })
 
     liveQuery(() => db.games.toArray()).subscribe((games) => {
-      this.games = games.sort((gameA, gameB) =>
-        gameA.gameDuration.localeCompare(gameB.gameDuration, undefined, {
-          numeric: true,
-          sensitivity: 'base',
-        })
+      this.games = games.sort(
+        (gameA, gameB) => gameA.gameDuration - gameB.gameDuration
       )
     })
   },
@@ -385,8 +513,19 @@ export default {
       }
       return event.toLocaleDateString('en-EN', options)
     },
+    resetGameHistory() {
+      db.games.clear()
+    },
     removeScoreboardEntry(gameId) {
       db.games.delete(gameId)
+    },
+    addDbEntry(isWon) {
+      db.games.add({
+        gamemode: this.currentGamemode,
+        gameDuration: this.$refs.stopwatch.elapsedTime,
+        gameCompletionTimestamp: Date.now(),
+        gameIsWon: isWon,
+      })
     },
   },
 }

@@ -1,5 +1,5 @@
 <template>
-  <span>{{ formattedElapsedTime }}</span>
+  <TimeString :milliseconds="elapsedTime" />
 </template>
 
 <script>
@@ -10,12 +10,6 @@ export default {
     timer: undefined,
   }),
   computed: {
-    formattedElapsedTime() {
-      const date = new Date(null)
-      date.setSeconds(this.elapsedTime / 1000)
-      const utc = date.toUTCString()
-      return utc.substr(utc.indexOf(':') + 1, 5)
-    },
     isRunning() {
       return !!this.timer
     },
