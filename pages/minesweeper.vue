@@ -152,7 +152,10 @@
                 </td>
               </tr>
               <tr
-                v-if="currentGamemodeGames.length > maxScoreboardGamesVisible"
+                v-if="
+                  currentGamemodeScoreboardEntries.length >
+                  maxScoreboardGamesVisible
+                "
               >
                 <th colspan="4" scope="row">...</th>
               </tr>
