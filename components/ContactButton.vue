@@ -60,7 +60,7 @@ export default {
       max-width: 0;
       transition: all 0.5s;
       display: inline-flex;
-      justify-content: start;
+      justify-content: flex-start;
       overflow: hidden;
     }
   }
