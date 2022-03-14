@@ -4,19 +4,11 @@
   >
     <div class="d-flex d-md-none gap-2 small">
       <ContactButton
-        text="LinkedIn"
-        href="https://www.linkedin.com/in/manuel-henke/"
-        icon="bi bi-linkedin"
-      />
-      <ContactButton
-        text="GitHub"
-        href="https://github.com/manuelhenke"
-        icon="bi bi-github"
-      />
-      <ContactButton
-        text="E-Mail"
-        href="mailto:contact@henkebyte.com"
-        icon="bi bi-envelope"
+        v-for="contactOption of contactOptions"
+        :key="contactOption.text"
+        :text="contactOption.text"
+        :href="contactOption.href"
+        :icon="contactOption.icon"
       />
     </div>
     <div class="d-flex gap-2 small">
@@ -33,6 +25,9 @@ export default {
   computed: {
     currentYear() {
       return new Date().getFullYear()
+    },
+    contactOptions() {
+      return this.$store.state.contactOptions
     },
   },
 }
