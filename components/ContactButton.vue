@@ -46,7 +46,7 @@ export default {
         .button-text {
           margin-left: 5px;
           opacity: 1;
-          width: 60px;
+          max-width: 100px;
         }
       }
     }
@@ -57,10 +57,11 @@ export default {
 
       white-space: nowrap;
       opacity: 0;
-      width: 0;
+      max-width: 0;
       transition: all 0.5s;
       display: inline-flex;
-      justify-content: center;
+      justify-content: start;
+      overflow: hidden;
     }
   }
 }
