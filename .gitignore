@@ -89,3 +89,7 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Playwright output directories
+test-results/
+playwright-report/

@@ -9,8 +9,10 @@
         <Nuxt />
       </main>
       <TheFooter class="mt-5" />
-      <FloatingContactButtons />
     </div>
+    <aside>
+      <FloatingContactButtons />
+    </aside>
   </div>
 </template>
 

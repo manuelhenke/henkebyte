@@ -1,9 +1,13 @@
 <template>
   <div id="center-layout">
     <div class="content-container">
-      <Nuxt />
+      <main>
+        <Nuxt />
+      </main>
     </div>
-    <FloatingContactButtons />
+    <aside>
+      <FloatingContactButtons />
+    </aside>
   </div>
 </template>
 

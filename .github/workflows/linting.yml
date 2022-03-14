@@ -1,23 +1,20 @@
-name: CI
+name: Linting
 
 on:
   push:
     branches:
       - main
-      - master
   pull_request:
     branches:
       - main
-      - master
 
 jobs:
-  ci:
+  linting:
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14]
 
     steps:
       - name: Checkout 🛎
@@ -26,8 +23,7 @@ jobs:
       - name: Setup node env 🏗
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
-          check-latest: true
+          node-version-file: '.nvmrc'
 
       - name: Get yarn cache directory path 🛠
         id: yarn-cache-dir-path

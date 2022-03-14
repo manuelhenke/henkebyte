@@ -25,7 +25,12 @@
     <hr class="my-4" />
 
     <div class="d-grid gap-2 col-12 col-md-6 col-lg-4 mx-auto my-3 text-center">
-      <select ref="gamemode" class="form-select text-center" name="gamemode">
+      <select
+        ref="gamemode"
+        v-model="currentGamemode"
+        class="form-select text-center"
+        name="gamemode"
+      >
         <option value="easy" selected>Easy - 9x9 / 10 Mines</option>
         <option value="normal">Normal - 16x16 / 40 Mines</option>
         <option value="hard">Hard - 16x30 / 99 Mines</option>
@@ -43,7 +48,7 @@
       </button>
     </div>
 
-    <div class="text-center mt-3">
+    <div class="text-center my-3 position-relative">
       <minesweeper-game
         id="minesweeper"
         ref="minesweeper"
@@ -51,11 +56,31 @@
         bomb-counter-selector="#bomb-counter"
         @field-click="handleMinesweeperClick"
       ></minesweeper-game>
+      <div v-if="!isEnded && !isStopwatchRunning" class="overlay">
+        <button
+          v-if="!isEnded"
+          class="btn btn-link btn-icon btn-lg"
+          @click="toggleStopWatch"
+        >
+          <i class="bi bi-play-circle-fill"></i>
+        </button>
+      </div>
     </div>
-    <div class="my-3 d-flex gap-3 align-items-center justify-content-center">
-      <span>
-        <i class="bi bi-stopwatch"></i> <StopWatch ref="stopwatch"></StopWatch>
-      </span>
+
+    <div class="my-3 d-flex gap-5 align-items-center justify-content-center">
+      <div class="d-flex gap-2 align-items-center justify-content-center">
+        <span>
+          <i class="bi bi-stopwatch"></i>
+          <StopWatch ref="stopwatch"></StopWatch>
+        </span>
+        <button
+          v-if="!isEnded && isStopwatchRunning"
+          class="btn btn-link btn-icon btn-lg"
+          @click="toggleStopWatch"
+        >
+          <i class="bi bi-pause-circle-fill"></i>
+        </button>
+      </div>
       <span class="badge rounded-pill bg-danger"
         ><span id="bomb-counter"></span> Mines left</span
       >
@@ -78,6 +103,80 @@
 
       <div v-else>Just hold a field to place a flag.</div>
     </div>
+
+    <section v-show="currentGamemodeScoreboardEntries.length">
+      <div class="d-flex gap-2 align-items-center justify-content-between">
+        <h2>Personal Scoreboard</h2>
+        <button
+          class="btn btn-outline-danger"
+          data-bs-toggle="modal"
+          data-bs-target="#reset-game-history-modal"
+        >
+          Reset
+        </button>
+      </div>
+      <div class="row">
+        <div class="col">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Game Duration</th>
+                <th scope="col">Played on</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(game, index) in currentGamemodeScoreboardEntries.slice(
+                  0,
+                  maxScoreboardGamesVisible
+                )"
+                :key="index"
+                class="scoreboard-row"
+              >
+                <th scope="row">{{ index + 1 }}</th>
+                <td>
+                  <TimeString :milliseconds="game.gameDuration" />
+                </td>
+                <td>
+                  {{ toDateString(game.gameCompletionTimestamp) }}
+                </td>
+                <td class="scoreboard-action">
+                  <button
+                    class="btn btn-link btn-icon btn-lg"
+                    @click="removeScoreboardEntry(game.id)"
+                  >
+                    <i class="bi bi-trash-fill"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                v-if="
+                  currentGamemodeScoreboardEntries.length >
+                  maxScoreboardGamesVisible
+                "
+              >
+                <th colspan="4" scope="row">...</th>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th scope="row">Avg.</th>
+                <td>
+                  ~<TimeString :milliseconds="currentGamemodeAverageDuration" />
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="col col-md-4">
+          <canvas ref="game-history-chart"></canvas>
+        </div>
+      </div>
+    </section>
 
     <div
       id="restart-modal"
@@ -121,6 +220,51 @@
         </div>
       </div>
     </div>
+
+    <div
+      id="reset-game-history-modal"
+      class="modal fade"
+      tabindex="-1"
+      aria-labelledby="resetGameHistoryModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="resetGameHistoryModalLabel" class="modal-title">
+              Reset game history
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Are you sure, that you want to reset the entire history (including
+            every gamemode)? This action is irreversible.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              @click="resetGameHistory"
+            >
+              Yes, reset
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div ref="firework" class="firework-container"></div>
   </div>
 </template>
@@ -128,15 +272,32 @@
 <script>
 import Platform from 'platform-detect'
 import { Fireworks } from 'fireworks-js'
+import { liveQuery } from 'dexie'
+import {
+  Chart,
+  ArcElement,
+  DoughnutController,
+  Title,
+  Legend,
+  Tooltip,
+} from 'chart.js'
+import { db } from '~/middleware/db'
 import 'minesweeper-for-web'
+
+Chart.register(ArcElement, DoughnutController, Legend, Title, Tooltip)
 
 export default {
   name: 'MinesweeperPage',
   layout: 'default-centered',
   data: () => ({
-    isEnded: false,
+    isMounted: false,
+    isEnded: true,
     /** @type {Fireworks} */
     fireworks: null,
+    currentGamemode: 'easy',
+    games: [],
+    maxScoreboardGamesVisible: 10,
+    gamesHistoryChart: null,
   }),
   head: {
     title: 'Minesweeper - HenkeByte',
@@ -168,8 +329,77 @@ export default {
 
       return 'hold'
     },
+    isStopwatchRunning() {
+      if (!this.isMounted) return
+
+      // this.$refs is available
+      return this.$refs.stopwatch.isRunning
+    },
+    currentGamemodeGames() {
+      return this.games.filter((game) => game.gamemode === this.currentGamemode)
+    },
+    currentGamemodeScoreboardEntries() {
+      return this.currentGamemodeGames.filter((game) => game.gameIsWon)
+    },
+    currentGamemodeAverageDuration() {
+      const sum = this.currentGamemodeScoreboardEntries
+        .map((game) => game.gameDuration)
+        .reduce((a, b) => a + b, 0)
+      const avg = sum / this.currentGamemodeScoreboardEntries.length || 0
+      return avg
+    },
+  },
+  watch: {
+    currentGamemodeGames() {
+      if (
+        this.currentGamemodeGames.length &&
+        this.$refs['game-history-chart']
+      ) {
+        const wonGames = this.currentGamemodeGames.filter(
+          (game) => game.gameIsWon
+        ).length
+        const lostGames = this.currentGamemodeGames.length - wonGames
+
+        if (this.gamesHistoryChart) {
+          this.gamesHistoryChart.data.datasets[0].data = [wonGames, lostGames]
+          this.gamesHistoryChart.options.plugins.title.text = `${this.currentGamemodeGames.length} game(s) played in total`
+          this.gamesHistoryChart.update()
+        } else {
+          const config = {
+            type: 'doughnut',
+            data: {
+              labels: ['Won', 'Lost'],
+              datasets: [
+                {
+                  label: 'Games History',
+                  data: [wonGames, lostGames],
+                  backgroundColor: ['#198754', '#dc3545'],
+                  hoverOffset: 4,
+                },
+              ],
+            },
+            options: {
+              plugins: {
+                title: {
+                  text: `${this.currentGamemodeGames.length} game(s) played in total`,
+                  display: true,
+                  position: 'bottom',
+                },
+              },
+            },
+          }
+
+          this.gamesHistoryChart = new Chart(
+            this.$refs['game-history-chart'],
+            config
+          )
+        }
+      }
+    },
   },
   mounted() {
+    this.isMounted = true
+
     function getGameModeConfiguration(currentGameMode) {
       switch (currentGameMode) {
         case 'hard':
@@ -196,29 +426,59 @@ export default {
 
     this.$refs.gamemode.addEventListener('change', (e) => {
       e.preventDefault()
-
-      const gameModeConfiguration = getGameModeConfiguration(e.target.value)
+      const gameModeConfiguration = getGameModeConfiguration(
+        this.currentGamemode
+      )
       this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration)
+      this.restartGame()
     })
+
+    const gameModeConfiguration = getGameModeConfiguration(this.currentGamemode)
+    this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration)
 
     this.$refs.minesweeper.addEventListener('game-won', () => {
       this.isEnded = true
       this.$refs.stopwatch.stop()
       this.fireworks.start()
+
+      this.addDbEntry(true)
+
+      let fireworkDuration
+      switch (this.currentGamemode) {
+        case 'hard':
+          fireworkDuration = 20000
+          break
+        case 'normal':
+          fireworkDuration = 15000
+          break
+        case 'easy':
+        default:
+          fireworkDuration = 10000
+          break
+      }
+
       window.setTimeout(() => {
         this.fireworks.stop()
-      }, 10000)
+      }, fireworkDuration)
     })
 
     this.$refs.minesweeper.addEventListener('game-lost', () => {
       this.isEnded = true
       this.$refs.stopwatch.stop()
+
+      this.addDbEntry(false)
     })
 
     this.fireworks = new Fireworks(this.$refs.firework, {
       particles: 200,
       explosion: 10,
       sound: false,
+    })
+
+    liveQuery(() => db.games.toArray()).subscribe((games) => {
+      this.games = games.sort(
+        (gameA, gameB) => gameA.gameDuration - gameB.gameDuration
+      )
     })
   },
   methods: {
@@ -228,15 +488,47 @@ export default {
       }
     },
     restartGame() {
+      this.isEnded = true
       this.fireworks.stop()
       this.$refs.stopwatch.reset()
       this.$refs.minesweeper.restartGame()
-      this.isEnded = false
     },
     handleMinesweeperClick() {
-      if (!this.$refs.stopwatch.isRunning && !this.isEnded) {
+      this.isEnded = false
+      if (!this.$refs.stopwatch.isRunning) {
         this.$refs.stopwatch.start()
       }
+    },
+    toggleStopWatch() {
+      if (this.isStopwatchRunning) {
+        this.$refs.stopwatch.stop()
+      } else {
+        this.$refs.stopwatch.start()
+      }
+    },
+    toDateString(timestamp) {
+      const event = new Date(timestamp)
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }
+      return event.toLocaleDateString('en-EN', options)
+    },
+    resetGameHistory() {
+      db.games.clear()
+    },
+    removeScoreboardEntry(gameId) {
+      db.games.delete(gameId)
+    },
+    addDbEntry(isWon) {
+      db.games.add({
+        gamemode: this.currentGamemode,
+        gameDuration: this.$refs.stopwatch.elapsedTime,
+        gameCompletionTimestamp: Date.now(),
+        gameIsWon: isWon,
+      })
     },
   },
 }
@@ -258,6 +550,25 @@ export default {
   > * {
     height: 100%;
     width: 100%;
+  }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(var(--bs-light-rgb), 0.975);
+  display: flex;
+  place-content: center;
+  place-items: center;
+
+  .btn {
+    font-size: 3rem;
+  }
+}
+
+@media (hover: hover) {
+  .scoreboard-row:not(:hover) .scoreboard-action > * {
+    visibility: hidden;
   }
 }
 </style>
