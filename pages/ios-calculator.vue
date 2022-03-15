@@ -2,7 +2,7 @@
   <div>
     <TheTitle badge-text="New">iOS-Calculator</TheTitle>
     <TheLead
-      >This is an implementation of the iOS Calculator, which is available at
+      >This is an implementation of the iOS-Calculator, which is available at
       <a
         href="https://github.com/manuelhenke/ios-calculator-for-web"
         target="_blank"

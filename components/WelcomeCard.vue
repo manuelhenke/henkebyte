@@ -2,26 +2,16 @@
   <div
     class="p-3 p-sm-4 p-md-5 bg-light rounded-3 shadow-lg welcome-card text-center"
   >
-    <h1 class="display-5">Welcome to <span class="d-none">HenkeByte</span></h1>
+    <div class="welcome-card-title-container">
+      <slot name="title"></slot>
+    </div>
     <div class="welcome-card-image-container">
-      <img
-        src="~/assets/images/henkebyte-logo.png"
-        class="img-fluid"
-        alt="henkebyte-logo"
-        height="200"
-        width="200"
-      />
+      <slot name="image"></slot>
     </div>
     <hr class="welcome-card-line" />
-    <nav class="welcome-card-message-container">
-      <ul>
-        <li v-for="link in links" :key="link.to">
-          <nuxt-link class="btn btn-link btn-lg" :to="link.to"
-            >{{ link.name }}<i class="bi bi-chevron-right"></i
-          ></nuxt-link>
-        </li>
-      </ul>
-    </nav>
+    <div class="welcome-card-message-container">
+      <slot></slot>
+    </div>
     <TheFooter />
   </div>
 </template>
@@ -29,18 +19,6 @@
 <script>
 export default {
   name: 'WelcomeCard',
-  data: () => ({
-    links: [
-      {
-        to: 'ios-calculator',
-        name: 'iOS-Calculator',
-      },
-      {
-        to: 'minesweeper',
-        name: 'Minesweeper',
-      },
-    ],
-  }),
 }
 </script>
 
@@ -54,9 +32,6 @@ export default {
 
   .welcome-card-image-container {
     max-width: 200px;
-    img {
-      width: 100%;
-    }
   }
 
   .welcome-card-line {

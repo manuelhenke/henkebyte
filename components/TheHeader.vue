@@ -4,12 +4,13 @@
       <nuxt-link to="/" class="text-decoration-none"
         ><i class="bi bi-chevron-left"></i>Home</nuxt-link
       >
-      <img
-        src="~/assets/images/henkebyte-logo.png"
-        class="img-fluid"
-        width="50"
-        alt="henkebyte-logo"
-      />
+      <nuxt-link to="/"
+        ><img
+          src="~/assets/images/henkebyte-logo.png"
+          class="img-fluid"
+          width="50"
+          alt="henkebyte-logo"
+      /></nuxt-link>
     </nav>
   </header>
 </template>
