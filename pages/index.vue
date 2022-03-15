@@ -18,7 +18,7 @@
 
     <nav class="d-flex flex-column gap-2">
       <div v-for="navElement in navigation" :key="navElement.title">
-        <h2 v-if="navElement.title" class="h4 mb-0">{{ navElement.title }}</h2>
+        <h2 v-if="navElement.title" class="h5 mb-0">{{ navElement.title }}</h2>
         <ul>
           <li v-for="link in navElement.links" :key="link.to">
             <router-link class="btn btn-link btn-lg" :to="link.to">{{
