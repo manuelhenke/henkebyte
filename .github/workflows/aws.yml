@@ -2,7 +2,7 @@ name: Deploy to AWS
 
 on:
   workflow_run:
-    workflows: ['Test', 'Linting']
+    workflows: ['Test']
     branches: [main]
     types:
       - completed
