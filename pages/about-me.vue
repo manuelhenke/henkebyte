@@ -127,7 +127,7 @@ export default {
   },
   methods: {
     sortByStars(entries) {
-      return entries.sort((e1, e2) => e2.stars - e1.stars)
+      return Array.from(entries).sort((e1, e2) => e2.stars - e1.stars)
     },
   },
 }
