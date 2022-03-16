@@ -16,12 +16,12 @@
       />
     </template>
 
-    <nav class="d-flex flex-column gap-2">
-      <div v-for="navElement in navigation" :key="navElement.title">
-        <h2 v-if="navElement.title" class="h5 mb-0">{{ navElement.title }}</h2>
+    <nav class="row row-cols-1 row-cols-sm-2 gy-3">
+      <div v-for="navElement in navigation" :key="navElement.title" class="col">
+        <h2 v-if="navElement.title" class="h5 mb-1">{{ navElement.title }}</h2>
         <ul>
           <li v-for="link in navElement.links" :key="link.to">
-            <router-link class="btn btn-link btn-lg" :to="link.to">{{
+            <router-link class="link-primary fs-5" :to="link.to">{{
               link.name
             }}</router-link>
           </li>
@@ -44,10 +44,14 @@ export default {
             to: 'about-me',
             name: 'About Me',
           },
+          {
+            to: 'resources-overview',
+            name: 'Resources Overview',
+          },
         ],
       },
       {
-        title: 'Open Source Projects',
+        title: 'Projects',
         links: [
           {
             to: 'ios-calculator',
@@ -63,3 +67,9 @@ export default {
   }),
 }
 </script>
+
+<style lang="scss" scoped>
+nav ul li:not(:last-child) {
+  margin-bottom: 6px;
+}
+</style>

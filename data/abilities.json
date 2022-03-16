@@ -1,0 +1,110 @@
+[
+  {
+    "title": "Skills",
+    "entries": [
+      {
+        "name": "JavaScript",
+        "stars": 5,
+        "libraries": [
+          {
+            "name": "Vue.js",
+            "stars": 5,
+            "libraries": [{ "name": "Nuxt.js", "stars": 4 }]
+          },
+          { "name": "Node.js", "stars": 5 },
+          { "name": "Webpack", "stars": 4 },
+          { "name": "jQuery", "stars": 4 },
+          { "name": "Electron", "stars": 3 },
+          { "name": "TypeScript", "stars": 3 }
+        ]
+      },
+      {
+        "name": "CSS",
+        "stars": 5,
+        "libraries": [
+          { "name": "SCSS", "stars": 5 },
+          { "name": "Bootstrap", "stars": 5 }
+        ]
+      },
+      { "name": "HTML", "stars": 5 },
+      {
+        "name": "Java",
+        "stars": 4,
+        "libraries": [
+          { "name": "Spring", "stars": 4 },
+          { "name": "Maven", "stars": 4 }
+        ]
+      },
+      {
+        "name": "Swift",
+        "stars": 3,
+        "libraries": [
+          { "name": "SwiftUI", "stars": 4 },
+          { "name": "ARKit", "stars": 2 }
+        ]
+      },
+      {
+        "name": "PHP",
+        "stars": 3,
+        "libraries": [{ "name": "Wordpress", "stars": 4 }]
+      },
+      { "name": "SQL", "stars": 3 },
+      { "name": "Python", "stars": 2 },
+      { "name": "React", "stars": 2 },
+      { "name": "Angular", "stars": 2 },
+      { "name": "R", "stars": 1 },
+      { "name": "Go", "stars": 1 }
+    ]
+  },
+  {
+    "title": "Languages",
+    "entries": [
+      { "name": "German", "stars": 5 },
+      { "name": "English", "stars": 4 },
+      { "name": "Spanish", "stars": 1 },
+      { "name": "Binary", "stars": 0 }
+    ]
+  },
+  {
+    "title": "Tools",
+    "entries": [
+      { "name": "Git", "stars": 4 },
+      { "name": "VSCode", "stars": 4 },
+      { "name": "IntelliJ", "stars": 3 },
+      { "name": "Jira", "stars": 4 },
+      {
+        "name": "AWS",
+        "stars": 3,
+        "libraries": [
+          { "name": "Route 53", "stars": 5 },
+          { "name": "IAM", "stars": 5 },
+          { "name": "EFS", "stars": 5 },
+          { "name": "Rekognition", "stars": 5 },
+          { "name": "S3", "stars": 5 },
+          { "name": "CloudFront", "stars": 5 },
+          { "name": "Lambda", "stars": 4 },
+          { "name": "EC2", "stars": 4 },
+          { "name": "RDS", "stars": 4 },
+          { "name": "CloudFormation", "stars": 4 },
+          { "name": "CodePipeline", "stars": 4 },
+          { "name": "API Gateway", "stars": 4 },
+          { "name": "SNS", "stars": 3 },
+          { "name": "Amazon Pinpoint", "stars": 3 },
+          { "name": "SES", "stars": 3 },
+          { "name": "SQS", "stars": 2 },
+          { "name": "EKS", "stars": 2 }
+        ]
+      },
+      { "name": "Scrum", "stars": 4 },
+      { "name": "DevOps", "stars": 4 },
+      { "name": "Confluence", "stars": 4 },
+      {
+        "name": "Docker",
+        "stars": 3,
+        "libraries": [{ "name": "Docker Compose", "stars": 5 }]
+      },
+      { "name": "Postman", "stars": 3 },
+      { "name": "Kubernetes", "stars": 2 }
+    ]
+  }
+]

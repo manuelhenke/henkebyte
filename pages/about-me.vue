@@ -7,12 +7,12 @@
         <div class="col">
           <p class="fs-4 lead">
             Hey there! I am Manuel Henke, {{ currentAge }} years old and from
-            the heart of Germany, Berlin. At the moment I'm in the final phase
-            of my master studies in Information Systems Management. On the side
-            I'm still working as a working student as a fullstack software
-            developer. Privately, I'm just starting to get involved in open
-            source development and have already started some small projects,
-            which are showcased on this website.
+            the heart of Berlin, Germany. At the moment I'm in the final phase
+            of my master studies in Information Systems Management. I also work
+            as a student trainee in software development in the area of web
+            development and cloud computing. Privately I'm just starting to get
+            involved with open source development and have already started some
+            small projects which are presented on this website.
           </p>
         </div>
         <div class="col-12 col-sm-4 col-md-4 col-lg-3 text-center">
@@ -41,26 +41,14 @@
         <h3>{{ ability.title }}</h3>
         <div
           v-if="Array.isArray(ability.entries)"
-          class="row row-cols-1 row-cols-sm-2 gy-3"
+          class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gy-3"
         >
-          <div v-for="entry of ability.entries" :key="entry.name" class="col">
-            {{ entry.name }}
-            <div class="stars">
-              <span
-                v-for="index in Math.min(entry.stars, 5)"
-                :key="index"
-                class="star-filled"
-              >
-                <i class="bi bi-code"></i>
-              </span>
-              <span
-                v-for="index in 5 - Math.min(entry.stars, 5)"
-                :key="index"
-                class="star-unfilled"
-              >
-                <i class="bi bi-code"></i>
-              </span>
-            </div>
+          <div
+            v-for="entry of sortByStars(ability.entries)"
+            :key="entry.name"
+            class="col"
+          >
+            <AbilityElement :entry="entry" />
           </div>
         </div>
       </div>
@@ -69,6 +57,8 @@
 </template>
 
 <script>
+import abilities from '~/data/abilities.json'
+
 function currentAge() {
   const birthday = new Date(1996, 11, 6)
   const ageDifMs = Date.now() - birthday.getTime()
@@ -92,10 +82,10 @@ export default {
       {
         from: new Date(2016, 9),
         to: new Date(2020, 8),
-        role: 'Wirtschaftsinformatiok (BSc)',
+        role: 'Wirtschaftsinformatik (BSc)',
         place: 'Technische Universität Berlin',
         description:
-          'Thesis: Konzeption und Entwicklung eines cloudbasierten Lösungsansatzes zur automatisierten Bewertung der Barrierefreiheit im häuslichen Bereich als iOS-App (1,0)',
+          'Thesis: Design and development of a cloud-based solution approach for automated home accessibility assessment as an iOS app',
       },
     ],
     experienceTimeLineItems: [
@@ -116,63 +106,7 @@ export default {
           'Developing applications mainly using PHP and Java for the backend and the common frontend web technologies as well as the frontend libraries Bootstrap and jQuery.',
       },
     ],
-    abilities: [
-      {
-        title: 'Skills',
-        entries: [
-          {
-            name: 'JavaScript',
-            stars: 5,
-          },
-          {
-            name: 'Java',
-            stars: 4,
-          },
-          {
-            name: 'Python',
-            stars: 3,
-          },
-          {
-            name: 'Go',
-            stars: 1,
-          },
-        ],
-      },
-      {
-        title: 'Languages',
-        entries: [
-          {
-            name: 'German',
-            stars: 5,
-          },
-          {
-            name: 'English',
-            stars: 4,
-          },
-          {
-            name: 'Spanish',
-            stars: 1,
-          },
-        ],
-      },
-      {
-        title: 'Tools',
-        entries: [
-          {
-            name: 'VSCode',
-            stars: 5,
-          },
-          {
-            name: 'FileZilla',
-            stars: 4,
-          },
-          {
-            name: 'Postman',
-            stars: 3,
-          },
-        ],
-      },
-    ],
+    abilities,
   }),
   head: {
     title: 'About Me - HenkeByte',
@@ -187,9 +121,14 @@ export default {
         hid: 'description',
         name: 'description',
         property: 'og:description',
-        content: `Hey there! I am Manuel Henke, ${currentAge()} years old and from the heart of Germany, Berlin. At the moment I'm in the final phase of my master studies in Information Systems Management. On the side I'm still working as a working student as a fullstack software developer. Privately, I'm just starting to get involved in open source development and have already started a small project.`,
+        content: `Hey there! I am Manuel Henke, ${currentAge()} years old and from the heart of Berlin, Germany. At the moment I'm in the final phase of my master studies in Information Systems Management. I also work as a student trainee in software development in the area of web development and cloud computing. Privately I'm just starting to get involved with open source development and have already started some small projects which are presented on this website.`,
       },
     ],
+  },
+  methods: {
+    sortByStars(entries) {
+      return entries.sort((e1, e2) => e2.stars - e1.stars)
+    },
   },
 }
 </script>
@@ -200,28 +139,6 @@ export default {
     width: 100%;
     @media (max-width: 576px) {
       width: 200px;
-    }
-  }
-}
-#abilities {
-  .stars {
-    display: flex;
-    gap: 5px;
-
-    > * {
-      border: 1px solid #139187;
-      border-radius: 100%;
-      height: 40px;
-      width: 40px;
-      display: flex;
-      place-content: center;
-      place-items: center;
-      font-size: 25px;
-      line-height: 1;
-    }
-    .star-filled {
-      background: #139187;
-      color: white;
     }
   }
 }

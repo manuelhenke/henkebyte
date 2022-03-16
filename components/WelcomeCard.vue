@@ -41,6 +41,7 @@ export default {
   }
 
   .welcome-card-message-container {
+    align-self: stretch;
     ul {
       list-style: none;
       padding: 0;

@@ -60,6 +60,7 @@
         <button
           v-if="!isEnded"
           class="btn btn-link btn-icon btn-lg"
+          type="button"
           @click="toggleStopWatch"
         >
           <i class="bi bi-play-circle-fill"></i>
@@ -76,6 +77,7 @@
         <button
           v-if="!isEnded && isStopwatchRunning"
           class="btn btn-link btn-icon btn-lg"
+          type="button"
           @click="toggleStopWatch"
         >
           <i class="bi bi-pause-circle-fill"></i>
@@ -109,6 +111,7 @@
         <h2>Personal Scoreboard</h2>
         <button
           class="btn btn-outline-danger"
+          type="button"
           data-bs-toggle="modal"
           data-bs-target="#reset-game-history-modal"
         >
@@ -145,6 +148,7 @@
                 <td class="scoreboard-action">
                   <button
                     class="btn btn-link btn-icon btn-lg"
+                    type="button"
                     @click="removeScoreboardEntry(game.id)"
                   >
                     <i class="bi bi-trash-fill"></i>

@@ -36,7 +36,7 @@ export default {
     },
     colorDots: {
       type: String,
-      default: '#139187',
+      default: 'var(--bs-secondary)',
     },
     uniqueTimeline: {
       type: Boolean,

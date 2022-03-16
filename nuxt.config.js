@@ -48,6 +48,10 @@ export default {
       src: '@/plugins/bootstrap.js',
       mode: 'client',
     },
+    {
+      src: '@/plugins/contentful.js',
+      mode: 'client',
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -59,6 +63,12 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
+    // https://github.com/nuxt-community/dotenv-module
+    '@nuxtjs/dotenv',
+    // https://sitemap.nuxtjs.org/
+    '@nuxtjs/sitemap',
+    // https://github.com/nuxt-community/robots-module
+    '@nuxtjs/robots',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -67,8 +77,6 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    // https://sitemap.nuxtjs.org/
-    '@nuxtjs/sitemap',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -131,6 +139,11 @@ export default {
         }
       })
     },
+  },
+
+  // Robots Configuration: https://github.com/nuxt-community/robots-module
+  robots: {
+    Sitemap: 'https://henkebyte.com/sitemap.xml',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

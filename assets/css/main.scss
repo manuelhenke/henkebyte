@@ -1,6 +1,5 @@
 $primary: #139187;
-$secondary: #f8f818;
-$background: #55df82;
+$secondary: #55df82;
 $link-decoration: none;
 $enable-negative-margins: true;
 
@@ -19,7 +18,7 @@ body {
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
-  background-color: $background;
+  background-color: $secondary;
   max-width: 100vw;
   overflow-x: hidden;
 }
@@ -48,13 +47,13 @@ a:not(.btn) {
 
 ::-moz-selection {
   /* Code for Firefox */
-  background: $background;
+  background: $secondary;
 }
 
 ::selection {
-  background: $background;
+  background: $secondary;
 }
 
 input {
-  caret-color: $background;
+  caret-color: $secondary;
 }
