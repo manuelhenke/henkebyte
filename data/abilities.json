@@ -68,13 +68,13 @@
   {
     "title": "Tools",
     "entries": [
-      { "name": "Git", "stars": 4 },
-      { "name": "VSCode", "stars": 4 },
+      { "name": "Git", "stars": 5 },
+      { "name": "VSCode", "stars": 5 },
       { "name": "IntelliJ", "stars": 3 },
       { "name": "Jira", "stars": 4 },
       {
         "name": "AWS",
-        "stars": 3,
+        "stars": 4,
         "libraries": [
           { "name": "Route 53", "stars": 5 },
           { "name": "IAM", "stars": 5 },
