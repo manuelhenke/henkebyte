@@ -25,6 +25,12 @@ jobs:
         with:
           node-version-file: '.nvmrc'
 
+      - name: create env file
+        run: |
+          touch .env
+          echo CTF_SPACE_ID=${{ secrets.CTF_SPACE_ID }} >> .env
+          echo CTF_CDA_ACCESS_TOKEN=${{ secrets.CTF_CDA_ACCESS_TOKEN }} >> .env
+
       - name: Get yarn cache directory path 🛠
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"

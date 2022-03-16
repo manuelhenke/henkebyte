@@ -7,4 +7,13 @@ const config = {
   accessToken: process.env.CTF_CDA_ACCESS_TOKEN,
 }
 
-export const client = createClient(config)
+let contentfulClient
+
+try {
+  contentfulClient = createClient(config)
+} catch (error) {
+  // eslint-disable-next-line no-console
+  console.error(error)
+}
+
+export const client = contentfulClient
