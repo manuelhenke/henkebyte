@@ -19,7 +19,7 @@
         :key="index"
         :class="index <= entry.stars ? 'star-filled' : 'star-unfilled'"
       >
-        <i v-if="index < entry.stars" class="bi bi-code-slash"></i>
+        <i v-if="index <= entry.stars" class="bi bi-code-slash"></i>
         <i v-else class="bi bi-code"></i>
       </span>
     </div>
