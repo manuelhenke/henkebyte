@@ -1,11 +1,6 @@
 <template>
   <span class="app-contact">
-    <a
-      pill
-      class="btn btn-primary text-light text-decoration-none"
-      :href="href"
-      target="_blank"
-    >
+    <a pill class="btn btn-primary" :href="href" target="_blank">
       <i :class="icon"></i>
       <span class="button-text">{{ text }}</span>
     </a>

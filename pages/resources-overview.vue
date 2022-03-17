@@ -18,7 +18,7 @@
           aria-label="search resources"
         />
         <button
-          class="btn btn-primary text-light d-sm-none w-100 mt-3"
+          class="btn btn-primary d-sm-none w-100 mt-3"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasExample"
@@ -54,10 +54,7 @@
                 >#{{ category.fields.title }}</span
               >
             </div>
-            <a
-              :href="site.fields.url"
-              class="btn btn-primary text-light"
-              target="_blank"
+            <a :href="site.fields.url" class="btn btn-primary" target="_blank"
               >Visit<i class="bi bi-box-arrow-up-right ms-2"></i
             ></a>
           </div>
@@ -84,11 +81,11 @@
             </label>
           </div>
         </form>
-        <div class="row row-cols-2 mt-3">
+        <div class="row row-cols-1 row-cols-md-2 g-1 mt-3">
           <div class="col">
             <button
               :disabled="categories.length === checkedCategories.length"
-              class="btn btn-primary text-light w-100"
+              class="btn btn-primary w-100"
               type="button"
               @click="selectAllCategories"
             >
@@ -98,7 +95,7 @@
           <div class="col">
             <button
               :disabled="checkedCategories.length === 0"
-              class="btn btn-primary text-light w-100"
+              class="btn btn-primary w-100"
               type="button"
               @click="deselectAllCategories"
             >
@@ -147,7 +144,7 @@
           <div class="col">
             <button
               :disabled="categories.length === checkedCategories.length"
-              class="btn btn-primary text-light w-100"
+              class="btn btn-primary w-100"
               type="button"
               @click="selectAllCategories"
             >
@@ -157,7 +154,7 @@
           <div class="col">
             <button
               :disabled="checkedCategories.length === 0"
-              class="btn btn-primary text-light w-100"
+              class="btn btn-primary w-100"
               type="button"
               @click="deselectAllCategories"
             >
@@ -264,12 +261,14 @@ export default {
           return 'Zzzzzzzzzzzzz...'
         case 'oguzhan':
         case 'osan':
+        case 'osantor':
         case 'berber':
         case 'mehli':
           return 'Gülme vuruşu!'
         case 'nami':
         case 'namy':
         case 'sadeghnia':
+        case 'namysade':
           return 'Manuuuuu!'
         case 'thao':
           return 'OOOOOOHHHHH VIETNAM!'

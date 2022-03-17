@@ -6,6 +6,25 @@ $enable-negative-margins: true;
 @import '~bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
+.btn-primary {
+  @include button-variant(
+    $primary,
+    $primary,
+    $color: $white,
+    $hover-color: $white,
+    $active-color: $white,
+    $disabled-color: $white
+  );
+}
+
+.btn-outline-primary {
+  @include button-outline-variant(
+    $primary,
+    $color-hover: $white,
+    $active-color: $white
+  );
+}
+
 .btn-icon {
   padding: 0;
   &:focus {
