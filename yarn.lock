@@ -5946,10 +5946,10 @@ internal-slot@^1.0.3:
     has "^1.0.3"
     side-channel "^1.0.4"
 
-ios-calculator-for-web@^1.2.4:
-  version "1.2.6"
-  resolved "https://registry.npmjs.org/ios-calculator-for-web/-/ios-calculator-for-web-1.2.6.tgz"
-  integrity sha512-MfQM793vG1cn3wc//S5JLW1SAssBZCOAhTLhbW+glpPnIugjuzfkH3/qcLLmw0WGqjTrcrNDmFrR/DwFIYg9WQ==
+ios-calculator-for-web@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/ios-calculator-for-web/-/ios-calculator-for-web-1.2.7.tgz#8104ea2efae2da47b8fff0f47facbb2b996007f7"
+  integrity sha512-qWHnIE7EAR3lnorBtpMcihWYPDoeq74HwvaA/ShmGeNMbSer11x3HKxhQCn6iW9sXQ0qwnlBpPuq99o8Xq1AgQ==
   dependencies:
     mathjs "^10.0.0"
 
