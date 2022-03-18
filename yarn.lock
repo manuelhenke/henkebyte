@@ -7509,10 +7509,10 @@ min-indent@^1.0.0:
   resolved "https://registry.npmjs.org/min-indent/-/min-indent-1.0.1.tgz"
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
-minesweeper-for-web@^2.1.6:
-  version "2.1.12"
-  resolved "https://registry.npmjs.org/minesweeper-for-web/-/minesweeper-for-web-2.1.12.tgz"
-  integrity sha512-yqI7Yadyu7TOTn68YoEvpcZpNxWqv99GW+J2mMihAPUwioNS9By7vaAcv6z6rJq4LDhyV4dJqXF7z/YehDImzw==
+minesweeper-for-web@^2.1.13:
+  version "2.1.13"
+  resolved "https://registry.yarnpkg.com/minesweeper-for-web/-/minesweeper-for-web-2.1.13.tgz#9de344f8681addd379d451d1e04225fb25876801"
+  integrity sha512-J/YmQ32eXjX8SZvwC8fGUZbY/pPC1l4m0QJz09GqmuOg93NuJ6PFu+8O2HyrZZQDPKiO74UaHVZ4IGwZZ86A4Q==
   dependencies:
     lit "^2.2.0"
 
