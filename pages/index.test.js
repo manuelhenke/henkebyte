@@ -1,10 +1,8 @@
-import { setupTest, createPage } from '@nuxt/test-utils'
+import { describe, test } from '@jest/globals'
+import { createPage, setupTest } from '@nuxt/test-utils'
 
 describe('browser', () => {
-  setupTest({
-    testDir: __dirname,
-    browser: true,
-  })
+  setupTest({ browser: true })
 
   test('should render page', async () => {
     const page = await createPage('/')
