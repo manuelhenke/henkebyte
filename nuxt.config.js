@@ -1,9 +1,18 @@
+import { defineNuxtConfig } from '@nuxt/bridge'
+
 const buildDescription = (target) =>
   `A showcase ${target} for different open source web projects including an iOS-Calculator and Minesweeper.`
 
-export default {
+export default defineNuxtConfig({
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
+
+  bridge: false, // Temporarily disable bridge integration
+  // bridge: {
+  //   // Can be enabled once this is fixed: https://github.com/nuxt/framework/issues/886
+  //   // TODO: change start script to `nuxi preview` in package.json
+  //   nitro: false,
+  // },
 
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -155,4 +164,4 @@ export default {
   loading: {
     color: '#139187',
   },
-}
+})
