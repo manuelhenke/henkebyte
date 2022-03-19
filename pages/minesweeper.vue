@@ -88,15 +88,15 @@
       >
     </div>
 
-    <div class="alert alert-primary d-flex align-items-center" role="alert">
+    <div class="alert alert-info d-flex align-items-center" role="alert">
       <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
 
-      <div v-if="supportedInput === 'windows'">
+      <div v-if="$device.isWindows && !$device.isMobile">
         To place a flag just hold <kbd>Ctrl</kbd> or <kbd>Alt</kbd> while
         clicking on a field. Or just hold a field to place a flag.
       </div>
 
-      <div v-else-if="supportedInput === 'mac'">
+      <div v-else-if="$device.isMacOS && !$device.isMobile">
         To place a flag just hold
         <kbd>Cmd <i class="bi bi-command"></i></kbd> or
         <kbd>Opt <i class="bi bi-option"></i></kbd> while clicking on a field.
@@ -274,7 +274,6 @@
 </template>
 
 <script>
-import Platform from 'platform-detect'
 import { Fireworks } from 'fireworks-js'
 import { liveQuery } from 'dexie'
 import {
@@ -322,17 +321,6 @@ export default {
     ],
   },
   computed: {
-    supportedInput() {
-      if (Platform.mouse) {
-        if (Platform.macos) {
-          return 'mac'
-        } else {
-          return 'windows'
-        }
-      }
-
-      return 'hold'
-    },
     isStopwatchRunning() {
       if (!this.isMounted) return
 

@@ -69,6 +69,8 @@ export default {
     '@nuxtjs/sitemap',
     // https://github.com/nuxt-community/robots-module
     '@nuxtjs/robots',
+    // https://github.com/nuxt-community/device-module
+    '@nuxtjs/device',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
