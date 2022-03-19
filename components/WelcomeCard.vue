@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-3 p-sm-4 p-md-5 bg-light rounded-3 shadow-lg welcome-card text-center"
+    class="p-3 p-sm-4 p-md-5 bg-light rounded-3 shadow welcome-card text-center"
   >
     <div class="welcome-card-title-container">
       <slot name="title"></slot>
@@ -13,6 +13,7 @@
       <slot></slot>
     </div>
     <TheFooter />
+    <!-- <TheFooter no-color-mode-picker /> -->
   </div>
 </template>
 

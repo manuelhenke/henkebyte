@@ -9,7 +9,7 @@
           src="~/assets/images/henkebyte-logo.png"
           class="img-fluid"
           width="50"
-          alt="henkebyte-logo"
+          alt="Logo of henkebyte"
       /></nuxt-link>
     </nav>
   </header>

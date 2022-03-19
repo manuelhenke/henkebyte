@@ -263,13 +263,20 @@ export default {
         case 'osan':
         case 'osantor':
         case 'berber':
-        case 'mehli':
+        case 'melih':
           return 'Gülme vuruşu!'
         case 'nami':
         case 'namy':
         case 'sadeghnia':
         case 'namysade':
           return 'Manuuuuu!'
+        case 'bilal':
+          return 'CRYPTO!!!!!'
+        case 'niko':
+        case 'mestanis':
+        case 'nibones':
+        case 'grieche':
+          return 'Jaaaaaa, lass mal times...'
         case 'thao':
           return 'OOOOOOHHHHH VIETNAM!'
         case 'henni':
