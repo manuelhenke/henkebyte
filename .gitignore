@@ -94,3 +94,6 @@ sw.*
 # Playwright output directories
 test-results/
 playwright-report/
+
+# Ignore symbolic link folders
+ln-*

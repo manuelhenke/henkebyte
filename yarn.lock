@@ -1596,7 +1596,7 @@
     node-html-parser "^5.1.0"
     ufo "^0.7.9"
 
-"@nuxt/kit@npm:@nuxt/kit-edge@3.0.0-27460489.53fbca7":
+"@nuxt/kit@npm:@nuxt/kit-edge@3.0.0-27460489.53fbca7", "@nuxt/kit@npm:@nuxt/kit-edge@latest":
   version "3.0.0-27460489.53fbca7"
   resolved "https://registry.yarnpkg.com/@nuxt/kit-edge/-/kit-edge-3.0.0-27460489.53fbca7.tgz#b304fd9ea571e542f69e6121a1c5bc0af776accb"
   integrity sha512-6rYLtw80Zrw+rwQXrzxv0kNwe46hoByxnEcQS3GaXlAM/9aZfdOnCSg6qiI5NJoFcjSF+6chG6oTAk33HdUlBA==
@@ -1910,6 +1910,16 @@
     axios-retry "^3.1.9"
     consola "^2.15.3"
     defu "^5.0.0"
+
+"@nuxtjs/color-mode@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/color-mode/-/color-mode-3.0.2.tgz#17110d78864ad00ce524f7fc2d379d8c28ff765a"
+  integrity sha512-JgppnxOsVe2T/UGj0xjok/8TKDI27bRuhNh+Qrvr0FsS90Mty2acZLLN0lkrOTV0WLrpnTgN7mZCrgCWmhvziA==
+  dependencies:
+    "@nuxt/kit" "npm:@nuxt/kit-edge@latest"
+    defu "^5.0.0"
+    lodash.template "^4.5.0"
+    pathe "^0.2.0"
 
 "@nuxtjs/device@^2.1.0":
   version "2.1.0"
@@ -4322,7 +4332,7 @@ contentful-sdk-core@^7.0.1:
     p-throttle "^4.1.1"
     qs "^6.9.4"
 
-contentful@^9.1.13:
+contentful@^9.1.18:
   version "9.1.18"
   resolved "https://registry.yarnpkg.com/contentful/-/contentful-9.1.18.tgz#81eeb30b28b5e578f13fdf9459dd57d09089efba"
   integrity sha512-Hi4IyW2EIfypSgICYZcDUvn0dqAFhwp64h+VpWUsiEULdtxnyBdHxxh9utlgpv4sW0sj74SU3ChNgYAMxaH2+g==
@@ -5568,7 +5578,7 @@ eslint-plugin-unicorn@^41.0.0:
     semver "^7.3.5"
     strip-indent "^3.0.0"
 
-eslint-plugin-vue@^8.2.0, eslint-plugin-vue@^8.5.0:
+eslint-plugin-vue@^8.5.0:
   version "8.5.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-8.5.0.tgz#65832bba43ca713fa5da16bdfcf55d0095677f6f"
   integrity sha512-i1uHCTAKOoEj12RDvdtONWrGzjFm/djkzqfhmQ0d6M/W8KM81mhswd/z+iTZ0jCpdUedW3YRgcVfQ37/J4zoYQ==

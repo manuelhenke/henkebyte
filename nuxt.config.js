@@ -7,12 +7,12 @@ export default defineNuxtConfig({
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
-  bridge: false, // Temporarily disable bridge integration
-  // bridge: {
-  //   // Can be enabled once this is fixed: https://github.com/nuxt/framework/issues/886
-  //   // TODO: change start script to `nuxi preview` in package.json
-  //   nitro: false,
-  // },
+  // bridge: false, // Temporarily disable bridge integration
+  bridge: {
+    // Can be enabled once this is fixed: https://github.com/nuxt/framework/issues/886
+    // TODO: change start script to `nuxi preview` in package.json
+    nitro: false,
+  },
 
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -44,12 +44,31 @@ export default defineNuxtConfig({
         property: 'og:title',
         content: 'HenkeByte',
       },
+      // This doesn't work along well with the theme selection inside the web app
+      // TODO: set theme-color dynamic based on the selected theme
+      /* {
+        hid: 'theme-color-light',
+        name: 'theme-color',
+        media: '(prefers-color-scheme: light)',
+        content: '#55df82',
+      },
+      {
+        hid: 'theme-color-dark',
+        name: 'theme-color',
+        media: '(prefers-color-scheme: dark)',
+        content: '#000000',
+      }, */
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['@/assets/css/main.scss'],
+  css: [
+    '@/assets/css/main.scss',
+    '@/assets/css/light-theme.scss',
+    '@/assets/css/dark-theme.scss',
+    '@/assets/css/sepia-theme.scss',
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -78,8 +97,6 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     // https://github.com/nuxt-community/robots-module
     '@nuxtjs/robots',
-    // https://github.com/nuxt-community/device-module
-    '@nuxtjs/device',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -88,6 +105,10 @@ export default defineNuxtConfig({
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    // https://github.com/nuxt-community/device-module
+    '@nuxtjs/device',
+    // https://color-mode.nuxtjs.org/
+    '@nuxtjs/color-mode',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -101,7 +122,6 @@ export default defineNuxtConfig({
     meta: {
       name: 'HenkeByte',
       author: 'Manuel Henke',
-      theme_color: '#55df82',
       lang: 'en',
       ogHost: 'https://henkebyte.com',
       ogImage: {
@@ -120,6 +140,7 @@ export default defineNuxtConfig({
       short_name: 'HenkeByte',
       description: buildDescription('PWA'),
       background_color: '#55df82',
+      // theme_color: '#55df82',
       lang: 'en',
     },
   },
@@ -163,5 +184,10 @@ export default defineNuxtConfig({
   // Loading Configuration: https://nuxtjs.org/docs/features/loading/
   loading: {
     color: '#139187',
+  },
+
+  // https://color-mode.nuxtjs.org/
+  colorMode: {
+    fallback: 'light',
   },
 })
