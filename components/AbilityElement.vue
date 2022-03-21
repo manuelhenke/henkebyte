@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ability-element">
     <div
       v-if="Array.isArray(entry.libraries)"
       class="mb-1 text-primary skill-expand-trigger"
@@ -27,15 +27,13 @@
     <div
       v-if="Array.isArray(entry.libraries)"
       :id="librariesHtmlId"
-      class="collapse mt-2"
+      class="libraries collapse mt-2"
     >
-      <div class="libraries">
-        <AbilityElement
-          v-for="library of entry.libraries"
-          :key="library.name"
-          :entry="library"
-        />
-      </div>
+      <AbilityElement
+        v-for="library of entry.libraries"
+        :key="library.name"
+        :entry="library"
+      />
     </div>
   </div>
 </template>
@@ -51,33 +49,36 @@ export default {
   },
   computed: {
     librariesHtmlId() {
-      return this.entry.name.replace(/[^\w]/gi, '-') + '-libraries'
+      return 'libraries-' + this._uid
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/css/bootstrap-mixins.scss';
+
 .skill-expand-trigger {
   cursor: pointer;
 }
 
 .stars {
   display: flex;
-  gap: 5px;
+  gap: map-get($spacers, 1);
 
   --accent-color: var(--bs-secondary);
 
-  > * {
-    border: 1px solid var(--accent-color);
-    border-radius: 100%;
+  > [class^='star-'] {
+    $star-dimension: 2rem;
+    border: map-get($border-widths, 1) solid var(--accent-color);
+    border-radius: $border-radius-pill;
     color: var(--accent-color);
-    height: 30px;
-    width: 30px;
+    height: $star-dimension;
+    width: $star-dimension;
     display: flex;
     place-content: center;
     place-items: center;
-    font-size: 15px;
+    font-size: calc($star-dimension / 2);
     line-height: 1;
   }
   .star-filled {
@@ -87,10 +88,10 @@ export default {
 }
 
 .libraries {
-  border-left: 2px solid var(--bs-secondary);
-  padding-left: 1rem;
+  border-left: map-get($border-widths, 2) solid var(--bs-secondary);
+  padding: map-get($spacers, 1) map-get($spacers, 2);
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: map-get($spacers, 2);
 }
 </style>

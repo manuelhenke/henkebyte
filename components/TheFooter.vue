@@ -1,8 +1,7 @@
-<template>
-  <footer
-    class="text-center d-flex gap-2 flex-column justify-content-center align-items-center"
-  >
-    <div class="d-flex d-md-none gap-1 small">
+<template comments>
+  <footer>
+    <!-- footer -->
+    <div class="upper-footer d-md-none">
       <ContactButton
         v-for="contactOption of contactOptions"
         :key="contactOption.text"
@@ -11,12 +10,13 @@
         :icon="contactOption.icon"
       />
     </div>
-    <div class="d-flex gap-2 small">
+    <div class="lower-footer">
       <!-- <nuxt-link to="/imprint">Imprint</nuxt-link>
       <i class="bi bi-slash"></i> -->
-      <span>&copy; {{ currentYear }} Copyright Manuel Henke</span>
+      <small>&copy; {{ currentYear }} Copyright Manuel Henke</small>
     </div>
     <ColorModePicker v-if="!noColorModePicker" />
+    <!-- /footer -->
   </footer>
 </template>
 
@@ -40,3 +40,26 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/css/bootstrap-mixins.scss';
+
+footer {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  place-items: center;
+  gap: map-get($gutters, 2);
+
+  .upper-footer {
+    display: flex;
+    gap: map-get($gutters, 1);
+  }
+
+  .lower-footer {
+    display: flex;
+    gap: map-get($gutters, 2);
+  }
+}
+</style>

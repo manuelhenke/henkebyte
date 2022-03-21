@@ -8,6 +8,11 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  // server: {
+  //   // To make the application available in the local network
+  //   host: '0.0.0.0',
+  // },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   // Test meta config here: https://www.opengraph.xyz/
   head: {

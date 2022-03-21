@@ -1,5 +1,6 @@
-@use 'variables';
-@use 'bootstrap/scss/bootstrap-reboot';
+@import 'variables';
+@import 'mixins';
+@import '~bootstrap/scss/bootstrap-reboot';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
 html,
@@ -12,7 +13,7 @@ body {
 body,
 .modal {
   // bootstrap adds padding-right for modals and offcanvas, idk why tho
-  padding-right: 0 !important;
+  padding-right: map-get($spacers, 0) !important;
 }
 
 i.bi {
@@ -31,7 +32,17 @@ a:not(.btn) {
       content: '\F1C5'; // box-arrow-up-right
       display: inline;
       text-decoration: none;
-      margin-left: 0.25em;
+      margin-left: map-get($spacers, 1);
+    }
+  }
+}
+
+section:not(.no-spacing-below) + section {
+  margin-top: map-get($spacers, 5);
+
+  @each $value, $space in $spacers {
+    &.space-#{$value} {
+      margin-top: $space;
     }
   }
 }

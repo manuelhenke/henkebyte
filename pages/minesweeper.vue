@@ -1,5 +1,6 @@
-<template>
-  <div>
+<template comments>
+  <div id="minesweeper-page">
+    <!-- #minesweeper-page -->
     <TheTitle badge-text="New">Minesweeper</TheTitle>
     <TheLead>
       This is an implementation of the game
@@ -26,10 +27,10 @@
 
     <div class="d-grid gap-2 col-12 col-md-6 col-lg-4 mx-auto my-3 text-center">
       <select
-        ref="gamemode"
         v-model="currentGamemode"
         class="form-select text-center"
         name="gamemode"
+        @change="onChangedGamemode"
       >
         <option value="easy" selected>Easy - 9x9 / 10 Mines</option>
         <option value="normal">Normal - 16x16 / 40 Mines</option>
@@ -55,10 +56,11 @@
         class="d-inline-block"
         bomb-counter-selector="#bomb-counter"
         @field-click="handleMinesweeperClick"
+        @game-won="onGameWon"
+        @game-lost="onGameLost"
       ></minesweeper-game>
       <div v-if="!isEnded && !isStopwatchRunning" class="overlay">
         <button
-          v-if="!isEnded"
           class="btn btn-link btn-icon btn-lg"
           type="button"
           @click="toggleStopWatch"
@@ -72,7 +74,11 @@
       <div class="d-flex gap-2 align-items-center justify-content-center">
         <span>
           <i class="bi bi-stopwatch"></i>
-          <StopWatch ref="stopwatch"></StopWatch>
+          <StopWatch ref="stopwatch">
+            <template #default="{ elapsedTime }">
+              <TimeString :milliseconds="elapsedTime" />
+            </template>
+          </StopWatch>
         </span>
         <button
           v-if="!isEnded && isStopwatchRunning"
@@ -143,7 +149,7 @@
                   <TimeString :milliseconds="game.gameDuration" />
                 </td>
                 <td>
-                  {{ toDateString(game.gameCompletionTimestamp) }}
+                  {{ timestampToDateString(game.gameCompletionTimestamp) }}
                 </td>
                 <td class="scoreboard-action">
                   <button
@@ -270,6 +276,7 @@
       </div>
     </div>
     <div ref="firework" class="firework-container"></div>
+    <!-- /#minesweeper-page -->
   </div>
 </template>
 
@@ -285,13 +292,13 @@ import {
   Tooltip,
 } from 'chart.js'
 import { db } from '~/middleware/db'
+import { timestampToDateString } from '~/util'
 import 'minesweeper-for-web'
 
 Chart.register(ArcElement, DoughnutController, Legend, Title, Tooltip)
 
 export default {
   name: 'MinesweeperPage',
-  layout: 'default-centered',
   data: () => ({
     isMounted: false,
     isEnded: true,
@@ -392,8 +399,25 @@ export default {
   mounted() {
     this.isMounted = true
 
-    function getGameModeConfiguration(currentGameMode) {
-      switch (currentGameMode) {
+    const gameModeConfiguration = this.getGameModeConfiguration()
+    this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration)
+
+    this.fireworks = new Fireworks(this.$refs.firework, {
+      particles: 200,
+      explosion: 10,
+      sound: false,
+    })
+
+    liveQuery(() => db.games.toArray()).subscribe((games) => {
+      this.games = games.sort(
+        (gameA, gameB) => gameA.gameDuration - gameB.gameDuration
+      )
+    })
+  },
+  methods: {
+    timestampToDateString,
+    getGameModeConfiguration() {
+      switch (this.currentGamemode) {
         case 'hard':
           return {
             columns: 30,
@@ -414,21 +438,14 @@ export default {
             bombs: 10,
           }
       }
-    }
-
-    this.$refs.gamemode.addEventListener('change', (e) => {
+    },
+    onChangedGamemode(e) {
       e.preventDefault()
-      const gameModeConfiguration = getGameModeConfiguration(
-        this.currentGamemode
-      )
+      const gameModeConfiguration = this.getGameModeConfiguration()
       this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration)
       this.restartGame()
-    })
-
-    const gameModeConfiguration = getGameModeConfiguration(this.currentGamemode)
-    this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration)
-
-    this.$refs.minesweeper.addEventListener('game-won', () => {
+    },
+    onGameWon() {
       this.isEnded = true
       this.$refs.stopwatch.stop()
       this.fireworks.start()
@@ -452,28 +469,13 @@ export default {
       window.setTimeout(() => {
         this.fireworks.stop()
       }, fireworkDuration)
-    })
-
-    this.$refs.minesweeper.addEventListener('game-lost', () => {
+    },
+    onGameLost() {
       this.isEnded = true
       this.$refs.stopwatch.stop()
 
       this.addDbEntry(false)
-    })
-
-    this.fireworks = new Fireworks(this.$refs.firework, {
-      particles: 200,
-      explosion: 10,
-      sound: false,
-    })
-
-    liveQuery(() => db.games.toArray()).subscribe((games) => {
-      this.games = games.sort(
-        (gameA, gameB) => gameA.gameDuration - gameB.gameDuration
-      )
-    })
-  },
-  methods: {
+    },
     clickedRestart() {
       if (this.isEnded) {
         this.restartGame()
@@ -498,16 +500,6 @@ export default {
         this.$refs.stopwatch.start()
       }
     },
-    toDateString(timestamp) {
-      const event = new Date(timestamp)
-      const options = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      }
-      return event.toLocaleDateString('en-EN', options)
-    },
     resetGameHistory() {
       db.games.clear()
     },
@@ -527,10 +519,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@media (max-width: 768px) {
+@import '@/assets/css/bootstrap-mixins.scss';
+
+$border-width: map-get($border-widths, 4);
+
+#minesweeper {
+  border-width: $border-width;
+}
+
+@include media-breakpoint-down(sm) {
   #minesweeper {
     border-width: 0;
-    outline: 4px solid rgb(189, 189, 189);
+    outline: $border-width solid rgb(189, 189, 189);
   }
 }
 
@@ -547,7 +547,7 @@ export default {
 
 .overlay {
   position: absolute;
-  inset: 0;
+  inset: -$border-width;
   background-color: rgba(var(--bs-light-rgb), 0.975);
   display: flex;
   place-content: center;
@@ -558,7 +558,7 @@ export default {
   }
 }
 
-@media (hover: hover) {
+@include only-on-hover-device {
   .scoreboard-row:not(:hover) .scoreboard-action > * {
     visibility: hidden;
   }

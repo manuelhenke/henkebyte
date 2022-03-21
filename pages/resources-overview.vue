@@ -1,5 +1,6 @@
-<template>
-  <div>
+<template comments>
+  <div id="resources-overview-page">
+    <!-- #resources-overview-page -->
     <TheTitle>Resources Overview</TheTitle>
     <TheLead
       >This is a collection of my favorite resources which levitate my
@@ -8,8 +9,10 @@
 
     <hr class="my-4" />
 
-    <div class="row flex-column-reverse flex-sm-row">
+    <div class="row flex-sm-row">
+      <!-- main area -->
       <div class="col-12 col-sm-8">
+        <!-- card container -->
         <input
           v-model="currentSearchInput"
           class="form-control"
@@ -21,8 +24,8 @@
           class="btn btn-primary d-sm-none w-100 mt-3"
           type="button"
           data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasExample"
-          aria-controls="offcanvasExample"
+          data-bs-target="#offcanvasCategories"
+          aria-controls="offcanvasCategories"
         >
           Filter
         </button>
@@ -59,9 +62,11 @@
             ></a>
           </div>
         </article>
+        <!-- /card container -->
       </div>
 
       <aside class="col-12 col-sm-4 mb-3 d-none d-sm-block">
+        <!-- categories sidebar -->
         <h2>Categories</h2>
         <form>
           <div
@@ -103,17 +108,22 @@
             </button>
           </div>
         </div>
+        <!-- /categories sidebar -->
       </aside>
+      <!-- /main area -->
     </div>
 
     <div
-      id="offcanvasExample"
+      id="offcanvasCategories"
       class="offcanvas offcanvas-end d-sm-none"
       tabindex="-1"
-      aria-labelledby="offcanvasExampleLabel"
+      aria-labelledby="offcanvasCategoriesLabel"
     >
+      <!-- categories offcanvas -->
       <div class="offcanvas-header">
-        <h5 id="offcanvasExampleLabel" class="offcanvas-title">Categories</h5>
+        <h5 id="offcanvasCategoriesLabel" class="offcanvas-title">
+          Categories
+        </h5>
         <button
           type="button"
           class="btn-close text-reset"
@@ -121,7 +131,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="offcanvas-body">
+      <div class="offcanvas-body pt-0">
         <form>
           <div
             v-for="category in sortedCategories"
@@ -163,7 +173,9 @@
           </div>
         </div>
       </div>
+      <!-- /categories offcanvas -->
     </div>
+    <!-- /#resources-overview-page -->
   </div>
 </template>
 
@@ -172,7 +184,6 @@ import { client } from '~/plugins/contentful.js'
 
 export default {
   name: 'ResourcesOverviewPage',
-  layout: 'default-centered',
   asyncData() {
     return (
       Promise.all([

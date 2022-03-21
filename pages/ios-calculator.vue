@@ -1,5 +1,6 @@
-<template>
-  <div>
+<template comments>
+  <div id="ios-calculator-page">
+    <!-- #ios-calculator-page -->
     <TheTitle badge-text="New">iOS-Calculator</TheTitle>
     <TheLead
       >This is an implementation of the iOS-Calculator, which is available at
@@ -21,6 +22,7 @@
     <div class="text-center mt-3">
       <ios-calculator></ios-calculator>
     </div>
+    <!-- /#ios-calculator-page -->
   </div>
 </template>
 
@@ -29,7 +31,6 @@ import 'ios-calculator-for-web'
 
 export default {
   name: 'CalculatorPage',
-  layout: 'default-centered',
   head: {
     title: 'iOS-Calculator - HenkeByte',
     meta: [

@@ -11,8 +11,8 @@
     </div>
     <section class="content-container">
       <div class="item fw-normal" :style="backgroundColor">
-        <h3 class="role-item">{{ itemTimeline.role }}</h3>
-        <h4 class="place-item">{{ itemTimeline.place }}</h4>
+        <h3 class="role-item fs-6">{{ itemTimeline.role }}</h3>
+        <h4 class="place-item fs-6">{{ itemTimeline.place }}</h4>
         <p class="description-item">
           {{ itemTimeline.description }}
         </p>
@@ -67,22 +67,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/css/bootstrap-mixins.scss';
+
 .timeline-item {
   display: grid;
   grid-template-columns: 5ch 1fr;
-  grid-column-gap: 15px;
+  grid-column-gap: map-get($spacers, 3);
 
   .year-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding: 15px 0;
-    font-weight: bold;
-    font-size: 18px;
+    padding: map-get($spacers, 3) map-get($spacers, 0);
+    font-weight: $font-weight-bold;
     text-align: center;
-    > * {
-      margin: 0;
+    > p {
+      margin: map-get($spacers, 0);
+      line-height: $headings-line-height;
     }
     .year-divider {
       line-height: 1;
@@ -95,37 +97,37 @@ export default {
 
   .content-container {
     .item {
-      border-left: 5px solid #ccd5db;
-      padding: 20px 0 20px 15px;
+      $line-width: 0.3rem;
+      border-left: $line-width solid $gray-400;
+      padding: map-get($spacers, 3);
       position: relative;
 
       &::before {
+        $dot-dimensions: 1rem;
         content: '';
         display: block;
         position: absolute;
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-        left: -10px;
-        top: 22px;
+        width: $dot-dimensions;
+        height: $dot-dimensions;
+        border-radius: $border-radius-pill;
+        left: calc(($dot-dimensions / 2) + ($line-width / 2)) * -1;
+        top: map-get($spacers, 3);
         background: var(--timeline-item-dot-color);
       }
     }
     .role-item {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 700;
+      margin: map-get($spacers, 0);
+      margin-bottom: map-get($spacers, 1);
+      font-weight: $font-weight-bold;
     }
     .place-item {
-      margin: 0;
-      padding: 5px 0;
-      font-size: 15px;
-      font-weight: 500;
+      margin: map-get($spacers, 0);
+      margin-bottom: map-get($spacers, 2);
+      font-weight: $font-weight-normal;
     }
     .description-item {
-      margin: 0;
-      font-size: 15px;
-      font-weight: 300;
+      margin: map-get($spacers, 0);
+      font-weight: $font-weight-light;
     }
   }
 }

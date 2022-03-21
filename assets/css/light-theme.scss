@@ -7,7 +7,7 @@
   $toast-header-background-color: white;
   $toast-background-color: rgba(white, 0.98);
 
-  @import 'bootstrap/scss/bootstrap';
+  @import '~bootstrap/scss/bootstrap';
   @import 'color-theme';
   @include root-variables($theme-colors, $body-color, $secondary);
 }

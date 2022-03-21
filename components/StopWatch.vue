@@ -1,5 +1,9 @@
 <template>
-  <TimeString :milliseconds="elapsedTime" />
+  <span>
+    <slot :elapsedTime="elapsedTime">
+      {{ elapsedTime }}
+    </slot>
+  </span>
 </template>
 
 <script>

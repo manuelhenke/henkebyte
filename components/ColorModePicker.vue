@@ -1,17 +1,19 @@
 <template>
-  <div id="color-mode-picker">
+  <div class="color-mode-picker">
     <ul>
       <li
         v-for="colorMode of colorModes"
         :key="colorMode.name"
         :title="`${capitalizeFirstLetter(colorMode.name)}mode`"
+        :aria-label="`Change color mode to ${colorMode.name}`"
         :class="{
           preferred:
             !$colorMode.unknown && colorMode.name === $colorMode.preference,
           // selected: !$colorMode.unknown && colorMode.name === $colorMode.value,
         }"
+        @click="changeColorMode(colorMode.name)"
       >
-        <div class="feather" @click="changeColorMode(colorMode.name)">
+        <div class="feather">
           <i :class="`bi bi-${colorMode.icon}`"></i>
         </div>
       </li>
@@ -28,9 +30,9 @@
     <div
       aria-live="polite"
       aria-atomic="true"
-      class="position-fixed top-0 start-50 translate-middle-x p-2"
+      class="position-fixed top-0 start-50 translate-middle-x"
     >
-      <div class="toast-container">
+      <div class="toast-container pt-3 pt-sm-4 pt-lg-5">
         <div
           v-for="colorMode of colorModes"
           :id="`${colorMode.name}-toast`"
@@ -67,6 +69,7 @@
 
 <script>
 import { Toast } from 'bootstrap'
+import { capitalizeFirstLetter } from '~/util'
 
 export default {
   name: 'ColorModePicker',
@@ -87,9 +90,7 @@ export default {
     lastActiveToast: null,
   }),
   methods: {
-    capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1)
-    },
+    capitalizeFirstLetter,
     changeColorMode(selectedColorModeName) {
       if (this.$colorMode.preference !== selectedColorModeName) {
         // Set color mode globally
@@ -104,11 +105,10 @@ export default {
           `${selectedColorModeName}-toast`
         )
 
-        const toast = new Toast(toastElement, {
+        this.lastActiveToast = new Toast(toastElement, {
           delay: 3000,
         })
-        toast.show()
-        this.lastActiveToast = toast
+        this.lastActiveToast.show()
       }
     },
   },
@@ -116,38 +116,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$transition-distance: 3px;
+@import '@/assets/css/bootstrap-mixins.scss';
+
+$transition-distance: 0.2rem;
 
 ul {
   display: flex;
-  gap: 5px;
+  gap: map-get($spacers, 1);
   list-style: none;
-  padding: 0;
+  padding: map-get($spacers, 0);
   // padding-top: $transition-distance;
-  margin: 0;
+  margin: map-get($spacers, 0);
 
   li {
     display: inline-block;
-    padding: 0;
+    padding: map-get($spacers, 0);
   }
-}
-
-p {
-  margin: 0;
-  padding: 0;
-  opacity: 0.75;
 }
 
 .feather {
   position: relative;
   top: 0;
   cursor: pointer;
-  padding: 7px;
-  // background-color: var(--bs-light);
-  // border: 2px solid var(--bs-body-color);
-  margin: 0;
-  border-radius: 5px;
-  transition: all 0.1s ease;
+  padding: map-get($spacers, 2);
+  margin: map-get($spacers, 0);
+  transition: top 0.1s ease;
+  /* background-color: var(--bs-light);
+  border: map-get($border-width, 2) solid var(--bs-body-color);
+  border-radius: $border-radius; */
 
   &:hover {
     top: -$transition-distance;
@@ -162,5 +158,15 @@ p {
 
 .selected .feather {
   color: var(--bs-primary);
+}
+
+p {
+  margin: map-get($spacers, 0);
+  padding: map-get($spacers, 0);
+  opacity: 0.75;
+}
+
+.toast-container {
+  max-width: calc(100vw - map-get($spacers, 2) * 2);
 }
 </style>

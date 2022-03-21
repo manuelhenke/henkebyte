@@ -30,7 +30,7 @@
   // Is default white (so black due to inverting), but it should remain white
   $kbd-color: $black;
 
-  @import 'bootstrap/scss/bootstrap';
+  @import '~bootstrap/scss/bootstrap';
   @import 'color-theme';
   @include root-variables($theme-colors, $body-color, $body-bg);
 }

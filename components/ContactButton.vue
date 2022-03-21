@@ -1,5 +1,5 @@
 <template>
-  <a pill class="btn btn-primary" :href="href" target="_blank"
+  <a pill class="contact-button btn btn-primary" :href="href" target="_blank"
     ><i :class="icon"></i><span class="button-text">{{ text }}</span></a
   >
 </template>
@@ -25,10 +25,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.btn {
-  $btn-dimension: 42px;
-  $gap: 5px;
-  $icon-dimension: 16px;
+@import '@/assets/css/bootstrap-mixins.scss';
+
+.contact-button {
+  $btn-dimension: 2.5rem;
+  $gap: map-get($spacers, 1);
+  $icon-dimension: 1rem;
   $btn-padding: calc(($btn-dimension - $icon-dimension) / 2);
 
   display: flex;
@@ -43,9 +45,9 @@ export default {
 
   transition: max-width 0.5s;
 
-  @media (hover: hover) {
+  @include only-on-hover-device {
     &:hover {
-      max-width: 150px;
+      max-width: 10rem;
     }
   }
 

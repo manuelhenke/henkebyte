@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="p-3 p-sm-4 p-md-5 bg-light rounded-3 shadow welcome-card text-center"
-  >
+  <div class="welcome-card card bg-light shadow">
     <div class="welcome-card-title-container">
       <slot name="title"></slot>
     </div>
@@ -13,7 +11,6 @@
       <slot></slot>
     </div>
     <TheFooter />
-    <!-- <TheFooter no-color-mode-picker /> -->
   </div>
 </template>
 
@@ -24,29 +21,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/css/bootstrap-mixins.scss';
+
 .welcome-card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
+  place-content: center;
+  place-items: center;
+  gap: map-get($spacers, 3);
+  text-align: center;
+  border: none;
+
+  --padding: #{map-get($spacers, 3)};
+  padding: var(--padding);
+
+  @include media-breakpoint-up(sm) {
+    --padding: #{map-get($spacers, 4)};
+  }
+
+  @include media-breakpoint-up(md) {
+    --padding: #{map-get($spacers, 5)};
+  }
 
   .welcome-card-image-container {
-    max-width: 200px;
+    max-width: 12rem;
   }
 
   .welcome-card-line {
-    height: 2px;
+    height: map-get($border-widths, 2);
     align-self: stretch;
-    margin: 0;
+    margin: map-get($spacers, 0);
   }
 
   .welcome-card-message-container {
     align-self: stretch;
     ul {
       list-style: none;
-      padding: 0;
-      margin: 0;
+      padding: map-get($spacers, 0);
+      margin: map-get($spacers, 0);
     }
   }
 }

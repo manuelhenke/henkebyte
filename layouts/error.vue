@@ -1,8 +1,9 @@
-<template>
-  <div id="error-layout">
+<template comments>
+  <div id="error-page">
+    <!-- #error-page -->
     <div v-if="error.statusCode === 404">
       <TheTitle>404 - Page not found</TheTitle>
-      <TheLead>The Page you are searching for does not exist.</TheLead>
+      <TheLead>The page you are searching for does not exist.</TheLead>
     </div>
     <div v-else-if="errorMessage">
       <TheTitle>Error {{ error.statusCode }}</TheTitle>
@@ -13,8 +14,6 @@
       <TheLead>{{ error.message }}</TheLead>
     </div>
 
-    <hr class="my-4" />
-
     <div class="text-center mt-3">
       <!-- https://unsplash.com/photos/fDaUCTp28dA -->
       <img
@@ -23,13 +22,14 @@
         alt="Sad Robot"
       />
     </div>
+    <!-- /#error-page -->
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ErrorLayout',
-  layout: 'default-centered',
+  name: 'ErrorPage',
+  layout: 'card-layout',
   props: {
     error: {
       type: Object,

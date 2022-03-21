@@ -1,5 +1,5 @@
 <template>
-  <span>{{ formattedElapsedTime }}</span>
+  <span class="time-string">{{ formattedElapsedTime }}</span>
 </template>
 
 <script>

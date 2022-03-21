@@ -1,5 +1,5 @@
 <template>
-  <div class="contact-button-container d-none d-md-flex">
+  <div class="floating-contact-buttons d-none d-md-flex">
     <ContactButton
       v-for="contactOption of contactOptions"
       :key="contactOption.text"
@@ -22,14 +22,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.contact-button-container {
+@import '@/assets/css/bootstrap-mixins.scss';
+
+.floating-contact-buttons {
   position: fixed;
-  bottom: 15px;
-  right: 15px;
+  bottom: map-get($spacers, 3);
+  right: map-get($spacers, 3);
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 5px;
+  place-items: flex-end;
+  place-content: center;
+  gap: map-get($spacers, 1);
 }
 </style>

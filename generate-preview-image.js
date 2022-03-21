@@ -12,10 +12,15 @@ const playwright = require('playwright')
       height: 630,
     },
   })
+
   try {
     const page = await context.newPage()
     await page.goto(`http://localhost:${port}`)
     await page.screenshot({ path: 'static/preview.png' })
+  } catch (error) {
+    console.error(
+      'Your Website should be running locally. You can specify the port as an argument "node generate-preview-image.js 8080"'
+    )
   } finally {
     await browser.close()
   }

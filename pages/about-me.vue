@@ -1,11 +1,13 @@
-<template>
-  <div>
+<template comments>
+  <div id="about-me-page">
+    <!-- #about-me-page -->
     <TheTitle>About Me</TheTitle>
     <section id="introduction">
+      <!-- #introduction -->
       <h2 class="visually-hidden">Introduction</h2>
       <div class="row">
         <div class="col">
-          <p class="fs-4 lead">
+          <p class="lead">
             Hey there! I am Manuel Henke, {{ currentAge }} years old and from
             the heart of Berlin, Germany. At the moment I'm in the final phase
             of my master studies in Information Systems Management. I also work
@@ -15,7 +17,7 @@
             small projects which are presented on this website.
           </p>
         </div>
-        <div class="col-12 col-sm-4 col-md-4 col-lg-3 text-center">
+        <div class="col-12 col-sm-4 col-md-3 text-center">
           <img
             src="~/assets/images/manuel-henke.jpg"
             class="img-fluid rounded-circle"
@@ -23,21 +25,31 @@
           />
         </div>
       </div>
+      <!-- /#introduction -->
     </section>
 
-    <section id="experience" class="my-5">
+    <section id="education">
+      <!-- #education -->
       <h2>Education</h2>
       <TimelineMain :timeline-items="educationTimeLineItems" unique-timeline />
+      <!-- /#education -->
     </section>
 
-    <section id="experience" class="my-5">
+    <section id="experience">
+      <!-- #experience -->
       <h2>Experience</h2>
       <TimelineMain :timeline-items="experienceTimeLineItems" unique-timeline />
+      <!-- /#experience -->
     </section>
 
     <section id="abilities">
+      <!-- #abilities -->
       <h2>Abilities</h2>
-      <div v-for="ability of abilities" :key="ability.title" class="my-4">
+      <section
+        v-for="ability of abilities"
+        :key="ability.title"
+        class="space-4"
+      >
         <h3>{{ ability.title }}</h3>
         <div
           v-if="Array.isArray(ability.entries)"
@@ -51,8 +63,10 @@
             <AbilityElement :entry="entry" />
           </div>
         </div>
-      </div>
+      </section>
+      <!-- /#abilities -->
     </section>
+    <!-- /#about-me-page -->
   </div>
 </template>
 
@@ -68,7 +82,6 @@ function currentAge() {
 
 export default {
   name: 'AboutMePage',
-  layout: 'default-centered',
   data: () => ({
     currentAge: currentAge(),
     educationTimeLineItems: [
@@ -134,11 +147,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/css/bootstrap-mixins.scss';
+
 #introduction {
   img {
     width: 100%;
-    @media (max-width: 576px) {
-      width: 200px;
+    @include media-breakpoint-down(sm) {
+      width: 12rem;
     }
   }
 }

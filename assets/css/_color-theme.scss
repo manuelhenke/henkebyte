@@ -36,7 +36,7 @@ $btn-primary-color: $white !default;
 }
 
 .btn-icon {
-  padding: 0;
+  padding: map-get($spacers, 0);
   &:focus {
     box-shadow: none;
   }

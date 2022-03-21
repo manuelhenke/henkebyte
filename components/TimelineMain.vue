@@ -1,5 +1,5 @@
 <template>
-  <section class="timeline">
+  <section class="timeline-main">
     <div v-if="hasItems" class="wrapper-timeline">
       <div
         v-for="(timelineContent, timelineIndex) in dataTimeline"
@@ -132,17 +132,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.timeline {
+@import '@/assets/css/bootstrap-mixins.scss';
+
+.timeline-main {
   text-align: left;
   width: 100%;
 
   .wrapper-timeline {
     position: relative;
   }
-  .wrapper-item {
-    margin-bottom: 20px;
+
+  .wrapper-item:not(:last-child) {
+    margin-bottom: map-get($spacers, 3);
     &.unique-timeline {
-      margin-bottom: 0;
+      margin-bottom: map-get($spacers, 0);
     }
   }
 }
