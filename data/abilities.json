@@ -15,6 +15,7 @@
           { "name": "Webpack", "stars": 4 },
           { "name": "jQuery", "stars": 4 },
           { "name": "Storybook", "stars": 4 },
+          { "name": "WebComponents", "stars": 4 },
           { "name": "Electron", "stars": 3 },
           { "name": "TypeScript", "stars": 3 },
           { "name": "Jest", "stars": 3 },
