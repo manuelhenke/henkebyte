@@ -1,30 +1,5 @@
-<template comments>
-  <div id="minesweeper-page">
-    <!-- #minesweeper-page -->
-    <TheTitle badge-text="New">Minesweeper</TheTitle>
-    <TheLead>
-      This is an implementation of the game
-      <a
-        href="https://www.instructables.com/id/How-to-beat-Minesweeper/"
-        target="_blank"
-        title="Minesweeper Tutorial"
-        >Minesweeper</a
-      >, which is available at
-      <a
-        href="https://github.com/manuelhenke/minesweeper-for-web"
-        target="_blank"
-        >GitHub</a
-      >
-      or
-      <a
-        href="https://www.npmjs.com/package/minesweeper-for-web"
-        target="_blank"
-        >npm</a
-      >.
-    </TheLead>
-
-    <hr class="my-4" />
-
+<template>
+  <div class="minesweeper">
     <div class="d-grid gap-2 col-12 col-md-6 col-lg-4 mx-auto my-3 text-center">
       <select
         v-model="currentGamemode"
@@ -35,7 +10,6 @@
         <option value="easy" selected>Easy - 9x9 / 10 Mines</option>
         <option value="normal">Normal - 16x16 / 40 Mines</option>
         <option value="hard">Hard - 16x30 / 99 Mines</option>
-        <!-- <option value="custom">Custom</option> -->
       </select>
       <button
         id="show-btn"
@@ -275,8 +249,8 @@
         </div>
       </div>
     </div>
+
     <div ref="firework" class="firework-container"></div>
-    <!-- /#minesweeper-page -->
   </div>
 </template>
 
@@ -287,8 +261,8 @@ import {
   Chart,
   ArcElement,
   DoughnutController,
-  Title,
   Legend,
+  Title,
   Tooltip,
 } from 'chart.js'
 import { db } from '~/middleware/db'
@@ -298,7 +272,7 @@ import 'minesweeper-for-web'
 Chart.register(ArcElement, DoughnutController, Legend, Title, Tooltip)
 
 export default {
-  name: 'MinesweeperPage',
+  name: 'MinesweeperWrapper',
   data: () => ({
     isMounted: false,
     isEnded: true,
@@ -309,24 +283,6 @@ export default {
     maxScoreboardGamesVisible: 10,
     gamesHistoryChart: null,
   }),
-  head: {
-    title: 'Minesweeper - HenkeByte',
-    meta: [
-      {
-        hid: 'title',
-        name: 'title',
-        property: 'og:title',
-        content: 'Minesweeper - HenkeByte',
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        property: 'og:description',
-        content:
-          'Showcase of the implementation of the project "minesweeper-for-web" which is available at GitHub and npm.',
-      },
-    ],
-  },
   computed: {
     isStopwatchRunning() {
       if (!this.isMounted) return

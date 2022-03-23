@@ -1,5 +1,5 @@
 <template>
-  <div class="ability-element">
+  <div class="ability-item">
     <div
       v-if="Array.isArray(entry.libraries)"
       class="mb-1 text-primary skill-expand-trigger"
@@ -29,7 +29,7 @@
       :id="librariesHtmlId"
       class="libraries collapse mt-2"
     >
-      <AbilityElement
+      <AbilityItem
         v-for="library of entry.libraries"
         :key="library.name"
         :entry="library"
@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: 'AbilityElement',
+  name: 'AbilityItem',
   props: {
     entry: {
       type: Object,

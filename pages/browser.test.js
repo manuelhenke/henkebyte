@@ -1,0 +1,37 @@
+import { describe, test } from '@jest/globals'
+import { createPage, setupTest } from '@nuxt/test-utils'
+
+const testCases = [
+  {
+    url: '/',
+    titleToMatch: 'Welcome to',
+  },
+  /* {
+    url: '/about-me',
+    titleToMatch: 'About Me',
+  },
+  {
+    url: '/resources-overview',
+    titleToMatch: 'Resources Overview',
+  },
+  {
+    url: '/minesweeper',
+    titleToMatch: 'Minesweeper',
+  },
+  {
+    url: '/ios-calculator',
+    titleToMatch: 'iOS-Calculator',
+  }, */
+]
+
+describe('browser', () => {
+  setupTest({ browser: true })
+
+  for (const testCase of testCases) {
+    test(`should render page ${testCase.url}`, async () => {
+      const page = await createPage(testCase.url)
+      const body = await page.innerHTML('body')
+      expect(body).toContain(testCase.titleToMatch)
+    })
+  }
+})

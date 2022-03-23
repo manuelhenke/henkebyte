@@ -41,18 +41,14 @@ export default {
   computed: {
     yearFrom() {
       if ('from' in this.itemTimeline && this.itemTimeline.from !== undefined) {
-        return this.itemTimeline.from.getFullYear()
+        return this.itemTimeline.from
       } else {
         return null
       }
     },
     yearTo() {
       if ('to' in this.itemTimeline && this.itemTimeline.to !== undefined) {
-        if (typeof this.itemTimeline.to === 'string') {
-          return this.itemTimeline.to
-        } else {
-          return this.itemTimeline.to.getFullYear()
-        }
+        return this.itemTimeline.to
       } else {
         return null
       }

@@ -87,25 +87,19 @@ export default {
       if (!previousItem || !nextItem) {
         return false
       }
-      const fullPreviousYear = this.getYear(previousItem)
-      const fullNextYear = this.getYear(nextItem)
-      const fullCurrentYear = this.getYear(currentItem)
+      const fullPreviousYear = previousItem.from
+      const fullNextYear = nextItem.from
+      const fullCurrentYear = currentItem.from
       return (
         (fullPreviousYear === fullCurrentYear &&
           fullCurrentYear === fullNextYear) ||
         fullCurrentYear === fullNextYear
       )
     },
-    getYear(date) {
-      return date.from.getFullYear()
-    },
-    hasYear(dataTimeline) {
-      return 'from' in dataTimeline && dataTimeline.from !== undefined
-    },
     getTimelineItemsAssembled(items) {
       const itemsGroupByYear = []
       items.forEach((item) => {
-        const fullTime = item.from.getTime()
+        const fullTime = item.from
         if (itemsGroupByYear[fullTime]) {
           return itemsGroupByYear[fullTime].push(item)
         }

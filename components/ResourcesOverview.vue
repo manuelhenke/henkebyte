@@ -1,27 +1,18 @@
 <template comments>
-  <div id="resources-overview-page">
-    <!-- #resources-overview-page -->
-    <TheTitle>Resources Overview</TheTitle>
-    <TheLead
-      >This is a collection of my favorite resources which levitate my
-      development workflow.</TheLead
-    >
-
-    <hr class="my-4" />
-
+  <div class="resources-overview">
     <div class="row flex-sm-row">
       <!-- main area -->
       <div class="col-12 col-sm-8">
         <!-- card container -->
         <input
           v-model="currentSearchInput"
-          class="form-control"
+          class="form-control mb-3"
           type="text"
           placeholder="Search..."
           aria-label="search resources"
         />
         <button
-          class="btn btn-primary d-sm-none w-100 mt-3"
+          class="btn btn-primary d-sm-none w-100 mb-3"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasCategories"
@@ -29,16 +20,19 @@
         >
           Filter
         </button>
-        <div
-          v-if="filteredSites.length === 0"
-          class="display-5 my-5 text-center"
-        >
-          {{ nothingFoundMessage }}
+        <div class="d-flex justify-content-center">
+          <div v-if="$fetchState.pending" class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p v-else-if="$fetchState.error">An error occurred :(</p>
+          <div v-else-if="filteredSites.length === 0" class="display-5">
+            {{ nothingFoundMessage }}
+          </div>
         </div>
         <article
           v-for="site in filteredSites"
           :key="site.fields.title"
-          class="card my-3"
+          class="card mb-3"
         >
           <div class="card-body">
             <h2 class="card-title">{{ site.fields.title }}</h2>
@@ -183,8 +177,14 @@
 import { client } from '~/plugins/contentful.js'
 
 export default {
-  name: 'ResourcesOverviewPage',
-  asyncData() {
+  name: 'ResourcesOverview',
+  data: () => ({
+    sites: [],
+    categories: [],
+    checkedCategories: [],
+    currentSearchInput: '',
+  }),
+  fetch() {
     return (
       Promise.all([
         client.getEntries({
@@ -197,38 +197,13 @@ export default {
         }),
       ])
         .then(([sites, categories]) => {
-          return {
-            sites: sites.items,
-            categories: categories.items,
-            checkedCategories: categories.items.map((item) => item.sys.id),
-          }
+          this.sites = sites.items
+          this.categories = categories.items
+          this.checkedCategories = categories.items.map((item) => item.sys.id)
         })
         // eslint-disable-next-line no-console
         .catch(console.error)
     )
-  },
-  data: () => ({
-    sites: [],
-    categories: [],
-    checkedCategories: [],
-    currentSearchInput: '',
-  }),
-  head: {
-    title: 'Resources Overview - HenkeByte',
-    meta: [
-      {
-        hid: 'title',
-        name: 'title',
-        property: 'og:title',
-        content: 'Resources Overview - HenkeByte',
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        property: 'og:description',
-        content: `This is a collection of my favorite resources which levitate my development workflow.`,
-      },
-    ],
   },
   computed: {
     filteredSites() {

@@ -1,3 +1,5 @@
+import { getRoutes, filterRoutes } from './util/sitemap'
+
 const buildDescription = (target) =>
   `A showcase ${target} for different open source web projects including an iOS-Calculator and Minesweeper.`
 
@@ -105,6 +107,8 @@ export default {
     '@nuxtjs/device',
     // https://color-mode.nuxtjs.org/
     '@nuxtjs/color-mode',
+    // https://content.nuxtjs.org/
+    '@nuxt/content',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -151,22 +155,9 @@ export default {
   sitemap: {
     hostname: 'https://henkebyte.com',
     gzip: true,
-    exclude: ['/secret', '/admin/**'],
-    filter: ({ routes, options }) => {
-      // object containing [routeName]: [priority] pairs
-      const priorities = {
-        index: 1,
-        minesweeper: 0.8,
-        calculator: 0.7,
-      }
-      return routes.map((route) => {
-        return {
-          ...route,
-          lastmod: new Date(),
-          priority: priorities[route.name] || 0.5,
-        }
-      })
-    },
+    exclude: ['/secret', '/admin/**', '/_nuxt/**'],
+    routes: getRoutes,
+    filter: filterRoutes,
   },
 
   // Robots Configuration: https://github.com/nuxt-community/robots-module
