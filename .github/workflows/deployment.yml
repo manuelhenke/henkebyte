@@ -6,7 +6,6 @@ on:
       - main
 
 env:
-  OS: ubuntu-latest
   TARGET_FOLDER: ./dist
   AWS_REGION: eu-central-1
   AWS_S3_BUCKET_URI: s3://henkebyte.com
@@ -16,7 +15,7 @@ jobs:
   deploy:
     needs: build
     name: Deploy
-    runs-on: ${{ env.OS }}
+    runs-on: ubuntu-latest
     environment: production
     timeout-minutes: 5
 
