@@ -6,7 +6,7 @@ fields:
 - type: text
   name: title
   label: Title
-  description: 'The title on the page and the fallback for <title>.'
+  description: The title on the page and the fallback for &lt;title&gt;.
   config:
     required: true
 - type: text
@@ -21,7 +21,7 @@ fields:
   - type: text
     name: key
     label: Key
-    description: 'Will result in a meta tag in the head with name="<key>" and property="og:<key>".'
+    description: Will result in a meta tag in the head with name="<key>" and property="og:<key>".
     config:
       required: true
   - type: textarea
