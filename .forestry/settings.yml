@@ -4,9 +4,6 @@ auto_deploy: false
 admin_path: "/static/admin"
 webhook_url: 
 sections:
-- type: document
-  path: content/home.md
-  label: Navigation
 - type: directory
   path: content
   label: Pages
