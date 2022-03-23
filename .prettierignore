@@ -104,3 +104,4 @@ playwright-report/
 ln-*
 
 .forestry/
+static/admin/

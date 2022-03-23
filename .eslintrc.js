@@ -9,7 +9,7 @@ module.exports = {
     requireConfigFile: false,
   },
   extends: ['@nuxtjs', 'plugin:nuxt/recommended', 'prettier'],
-  ignorePatterns: ['.forestry/**/*'],
+  ignorePatterns: ['.forestry/**/*', 'static/admin/**/*'],
   plugins: [],
   // add your custom rules here
   rules: {},
