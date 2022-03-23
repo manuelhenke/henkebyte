@@ -5,6 +5,8 @@ fields:
 - type: text
   name: title
   label: title
+  config:
+    required: true
 - type: field_group_list
   name: meta-tags
   label: meta-tags
@@ -12,9 +14,17 @@ fields:
   - type: text
     name: key
     label: key
+    config:
+      required: true
   - type: textarea
     name: value
     label: value
+    config:
+      wysiwyg: false
+      required: true
+    default: ''
+  config:
+    labelField: key
 - type: field_group_list
   name: educationTimeLineItems
   label: educationTimeLineItems
@@ -22,18 +32,29 @@ fields:
   - type: number
     name: from
     label: from
+    config:
+      required: true
   - type: text
     name: to
     label: to
+    default: today
   - type: text
     name: role
     label: role
+    config:
+      required: true
   - type: text
     name: place
     label: place
+    config:
+      required: true
   - type: text
     name: description
     label: description
+    config:
+      required: true
+  config:
+    labelField: place
 - type: field_group_list
   name: experienceTimeLineItems
   label: experienceTimeLineItems
@@ -41,18 +62,27 @@ fields:
   - type: number
     name: from
     label: from
+    config:
+      required: true
   - type: text
     name: to
     label: to
+    default: today
   - type: text
     name: role
     label: role
+    config:
+      required: true
   - type: text
     name: place
     label: place
+    config:
+      required: true
   - type: textarea
     name: description
     label: description
+    config:
+      required: true
 - type: field_group_list
   name: skills
   label: skills
@@ -83,6 +113,12 @@ fields:
       - type: number
         name: stars
         label: stars
+      config:
+        labelField: name
+    config:
+      labelField: name
+  config:
+    labelField: name
 - type: field_group_list
   name: languages
   label: languages
@@ -93,6 +129,8 @@ fields:
   - type: number
     name: stars
     label: stars
+  config:
+    labelField: name
 - type: field_group_list
   name: tools
   label: tools
@@ -103,3 +141,5 @@ fields:
   - type: number
     name: stars
     label: stars
+  config:
+    labelField: name
