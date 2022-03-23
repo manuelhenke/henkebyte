@@ -54,7 +54,7 @@ fields:
     config:
       required: true
   config:
-    labelField: place
+    labelField: role
 - type: field_group_list
   name: experienceTimeLineItems
   label: experienceTimeLineItems
@@ -83,6 +83,8 @@ fields:
     label: description
     config:
       required: true
+  config:
+    labelField: place
 - type: field_group_list
   name: skills
   label: skills
