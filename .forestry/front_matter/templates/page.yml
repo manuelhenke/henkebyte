@@ -9,6 +9,8 @@ fields:
   description: The title on the page and the fallback for &lt;title&gt;.
   config:
     required: true
+    min: 2
+    max: 60
 - type: text
   name: badge_text
   label: Badge text
@@ -16,18 +18,18 @@ fields:
 - type: field_group_list
   name: meta_tags
   label: Meta Tags
-  description: Add Meta Tags to the head
+  description: Will be used for name="&lt;key&gt;" and property="og:&lt;key&gt;"
   fields:
   - type: text
     name: key
     label: Key
-    description: Will result in a meta tag in the head with name="<key>" and property="og:<key>".
+    description: Fills the name and property (prefixed with "og:") attribute.
     config:
       required: true
   - type: textarea
     name: content
     label: Content
-    description: Will result populate the meta tag with content="<content>".
+    description: Fills the content attribute.
     config:
       required: true
     default: ''
