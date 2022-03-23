@@ -1,0 +1,20 @@
+---
+label: Page
+hide_body: false
+fields:
+- type: text
+  name: title
+  label: title
+- type: text
+  name: badge-text
+  label: badge-text
+- type: field_group_list
+  name: meta-tags
+  label: meta-tags
+  fields:
+  - type: text
+    name: key
+    label: key
+  - type: textarea
+    name: value
+    label: value
