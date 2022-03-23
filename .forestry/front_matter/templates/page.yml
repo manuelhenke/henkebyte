@@ -27,3 +27,5 @@ fields:
     default: ''
   config:
     labelField: key
+pages:
+- content/minesweeper.md
