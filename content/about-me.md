@@ -1,14 +1,14 @@
 ---
 title: About Me
-meta-tags:
+meta_tags:
 - key: description
-  value: Hey there! I am Manuel Henke, 25 years old and from the heart of Berlin,
+  content: Hey there! I am Manuel Henke, 25 years old and from the heart of Berlin,
     Germany. At the moment I'm in the final phase of my master studies in Information
     Systems Management. I also work as a student trainee in software development in
     the area of web development and cloud computing. Privately I'm just starting to
     get involved with open source development and have already started some small
     projects which are presented on this website.
-education-timeline-items:
+education_timeline_items:
 - from: "2020"
   to: today
   role: Information Systems Management (MSc)
@@ -20,7 +20,7 @@ education-timeline-items:
   place: Technische Universität Berlin
   description: 'Thesis: Design and development of a cloud-based solution approach
     for automated home accessibility assessment as an iOS app'
-experience-timeline-items:
+experience_timeline_items:
 - from: "2019"
   to: today
   role: Cloud Fullstack-Developer (Student Employee)
@@ -201,14 +201,14 @@ tools:
 <section id="education">
   <!-- #education -->
   <h2>Education</h2>
-  <timeline-main :timeline-items="education-timeline-items" unique-timeline></timeline-main>
+  <timeline-main :timeline-items="education_timeline_items" unique-timeline></timeline-main>
   <!-- /#education -->
 </section>
 
 <section id="experience">
   <!-- #experience -->
   <h2>Experience</h2>
-  <timeline-main :timeline-items="experience-timeline-items" unique-timeline /></timeline-main>
+  <timeline-main :timeline-items="experience_timeline_items" unique-timeline /></timeline-main>
   <!-- /#experience -->
 </section>
 

@@ -5,24 +5,28 @@ display_field: title
 fields:
 - type: text
   name: title
-  label: title
+  label: Title
+  description: The title on the page and the fallback for the title tag in the <head>.
   config:
     required: true
 - type: text
-  name: badge-text
-  label: badge-text
+  name: badge_text
+  label: Badge text
+  description: Leave empty to hide the badge on the page.
 - type: field_group_list
-  name: meta-tags
-  label: meta-tags
+  name: meta_tags
+  label: meta_tags
   fields:
   - type: text
     name: key
-    label: key
+    label: Key
+    description: Will result in a meta tag in the head with name="<key>" and property="og:<key>".
     config:
       required: true
   - type: textarea
-    name: value
-    label: value
+    name: content
+    label: Content
+    description: Will result populate the meta tag with content="<content>".
     config:
       required: true
     default: ''

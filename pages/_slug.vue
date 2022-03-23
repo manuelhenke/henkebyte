@@ -1,7 +1,7 @@
 <template comments>
   <div id="page">
     <!-- #page -->
-    <TheTitle :badge-text="page['badge-text']">{{ page.title }}</TheTitle>
+    <TheTitle :badge_text="page.badge_text">{{ page.title }}</TheTitle>
     <nuxt-content :document="page" />
     <!-- /#page -->
   </div>
@@ -33,15 +33,19 @@ export default {
       meta: [],
     }
 
-    if (this.page['meta-tags']) {
-      const metaTags = this.page['meta-tags']
+    if (this.page.meta_tags) {
+      const metaTags = this.page.meta_tags
 
       for (const metaTag of metaTags) {
         head.meta.push({
           hid: metaTag.key,
           name: metaTag.key,
+          content: metaTag.content,
+        })
+        head.meta.push({
+          hid: `og:${metaTag.key}`,
           property: `og:${metaTag.key}`,
-          content: metaTag.value,
+          content: metaTag.content,
         })
       }
     }

@@ -8,68 +8,68 @@ fields:
   template: page
   label: Page
 - type: field_group_list
-  name: education-timeline-items
+  name: education_timeline_items
   label: Education Timeline Items
   fields:
   - type: number
-    name: from
+    name: From
     label: from
     config:
       required: true
   - type: text
     name: to
-    label: to
+    label: To
     default: today
   - type: text
     name: role
-    label: role
+    label: Role
     config:
       required: true
   - type: text
     name: place
-    label: place
+    label: Place
     config:
       required: true
   - type: text
     name: description
-    label: description
+    label: Description
     config:
       required: true
   config:
     labelField: role
 - type: field_group_list
-  name: experienceTimeLineItems
-  label: experienceTimeLineItems
+  name: experience_timeline_items
+  label: Experience Timeline Items
   fields:
   - type: number
     name: from
-    label: from
+    label: From
     config:
       required: true
   - type: text
     name: to
-    label: to
+    label: To
     default: today
   - type: text
     name: role
-    label: role
+    label: Role
     config:
       required: true
   - type: text
     name: place
-    label: place
+    label: Place
     config:
       required: true
   - type: textarea
     name: description
-    label: description
+    label: Description
     config:
       required: true
   config:
     labelField: place
 - type: field_group_list
   name: skills
-  label: skills
+  label: Skills
   fields:
   - type: text
     name: name
@@ -105,7 +105,7 @@ fields:
     labelField: name
 - type: field_group_list
   name: languages
-  label: languages
+  label: Languages
   fields:
   - type: text
     name: name
@@ -117,7 +117,7 @@ fields:
     labelField: name
 - type: field_group_list
   name: tools
-  label: tools
+  label: Tools
   fields:
   - type: text
     name: name
