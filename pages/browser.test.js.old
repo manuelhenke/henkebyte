@@ -1,12 +1,12 @@
 import { describe, test } from '@jest/globals'
-import { createPage, setupTest } from '@nuxt/test-utils'
+import { createPage } from '@nuxt/test-utils'
 
 const testCases = [
   {
     url: '/',
     titleToMatch: 'Welcome to',
   },
-  /* {
+  {
     url: '/about-me',
     titleToMatch: 'About Me',
   },
@@ -21,7 +21,7 @@ const testCases = [
   {
     url: '/ios-calculator',
     titleToMatch: 'iOS-Calculator',
-  }, */
+  },
 ]
 
 describe('browser', () => {
