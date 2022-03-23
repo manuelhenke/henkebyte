@@ -28,4 +28,5 @@ fields:
   config:
     labelField: key
 pages:
+- content/ios-calculator.md
 - content/minesweeper.md
