@@ -1,5 +1,5 @@
 ---
-title: About Mee
+title: About Me
 meta-tags:
 - key: description
   value: Hey there! I am Manuel Henke, 25 years old and from the heart of Berlin,
