@@ -5,6 +5,8 @@ fields:
 - type: text
   name: title
   label: title
+  config:
+    required: true
 - type: text
   name: badge-text
   label: badge-text
@@ -15,6 +17,13 @@ fields:
   - type: text
     name: key
     label: key
+    config:
+      required: true
   - type: textarea
     name: value
     label: value
+    config:
+      required: true
+    default: ''
+  config:
+    labelField: key
