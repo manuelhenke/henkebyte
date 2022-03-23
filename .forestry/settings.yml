@@ -5,10 +5,8 @@ admin_path: "/static/admin"
 webhook_url: 
 sections:
 - type: document
-  path: content
-  label: Home
-  match: "**/*"
-  read_only: false
+  path: content/home.md
+  label: Navigation
 - type: directory
   path: content
   label: Pages
