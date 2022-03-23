@@ -2,7 +2,7 @@
 new_page_extension: md
 auto_deploy: false
 admin_path: "/static/admin"
-webhook_url: 
+webhook_url:
 sections:
 - type: directory
   path: content
@@ -19,7 +19,7 @@ build:
   - CTF_SPACE_ID=s54fg9ycsdnw
   - CTF_CDA_ACCESS_TOKEN=3rczcfkfA_SsAFZ7Z1KNF8P0vRJK8CiH0NVpVCmYTo0
   preview_output_directory: dist
-  install_dependencies_command: yarn
+  install_dependencies_command: yarn install --frozen-lockfile
   preview_docker_image: forestryio/node:16
   mount_path: "/srv"
   working_dir: "/srv"
