@@ -9,6 +9,9 @@
 
 <script>
 export default {
+  layout(context) {
+    return undefined
+  },
   async asyncData({ $content, params, error }) {
     const slug = params.slug || 'index'
     const page = await $content(slug)

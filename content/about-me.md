@@ -8,7 +8,7 @@ meta-tags:
     the area of web development and cloud computing. Privately I'm just starting to
     get involved with open source development and have already started some small
     projects which are presented on this website.
-educationTimeLineItems:
+education-timeline-items:
 - from: "2020"
   to: today
   role: Information Systems Management (MSc)
@@ -20,7 +20,7 @@ educationTimeLineItems:
   place: Technische Universität Berlin
   description: 'Thesis: Design and development of a cloud-based solution approach
     for automated home accessibility assessment as an iOS app'
-experienceTimeLineItems:
+experience-timeline-items:
 - from: "2019"
   to: today
   role: Cloud Fullstack-Developer (Student Employee)
@@ -204,14 +204,14 @@ tools:
 <section id="education">
   <!-- #education -->
   <h2>Education</h2>
-  <timeline-main :timeline-items="educationTimeLineItems" unique-timeline></timeline-main>
+  <timeline-main :timeline-items="education-timeline-items" unique-timeline></timeline-main>
   <!-- /#education -->
 </section>
 
 <section id="experience">
   <!-- #experience -->
   <h2>Experience</h2>
-  <timeline-main :timeline-items="experienceTimeLineItems" unique-timeline /></timeline-main>
+  <timeline-main :timeline-items="experience-timeline-items" unique-timeline /></timeline-main>
   <!-- /#experience -->
 </section>
 
