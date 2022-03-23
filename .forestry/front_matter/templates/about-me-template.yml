@@ -2,32 +2,14 @@
 label: About Me Template
 hide_body: false
 fields:
-- type: text
-  name: title
-  label: title
-  config:
-    required: true
+- name: page
+  type: include
+  config: {}
+  template: page
+  label: Page
 - type: field_group_list
-  name: meta-tags
-  label: meta-tags
-  fields:
-  - type: text
-    name: key
-    label: key
-    config:
-      required: true
-  - type: textarea
-    name: value
-    label: value
-    config:
-      wysiwyg: false
-      required: true
-    default: ''
-  config:
-    labelField: key
-- type: field_group_list
-  name: educationTimeLineItems
-  label: educationTimeLineItems
+  name: education-timeline-items
+  label: Education Timeline Items
   fields:
   - type: number
     name: from
