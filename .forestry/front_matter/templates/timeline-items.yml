@@ -1,28 +1,29 @@
 ---
-label: Timeline Items
+label: Timeline Item
 hide_body: true
+display_field: place
 fields:
-  - type: text
-    name: from
-    label: From
-    config:
-      required: true
-  - type: text
-    name: to
-    label: To
-    default: today
-  - type: text
-    name: role
-    label: Role
-    config:
-      required: true
-  - type: text
-    name: place
-    label: Place
-    config:
-      required: true
-  - type: textarea
-    name: description
-    label: Description
-    config:
-      required: true
+- type: text
+  name: from
+  label: From
+  config:
+    required: true
+- type: text
+  name: to
+  label: To
+  default: today
+- type: text
+  name: role
+  label: Role
+  config:
+    required: true
+- type: text
+  name: place
+  label: Place
+  config:
+    required: true
+- type: textarea
+  name: description
+  label: Description
+  config:
+    required: true
