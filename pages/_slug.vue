@@ -26,26 +26,19 @@ export default {
   }),
   head() {
     const head = {
+      title: `${this.page.title} - HenkeByte`,
       meta: [],
     }
 
     if (this.page['meta-tags']) {
       const metaTags = this.page['meta-tags']
-      if (metaTags.title) {
-        head.title = metaTags.title
+
+      for (const metaTag of metaTags) {
         head.meta.push({
-          hid: 'title',
-          name: 'title',
-          property: 'og:title',
-          content: metaTags.title,
-        })
-      }
-      if (metaTags.description) {
-        head.meta.push({
-          hid: 'description',
-          name: 'description',
-          property: 'og:description',
-          content: metaTags.description,
+          hid: metaTag.key,
+          name: metaTag.key,
+          property: `og:${metaTag.key}`,
+          content: metaTag.value,
         })
       }
     }

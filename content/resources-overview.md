@@ -1,8 +1,8 @@
 ---
 title: Resources Overview
 meta-tags:
-  title: Resources Overview - HenkeByte
-  description: This is a collection of my favorite resources which levitate my development workflow.
+  - key: description
+    value: This is a collection of my favorite resources which levitate my development workflow.
 ---
 
 <the-lead>

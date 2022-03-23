@@ -1,7 +1,7 @@
 export default function ({ route, redirect }) {
   if (
     route.path !== '/' &&
-    !route.path.contains('admin') &&
+    !route.path.includes('admin') &&
     route.path.endsWith('/')
   ) {
     const { path, query, hash } = route

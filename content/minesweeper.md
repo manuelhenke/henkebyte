@@ -2,8 +2,8 @@
 title: Minesweeper
 badge-text: New
 meta-tags:
-  title: 'Minesweeper - HenkeByte'
-  description: 'Showcase of the implementation of the project "minesweeper-for-web" which is available at GitHub and npm.'
+  - key: description
+    value: 'Showcase of the implementation of the project "minesweeper-for-web" which is available at GitHub and npm.'
 ---
 
 <the-lead>

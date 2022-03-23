@@ -1,8 +1,8 @@
 ---
 title: About Me
 meta-tags:
-  title: About Me - HenkeByte
-  description: Hey there! I am Manuel Henke, 25 years old and from the heart of Berlin, Germany. At the moment I'm in the final phase of my master studies in Information Systems Management. I also work as a student trainee in software development in the area of web development and cloud computing. Privately I'm just starting to get involved with open source development and have already started some small projects which are presented on this website.
+  - key: description
+    value: Hey there! I am Manuel Henke, 25 years old and from the heart of Berlin, Germany. At the moment I'm in the final phase of my master studies in Information Systems Management. I also work as a student trainee in software development in the area of web development and cloud computing. Privately I'm just starting to get involved with open source development and have already started some small projects which are presented on this website.
 educationTimeLineItems:
   - from: 2020
     to: today
