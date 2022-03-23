@@ -6,7 +6,7 @@ fields:
 - type: text
   name: title
   label: Title
-  description: The title on the page and the fallback for the title tag in the <head>.
+  description: 'The title on the page and the fallback for <title>.'
   config:
     required: true
 - type: text
@@ -15,12 +15,13 @@ fields:
   description: Leave empty to hide the badge on the page.
 - type: field_group_list
   name: meta_tags
-  label: meta_tags
+  label: Meta Tags
+  description: Add Meta Tags to the head
   fields:
   - type: text
     name: key
     label: Key
-    description: Will result in a meta tag in the head with name="<key>" and property="og:<key>".
+    description: 'Will result in a meta tag in the head with name="<key>" and property="og:<key>".'
     config:
       required: true
   - type: textarea
