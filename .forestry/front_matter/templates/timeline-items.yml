@@ -8,22 +8,24 @@ fields:
   label: From
   config:
     required: true
+  description: eg. "2018" or "Aug. '18"
 - type: text
   name: to
   label: To
   default: today
+  description: eg. "2018", "Aug. '18" or "today"
 - type: text
-  name: role
-  label: Role
+  name: heading
+  label: Heading
   config:
     required: true
 - type: text
-  name: place
-  label: Place
+  name: subheading
+  label: Subheading
   config:
     required: true
 - type: textarea
-  name: description
-  label: Description
+  name: paragraph
+  label: Paragraph
   config:
     required: true
