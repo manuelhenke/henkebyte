@@ -1,6 +1,4 @@
-[![Linting](https://github.com/manuelhenke/henkebyte/actions/workflows/linting.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/linting.yml)
-[![Test](https://github.com/manuelhenke/henkebyte/actions/workflows/test.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/test.yml)
-[![Deploy to AWS](https://github.com/manuelhenke/henkebyte/actions/workflows/aws.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/aws.yml)
+[![Deployment](https://github.com/manuelhenke/henkebyte/actions/workflows/deployment.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/deployment.yml)
 
 # Henkebyte
 
