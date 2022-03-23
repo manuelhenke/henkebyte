@@ -39,14 +39,11 @@ skills:
 - name: JavaScript
   stars: "5"
   libraries:
-  - name: WebComponents
-    stars: "4"
-    libraries: ''
   - name: Vue.js
     stars: "5"
     libraries:
     - name: Nuxt.js
-      stars: "4"
+      stars: '4'
   - name: Node.js
     stars: "5"
   - name: Webpack
