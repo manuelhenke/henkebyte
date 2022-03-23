@@ -2,16 +2,16 @@
 new_page_extension: md
 auto_deploy: false
 admin_path: "/static/admin"
-webhook_url:
+webhook_url: 
 sections:
 - type: directory
   path: content
   label: Pages
   create: documents
-  templates:
-  - page
-  - about-me
   match: "**/*"
+  templates:
+  - about-me-template
+  - page
 upload_dir: static
 public_path: ''
 front_matter_path: ''
