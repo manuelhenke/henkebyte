@@ -49,14 +49,14 @@ jobs:
           echo CTF_SPACE_ID=${{ secrets.CTF_SPACE_ID }} >> .env
           echo CTF_CDA_ACCESS_TOKEN=${{ secrets.CTF_CDA_ACCESS_TOKEN }} >> .env
 
+      - name: Build 🛠
+        run: yarn build
+
       - name: Run linter 👀
         run: yarn lint
 
       - name: Run tests 👀
         run: yarn test
-
-      - name: Build 🛠
-        run: yarn build
 
       - name: Configure AWS credentials ⚙️
         uses: aws-actions/configure-aws-credentials@v1
