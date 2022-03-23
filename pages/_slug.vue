@@ -9,9 +9,6 @@
 
 <script>
 export default {
-  data: () => ({
-    page: undefined,
-  }),
   async asyncData({ $content, params, error }) {
     const slug = params.slug || 'index'
     const page = await $content(slug)
@@ -24,6 +21,9 @@ export default {
       page,
     }
   },
+  data: () => ({
+    page: undefined,
+  }),
   head() {
     const head = {
       meta: [],

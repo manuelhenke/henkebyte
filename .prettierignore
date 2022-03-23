@@ -95,3 +95,13 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Playwright output directories
+test-results/
+playwright-report/
+
+# Ignore symbolic link folders
+ln-*
+
+.forestry/
+admin/

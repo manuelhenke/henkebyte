@@ -1,4 +1,4 @@
-name: Deploy to AWS
+name: Deployment
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - main
 
 env:
+  OS: ubuntu-latest
   TARGET_FOLDER: ./dist
   AWS_REGION: eu-central-1
   AWS_S3_BUCKET_URI: s3://henkebyte.com
@@ -13,33 +14,25 @@ env:
 
 jobs:
   deploy:
+    needs: build
     name: Deploy
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
+    runs-on: ${{ env.OS }}
     environment: production
 
     steps:
-      - name: Checkout
+      - name: Checkout 🛎
         uses: actions/checkout@master
 
-      - name: Setup node env
+      - name: Setup node env 🏗
         uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
 
-      - name: create env file
-        run: |
-          touch .env
-          echo CTF_SPACE_ID=${{ secrets.CTF_SPACE_ID }} >> .env
-          echo CTF_CDA_ACCESS_TOKEN=${{ secrets.CTF_CDA_ACCESS_TOKEN }} >> .env
-
-      - name: Get yarn cache directory path
+      - name: Get yarn cache directory path 🔃
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Cache node_modules
+      - name: Cache node_modules 📦
         uses: actions/cache@v2.1.7
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
@@ -48,21 +41,33 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install dependencies
-        run: yarn
+      - name: Install dependencies 👨🏻‍💻
+        run: yarn install --frozen-lockfile
 
-      - name: Build
+      - name: create env file 📄
+        run: |
+          touch .env
+          echo CTF_SPACE_ID=${{ secrets.CTF_SPACE_ID }} >> .env
+          echo CTF_CDA_ACCESS_TOKEN=${{ secrets.CTF_CDA_ACCESS_TOKEN }} >> .env
+
+      - name: Run linter 👀
+        run: yarn lint
+
+      - name: Run tests 👀
+        run: yarn test
+
+      - name: Build 🛠
         run: yarn build
 
-      - name: Configure AWS credentials
+      - name: Configure AWS credentials ⚙️
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Deploy
+      - name: Deploy 📨
         run: aws s3 sync ${{ env.TARGET_FOLDER }} ${{ env.AWS_S3_BUCKET_URI }}
 
-      - name: Invalidate
+      - name: Invalidate ❌
         run: aws cloudfront create-invalidation --distribution-id ${{ env.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
