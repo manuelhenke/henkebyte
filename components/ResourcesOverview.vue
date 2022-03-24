@@ -1,48 +1,59 @@
 <template comments>
   <div class="resources-overview">
-    <div class="row flex-sm-row">
-      <!-- main area -->
-      <div class="col-12 col-sm-8">
-        <!-- card container -->
-        <input
-          v-model="currentSearchInput"
-          class="form-control mb-3"
-          type="text"
-          placeholder="Search..."
-          aria-label="search resources"
-        />
-        <button
-          class="btn btn-primary d-sm-none w-100 mb-3"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasCategories"
-          aria-controls="offcanvasCategories"
-        >
-          Filter
-        </button>
-        <div class="d-flex justify-content-center">
-          <div v-if="$fetchState.pending" class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-          <p v-else-if="$fetchState.error">An error occurred :(</p>
-          <div v-else-if="filteredSites.length === 0" class="display-5">
-            {{ nothingFoundMessage }}
-          </div>
-        </div>
-        <article
-          v-for="site in filteredSites"
-          :key="site.fields.title"
-          class="card mb-3"
-        >
+    <div class="search-bar mb-3">
+      <input
+        v-model="currentSearchInput"
+        class="form-control"
+        type="text"
+        placeholder="Search..."
+        aria-label="search resources"
+      />
+      <button
+        class="btn btn-primary w-100"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasCategories"
+        aria-controls="offcanvasCategories"
+      >
+        Filter<i class="bi bi-funnel ms-2"></i>
+      </button>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div v-if="$fetchState.pending" class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p v-else-if="$fetchState.error">An error occurred :(</p>
+      <div v-else-if="filteredSites.length === 0" class="display-5">
+        {{ nothingFoundMessage }}
+      </div>
+    </div>
+    <div
+      id="card-container"
+      ref="cardContainer"
+      class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-3"
+    >
+      <!-- card container -->
+      <div v-for="site in filteredSites" :key="site.fields.title" class="col">
+        <article class="card">
+          <img
+            v-if="site.fields.imageSrc"
+            :src="site.fields.imageSrc"
+            class="card-img-top"
+            :alt="`Preview of ${
+              site.fields.title ? site.fields.title : 'the site'
+            }`"
+            onerror="this.style.display='none'"
+          />
           <div class="card-body">
-            <h2 class="card-title">{{ site.fields.title }}</h2>
-            <p class="card-text d-none">
-              With supporting text below as a natural lead-in to additional
-              content.
+            <h2 v-if="site.fields.title" class="card-title">
+              {{ site.fields.title }}
+            </h2>
+            <p v-if="site.fields.description" class="card-text mb-0">
+              {{ site.fields.description }}
             </p>
             <div
               v-if="Array.isArray(site.fields.categories)"
-              class="d-flex gap-1 my-3"
+              class="d-flex flex-wrap gap-1 mt-2 mb-3"
             >
               <span
                 v-for="category in site.fields.categories"
@@ -51,65 +62,22 @@
                 >#{{ category.fields.title }}</span
               >
             </div>
-            <a :href="site.fields.url" class="btn btn-primary" target="_blank"
+            <a
+              v-if="site.fields.url"
+              :href="site.fields.url"
+              class="btn btn-primary"
+              target="_blank"
               >Visit<i class="bi bi-box-arrow-up-right ms-2"></i
             ></a>
           </div>
         </article>
         <!-- /card container -->
       </div>
-
-      <aside class="col-12 col-sm-4 mb-3 d-none d-sm-block">
-        <!-- categories sidebar -->
-        <h2>Categories</h2>
-        <form>
-          <div
-            v-for="category in sortedCategories"
-            :key="category.fields.title"
-            class="form-check"
-          >
-            <input
-              :id="category.fields.title"
-              v-model="checkedCategories"
-              class="form-check-input"
-              type="checkbox"
-              :value="category.sys.id"
-            />
-            <label class="form-check-label" :for="category.fields.title">
-              {{ category.fields.title }}
-            </label>
-          </div>
-        </form>
-        <div class="row row-cols-1 row-cols-md-2 g-1 mt-3">
-          <div class="col">
-            <button
-              :disabled="categories.length === checkedCategories.length"
-              class="btn btn-primary w-100"
-              type="button"
-              @click="selectAllCategories"
-            >
-              Select All
-            </button>
-          </div>
-          <div class="col">
-            <button
-              :disabled="checkedCategories.length === 0"
-              class="btn btn-primary w-100"
-              type="button"
-              @click="deselectAllCategories"
-            >
-              Deselect All
-            </button>
-          </div>
-        </div>
-        <!-- /categories sidebar -->
-      </aside>
-      <!-- /main area -->
     </div>
 
     <div
       id="offcanvasCategories"
-      class="offcanvas offcanvas-end d-sm-none"
+      class="offcanvas offcanvas-end"
       tabindex="-1"
       aria-labelledby="offcanvasCategoriesLabel"
     >
@@ -174,6 +142,7 @@
 </template>
 
 <script>
+import Masonry from 'masonry-layout'
 import { client } from '~/plugins/contentful.js'
 
 export default {
@@ -183,6 +152,7 @@ export default {
     categories: [],
     checkedCategories: [],
     currentSearchInput: '',
+    masonry: undefined,
   }),
   fetch() {
     return (
@@ -287,6 +257,21 @@ export default {
       }
     },
   },
+  watch: {
+    filteredSites() {
+      this.$nextTick(() => {
+        this.masonry.reloadItems()
+        this.masonry.layout()
+      })
+    },
+  },
+  mounted() {
+    this.masonry = new Masonry(this.$refs.cardContainer, {
+      // options
+      itemSelector: '.col',
+      percentPosition: true,
+    })
+  },
   methods: {
     selectAllCategories() {
       this.checkedCategories = this.categories.map((item) => item.sys.id)
@@ -297,3 +282,44 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/css/bootstrap-mixins.scss';
+
+.search-bar {
+  display: flex;
+  gap: map-get($spacers, 3);
+  flex-direction: column;
+
+  @include media-breakpoint-up(sm) {
+    flex-direction: row;
+  }
+
+  > input {
+    flex: 1 0;
+  }
+
+  > button {
+    flex: 0 1;
+    white-space: nowrap;
+  }
+}
+
+.card {
+  img {
+    background-color: white;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .card-text {
+    opacity: 0.7;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+</style>
