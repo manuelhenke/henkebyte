@@ -39,9 +39,6 @@ skills:
 - name: JavaScript
   stars: "5"
   libraries:
-  - name: WebComponents
-    stars: "4"
-    libraries: ''
   - name: Vue.js
     stars: "5"
     libraries:
