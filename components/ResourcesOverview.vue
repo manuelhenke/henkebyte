@@ -43,6 +43,7 @@
               site.fields.title ? site.fields.title : 'the site'
             }`"
             onerror="this.style.display='none'"
+            @error="masonry.layout()"
           />
           <div class="card-body">
             <h2 v-if="site.fields.title" class="card-title">
