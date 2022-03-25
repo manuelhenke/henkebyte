@@ -66,7 +66,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Deploy 📨
-        run: aws s3 sync ${{ env.TARGET_FOLDER }} ${{ env.AWS_S3_BUCKET_URI }}
+        run: aws s3 sync ${{ env.TARGET_FOLDER }} ${{ env.AWS_S3_BUCKET_URI }} --delete
 
       - name: Invalidate ❌
         run: aws cloudfront create-invalidation --distribution-id ${{ env.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
