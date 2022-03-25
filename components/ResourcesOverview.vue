@@ -5,9 +5,10 @@
         <input
           v-model="currentSearchInput"
           class="form-control"
-          type="text"
+          type="search"
           placeholder="Search..."
           aria-label="search resources"
+          @keyup.enter="$event.target.blur()"
         />
         <div
           v-if="currentSearchInput"
@@ -428,6 +429,8 @@ export default {
   display: flex;
   place-content: center;
   place-items: center;
+  text-align: center;
+
   &:not(:empty) {
     margin-top: map-get($spacers, 5);
   }
