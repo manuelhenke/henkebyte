@@ -19,7 +19,11 @@
       </button>
     </div>
     <div class="d-flex justify-content-center">
-      <div v-if="$fetchState.pending" class="spinner-border" role="status">
+      <div
+        v-if="$fetchState.pending"
+        class="spinner-border text-primary"
+        role="status"
+      >
         <span class="visually-hidden">Loading...</span>
       </div>
       <p v-else-if="$fetchState.error">An error occurred :(</p>

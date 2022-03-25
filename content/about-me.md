@@ -175,8 +175,8 @@ tools:
 <section id="introduction">
   <!-- #introduction -->
   <h2 class="visually-hidden">Introduction</h2>
-  <div class="row">
-    <div class="col">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-8 col-md-9">
       <p class="lead">
         Hey there! I am Manuel Henke, 25 years old and from
         the heart of Berlin, Germany. At the moment I'm in the final phase
@@ -187,7 +187,7 @@ tools:
         small projects which are presented on this website.
       </p>
     </div>
-    <div class="col-12 col-sm-4 col-md-3 text-center">
+    <div class="col-8 col-sm-4 col-md-3">
       <img
         src="/images/manuel-henke.jpg"
         class="img-fluid rounded-circle"

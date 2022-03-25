@@ -99,7 +99,7 @@
         </button>
       </div>
       <div class="row">
-        <div class="col">
+        <div class="col-12 col-md-8">
           <table class="table table-striped">
             <thead>
               <tr>
@@ -156,7 +156,7 @@
             </tfoot>
           </table>
         </div>
-        <div class="col col-md-4">
+        <div class="col-12 col-md-4">
           <canvas ref="game-history-chart"></canvas>
         </div>
       </div>
