@@ -149,6 +149,8 @@ export default {
   router: {
     trailingSlash: false,
     middleware: 'trailingSlashRedirect',
+    linkActiveClass: 'child-active',
+    linkExactActiveClass: 'active',
   },
 
   // Sitemap Configuration: https://sitemap.nuxtjs.org/guide/configuration

@@ -1,4 +1,36 @@
 export const state = () => ({
+  navigation: [
+    {
+      title: 'Home',
+      to: '/',
+    },
+    {
+      title: 'General',
+      links: [
+        {
+          to: 'about-me',
+          name: 'About Me',
+        },
+        {
+          to: 'resources-overview',
+          name: 'Resources Overview',
+        },
+      ],
+    },
+    {
+      title: 'Projects',
+      links: [
+        {
+          to: 'ios-calculator',
+          name: 'iOS-Calculator',
+        },
+        {
+          to: 'minesweeper',
+          name: 'Minesweeper',
+        },
+      ],
+    },
+  ],
   contactOptions: [
     {
       text: 'LinkedIn',
