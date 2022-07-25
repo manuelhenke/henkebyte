@@ -4,6 +4,11 @@
 
 Website hosted on [henkebyte.com](https://henkebyte.com)
 
+```bash
+# create symbolic link of bootstrap scss
+$ ln -s node_modules/bootstrap/scss ln-bootstrap-scss
+```
+
 ## Build Setup
 
 ```bash

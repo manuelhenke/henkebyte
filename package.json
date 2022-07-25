@@ -35,7 +35,8 @@
     "ios-calculator-for-web": "^1.2.4",
     "masonry-layout": "^4.2.2",
     "minesweeper-for-web": "^2.1.6",
-    "nuxt": "^2.15.8"
+    "nuxt": "^2.15.8",
+    "vue-clickaway": "^2.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",

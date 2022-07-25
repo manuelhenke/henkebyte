@@ -32,15 +32,14 @@ export default {
   text-align: center;
   border: none;
 
-  --padding: #{map-get($spacers, 3)};
-  padding: var(--padding);
+  padding: map-get($spacers, 3);
 
   @include media-breakpoint-up(sm) {
-    --padding: #{map-get($spacers, 4)};
+    padding: map-get($spacers, 4);
   }
 
   @include media-breakpoint-up(md) {
-    --padding: #{map-get($spacers, 5)};
+    padding: map-get($spacers, 5);
   }
 
   .welcome-card-image-container {

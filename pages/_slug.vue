@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  layout: 'default',
   async asyncData({ $content, params, error }) {
     const slug = params.slug || 'index'
     const page = await $content(slug)
