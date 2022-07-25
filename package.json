@@ -39,7 +39,7 @@
     "vue-clickaway": "^2.2.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.8",
+    "@babel/core": "^7.18.9",
     "@babel/eslint-parser": "^7.16.3",
     "@babel/preset-env": "^7.16.11",
     "@nuxt/test-utils": "^0.2.2",
