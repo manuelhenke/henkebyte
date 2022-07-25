@@ -61,7 +61,7 @@ skills:
   - name: Jest
     stars: "3"
   - name: React
-    stars: "2"
+    stars: "4"
   - name: Angular
     stars: "1"
 - name: CSS
