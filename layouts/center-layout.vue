@@ -28,7 +28,7 @@ export default {
   display: flex;
   place-content: center;
   place-items: center;
-  padding: $container-padding-x;
+  padding: map-get($spacers, 2);
 
   // this is kinda hacky to achieve only for mobile phones to use this value for min-height
   // on mobile device 100vh doesn't result in 100% of the visible screen. App bar and url tool bar also counts
