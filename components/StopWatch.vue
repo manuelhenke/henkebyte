@@ -1,6 +1,6 @@
 <template>
   <span>
-    <slot :elapsedTime="elapsedTime">
+    <slot :elapsed-time="elapsedTime">
       {{ elapsedTime }}
     </slot>
   </span>
