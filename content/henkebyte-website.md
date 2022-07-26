@@ -1,10 +1,9 @@
 ---
-title: Henkebyte
+title: Henkebyte Website
 badge-text: 'New'
 meta-tags:
 - key: description
-  value: Showcase of the implementation of the project "ios-calculator-for-web" which
-    is available at GitHub and npm.
+  value: Explanation to this showcase website including used (dev-)tools, hosting, deployment and content management.
 
 ---
 <the-lead>
@@ -13,11 +12,11 @@ meta-tags:
 
 <hr class="my-4" />
 
-<section id="tools">
-  <!-- #tools -->
-  <h2>Tools</h2>
+<section id="libraries-and-frameworks">
+  <!-- #libraries-and-frameworks -->
+  <h2>Libraries & Frameworks</h2>
   <p>
-    The website is a Single Page Application build with <a href="https://nuxtjs.org/" target="_blank">NuxtJS</a> (a library build on top of <a href="https://vuejs.org/" target="_blank">Vue.js</a>) along with some modules for NuxtJS:
+    It is a Single Page Application build with <a href="https://nuxtjs.org/" target="_blank">NuxtJS</a> (a library build on top of <a href="https://vuejs.org/" target="_blank">Vue.js</a>) along with some modules for NuxtJS:
     <dl class="row">
       <dt class="col-md-3"><a href="https://pwa.nuxtjs.org/" target="_blank">nuxt/pwa</a></dt>
       <dd class="col-md-9">Provides the website as Progressive Web App.</dd>
@@ -31,7 +30,7 @@ meta-tags:
   </p>
   <hr />
   <p>
-    The design is build upon a customized <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a> as well as some custom made components. Also utilizing <a href="https://icons.getbootstrap.com/" target="_blank">Bootstraps's icon pack</a>. 
+    The UI is build upon <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a> as well as some custom made components. The used icons are from <a href="https://icons.getbootstrap.com/" target="_blank">Bootstraps's icon pack</a>. 
   </p>
   <hr />
   <p>
@@ -50,19 +49,19 @@ meta-tags:
   <p>
     <small class="text-muted">Get a complete overview <a href="https://github.com/manuelhenke/henkebyte/blob/main/package.json#L22-L41" target="_blank">here</a></small>
   </p>
-  <!-- /#tools -->
+  <!-- /#libraries-and-frameworks -->
 </section>
 
-<section id="dev-tools">
-  <!-- #dev-tools -->
-  <h2>Dev-Tools</h2>
+<section id="dev-toolchain">
+  <!-- #dev-toolchain -->
+  <h2>Dev-Toolchain</h2>
   <p>
-    <em>Coming soon.</em>
+    <em>Coming soon...</em>
   </p>
   <p>
     <small class="text-muted">Get a complete overview <a href="https://github.com/manuelhenke/henkebyte/blob/main/package.json#L42-L71" target="_blank">here</a></small>
   </p>
-  <!-- /#dev-tools -->
+  <!-- /#dev-toolchain -->
 </section>
 
 <section id="hosting-and-deployment">
@@ -74,20 +73,20 @@ meta-tags:
   <!-- /#hosting-and-deployment -->
 </section>
 
-<section id="content">
-  <!-- #content -->
-  <h2>Content</h2>
+<section id="content-management">
+  <!-- #content-management -->
+  <h2>Content Management</h2>
   <p>
     The content on this page (and some meta information) is mainly stored in the GitHub repository itself. However, it is quite manageable via a Git-based CMS. The tool used for this is <a href="https://forestry.io/" target="_blank">forestry.io</a> and it commits changes directly to the repository. Through automated deployment, these changes are then available on the website after a few minutes. A second CMS is <a href="https://www.contentful.com/" target="_blank">contentful</a>. It is headless and a SaaS. The content stored there is used for the <nuxt-link to="resources-overview">Resources Overview</nuxt-link>.
   </p>
-  <!-- /#content -->
+  <!-- /#content-management -->
 </section>
 
 <section id="backend">
   <!-- #backend -->
   <h2>Backend</h2>
   <p>
-    <em>Currently there are no own backend services with custom business logic.</em>
+    <em>Currently there are no further backend services with custom business logic.</em>
   </p>
   <!-- /#backend -->
 </section>

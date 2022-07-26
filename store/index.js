@@ -21,8 +21,8 @@ export const state = () => ({
       title: 'Projects',
       links: [
         {
-          to: 'henkebyte',
-          name: 'Henkebyte',
+          to: 'henkebyte-website',
+          name: 'Henkebyte Website',
         },
         {
           to: 'ios-calculator',
