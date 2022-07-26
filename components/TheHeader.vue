@@ -123,9 +123,11 @@ export default {
 @import '@/assets/css/bootstrap-mixins.scss';
 $navbar-breakpoint: sm;
 
-header.is-sticky {
-  box-shadow: $box-shadow-sm;
-  transition: box-shadow 0.3s ease-in-out;
+header {
+  transition: box-shadow 0.2s ease-in;
+  &.is-sticky {
+    box-shadow: $box-shadow-sm;
+  }
 }
 
 nav {
@@ -136,8 +138,8 @@ nav {
   user-select: none;
   flex-flow: row wrap;
   @include padding-main-x;
-  padding-top: map-get($spacers, 3);
-  padding-bottom: map-get($spacers, 3);
+  padding-top: map-get($spacers, 2);
+  padding-bottom: map-get($spacers, 2);
 
   .navbar-toggle {
     margin-left: auto;
@@ -231,11 +233,6 @@ nav {
     }
 
     .navbar-item {
-      &:not(:last-child) {
-        border-bottom: map-get($border-widths, 1) solid
-          rgba(var(--bs-dark-rgb), 0.25);
-      }
-
       .nav-link {
         @include padding-main-x;
         padding-top: map-get($spacers, 3);
@@ -258,7 +255,6 @@ nav {
       .dropdown-menu {
         position: relative !important;
         transform: none !important;
-        margin-bottom: map-get($spacers, 3) !important;
         border: none;
         border-radius: 0;
         background: var(--bs-light);

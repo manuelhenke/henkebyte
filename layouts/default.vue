@@ -51,7 +51,7 @@ export default {
 
     .card {
       border: none;
-      // overflow: hidden;
+      // overflow: hidden; // will break sticky header
       .container {
         --padding-y: #{map-get($spacers, 5)};
         @include padding-main-x;
