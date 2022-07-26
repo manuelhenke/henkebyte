@@ -3,12 +3,18 @@ module.exports = {
   env: {
     browser: true,
     node: true,
+    'jest/globals': true,
   },
   parserOptions: {
     parser: '@babel/eslint-parser',
     requireConfigFile: false,
   },
-  extends: ['@nuxtjs', 'plugin:nuxt/recommended', 'prettier'],
+  extends: [
+    '@nuxtjs',
+    'plugin:jest/recommended',
+    'plugin:nuxt/recommended',
+    'prettier',
+  ],
   ignorePatterns: ['.forestry/**/*', 'static/admin/**/*'],
   plugins: [],
   // add your custom rules here
