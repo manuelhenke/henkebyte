@@ -16,10 +16,10 @@ meta-tags:
   <!-- #libraries-and-frameworks -->
   <h2>Libraries & Frameworks</h2>
   <p>
-    It is a Single Page Application build with <a href="https://nuxtjs.org/" target="_blank">NuxtJS</a> (a library build on top of <a href="https://vuejs.org/" target="_blank">Vue.js</a>) along with some modules for NuxtJS:
+    It is a <strong>Single Page Application</strong> build with <a href="https://nuxtjs.org/" target="_blank">NuxtJS</a> (a library build on top of <a href="https://vuejs.org/" target="_blank">Vue.js</a>) along with some modules for NuxtJS:
     <dl class="row">
       <dt class="col-md-3"><a href="https://pwa.nuxtjs.org/" target="_blank">nuxt/pwa</a></dt>
-      <dd class="col-md-9">Provides the website as Progressive Web App.</dd>
+      <dd class="col-md-9">Provides the website as <strong>Progressive Web App</strong>.</dd>
       <dt class="col-md-3"><a href="https://color-mode.nuxtjs.org/" target="_blank">nuxt/color-mode</a></dt>
       <dd class="col-md-9">Color modes like Light-, Dark- and Sepia-Mode.</dd>
       <dt class="col-md-3"><a href="https://content.nuxtjs.org/" target="_blank">nuxt/content</a></dt>
@@ -30,7 +30,7 @@ meta-tags:
   </p>
   <hr />
   <p>
-    The UI is build upon <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a> as well as some custom made components. The used icons are from <a href="https://icons.getbootstrap.com/" target="_blank">Bootstraps's icon pack</a>. 
+    The <strong>User Interface</strong> is build upon <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a> as well as some custom made components. The used <strong>icons</strong> are from <a href="https://icons.getbootstrap.com/" target="_blank">Bootstraps's icon pack</a>. 
   </p>
   <hr />
   <p>
@@ -68,7 +68,7 @@ meta-tags:
   <!-- #hosting-and-deployment -->
   <h2>Hosting and Deployment</h2>
   <p>
-    The website is hosted in <a href="https://aws.amazon.com/s3/" target="_blank">Amazon S3</a>. To achieve better latency and reduce traffic to the S3, the website is cached in <a href="https://aws.amazon.com/cloudfront/" target="_blank">Amazon CloudFront</a>. Deployment is automated using <a href="https://github.com/features/actions" target="_blank">GitHub actions</a>. A push to the main branch triggers a Continuous Integration (linting and testing) and a Code-Quality pipeline. If these pipelines are successful, the Continuous Deployment pipeline is triggered and creates the static build of the website. It is then deployed to S3 and finally the CloudFront cache is invalidated.
+    The website is <strong>statically hosted</strong> in <a href="https://aws.amazon.com/s3/" target="_blank">Amazon S3</a>. To achieve better latency and reduce traffic to the S3, the website is cached in <a href="https://aws.amazon.com/cloudfront/" target="_blank">Amazon CloudFront</a>. <strong>Deployment is automated</strong> using <a href="https://github.com/features/actions" target="_blank">GitHub actions</a>. A push to the main branch triggers a Continuous Integration (linting and testing) and a Code-Quality pipeline. If these pipelines are successful, the Continuous Deployment pipeline is triggered and creates the static build of the website. It is then deployed to S3 and finally the CloudFront cache is invalidated.
   </p>
   <!-- /#hosting-and-deployment -->
 </section>
@@ -77,7 +77,7 @@ meta-tags:
   <!-- #content-management -->
   <h2>Content Management</h2>
   <p>
-    The content on this page (and some meta information) is mainly stored in the GitHub repository itself. However, it is quite manageable via a Git-based CMS. The tool used for this is <a href="https://forestry.io/" target="_blank">forestry.io</a> and it commits changes directly to the repository. Through automated deployment, these changes are then available on the website after a few minutes. A second CMS is <a href="https://www.contentful.com/" target="_blank">contentful</a>. It is headless and a SaaS. The content stored there is used for the <nuxt-link to="resources-overview">Resources Overview</nuxt-link>.
+    The content on this page (and some meta information) is <strong>mainly stored in the Git Repository</strong> itself. However, it is quite manageable via a <strong>Git-based CMS</strong>. The tool used for this is <a href="https://forestry.io/" target="_blank">forestry.io</a> and it commits changes directly to the repository. Through automated deployment, these changes are then available on the website after a few minutes. A second CMS is <a href="https://www.contentful.com/" target="_blank">contentful</a>. It is <strong>headless CMS</strong> and a SaaS. The content stored there is used for the <nuxt-link to="resources-overview">Resources Overview</nuxt-link>.
   </p>
   <!-- /#content-management -->
 </section>
