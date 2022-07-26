@@ -1,9 +1,15 @@
-name: Deployment
+name: Continuous Integration
 
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches:
-      - main
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 env:
   TARGET_FOLDER: ./dist
@@ -12,10 +18,9 @@ env:
   AWS_CLOUDFRONT_DISTRIBUTION_ID: E1GEYIE2ZCH07U
 
 jobs:
-  deploy:
-    name: Deploy
+  build:
+    name: Build
     runs-on: ubuntu-latest
-    environment: production
     timeout-minutes: 5
 
     steps:
@@ -43,30 +48,8 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: yarn install --frozen-lockfile
 
-      - name: create env file 📄
-        run: |
-          touch .env
-          echo CTF_SPACE_ID=${{ secrets.CTF_SPACE_ID }} >> .env
-          echo CTF_CDA_ACCESS_TOKEN=${{ secrets.CTF_CDA_ACCESS_TOKEN }} >> .env
-
-      - name: Build 🛠
-        run: yarn build
-
       - name: Run linter 👀
         run: yarn lint
 
       - name: Run tests 👀
         run: yarn test
-
-      - name: Configure AWS credentials ⚙️
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
-
-      - name: Deploy 📨
-        run: aws s3 sync ${{ env.TARGET_FOLDER }} ${{ env.AWS_S3_BUCKET_URI }} --delete
-
-      - name: Invalidate ❌
-        run: aws cloudfront create-invalidation --distribution-id ${{ env.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"

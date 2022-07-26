@@ -1,5 +1,5 @@
 <template comments>
-  <header>
+  <header ref="header" class="sticky-top" :class="{ 'is-sticky': isSticky }">
     <!-- header -->
     <div v-if="isMobileMenuVisible" class="overlay"></div>
     <nav
@@ -63,12 +63,14 @@
 
 <script>
 import { mixin as clickaway } from 'vue-clickaway'
+import { throttle } from 'lodash-es'
 
 export default {
   name: 'TheHeader',
   mixins: [clickaway],
   data: () => ({
     isMobileMenuVisible: false,
+    isSticky: null,
   }),
   computed: {
     navigation() {
@@ -79,6 +81,12 @@ export default {
     $route(to, from) {
       this.isMobileMenuVisible = false
     },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.checkIsSticky)
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.checkIsSticky)
   },
   methods: {
     hasActiveChild(navElement) {
@@ -100,6 +108,13 @@ export default {
     closeMobileMenu() {
       this.isMobileMenuVisible = false
     },
+    checkIsSticky: throttle(function () {
+      if (this.$refs.header.offsetTop > 0) {
+        this.isSticky = true
+      } else {
+        this.isSticky = false
+      }
+    }, 200),
   },
 }
 </script>
@@ -107,6 +122,13 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/css/bootstrap-mixins.scss';
 $navbar-breakpoint: sm;
+
+header {
+  transition: box-shadow 0.2s ease-in;
+  &.is-sticky {
+    box-shadow: $box-shadow-sm;
+  }
+}
 
 nav {
   background: var(--bs-light);
@@ -116,7 +138,8 @@ nav {
   user-select: none;
   flex-flow: row wrap;
   @include padding-main-x;
-  padding-top: map-get($spacers, 3);
+  padding-top: map-get($spacers, 2);
+  padding-bottom: map-get($spacers, 2);
 
   .navbar-toggle {
     margin-left: auto;
@@ -179,6 +202,8 @@ nav {
 
   // Mobile View
   @include media-breakpoint-down($navbar-breakpoint) {
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
     .navbar-brand {
       img {
         width: 4rem;
@@ -210,15 +235,11 @@ nav {
     }
 
     .navbar-item {
-      &:not(:last-child) {
-        border-bottom: map-get($border-widths, 1) solid
-          rgba(var(--bs-dark-rgb), 0.25);
-      }
-
       .nav-link {
         @include padding-main-x;
         padding-top: map-get($spacers, 3);
         padding-bottom: map-get($spacers, 3);
+        border-radius: 0;
 
         &:hover {
           color: var(--bs-primary);
@@ -237,10 +258,12 @@ nav {
         position: relative !important;
         transform: none !important;
         border: none;
-        border-left: map-get($border-widths, 3) solid var(--bs-primary);
         border-radius: 0;
         background: var(--bs-light);
+        padding: 0;
+        @include padding-main-x;
         .nav-link {
+          border-left: map-get($border-widths, 3) solid var(--bs-primary);
           padding-left: map-get($spacers, 3);
         }
       }

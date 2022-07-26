@@ -1,6 +1,6 @@
 ---
 title: iOS-Calculator
-badge-text: New
+badge-text: ''
 meta-tags:
 - key: description
   value: Showcase of the implementation of the project "ios-calculator-for-web" which
