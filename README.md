@@ -1,4 +1,5 @@
 [![Deployment](https://github.com/manuelhenke/henkebyte/actions/workflows/deployment.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/deployment.yml)
+[![CodeQL](https://github.com/manuelhenke/henkebyte/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/codeql-analysis.yml)
 
 # Henkebyte
 
