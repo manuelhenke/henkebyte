@@ -202,6 +202,8 @@ nav {
 
   // Mobile View
   @include media-breakpoint-down($navbar-breakpoint) {
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
     .navbar-brand {
       img {
         width: 4rem;
