@@ -50,6 +50,8 @@
     "@nuxtjs/robots": "^2.5.0",
     "@nuxtjs/sitemap": "^2.4.0",
     "@nuxtjs/stylelint-module": "^4.1.0",
+    "@types/bootstrap": "^5.2.0",
+    "@types/lodash-es": "^4.17.6",
     "@types/vue-clickaway": "^2.2.0",
     "babel-jest": "^27.5.1",
     "eslint": "^8.11.0",

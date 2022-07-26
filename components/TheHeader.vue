@@ -32,6 +32,7 @@
           >
           <div v-else class="navbar-dropdown-container">
             <a
+              ref="dropdown"
               class="btn nav-link dropdown-toggle"
               :class="{
                 'active-child': hasActiveChild(navElement),
@@ -64,6 +65,7 @@
 <script>
 import { mixin as clickaway } from 'vue-clickaway'
 import { throttle } from 'lodash-es'
+import { Dropdown } from 'bootstrap'
 
 export default {
   name: 'TheHeader',
@@ -80,6 +82,14 @@ export default {
   watch: {
     $route(to, from) {
       this.isMobileMenuVisible = false
+      if (Array.isArray(this.$refs.dropdown)) {
+        this.$refs.dropdown
+          .map((element) => Dropdown.getOrCreateInstance(element))
+          .filter((dropdown) => !!dropdown)
+          .forEach((dropdown) => {
+            dropdown.hide()
+          })
+      }
     },
   },
   mounted() {
