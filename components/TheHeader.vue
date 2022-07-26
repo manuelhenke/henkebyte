@@ -153,7 +153,7 @@ nav {
       }
 
       i {
-        // transition: transform 200ms ease-in-out;
+        transition: transform 100ms ease-in-out;
       }
 
       &.show {

@@ -170,6 +170,9 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['@nuxtjs/color-mode'],
+    postcss: {
+      plugins: [],
+    },
   },
 
   // Loading Configuration: https://nuxtjs.org/docs/features/loading/
