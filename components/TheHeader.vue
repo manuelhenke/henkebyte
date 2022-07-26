@@ -1,5 +1,5 @@
 <template comments>
-  <header>
+  <header ref="header" class="sticky-top" :class="{ 'is-sticky': isSticky }">
     <!-- header -->
     <div v-if="isMobileMenuVisible" class="overlay"></div>
     <nav
@@ -63,12 +63,14 @@
 
 <script>
 import { mixin as clickaway } from 'vue-clickaway'
+import { throttle } from 'lodash-es'
 
 export default {
   name: 'TheHeader',
   mixins: [clickaway],
   data: () => ({
     isMobileMenuVisible: false,
+    isSticky: null,
   }),
   computed: {
     navigation() {
@@ -79,6 +81,12 @@ export default {
     $route(to, from) {
       this.isMobileMenuVisible = false
     },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.checkIsSticky)
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.checkIsSticky)
   },
   methods: {
     hasActiveChild(navElement) {
@@ -100,6 +108,13 @@ export default {
     closeMobileMenu() {
       this.isMobileMenuVisible = false
     },
+    checkIsSticky: throttle(function () {
+      if (this.$refs.header.offsetTop > 0) {
+        this.isSticky = true
+      } else {
+        this.isSticky = false
+      }
+    }, 200),
   },
 }
 </script>
@@ -107,6 +122,11 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/css/bootstrap-mixins.scss';
 $navbar-breakpoint: sm;
+
+header.is-sticky {
+  box-shadow: $box-shadow-sm;
+  transition: box-shadow 0.3s ease-in-out;
+}
 
 nav {
   background: var(--bs-light);
@@ -117,6 +137,7 @@ nav {
   flex-flow: row wrap;
   @include padding-main-x;
   padding-top: map-get($spacers, 3);
+  padding-bottom: map-get($spacers, 3);
 
   .navbar-toggle {
     margin-left: auto;
