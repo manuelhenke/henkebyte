@@ -21,16 +21,16 @@ export const state = () => ({
       title: 'Projects',
       links: [
         {
+          to: 'henkebyte',
+          name: 'Henkebyte',
+        },
+        {
           to: 'ios-calculator',
           name: 'iOS-Calculator',
         },
         {
           to: 'minesweeper',
           name: 'Minesweeper',
-        },
-        {
-          to: 'henkebyte',
-          name: 'Henkebyte',
         },
       ],
     },
