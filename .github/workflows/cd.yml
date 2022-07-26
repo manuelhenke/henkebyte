@@ -1,9 +1,9 @@
-name: Continuous Deployment
+name: "Continuous Deployment"
 
 # Only trigger, when the CI workflow succeeded
 on:
   workflow_run:
-    workflows: ['Continuous Integration']
+    workflows: ["Continuous Integration", "CodeQL"]
     types:
       - completed
 
@@ -30,7 +30,7 @@ jobs:
       - name: Setup node env 🏗
         uses: actions/setup-node@v3
         with:
-          node-version-file: '.nvmrc'
+          node-version-file: ".nvmrc"
 
       - name: Get yarn cache directory path 🔃
         id: yarn-cache-dir-path
