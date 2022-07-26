@@ -359,9 +359,7 @@ export default {
     this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration)
 
     this.fireworks = new Fireworks(this.$refs.firework, {
-      particles: 200,
-      explosion: 10,
-      sound: false,
+      acceleration: 1.01,
     })
 
     liveQuery(() => db.games.toArray()).subscribe((games) => {
@@ -491,14 +489,10 @@ $border-width: map-get($border-widths, 4);
 }
 
 .firework-container {
-  position: absolute;
+  position: fixed;
   inset: 0;
   pointer-events: none;
-
-  > * {
-    height: 100%;
-    width: 100%;
-  }
+  z-index: $zindex-fixed;
 }
 
 .overlay {
