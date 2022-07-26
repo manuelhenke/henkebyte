@@ -3,14 +3,22 @@ title: Henkebyte Website
 badge-text: 'New'
 meta-tags:
 - key: description
-  value: Explanation to this showcase website including used (dev-)tools, hosting, deployment and content management.
+  value: Description to this project website including used (dev-)tools, hosting, deployment and content management.
 
 ---
-<the-lead>
-  This website itself is a showcase to learn about different tools and libraries. The code is available on <a href="https://github.com/manuelhenke/henkebyte" target="_blank">GitHub</a>.
+<the-lead full-width>
+  This website itself is a project to learn and try out different tools and libraries. The code is available on <a href="https://github.com/manuelhenke/henkebyte" target="_blank">GitHub</a>.
 </the-lead>
 
-<hr class="my-4" />
+<div class="row justify-content-md-center my-4">
+  <div class="col-md-10 col-lg-8">
+    <img
+      src="/preview.png"
+      class="img-fluid"
+      alt="Picture of the website Henkebyte.com"
+    />
+  </div>
+</div>
 
 <section id="libraries-and-frameworks">
   <!-- #libraries-and-frameworks -->
@@ -77,7 +85,7 @@ meta-tags:
   <!-- #content-management -->
   <h2>Content Management</h2>
   <p>
-    The content on this page (and some meta information) is <strong>mainly stored in the Git Repository</strong> itself. However, it is quite manageable via a <strong>Git-based CMS</strong>. The tool used for this is <a href="https://forestry.io/" target="_blank">forestry.io</a> and it commits changes directly to the repository. Through automated deployment, these changes are then available on the website after a few minutes. A second CMS is <a href="https://www.contentful.com/" target="_blank">contentful</a>. It is <strong>headless CMS</strong> and a SaaS. The content stored there is used for the <nuxt-link to="resources-overview">Resources Overview</nuxt-link>.
+    The content on this page (and some meta information) is <strong>mainly stored in the Git Repository</strong> itself. However, it is quite manageable via a <strong>Git-based CMS</strong>. The tool used for this is <a href="https://forestry.io/" target="_blank">forestry.io</a> and it commits changes directly to the repository. Through automated deployment, these changes are then available on the website after a few minutes. Furthermore, the <strong>headless CMS</strong> <a href="https://www.contentful.com/" target="_blank">contentful</a> is used to store the content that is shown in the <nuxt-link to="resources-overview">Resources Overview</nuxt-link>.
   </p>
   <!-- /#content-management -->
 </section>
