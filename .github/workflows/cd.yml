@@ -1,0 +1,71 @@
+name: Continuous Deployment
+
+# Only trigger, when the CI workflow succeeded
+on:
+  workflow_run:
+    workflows: ['Continuous Integration']
+    types:
+      - completed
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  TARGET_FOLDER: ./dist
+  AWS_REGION: eu-central-1
+  AWS_S3_BUCKET_URI: s3://henkebyte.com
+  AWS_CLOUDFRONT_DISTRIBUTION_ID: E1GEYIE2ZCH07U
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Get yarn cache directory path 🔃
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node_modules 📦
+        uses: actions/cache@v3.0.5
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies 👨🏻‍💻
+        run: yarn install --frozen-lockfile
+
+      - name: create env file 📄
+        run: |
+          touch .env
+          echo CTF_SPACE_ID=${{ secrets.CTF_SPACE_ID }} >> .env
+          echo CTF_CDA_ACCESS_TOKEN=${{ secrets.CTF_CDA_ACCESS_TOKEN }} >> .env
+
+      - name: Build 🛠
+        run: yarn build
+
+      - name: Configure AWS credentials ⚙️
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy 📨
+        run: aws s3 sync ${{ env.TARGET_FOLDER }} ${{ env.AWS_S3_BUCKET_URI }} --delete
+
+      - name: Invalidate ❌
+        run: aws cloudfront create-invalidation --distribution-id ${{ env.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
