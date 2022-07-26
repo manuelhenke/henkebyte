@@ -66,21 +66,21 @@ meta-tags:
 </section>
 
 <section id="hosting-and-deployment">
-  <!-- #hosting -->
+  <!-- #hosting-and-deployment -->
   <h2>Hosting and Deployment</h2>
   <p>
     The website is hosted in <a href="https://aws.amazon.com/s3/" target="_blank">Amazon S3</a>. To achieve better latency and reduce traffic to the S3, the website is cached in <a href="https://aws.amazon.com/cloudfront/" target="_blank">Amazon CloudFront</a>. Deployment is automated using <a href="https://github.com/features/actions" target="_blank">GitHub actions</a>. A push to the main branch triggers a Continuous Integration (linting and testing) and a Code-Quality pipeline. If these pipelines are successful, the Continuous Deployment pipeline is triggered and creates the static build of the website. It is then deployed to S3 and finally the CloudFront cache is invalidated.
   </p>
-  <!-- /#hosting -->
+  <!-- /#hosting-and-deployment -->
 </section>
 
 <section id="content">
-  <!-- #hosting -->
+  <!-- #content -->
   <h2>Content</h2>
   <p>
     The content on this page (and some meta information) is mainly stored in the GitHub repository itself. However, it is quite manageable via a Git-based CMS. The tool used for this is <a href="https://forestry.io/" target="_blank">forestry.io</a> and it commits changes directly to the repository. Through automated deployment, these changes are then available on the website after a few minutes. A second CMS is <a href="https://www.contentful.com/" target="_blank">contentful</a>. It is headless and a SaaS. The content stored there is used for the <nuxt-link to="resources-overview">Resources Overview</nuxt-link>.
   </p>
-  <!-- /#hosting -->
+  <!-- /#content -->
 </section>
 
 <section id="backend">
@@ -89,5 +89,5 @@ meta-tags:
   <p>
     <em>Currently there are no own backend services with custom business logic.</em>
   </p>
-  <!-- /#hosting -->
+  <!-- /#backend -->
 </section>
