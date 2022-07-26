@@ -406,6 +406,12 @@ export default {
     flex: 1 0;
     position: relative;
 
+    input {
+      &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+      }
+    }
+
     .clear-input {
       position: absolute;
       top: 0;
@@ -415,6 +421,7 @@ export default {
       place-content: center;
       place-items: center;
       padding-inline: map-get($spacers, 3);
+      border: none;
       cursor: pointer;
     }
   }
