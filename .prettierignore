@@ -103,6 +103,8 @@ playwright-report/
 # Ignore symbolic link folders
 ln-*
 
+# Ignore non-code related directories
 .forestry/
 static/admin/
 content/
+.github/

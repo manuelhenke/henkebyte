@@ -9,8 +9,9 @@ export function filterRoutes({ routes, options }) {
   // object containing [routeName]: [priority] pairs
   const priorities = {
     '/': 1,
-    '/minesweeper': 0.8,
-    '/ios-calculator': 0.7,
+    '/henkebyte': 0.7,
+    '/minesweeper': 0.6,
+    '/ios-calculator': 0.6,
   }
 
   return routes.map((route) => {

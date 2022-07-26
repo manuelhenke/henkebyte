@@ -1,10 +1,10 @@
 ---
 title: Resources Overview
+badge-text: ''
 meta-tags:
 - key: description
   value: This is a collection of my favorite resources which levitate my development
     workflow.
-badge-text: ''
 
 ---
 <the-lead>
