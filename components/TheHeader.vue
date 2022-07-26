@@ -219,6 +219,7 @@ nav {
         @include padding-main-x;
         padding-top: map-get($spacers, 3);
         padding-bottom: map-get($spacers, 3);
+        border-radius: 0;
 
         &:hover {
           color: var(--bs-primary);
@@ -236,11 +237,14 @@ nav {
       .dropdown-menu {
         position: relative !important;
         transform: none !important;
+        margin-bottom: map-get($spacers, 3) !important;
         border: none;
-        border-left: map-get($border-widths, 3) solid var(--bs-primary);
         border-radius: 0;
         background: var(--bs-light);
+        padding: 0;
+        @include padding-main-x;
         .nav-link {
+          border-left: map-get($border-widths, 3) solid var(--bs-primary);
           padding-left: map-get($spacers, 3);
         }
       }
