@@ -1,10 +1,12 @@
 <template>
-  <h1 class="display-5 fw-bold">
-    <slot></slot>
-    <span v-if="badgeText" :class="`badge bg-${badgeColor}`">{{
+  <div class="hstack display-5 gap-3 mb-1">
+    <h1 class="mb-0 fw-bold display-5">
+      <slot></slot>
+    </h1>
+    <span v-if="badgeText" :class="`badge fw-bold bg-${badgeColor}`">{{
       badgeText
     }}</span>
-  </h1>
+  </div>
 </template>
 
 <script>

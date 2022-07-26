@@ -1,5 +1,10 @@
 <template>
-  <p class="col-md-8 fs-4 lead">
+  <p
+    class="fs-4 lead"
+    :class="{
+      'col-md-8': !fullWidth,
+    }"
+  >
     <slot></slot>
   </p>
 </template>
@@ -7,5 +12,12 @@
 <script>
 export default {
   name: 'TheLead',
+  props: {
+    fullWidth: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
 }
 </script>
