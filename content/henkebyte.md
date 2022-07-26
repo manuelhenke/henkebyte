@@ -17,7 +17,7 @@ meta-tags:
   <!-- #tools -->
   <h2>Tools</h2>
   <p>
-    The website is a Single Page Application build with <a href="https://nuxtjs.org/" target="_blank">NuxtJS</a> (a library build on top of <a href="https://vuejs.org/" target="_blank">Vue.js</a>) along with some plugins for NuxtJS:
+    The website is a Single Page Application build with <a href="https://nuxtjs.org/" target="_blank">NuxtJS</a> (a library build on top of <a href="https://vuejs.org/" target="_blank">Vue.js</a>) along with some modules for NuxtJS:
     <dl class="row">
       <dt class="col-md-3"><a href="https://pwa.nuxtjs.org/" target="_blank">nuxt/pwa</a></dt>
       <dd class="col-md-9">Provides the website as Progressive Web App.</dd>
