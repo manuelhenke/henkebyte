@@ -28,6 +28,10 @@ export const state = () => ({
           to: 'minesweeper',
           name: 'Minesweeper',
         },
+        {
+          to: 'henkebyte',
+          name: 'Henkebyte',
+        },
       ],
     },
   ],
