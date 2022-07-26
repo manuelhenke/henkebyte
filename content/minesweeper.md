@@ -1,6 +1,6 @@
 ---
 title: Minesweeper
-badge-text: New
+badge-text: ''
 meta-tags:
 - key: description
   value: Showcase of the implementation of the project "minesweeper-for-web" which
