@@ -1,4 +1,6 @@
-[![Deployment](https://github.com/manuelhenke/henkebyte/actions/workflows/deployment.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/deployment.yml)
+[![CI](https://github.com/manuelhenke/henkebyte/actions/workflows/ci.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/ci.yml)
+[![CD](https://github.com/manuelhenke/henkebyte/actions/workflows/cd.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/cd.yml)
+[![CodeQL](https://github.com/manuelhenke/henkebyte/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/codeql-analysis.yml)
 
 # Henkebyte
 
