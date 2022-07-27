@@ -129,6 +129,7 @@
                   <button
                     class="btn btn-link btn-icon btn-lg"
                     type="button"
+                    title="Remove entry"
                     @click="removeScoreboardEntry(game.id)"
                   >
                     <i class="bi bi-trash-fill"></i>

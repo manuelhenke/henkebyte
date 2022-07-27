@@ -13,6 +13,8 @@
         <div
           v-if="currentSearchInput"
           class="btn btn-icon clear-input"
+          role="button"
+          title="Reset input"
           @click="currentSearchInput = ''"
         >
           <i class="bi bi-x"></i>
@@ -21,6 +23,7 @@
       <button
         class="btn btn-primary d-none d-sm-inline-block"
         type="button"
+        title="Toggle grid layout"
         @click="toggleMasonry"
       >
         <i v-if="masonry" class="bi bi-grid"></i>

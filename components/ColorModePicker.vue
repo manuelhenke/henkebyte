@@ -5,7 +5,7 @@
         v-for="colorMode of colorModes"
         :id="`${colorMode.name}-mode-trigger`"
         :key="colorMode.name"
-        :title="`${capitalize(colorMode.name)}mode`"
+        :title="`Change theme to ${colorMode.name}mode`"
         :aria-label="`Change color mode to ${colorMode.name}`"
         :class="{
           preferred:
