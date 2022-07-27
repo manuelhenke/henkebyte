@@ -28,7 +28,7 @@
             v-if="navElement.to"
             class="btn nav-link"
             :to="navElement.to"
-            >{{ navElement.title }}</nuxt-link
+            >{{ navElement.name }}</nuxt-link
           >
           <div v-else class="navbar-dropdown-container">
             <a

@@ -10,10 +10,14 @@ meta-tags:
   This website itself is a project to learn and try out different tools and libraries. The code is available on <a href="https://github.com/manuelhenke/henkebyte" target="_blank">GitHub</a>.
 </the-lead>
 
-<div class="row justify-content-md-center my-4">
-  <div class="col-md-10 col-lg-8">
-    <website-screenshot-gallery></website-screenshot-gallery>
-  </div>
+<div class="vstack gap-1 align-items-center my-4">
+  <website-screenshot-gallery disable-auto-play></website-screenshot-gallery>
+  <small class="text-muted text-center"
+    >Overview of sample pages. The screenshots also change based on the
+    selected theme mode. The creation is automated using
+    <a href="http://playwright.com" target="_blank">Playwrigth</a> for all routes, the available themes and the
+    three device types (the screenshot of this page is obviously omitted due to redundancy).</small
+  >
 </div>
 
 <section id="libraries-and-frameworks">
@@ -51,7 +55,7 @@ meta-tags:
     </dl>
   </p>
   <p>
-    <small class="text-muted">Get a complete overview <a href="https://github.com/manuelhenke/henkebyte/blob/main/package.json#L22-L41" target="_blank">here</a></small>
+    <small class="text-muted">Get a complete overview <a href="https://github.com/manuelhenke/henkebyte/blob/main/package.json#L22-L43" target="_blank">here</a></small>
   </p>
   <!-- /#libraries-and-frameworks -->
 </section>
@@ -63,7 +67,7 @@ meta-tags:
     <em>Coming soon...</em>
   </p>
   <p>
-    <small class="text-muted">Get a complete overview <a href="https://github.com/manuelhenke/henkebyte/blob/main/package.json#L42-L71" target="_blank">here</a></small>
+    <small class="text-muted">Get a complete overview <a href="https://github.com/manuelhenke/henkebyte/blob/main/package.json#L44-L76" target="_blank">here</a></small>
   </p>
   <!-- /#dev-toolchain -->
 </section>

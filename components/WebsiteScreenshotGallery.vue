@@ -1,5 +1,5 @@
 <template>
-  <div class="vstack gap-1 align-items-center">
+  <div class="vstack align-items-center">
     <div
       class="btn-group mb-2"
       role="group"
@@ -16,58 +16,48 @@
         {{ capitalize(device) }}
       </button>
     </div>
-    <div id="website-screenshots" class="carousel slide" data-bs-ride="true">
-      <div class="carousel-indicators">
-        <button
-          v-for="(slide, index) in slides"
-          :key="slide.fileName"
-          type="button"
-          data-bs-target="#website-screenshots"
-          :data-bs-slide-to="index"
-          :class="{ active: index === 0 }"
-          aria-current="true"
-          :aria-label="slide.label"
-        ></button>
-      </div>
-      <div class="carousel-inner">
+    <div class="bg-dark px-2">
+      <Flicking
+        ref="flicking"
+        class="py-4"
+        :options="{
+          align: 'center',
+          circular: true,
+          resizeOnContentsReady: true,
+        }"
+        :plugins="plugins"
+      >
         <div
-          v-for="(slide, index) in slides"
+          v-for="slide in slides"
           :key="slide.fileName"
-          class="carousel-item"
-          :class="{ active: index === 0 }"
+          :class="`slide-panel slide-panel-${selectedDevice}`"
         >
           <img
             :src="`${imagesPath}${slide.fileName}.png`"
             class="d-block w-100"
             :alt="`${slide.label} of the website henkebyte.com`"
+            draggable="false"
           />
         </div>
-      </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#website-screenshots"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#website-screenshots"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+        <span slot="viewport" class="flicking-arrow-prev"></span>
+        <span slot="viewport" class="flicking-arrow-next"></span>
+        <div slot="viewport" class="flicking-pagination"></div>
+      </Flicking>
     </div>
-    <small class="text-muted">Overview of sample pages</small>
   </div>
 </template>
 
 <script>
+import { DIRECTION, Flicking } from '@egjs/vue-flicking'
+import {
+  Fade,
+  AutoPlay,
+  Arrow,
+  Pagination,
+  PAGINATION,
+} from '@egjs/flicking-plugins'
 import { sample, capitalize } from 'lodash'
+import routes from '@/store/routes'
 
 const deviceTypes = {
   DESKTOP: 'desktop',
@@ -77,35 +67,54 @@ const deviceTypes = {
 
 export default {
   name: 'WebsiteScreenshotGallery',
+  components: { Flicking },
+  props: {
+    disableAutoPlay: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    autoPlayDuration: {
+      type: Number,
+      required: false,
+      default: 10000,
+    },
+  },
   data: () => ({
     devices: Object.values(deviceTypes),
     selectedDevice: deviceTypes.DESKTOP,
-    slides: [
-      {
-        fileName: 'home',
-        label: 'Home page',
-      },
-      {
-        fileName: 'about-me',
-        label: 'About Me page',
-      },
-      {
-        fileName: 'resources-overview',
-        label: 'Resources Overview page',
-      },
-      {
-        fileName: 'minesweeper',
-        label: 'Minesweeper page',
-      },
-      {
-        fileName: 'ios-calculator',
-        label: 'iOS-Calculator page',
-      },
+    slides: Object.values(routes)
+      .filter((route) => route !== routes.HENKEBYTE_WEBSITE)
+      .map((route) => ({
+        fileName: route.name.toLocaleLowerCase().replace(' ', '-'),
+        label: `${route.name} page`,
+      })),
+    plugins: [
+      new Fade(),
+      new Pagination({ type: PAGINATION.TYPE.SCROLL }),
+      new Arrow(),
     ],
   }),
   computed: {
     imagesPath() {
       return `/images/website-story/${this.selectedDevice}/${this.$colorMode.value}/`
+    },
+    slidePanelWidthClass() {
+      switch (this.selectedDevice) {
+        case deviceTypes.DESKTOP:
+          return 'w-75'
+        case deviceTypes.TABLET:
+          return 'w-50'
+        case deviceTypes.MOBILE:
+          return 'w-25'
+        default:
+          return 'w-100'
+      }
+    },
+  },
+  watch: {
+    selectedDevice() {
+      this.$refs.flicking.resize()
     },
   },
   mounted() {
@@ -118,9 +127,73 @@ export default {
     } else {
       this.selectedDevice = sample(this.devices)
     }
+
+    if (!this.disableAutoPlay) {
+      this.plugins.push(
+        new AutoPlay({
+          duration: this.autoPlayDuration,
+          direction: DIRECTION.NEXT,
+          stopOnHover: true,
+        })
+      )
+    }
   },
   methods: {
     capitalize,
   },
 }
 </script>
+
+<style lang="scss">
+@import '@egjs/vue-flicking/dist/flicking.css';
+@import '@egjs/flicking-plugins/dist/flicking-plugins.css';
+@import '@/assets/css/bootstrap-mixins.scss';
+
+.slide-panel {
+  margin-right: map-get($spacers, 2);
+  width: 75%;
+}
+
+.flicking-arrow-next,
+.flicking-arrow-prev {
+  &::before,
+  &::after {
+    background-color: var(--bs-secondary);
+  }
+
+  &.flicking-arrow-disabled {
+    opacity: 0.1;
+  }
+}
+
+.flicking-pagination {
+  bottom: calc(map-get($spacers, 3) / 2);
+  .flicking-pagination-slider {
+    > * {
+      background-color: rgba(var(--bs-secondary-rgb), 0.5);
+      &[class$='-active'] {
+        background-color: var(--bs-secondary);
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .slide-panel-mobile {
+    width: 50%;
+  }
+  .flicking-arrow-next,
+  .flicking-arrow-prev {
+    display: none;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .slide-panel-mobile {
+    width: 25%;
+  }
+  .slide-panel-tablet {
+    width: 50%;
+  }
+}
+</style>

@@ -1,6 +1,59 @@
 /* eslint-disable no-console */
 const playwright = require('playwright')
 
+const routes = [
+  {
+    to: '/',
+    name: 'Home',
+  },
+  {
+    to: '/about-me',
+    name: 'About Me',
+  },
+  {
+    to: '/resources-overview',
+    name: 'Resources Overview',
+  },
+  {
+    to: '/henkebyte-website',
+    name: 'Henkebyte Website',
+  },
+  {
+    to: '/ios-calculator',
+    name: 'iOS-Calculator',
+  },
+  {
+    to: '/minesweeper',
+    name: 'Minesweeper',
+  },
+]
+
+const devices = [
+  {
+    name: 'desktop',
+    viewportSize: {
+      width: 1200,
+      height: 630,
+    },
+  },
+  {
+    name: 'tablet',
+    viewportSize: {
+      width: 820,
+      height: 1180,
+    },
+  },
+  {
+    name: 'mobile',
+    viewportSize: {
+      width: 390,
+      height: 844,
+    },
+  },
+]
+
+const themeModes = ['light', 'dark', 'sepia']
+
 ;(async () => {
   let port = process.argv[2]
   if (!port) port = '3000'
@@ -26,48 +79,20 @@ const playwright = require('playwright')
     }
 
     await screenshotPath('/', 'preview')
-
-    const devices = [
-      {
-        name: 'desktop',
-        viewportSize: {
-          width: 1200,
-          height: 630,
-        },
-      },
-      {
-        name: 'tablet',
-        viewportSize: {
-          width: 820,
-          height: 1180,
-        },
-      },
-      {
-        name: 'mobile',
-        viewportSize: {
-          width: 390,
-          height: 844,
-        },
-      },
-    ]
     for (const device of devices) {
       await page.setViewportSize(device.viewportSize)
-      for (const themeMode of ['light', 'dark', 'sepia']) {
+      for (const themeMode of themeModes) {
         await page.click(`#${themeMode}-mode-trigger`)
 
         const imageBaseFilePath =
           'images/website-story/' + device.name + '/' + themeMode + '/'
-        await screenshotPath('/', imageBaseFilePath + 'home')
-        await screenshotPath('/about-me', imageBaseFilePath + 'about-me')
-        await screenshotPath(
-          '/resources-overview',
-          imageBaseFilePath + 'resources-overview'
-        )
-        await screenshotPath('/minesweeper', imageBaseFilePath + 'minesweeper')
-        await screenshotPath(
-          '/ios-calculator',
-          imageBaseFilePath + 'ios-calculator'
-        )
+
+        for (const route of routes) {
+          await screenshotPath(
+            route.to,
+            imageBaseFilePath + route.name.toLocaleLowerCase().replace(' ', '-')
+          )
+        }
       }
     }
     await page.close()
