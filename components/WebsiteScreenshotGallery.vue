@@ -69,11 +69,17 @@
 <script>
 import { sample, capitalize } from 'lodash'
 
+const deviceTypes = {
+  DESKTOP: 'desktop',
+  TABLET: 'tablet',
+  MOBILE: 'mobile',
+}
+
 export default {
   name: 'WebsiteScreenshotGallery',
   data: () => ({
-    devices: ['desktop', 'tablet', 'mobile'],
-    selectedDevice: 'desktop',
+    devices: Object.values(deviceTypes),
+    selectedDevice: deviceTypes.DESKTOP,
     slides: [
       {
         fileName: 'home',
@@ -104,11 +110,11 @@ export default {
   },
   mounted() {
     if (this.$device.isMobile) {
-      this.selectedDevice = 'mobile'
+      this.selectedDevice = deviceTypes.MOBILE
     } else if (this.$device.isTablet) {
-      this.selectedDevice = 'tablet'
+      this.selectedDevice = deviceTypes.TABLET
     } else if (this.$device.isDesktop) {
-      this.selectedDevice = 'desktop'
+      this.selectedDevice = deviceTypes.DESKTOP
     } else {
       this.selectedDevice = sample(this.devices)
     }

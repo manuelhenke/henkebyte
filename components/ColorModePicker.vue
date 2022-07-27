@@ -5,7 +5,7 @@
         v-for="colorMode of colorModes"
         :id="`${colorMode.name}-mode-trigger`"
         :key="colorMode.name"
-        :title="`${capitalizeFirstLetter(colorMode.name)}mode`"
+        :title="`${capitalize(colorMode.name)}mode`"
         :aria-label="`Change color mode to ${colorMode.name}`"
         :class="{
           preferred:
@@ -57,7 +57,7 @@
           ></button>
         </div>
         <div class="toast-body">
-          Theme mode changed to: {{ capitalizeFirstLetter(colorMode.name) }}
+          Theme mode changed to: {{ capitalize(colorMode.name) }}
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@
 
 <script>
 import { Toast } from 'bootstrap'
-import { capitalizeFirstLetter } from '~/util'
+import { capitalize } from 'lodash'
 
 export default {
   name: 'ColorModePicker',
@@ -87,7 +87,7 @@ export default {
     lastActiveToast: null,
   }),
   methods: {
-    capitalizeFirstLetter,
+    capitalize,
     changeColorMode(selectedColorModeName) {
       if (this.$colorMode.preference !== selectedColorModeName) {
         // Set color mode globally

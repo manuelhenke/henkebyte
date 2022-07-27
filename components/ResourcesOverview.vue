@@ -163,9 +163,9 @@
 </template>
 
 <script>
+import { isEqual, sortBy } from 'lodash'
 import Masonry from 'masonry-layout'
 import { client } from '~/plugins/contentful.js'
-import { arrayEquals } from '~/util'
 
 export default {
   name: 'ResourcesOverview',
@@ -325,7 +325,9 @@ export default {
       }
 
       // Avoid redundant navigation
-      if (!arrayEquals(this.$route.query.categories, query.categories)) {
+      if (
+        !isEqual(sortBy(this.$route.query.categories), sortBy(query.categories))
+      ) {
         this.$router.replace({
           path: this.$route.path,
           query,
