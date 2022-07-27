@@ -3,7 +3,7 @@
 [![CodeQL](https://github.com/manuelhenke/henkebyte/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/codeql-analysis.yml)
 [![Licence](https://img.shields.io/github/license/manuelhenke/henkebyte)](./LICENSE)
 
-# Henkebyte
+# HenkeByte
 
 Website hosted on [henkebyte.com](https://henkebyte.com)
 

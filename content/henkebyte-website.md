@@ -1,5 +1,5 @@
 ---
-title: Henkebyte Website
+title: HenkeByte Website
 badge-text: New
 meta-tags:
 - key: description

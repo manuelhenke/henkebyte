@@ -57,7 +57,7 @@ import {
   PAGINATION,
 } from '@egjs/flicking-plugins'
 import { sample, capitalize } from 'lodash'
-import routes from '@/store/routes'
+import { routes } from '@/store/routes'
 
 const deviceTypes = {
   DESKTOP: 'desktop',
