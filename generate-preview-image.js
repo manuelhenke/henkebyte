@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const playwright = require('playwright')
-const { routeObject } = require('./store/routes')
+const { routes: routeObject } = require('./store/routes')
 
 const routes = Object.values(routeObject)
 
