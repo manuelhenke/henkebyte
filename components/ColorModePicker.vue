@@ -42,7 +42,7 @@
       >
         <div class="toast-header">
           <img
-            src="~/assets/images/henkebyte-logo.png"
+            src="~/assets/images/henkebyte-icon.png"
             class="rounded me-2"
             width="25"
             alt="Logo of henkebyte"
