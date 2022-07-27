@@ -6,10 +6,10 @@
  */
 
 /**
- * @module
+ * @module routes
  * @type {Record<string, Route>} Static route object containing all routes as flat structure
  */
-export default {
+const routes = {
   HOME: {
     to: '/',
     name: 'Home',
@@ -24,7 +24,7 @@ export default {
   },
   HENKEBYTE_WEBSITE: {
     to: '/henkebyte-website',
-    name: 'Henkebyte Website',
+    name: 'HenkeByte Website',
   },
   IOS_CALCULATOR: {
     to: '/ios-calculator',
@@ -35,3 +35,5 @@ export default {
     name: 'Minesweeper',
   },
 }
+
+module.exports = { routes }

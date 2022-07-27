@@ -1,32 +1,8 @@
 /* eslint-disable no-console */
 const playwright = require('playwright')
+const { routeObject } = require('./store/routes')
 
-const routes = [
-  {
-    to: '/',
-    name: 'Home',
-  },
-  {
-    to: '/about-me',
-    name: 'About Me',
-  },
-  {
-    to: '/resources-overview',
-    name: 'Resources Overview',
-  },
-  {
-    to: '/henkebyte-website',
-    name: 'Henkebyte Website',
-  },
-  {
-    to: '/ios-calculator',
-    name: 'iOS-Calculator',
-  },
-  {
-    to: '/minesweeper',
-    name: 'Minesweeper',
-  },
-]
+const routes = Object.values(routeObject)
 
 const devices = [
   {
