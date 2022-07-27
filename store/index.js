@@ -1,37 +1,18 @@
+import routes from './routes'
+
 export const state = () => ({
   navigation: [
-    {
-      title: 'Home',
-      to: '/',
-    },
+    routes.HOME,
     {
       title: 'General',
-      links: [
-        {
-          to: 'about-me',
-          name: 'About Me',
-        },
-        {
-          to: 'resources-overview',
-          name: 'Resources Overview',
-        },
-      ],
+      links: [routes.ABOUT_ME, routes.RESOURCES_OVERVIEW],
     },
     {
       title: 'Projects',
       links: [
-        {
-          to: 'henkebyte-website',
-          name: 'Henkebyte Website',
-        },
-        {
-          to: 'ios-calculator',
-          name: 'iOS-Calculator',
-        },
-        {
-          to: 'minesweeper',
-          name: 'Minesweeper',
-        },
+        routes.HENKEBYTE_WEBSITE,
+        routes.IOS_CALCULATOR,
+        routes.MINESWEEPER,
       ],
     },
   ],

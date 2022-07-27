@@ -1,4 +1,4 @@
-import { getRoutes, filterRoutes } from './util/sitemap'
+import { getRoutes, mapRoutes } from './util/routesUtils'
 
 const buildDescription = (target) =>
   `A showcase ${target} for different open source web projects including an iOS-Calculator and Minesweeper.`
@@ -159,7 +159,7 @@ export default {
     gzip: true,
     exclude: ['/secret', '/admin/**', '/_nuxt/**'],
     routes: getRoutes,
-    filter: filterRoutes,
+    filter: mapRoutes,
   },
 
   // Robots Configuration: https://github.com/nuxt-community/robots-module
