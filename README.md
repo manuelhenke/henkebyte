@@ -1,38 +1,30 @@
 [![CI](https://github.com/manuelhenke/henkebyte/actions/workflows/ci.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/ci.yml)
 [![CD](https://github.com/manuelhenke/henkebyte/actions/workflows/cd.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/cd.yml)
 [![CodeQL](https://github.com/manuelhenke/henkebyte/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/codeql-analysis.yml)
+[![Licence](https://img.shields.io/github/license/manuelhenke/henkebyte)](./LICENSE)
 
 # Henkebyte
 
 Website hosted on [henkebyte.com](https://henkebyte.com)
 
-```bash
-# create symbolic link of bootstrap scss
-$ ln -s node_modules/bootstrap/scss ln-bootstrap-scss
-```
-
 ## Build Setup
 
 ```bash
 # install dependencies
-$ yarn install
+$ yarn
 
 # serve with hot reload at localhost:3000
 $ yarn dev
 
-# build for production and launch server
+# build static project for production and launch server
 $ yarn build
 $ yarn start
 
-# generate static project
-$ yarn generate
 ```
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
 ## Special Directories
-
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
 
 ### `assets`
 
@@ -46,11 +38,23 @@ The components directory contains your Vue.js components. Components make up the
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
 
+### `content`
+
+Store your content as Markdown, JSON, YAML or CSV files and fetch it through a MongoDB like API, acting as a Git-based Headless CMS.
+
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/content).
+
 ### `layouts`
 
 Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+
+### `middleware`
+
+The middleware directory contains your application middleware. Middleware lets you define custom functions that can be run before rendering either a page or a group of pages (layout).
+
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/middleware).
 
 ### `pages`
 
@@ -77,3 +81,12 @@ More information about the usage of this directory in [the documentation](https:
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
+```bash
+# create symbolic link of bootstrap scss
+$ ln -s node_modules/bootstrap/scss ln-bootstrap-scss
+```
+
+## License
+
+[MIT Licence](./LICENSE)
