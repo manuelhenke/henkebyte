@@ -12,44 +12,7 @@ meta-tags:
 
 <div class="row justify-content-md-center my-4">
   <div class="col-md-10 col-lg-8">
-    <div id="website-screenshots" class="carousel slide" data-bs-ride="true">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#website-screenshots" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Home page"></button>
-        <button type="button" data-bs-target="#website-screenshots" data-bs-slide-to="1" aria-label="About Me page"></button>
-        <button type="button" data-bs-target="#website-screenshots" data-bs-slide-to="2" aria-label="Resources Overview page"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img
-            src="/images/website-story/home.png"
-            class="d-block w-100"
-            alt="Home page of the website henkebyte.com"
-          />
-        </div>
-        <div class="carousel-item">
-          <img
-            src="/images/website-story/about-me.png"
-            class="d-block w-100"
-            alt="About Me page of the website henkebyte.com"
-          />
-        </div>
-        <div class="carousel-item">
-          <img
-            src="/images/website-story/resources-overview.png"
-            class="d-block w-100"
-            alt="Resources Overview page of the website henkebyte.com"
-          />
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#website-screenshots" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#website-screenshots" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
+    <website-screenshot-gallery></website-screenshot-gallery>
   </div>
 </div>
 

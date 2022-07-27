@@ -3,6 +3,7 @@
     <ul>
       <li
         v-for="colorMode of colorModes"
+        :id="`${colorMode.name}-mode-trigger`"
         :key="colorMode.name"
         :title="`${capitalizeFirstLetter(colorMode.name)}mode`"
         :aria-label="`Change color mode to ${colorMode.name}`"
