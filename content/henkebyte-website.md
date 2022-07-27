@@ -12,11 +12,44 @@ meta-tags:
 
 <div class="row justify-content-md-center my-4">
   <div class="col-md-10 col-lg-8">
-    <img
-      src="/preview.png"
-      class="img-fluid"
-      alt="Picture of the website Henkebyte.com"
-    />
+    <div id="website-screenshots" class="carousel slide" data-bs-ride="true">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#website-screenshots" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Home page"></button>
+        <button type="button" data-bs-target="#website-screenshots" data-bs-slide-to="1" aria-label="About Me page"></button>
+        <button type="button" data-bs-target="#website-screenshots" data-bs-slide-to="2" aria-label="Resources Overview page"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img
+            src="/images/website-story/home.png"
+            class="d-block w-100"
+            alt="Home page of the website henkebyte.com"
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="/images/website-story/about-me.png"
+            class="d-block w-100"
+            alt="About Me page of the website henkebyte.com"
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="/images/website-story/resources-overview.png"
+            class="d-block w-100"
+            alt="Resources Overview page of the website henkebyte.com"
+          />
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#website-screenshots" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#website-screenshots" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -76,7 +109,7 @@ meta-tags:
   <!-- #hosting-and-deployment -->
   <h2>Hosting and Deployment</h2>
   <p>
-    The website is <strong>statically hosted</strong> in <a href="https://aws.amazon.com/s3/" target="_blank">Amazon S3</a>. To achieve better latency and reduce traffic to the S3, the website is cached in <a href="https://aws.amazon.com/cloudfront/" target="_blank">Amazon CloudFront</a>. <strong>Deployment is automated</strong> using <a href="https://github.com/features/actions" target="_blank">GitHub actions</a>. A push to the main branch triggers a Continuous Integration (linting and testing) and a Code-Quality pipeline. If these pipelines are successful, the Continuous Deployment pipeline is triggered and creates the static build of the website. It is then deployed to S3 and finally the CloudFront cache is invalidated.
+    The website is <strong>statically hosted</strong> in <a href="https://aws.amazon.com/s3/" target="_blank">Amazon S3</a>. To achieve better latency and reduce direct traffic to S3, the website is cached in <a href="https://aws.amazon.com/cloudfront/" target="_blank">Amazon CloudFront</a> and then distributed via a <strong>CDN</strong>. <strong>Deployment is automated</strong> using <a href="https://github.com/features/actions" target="_blank">GitHub actions</a>. A push to the main branch triggers a Continuous Integration (linting and testing) and a Code-Quality pipeline. If these pipelines are successful, the Continuous Deployment pipeline is triggered and creates the static build of the website. It is then deployed to S3 and finally the CloudFront cache is invalidated.
   </p>
   <!-- /#hosting-and-deployment -->
 </section>

@@ -13,10 +13,25 @@ const playwright = require('playwright')
     },
   })
 
+  const baseUrl = `http://localhost:${port}`
   try {
     const page = await context.newPage()
-    await page.goto(`http://localhost:${port}`)
-    await page.screenshot({ path: 'static/preview.png' })
+
+    const screenshotPath = async (path, filePath) => {
+      await page.goto(`${baseUrl}${path}`, {
+        waitUntil: 'networkidle',
+      })
+      await page.screenshot({ path: `static/${filePath ?? path}.png` })
+    }
+
+    await screenshotPath('/', 'preview')
+    await screenshotPath('/', 'images/website-story/home')
+    await screenshotPath('/about-me', 'images/website-story/about-me')
+    await screenshotPath(
+      '/resources-overview',
+      'images/website-story/resources-overview'
+    )
+    await page.close()
   } catch (error) {
     console.error(
       'Your Website should be running locally. You can specify the port as an argument "node generate-preview-image.js 8080"'
