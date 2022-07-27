@@ -11,10 +11,9 @@ meta-tags:
 This website itself is a project to learn and try out different tools and libraries. The code is available on <a href="https://github.com/manuelhenke/henkebyte" target="_blank">GitHub</a>.
 </the-lead>
 
-<div class="vstack gap-1 align-items-center my-4"> <website-screenshot-gallery disable-auto-play></website-screenshot-gallery> <small class="text-muted text-center" >Overview of sample pages. The screenshots also change based on the selected theme mode. The creation is automated using <a href="https://playwright.dev/" target="_blank">Playwright</a> for all routes, the available themes and the three device types (the screenshot of this page is obviously omitted due to redundancy).</small
-
-> 
-
+<div class="vstack gap-1 align-items-center my-4">
+  <website-screenshot-gallery disable-auto-play></website-screenshot-gallery>
+  <small class="text-muted text-center">Overview of sample pages. The screenshots also change based on the selected theme mode. The creation is automated using <a href="https://playwright.dev/" target="_blank">Playwright</a> for all routes, the available themes and the three device types (the screenshot of this page is obviously omitted due to redundancy).</small> 
 </div>
 
 <section id="libraries-and-frameworks">
