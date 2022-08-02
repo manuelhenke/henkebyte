@@ -1,7 +1,7 @@
 [![CI](https://github.com/manuelhenke/henkebyte/actions/workflows/ci.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/ci.yml)
 [![CD](https://github.com/manuelhenke/henkebyte/actions/workflows/cd.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/cd.yml)
 [![CodeQL](https://github.com/manuelhenke/henkebyte/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/codeql-analysis.yml)
-[![Licence](https://img.shields.io/github/license/manuelhenke/henkebyte)](./LICENSE)
+[![License](https://img.shields.io/github/license/manuelhenke/henkebyte)](./LICENSE)
 
 # HenkeByte
 
@@ -89,4 +89,4 @@ $ ln -s node_modules/bootstrap/scss ln-bootstrap-scss
 
 ## License
 
-[MIT Licence](./LICENSE)
+[MIT License](./LICENSE)
