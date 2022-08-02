@@ -6824,9 +6824,9 @@ internal-slot@^1.0.3:
     side-channel "^1.0.4"
 
 ios-calculator-for-web@^1.2.4:
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/ios-calculator-for-web/-/ios-calculator-for-web-1.2.9.tgz#88894b4be62edf2fb07c0d396425453b33b47fea"
-  integrity sha512-EuO9BVKB1zv2lY4JfSKs8R5ICRsKlwB/k9GMwVODaUCG0zy/ZMwMG6NvTjfhrpAqL6HT+MkZd3QFhZliRhrpsg==
+  version "1.2.10"
+  resolved "https://registry.yarnpkg.com/ios-calculator-for-web/-/ios-calculator-for-web-1.2.10.tgz#79652aae5eb6986794759bd097cc91370f5307af"
+  integrity sha512-ceDKLlI4shGb0PS/zX0D5cvFsRNJff2/cU4ntLydtNSpHIHiD3c4acb8BkuakUIhmqvnWsy6gLkqlvDM18D/kw==
 
 ip@^1.1.5:
   version "1.1.8"
@@ -8515,9 +8515,9 @@ min-indent@^1.0.0:
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
 minesweeper-for-web@^2.1.14:
-  version "2.1.14"
-  resolved "https://registry.yarnpkg.com/minesweeper-for-web/-/minesweeper-for-web-2.1.14.tgz#b7c89029e4a077bafe15205d3c6aea72465c0a66"
-  integrity sha512-5HRk56eTRDSE3RdpVj8ETNunnakba2dLGN7clmHqCQiu8G6czBFL5VLGy68lvTnkx4p0l92MBNu//AMwC99NWA==
+  version "2.1.15"
+  resolved "https://registry.yarnpkg.com/minesweeper-for-web/-/minesweeper-for-web-2.1.15.tgz#bb9daef37806edb262024af5f8473274b9876a22"
+  integrity sha512-2hnxwnnU4JbtvvGUzokncfOqNq/nscP18oohly65k3p7hNJ1wxbyGvDe5P+TTswZ6ur8y7l8JysbtWN64VnpNA==
   dependencies:
     lit "^2.2.0"
 
