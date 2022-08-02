@@ -1,6 +1,5 @@
 name: "Continuous Deployment"
 
-# Only trigger, when the CI and CodeQL workflow succeeded
 on:
   workflow_run:
     workflows: ["Continuous Integration"]
