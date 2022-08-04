@@ -24,6 +24,13 @@ $ yarn start
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
+### Develop
+
+```bash
+# create symbolic link of bootstrap scss
+$ ln -s node_modules/bootstrap/scss ln-bootstrap-scss
+```
+
 ## Special Directories
 
 ### `assets`
@@ -81,11 +88,6 @@ More information about the usage of this directory in [the documentation](https:
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
-
-```bash
-# create symbolic link of bootstrap scss
-$ ln -s node_modules/bootstrap/scss ln-bootstrap-scss
-```
 
 ## License
 
