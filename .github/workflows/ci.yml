@@ -3,10 +3,22 @@ name: "Continuous Integration"
 on:
   push:
     branches: ["main"]
+    paths-ignore:
+      - .forestry/**'
+      - .husky/**'
+      - '.env.example'
+      - '.gitignore'
+      - 'LICENSE'
+      - 'README.md'
   pull_request:
     branches: ["main"]
-
-  workflow_dispatch:
+    paths-ignore:
+      - .forestry/**'
+      - .husky/**'
+      - '.env.example'
+      - '.gitignore'
+      - 'LICENSE'
+      - 'README.md'
 
 env:
   TARGET_FOLDER: ./dist
