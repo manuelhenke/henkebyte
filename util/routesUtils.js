@@ -25,6 +25,7 @@ export function mapRoutes({ routes, options }) {
       const stats = statSync(path)
       lastmod = stats.mtime
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error)
     }
     mappedRoutes.push({
