@@ -5,7 +5,7 @@
 
 # HenkeByte
 
-Website build with NuxtJS and hosted on [henkebyte.com](https://henkebyte.com). asdasf
+Website build with NuxtJS and hosted on [henkebyte.com](https://henkebyte.com).
 
 ## Build Setup
 
