@@ -4,7 +4,7 @@
     <WelcomeCard>
       <template #title>
         <h1 class="display-5 mb-0">
-          Welcome to <span class="visually-hidden">HenkeByte</span>
+          Welcomee to <span class="visually-hidden">HenkeByte</span>
         </h1>
       </template>
 
