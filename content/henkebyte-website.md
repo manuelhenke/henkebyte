@@ -5,6 +5,7 @@ meta-tags:
 - key: description
   value: Description to this project website including used (dev-)tools, hosting,
     deployment and content management.
+badge_text: New
 
 ---
 <the-lead full-width>
