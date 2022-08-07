@@ -36,7 +36,8 @@ fields:
   config:
     labelField: key
 pages:
+- content/henkebyte-website.md
 - content/ios-calculator.md
 - content/minesweeper.md
 - content/resources-overview.md
-- content/henkebyte-website.md
+- content/test.md
