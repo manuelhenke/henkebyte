@@ -1,7 +1,7 @@
 <template>
   <div class="ability-item">
     <div
-      v-if="Array.isArray(entry.libraries)"
+      v-if="hasLibraries"
       class="mb-1 text-primary skill-expand-trigger"
       data-bs-toggle="collapse"
       :data-bs-target="`#${librariesHtmlId}`"
@@ -26,17 +26,15 @@
       </span>
     </div>
 
-    <div
-      v-if="Array.isArray(entry.libraries)"
-      :id="librariesHtmlId"
-      class="libraries collapse mt-2"
-    >
+    <div v-if="hasLibraries" :id="librariesHtmlId" class="libraries collapse mt-2">
       <AbilityItem v-for="library of entry.libraries" :key="library.name" :entry="library" />
     </div>
   </div>
 </template>
 
 <script>
+import { isArray, isEmpty } from 'lodash-es';
+
 export default {
   name: 'AbilityItem',
   props: {
@@ -49,6 +47,9 @@ export default {
     librariesHtmlId() {
       // eslint-disable-next-line no-underscore-dangle
       return `libraries-${this._uid}`;
+    },
+    hasLibraries() {
+      return isArray(this.entry.libraries) && !isEmpty(this.entry.libraries);
     },
   },
 };
