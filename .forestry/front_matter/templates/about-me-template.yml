@@ -7,149 +7,25 @@ fields:
   config: {}
   template: page
   label: Page
-- type: field_group_list
+- type: include
+  template: timeline-items
   name: education_timeline_items
   label: Education Timeline Items
-  fields:
-  - type: number
-    name: From
-    label: from
-    config:
-      required: true
-  - type: text
-    name: to
-    label: To
-    default: today
-  - type: text
-    name: role
-    label: Role
-    config:
-      required: true
-  - type: text
-    name: place
-    label: Place
-    config:
-      required: true
-  - type: text
-    name: description
-    label: Description
-    config:
-      required: true
-  config:
-    labelField: role
-- type: field_group_list
+- type: include
+  template: timeline-items
   name: experience_timeline_items
   label: Experience Timeline Items
-  fields:
-  - type: number
-    name: from
-    label: From
-    config:
-      required: true
-  - type: text
-    name: to
-    label: To
-    default: today
-  - type: text
-    name: role
-    label: Role
-    config:
-      required: true
-  - type: text
-    name: place
-    label: Place
-    config:
-      required: true
-  - type: textarea
-    name: description
-    label: Description
-    config:
-      required: true
-  config:
-    labelField: place
-- type: field_group_list
+- type: include
+  template: skill-items
   name: skills
   label: Skills
-  fields:
-  - type: text
-    name: name
-    label: name
-  - type: number
-    name: stars
-    label: stars
-  - type: field_group_list
-    name: libraries
-    label: libraries
-    fields:
-    - type: text
-      name: name
-      label: name
-    - type: number
-      name: stars
-      label: stars
-    - type: field_group_list
-      name: libraries
-      label: libraries
-      fields:
-      - type: text
-        name: name
-        label: name
-      - type: number
-        name: stars
-        label: stars
-      config:
-        labelField: name
-    config:
-      labelField: name
-  config:
-    labelField: name
-- type: field_group_list
+- type: include
+  template: skill-items
   name: languages
   label: Languages
-  fields:
-  - type: text
-    name: name
-    label: name
-  - type: number
-    name: stars
-    label: stars
-  config:
-    labelField: name
-- type: field_group_list
+- type: include
+  template: skill-items
   name: tools
   label: Tools
-  fields:
-  - type: text
-    name: name
-    label: name
-  - type: number
-    name: stars
-    label: stars
-  - type: field_group_list
-    name: libraries
-    label: libraries
-    fields:
-    - type: text
-      name: name
-      label: name
-    - type: number
-      name: stars
-      label: stars
-    - type: field_group_list
-      name: libraries
-      label: libraries
-      fields:
-      - type: text
-        name: name
-        label: name
-      - type: number
-        name: stars
-        label: stars
-      config:
-        labelField: name
-    config:
-      labelField: name
-  config:
-    labelField: name
 pages:
 - content/about-me.md

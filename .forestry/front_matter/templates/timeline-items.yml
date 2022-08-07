@@ -1,31 +1,37 @@
 ---
-label: Timeline Item
+label: Timeline Items
 hide_body: true
 display_field: place
 fields:
-- type: text
-  name: from
-  label: From
+  - type: field_group_list
+    name: timeline_items
+    label: Timeline Items
+    fields:
+    - type: text
+      name: from
+      label: From
+      config:
+        required: true
+      description: eg. "2018" or "Aug. '18"
+    - type: text
+      name: to
+      label: To
+      default: today
+      description: eg. "2018", "Aug. '18" or "today"
+    - type: text
+      name: role
+      label: Role
+      config:
+        required: true
+    - type: text
+      name: place
+      label: Place
+      config:
+        required: true
+    - type: textarea
+      name: description
+      label: Description
+      config:
+        required: true
   config:
-    required: true
-  description: eg. "2018" or "Aug. '18"
-- type: text
-  name: to
-  label: To
-  default: today
-  description: eg. "2018", "Aug. '18" or "today"
-- type: text
-  name: heading
-  label: Heading
-  config:
-    required: true
-- type: text
-  name: subheading
-  label: Subheading
-  config:
-    required: true
-- type: textarea
-  name: paragraph
-  label: Paragraph
-  config:
-    required: true
+    labelField: role
