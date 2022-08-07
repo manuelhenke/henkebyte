@@ -6,6 +6,8 @@ fields:
   - type: field_group_list
     name: skill_items
     label: Skill Items
+    config:
+      labelField: name
     fields:
     - type: text
       name: name
@@ -37,5 +39,3 @@ fields:
           labelField: name
       config:
         labelField: name
-    config:
-      labelField: name

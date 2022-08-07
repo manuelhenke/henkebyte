@@ -6,6 +6,8 @@ fields:
   - type: field_group_list
     name: timeline_items
     label: Timeline Items
+    config:
+      labelField: role
     fields:
     - type: text
       name: from
@@ -32,6 +34,4 @@ fields:
       name: description
       label: Description
       config:
-        required: true
-  config:
-    labelField: role
+          required: true
