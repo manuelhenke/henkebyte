@@ -1,47 +1,22 @@
 ---
 label: About Me Template
 hide_body: false
+display_field: title
 fields:
 - type: include
   template: page
+  name: page
+  label: Page
 - type: field_group_list
   name: education_timeline_items
   label: Education Timeline Items
   config:
     labelField: role
   fields:
-  - type: include
+  - name: timeline_item
+    type: include
+    config: {}
     template: timeline-item
-- type: field_group_list
-  name: experience_timeline_items
-  label: Experience Timeline Items
-  config:
-    labelField: role
-  fields:
-  - type: include
-    template: timeline-item
-- type: field_group_list
-  name: skills
-  label: Skills
-  config:
-    labelField: name
-  fields:
-  - type: include
-    template: skill-item
-- type: field_group_list
-  name: languages
-  config:
-    labelField: name
-  fields:
-  - type: include
-    template: skill-item
-- type: field_group_list
-  name: tools
-  label: Tools
-  config:
-    labelField: name
-  fields:
-  - type: include
-    template: skill-item
+    label: Timeline Item
 pages:
 - content/about-me.md

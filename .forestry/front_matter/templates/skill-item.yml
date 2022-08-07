@@ -3,6 +3,16 @@ label: Skill Item
 hide_body: true
 display_field: name
 fields:
+- type: text
+  name: name
+  label: name
+- type: number
+  name: stars
+  label: stars
+- type: field_group_list
+  name: libraries
+  label: libraries
+  fields:
   - type: text
     name: name
     label: name
@@ -19,17 +29,7 @@ fields:
     - type: number
       name: stars
       label: stars
-    - type: field_group_list
-      name: libraries
-      label: libraries
-      fields:
-      - type: text
-        name: name
-        label: name
-      - type: number
-        name: stars
-        label: stars
-      config:
-        labelField: name
     config:
       labelField: name
+  config:
+    labelField: name
