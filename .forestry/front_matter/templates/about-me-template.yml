@@ -27,6 +27,35 @@ fields:
     type: include
     template: timeline-item
     label: Experience
+- type: field_group_list
+  name: skills
+  label: Skills
+  config:
+    labelField: name
+  fields:
+  - name: skill_item
+    type: include
+    template: skill-item
+    label: Skill
+- type: field_group_list
+  name: lanuages
+  label: Languages
+  config:
+    labelField: name
+  fields:
+  - name: skill_item
+    type: include
+    template: skill-item
+    label: Language
+- type: field_group_list
+  name: tools
+  label: Tools
+  config:
+    labelField: name
+  fields:
+  - name: skill_item
+    type: include
+    template: skill-item
+    label: Tool
 pages:
 - content/about-me.md
-- content/bla.md
