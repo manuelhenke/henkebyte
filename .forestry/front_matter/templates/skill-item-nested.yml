@@ -1,0 +1,29 @@
+---
+label: Skill Item
+hide_body: true
+display_field: name
+fields:
+- name: skill_item
+  type: include
+  template: skill-item
+  label: Skill
+- type: field_group_list
+  name: libraries
+  label: Libraries
+  config:
+    labelField: name
+  fields:
+  - name: skill_item
+    type: include
+    template: skill-item
+    label: Skill
+  - type: field_group_list
+    name: libraries
+    label: Libraries
+    config:
+      labelField: name
+    fields:
+    - name: skill_item
+      type: include
+      template: skill-item
+      label: Skill

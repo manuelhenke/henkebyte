@@ -35,7 +35,7 @@ fields:
   fields:
   - name: skill_item
     type: include
-    template: skill-item
+    template: skill-item-nested
     label: Skill
 - type: field_group_list
   name: lanuages
@@ -45,7 +45,7 @@ fields:
   fields:
   - name: skill_item
     type: include
-    template: skill-item
+    template: skill-item-nested
     label: Language
 - type: field_group_list
   name: tools
@@ -55,7 +55,7 @@ fields:
   fields:
   - name: skill_item
     type: include
-    template: skill-item
+    template: skill-item-nested
     label: Tool
 pages:
 - content/about-me.md
