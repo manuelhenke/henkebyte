@@ -3,8 +3,9 @@
     <ul>
       <li
         v-for="colorMode of colorModes"
+        :id="`${colorMode.name}-mode-trigger`"
         :key="colorMode.name"
-        :title="`${capitalizeFirstLetter(colorMode.name)}mode`"
+        :title="`Change theme to ${colorMode.name}mode`"
         :aria-label="`Change color mode to ${colorMode.name}`"
         :class="{
           preferred:
@@ -28,39 +29,35 @@
     </p>
 
     <div
-      aria-live="polite"
-      aria-atomic="true"
-      class="position-fixed top-0 start-50 translate-middle-x"
+      class="toast-container position-fixed top-0 start-50 translate-middle-x pt-3 pt-sm-4 pt-lg-5"
     >
-      <div class="toast-container pt-3 pt-sm-4 pt-lg-5">
-        <div
-          v-for="colorMode of colorModes"
-          :id="`${colorMode.name}-toast`"
-          :key="colorMode.name"
-          class="toast"
-          role="alert"
-          aria-live="status"
-          aria-atomic="true"
-        >
-          <div class="toast-header">
-            <img
-              src="~/assets/images/henkebyte-logo.png"
-              class="rounded me-2"
-              width="25"
-              alt="Logo of henkebyte"
-            />
-            <strong class="me-auto">HenkeByte</strong>
-            <small class="text-muted">just now</small>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="toast"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="toast-body">
-            Theme mode changed to: {{ capitalizeFirstLetter(colorMode.name) }}
-          </div>
+      <div
+        v-for="colorMode of colorModes"
+        :id="`${colorMode.name}-toast`"
+        :key="colorMode.name"
+        class="toast"
+        role="alert"
+        aria-live="status"
+        aria-atomic="true"
+      >
+        <div class="toast-header">
+          <img
+            src="~/assets/images/henkebyte-icon.png"
+            class="rounded me-2"
+            width="25"
+            alt="Logo of henkebyte"
+          />
+          <strong class="me-auto">HenkeByte</strong>
+          <small class="text-muted">just now</small>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="toast-body">
+          Theme mode changed to: {{ capitalize(colorMode.name) }}
         </div>
       </div>
     </div>
@@ -69,7 +66,7 @@
 
 <script>
 import { Toast } from 'bootstrap'
-import { capitalizeFirstLetter } from '~/util'
+import { capitalize } from 'lodash'
 
 export default {
   name: 'ColorModePicker',
@@ -90,7 +87,7 @@ export default {
     lastActiveToast: null,
   }),
   methods: {
-    capitalizeFirstLetter,
+    capitalize,
     changeColorMode(selectedColorModeName) {
       if (this.$colorMode.preference !== selectedColorModeName) {
         // Set color mode globally

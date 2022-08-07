@@ -18,9 +18,6 @@ front_matter_path: ''
 use_front_matter_path: false
 file_template: ":filename:"
 build:
-  preview_env:
-  - CTF_SPACE_ID=s54fg9ycsdnw
-  - CTF_CDA_ACCESS_TOKEN=3rczcfkfA_SsAFZ7Z1KNF8P0vRJK8CiH0NVpVCmYTo0
   preview_output_directory: dist
   install_dependencies_command: yarn install --frozen-lockfile
   preview_docker_image: forestryio/node:16

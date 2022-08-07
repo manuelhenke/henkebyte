@@ -1,4 +1,21 @@
+import { routes } from './routes'
+
 export const state = () => ({
+  navigation: [
+    routes.HOME,
+    {
+      title: 'General',
+      links: [routes.ABOUT_ME, routes.RESOURCES_OVERVIEW],
+    },
+    {
+      title: 'Projects',
+      links: [
+        routes.HENKEBYTE_WEBSITE,
+        routes.IOS_CALCULATOR,
+        routes.MINESWEEPER,
+      ],
+    },
+  ],
   contactOptions: [
     {
       text: 'LinkedIn',

@@ -1,7 +1,7 @@
 ---
 title: Minesweeper
-badge_text: New
-meta_tags:
+badge-text: ''
+meta-tags:
 - key: description
   content: Showcase of the implementation of the project "minesweeper-for-web" which
     is available at GitHub and npm.

@@ -1,7 +1,7 @@
 ---
 title: iOS-Calculator
-badge_text: New
-meta_tags:
+badge-text: ''
+meta-tags:
 - key: description
   content: Showcase of the implementation of the project "ios-calculator-for-web" which
     is available at GitHub and npm.

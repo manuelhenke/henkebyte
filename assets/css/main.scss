@@ -3,8 +3,7 @@
 @import '~bootstrap/scss/bootstrap-reboot';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
-html,
-body {
+html {
   scroll-behavior: smooth;
   max-width: 100vw;
   overflow-x: hidden;
@@ -45,4 +44,19 @@ section:not(.no-spacing-below) + section {
       margin-top: $space;
     }
   }
+}
+
+img {
+  // Fix blurry images: https://tutorialsclass.com/code/css-code-to-fix-blurry-image-when-scaling-down/
+  image-rendering: -moz-crisp-edges; /* Firefox */
+  image-rendering: -o-crisp-edges; /* Opera */
+  image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -ms-transform: translateZ(0); /* IE 9 */
+  -webkit-transform: translateZ(0); /* Chrome, Safari, Opera */
+  transform: translateZ(0);
 }

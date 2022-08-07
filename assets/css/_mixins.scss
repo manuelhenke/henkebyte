@@ -4,12 +4,11 @@
   }
 }
 
-@mixin stretch-main() {
-  min-height: 100vh;
+@mixin stretch($selector: main) {
   display: flex;
   flex-direction: column;
 
-  > main {
+  > #{$selector} {
     flex: 1;
   }
 }

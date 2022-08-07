@@ -23,9 +23,9 @@
           </h2>
           <ul>
             <li v-for="link in navElement.links" :key="link.to">
-              <router-link class="link-primary fs-5" :to="link.to">{{
+              <nuxt-link class="link-primary fs-5" :to="link.to">{{
                 link.name
-              }}</router-link>
+              }}</nuxt-link>
             </li>
           </ul>
         </div>
@@ -39,36 +39,13 @@
 export default {
   name: 'IndexPage',
   layout: 'center-layout',
-  data: () => ({
-    navigation: [
-      {
-        title: 'General',
-        links: [
-          {
-            to: 'about-me',
-            name: 'About Me',
-          },
-          {
-            to: 'resources-overview',
-            name: 'Resources Overview',
-          },
-        ],
-      },
-      {
-        title: 'Projects',
-        links: [
-          {
-            to: 'ios-calculator',
-            name: 'iOS-Calculator',
-          },
-          {
-            to: 'minesweeper',
-            name: 'Minesweeper',
-          },
-        ],
-      },
-    ],
-  }),
+  computed: {
+    navigation() {
+      return this.$store.state.navigation.filter(
+        (navElement) => navElement.links
+      )
+    },
+  },
 }
 </script>
 

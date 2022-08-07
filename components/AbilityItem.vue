@@ -7,6 +7,8 @@
       :data-bs-target="`#${librariesHtmlId}`"
       aria-expanded="false"
       :aria-controls="librariesHtmlId"
+      role="button"
+      title="Show sub-abilities"
     >
       <h4 class="d-inline fs-6 mb-0">{{ entry.name }}</h4>
       <i class="bi bi-chevron-expand"></i>

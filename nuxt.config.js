@@ -1,4 +1,4 @@
-import { getRoutes, filterRoutes } from './util/sitemap'
+import { getRoutes, mapRoutes } from './util/routesUtils'
 
 const buildDescription = (target) =>
   `A showcase ${target} for different open source web projects including an iOS-Calculator and Minesweeper.`
@@ -57,7 +57,31 @@ export default {
         content: '#000000',
       }, */
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      {
+        rel: 'apple-touch-icon',
+        sizes: '120x120',
+        href: '/apple-touch-icon.png?v=1',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/favicon-32x32.png?v=1',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/favicon-16x16.png?v=1',
+      },
+      {
+        rel: 'mask-icon',
+        href: '/safari-pinned-tab.svg?v=1',
+        color: '#55df82',
+      },
+      { rel: 'shortcut icon', href: '/favicon.ico?v=1' },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -149,6 +173,8 @@ export default {
   router: {
     trailingSlash: false,
     middleware: 'trailingSlashRedirect',
+    linkActiveClass: 'child-active',
+    linkExactActiveClass: 'active',
   },
 
   // Sitemap Configuration: https://sitemap.nuxtjs.org/guide/configuration
@@ -157,7 +183,7 @@ export default {
     gzip: true,
     exclude: ['/secret', '/admin/**', '/_nuxt/**'],
     routes: getRoutes,
-    filter: filterRoutes,
+    filter: mapRoutes,
   },
 
   // Robots Configuration: https://github.com/nuxt-community/robots-module
@@ -168,6 +194,9 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['@nuxtjs/color-mode'],
+    postcss: {
+      plugins: [],
+    },
   },
 
   // Loading Configuration: https://nuxtjs.org/docs/features/loading/

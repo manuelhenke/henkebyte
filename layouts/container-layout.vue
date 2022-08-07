@@ -30,11 +30,8 @@ export default {
 
 .layout-root {
   @include layout-root;
-
   .container {
-    @include stretch-main;
-    @include padding-main-y;
-
+    @include stretch;
     .footer {
       margin-top: map-get($spacers, 5);
     }

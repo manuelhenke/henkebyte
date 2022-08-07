@@ -99,7 +99,7 @@
         </button>
       </div>
       <div class="row">
-        <div class="col">
+        <div class="col-12 col-md-8">
           <table class="table table-striped">
             <thead>
               <tr>
@@ -129,6 +129,7 @@
                   <button
                     class="btn btn-link btn-icon btn-lg"
                     type="button"
+                    title="Remove entry"
                     @click="removeScoreboardEntry(game.id)"
                   >
                     <i class="bi bi-trash-fill"></i>
@@ -156,7 +157,7 @@
             </tfoot>
           </table>
         </div>
-        <div class="col col-md-4">
+        <div class="col-12 col-md-4">
           <canvas ref="game-history-chart"></canvas>
         </div>
       </div>
@@ -359,9 +360,7 @@ export default {
     this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration)
 
     this.fireworks = new Fireworks(this.$refs.firework, {
-      particles: 200,
-      explosion: 10,
-      sound: false,
+      acceleration: 1.01,
     })
 
     liveQuery(() => db.games.toArray()).subscribe((games) => {
@@ -491,14 +490,10 @@ $border-width: map-get($border-widths, 4);
 }
 
 .firework-container {
-  position: absolute;
+  position: fixed;
   inset: 0;
   pointer-events: none;
-
-  > * {
-    height: 100%;
-    width: 100%;
-  }
+  z-index: $zindex-fixed;
 }
 
 .overlay {
