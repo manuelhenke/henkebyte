@@ -85,6 +85,7 @@ const themeModes = ['light', 'dark', 'sepia'];
             page.waitForLoadState('load'),
             page.waitForLoadState('domcontentloaded'),
             page.waitForSelector('img'),
+            page.waitForTimeout(200), // TODO: replace with better selector
           ];
           if (route.to === 'resources-overview') {
             waitForPromises.push(page.waitForEvent('layoutComplete'));
