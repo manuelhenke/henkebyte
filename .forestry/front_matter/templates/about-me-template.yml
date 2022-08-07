@@ -9,14 +9,23 @@ fields:
   label: Page
 - type: field_group_list
   name: education_timeline_items
-  label: Education Timeline Items
+  label: Educations
   config:
     labelField: role
   fields:
   - name: timeline_item
     type: include
-    config: {}
     template: timeline-item
-    label: Timeline Item
+    label: Education
+- type: field_group_list
+  name: experience_timeline_items
+  label: Experiences
+  config:
+    labelField: role
+  fields:
+  - name: timeline_item
+    type: include
+    template: timeline-item
+    label: Experience
 pages:
 - content/about-me.md
