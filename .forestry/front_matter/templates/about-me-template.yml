@@ -38,7 +38,7 @@ fields:
     template: skill-item-nested
     label: Skill
 - type: field_group_list
-  name: lanuages
+  name: languages
   label: Languages
   config:
     labelField: name

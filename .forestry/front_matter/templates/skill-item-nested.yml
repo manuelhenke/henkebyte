@@ -12,7 +12,6 @@ fields:
   label: Libraries
   config:
     labelField: name
-    min: 
   fields:
   - name: skill_item
     type: include

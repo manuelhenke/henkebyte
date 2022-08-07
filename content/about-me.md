@@ -38,89 +38,89 @@ experience_timeline_items:
     and jQuery.
 skills:
 - name: JavaScript
-  stars: "5"
+  stars: 5
   libraries:
   - name: Vue.js
-    stars: "5"
+    stars: 5
     libraries:
     - name: Nuxt.js
-      stars: '4'
+      stars: 4
   - name: Node.js
-    stars: "5"
+    stars: 5
   - name: Webpack
-    stars: "4"
+    stars: 4
   - name: jQuery
-    stars: "4"
+    stars: 4
   - name: Storybook
-    stars: "4"
+    stars: 4
   - name: WebComponents
-    stars: "4"
+    stars: 4
   - name: Electron
-    stars: "3"
+    stars: 3
   - name: TypeScript
-    stars: "3"
+    stars: 3
   - name: Jest
-    stars: "3"
+    stars: 3
   - name: React
-    stars: "4"
+    stars: 4
   - name: Angular
-    stars: "1"
+    stars: 1
 - name: CSS
-  stars: "5"
+  stars: 5
   libraries:
   - name: SCSS
-    stars: "5"
+    stars: 5
   - name: Bootstrap
-    stars: "5"
+    stars: 5
 - name: HTML
-  stars: "5"
+  stars: 5
 - name: Java
-  stars: "4"
+  stars: 4
   libraries:
   - name: Spring
-    stars: "4"
+    stars: 4
   - name: Maven
-    stars: "4"
+    stars: 4
 - name: Swift
-  stars: "3"
+  stars: 3
   libraries:
   - name: SwiftUI
-    stars: "4"
+    stars: 4
   - name: ARKit
-    stars: "2"
+    stars: 2
 - name: PHP
-  stars: "3"
+  stars: 3
   libraries:
   - name: Wordpress
-    stars: "4"
+    stars: 4
 - name: SQL
-  stars: "3"
+  stars: 3
 - name: Python
-  stars: "2"
+  stars: 2
 - name: R
-  stars: "1"
+  stars: 1
 - name: Go
-  stars: "1"
+  stars: 1
 languages:
 - name: German
-  stars: "5"
+  stars: 5
 - name: English
-  stars: "4"
+  stars: 4
 - name: Spanish
-  stars: "1"
+  stars: 1
 - name: Binary
-  stars: "0"
+  stars: 0
 tools:
 - name: Git
-  stars: "5"
+  stars: 5
 - name: VSCode
-  stars: "5"
+  stars: 5
 - name: IntelliJ
-  stars: "3"
+  stars: 3
 - name: Jira
-  stars: "4"
+  stars: 4
 - name: AWS
-  stars: "4"
+  stars: 4
   libraries:
   - name: Route 53
     stars: 5
@@ -157,20 +157,20 @@ tools:
   - name: EKS
     stars: 2
 - name: Scrum
-  stars: "4"
+  stars: 4
 - name: DevOps
-  stars: "4"
+  stars: 4
 - name: Confluence
-  stars: "4"
+  stars: 4
 - name: Docker
-  stars: "3"
+  stars: 3
   libraries:
   - name: Docker Compose
     stars: 5
 - name: Postman
-  stars: "3"
+  stars: 3
 - name: Kubernetes
-  stars: "2"
+  stars: 2
 
 ---
 <section id="introduction">
