@@ -47,130 +47,183 @@ skills:
       stars: 4
   - name: Node.js
     stars: 5
+    libraries: []
   - name: Webpack
     stars: 4
+    libraries: []
   - name: jQuery
     stars: 4
+    libraries: []
   - name: Storybook
     stars: 4
+    libraries: []
   - name: WebComponents
     stars: 4
+    libraries: []
   - name: Electron
     stars: 3
+    libraries: []
   - name: TypeScript
     stars: 3
+    libraries: []
   - name: Jest
     stars: 3
+    libraries: []
   - name: React
     stars: 4
+    libraries: []
   - name: Angular
     stars: 1
+    libraries: []
 - name: CSS
   stars: 5
   libraries:
   - name: SCSS
     stars: 5
+    libraries: []
   - name: Bootstrap
     stars: 5
+    libraries: []
 - name: HTML
   stars: 5
+  libraries: []
 - name: Java
   stars: 4
   libraries:
   - name: Spring
     stars: 4
+    libraries: []
   - name: Maven
     stars: 4
+    libraries: []
 - name: Swift
   stars: 3
   libraries:
   - name: SwiftUI
     stars: 4
+    libraries: []
   - name: ARKit
     stars: 2
+    libraries: []
 - name: PHP
   stars: 3
   libraries:
   - name: Wordpress
     stars: 4
+    libraries: []
 - name: SQL
   stars: 3
+  libraries: []
 - name: Python
   stars: 2
+  libraries: []
 - name: R
   stars: 1
+  libraries: []
 - name: Go
   stars: 1
+  libraries: []
 languages:
 - name: German
   stars: 5
+  libraries: []
 - name: English
   stars: 4
+  libraries: []
 - name: Spanish
   stars: 1
+  libraries: []
 - name: Binary
-  stars: 0
+  stars: '0'
+  libraries: []
 tools:
 - name: Git
   stars: 5
+  libraries: []
 - name: VSCode
   stars: 5
+  libraries: []
 - name: IntelliJ
   stars: 3
+  libraries: []
 - name: Jira
   stars: 4
+  libraries: []
 - name: AWS
   stars: 4
   libraries:
   - name: Route 53
     stars: 5
+    libraries: []
   - name: IAM
     stars: 5
+    libraries: []
   - name: EFS
     stars: 5
+    libraries: []
   - name: Rekognition
     stars: 5
+    libraries: []
   - name: S3
     stars: 5
+    libraries: []
   - name: CloudFront
     stars: 5
+    libraries: []
   - name: Lambda
     stars: 4
+    libraries: []
   - name: EC2
     stars: 4
+    libraries: []
   - name: RDS
     stars: 4
+    libraries: []
   - name: CloudFormation
     stars: 4
+    libraries: []
   - name: CodePipeline
     stars: 4
+    libraries: []
   - name: API Gateway
     stars: 4
+    libraries: []
   - name: SNS
     stars: 3
+    libraries: []
   - name: Amazon Pinpoint
     stars: 3
+    libraries: []
   - name: SES
     stars: 3
+    libraries: []
   - name: SQS
     stars: 2
+    libraries: []
   - name: EKS
     stars: 2
+    libraries: []
 - name: Scrum
   stars: 4
+  libraries: []
 - name: DevOps
   stars: 4
+  libraries: []
 - name: Confluence
   stars: 4
+  libraries: []
 - name: Docker
   stars: 3
   libraries:
   - name: Docker Compose
     stars: 5
+    libraries: []
 - name: Postman
   stars: 3
+  libraries: []
 - name: Kubernetes
   stars: 2
+  libraries: []
 
 ---
 <section id="introduction">
