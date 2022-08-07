@@ -1,7 +1,7 @@
-import { getRoutes, mapRoutes } from './util/routesUtils'
+import { getRoutes, mapRoutes } from './util/routesUtils';
 
 const buildDescription = (target) =>
-  `A showcase ${target} for different open source web projects including an iOS-Calculator and Minesweeper.`
+  `A showcase ${target} for different open source web projects including an iOS-Calculator and Minesweeper.`;
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -100,6 +100,10 @@ export default {
     },
     {
       src: '@/plugins/contentful.js',
+      mode: 'client',
+    },
+    {
+      src: '@//plugins/vuex-persist.js',
       mode: 'client',
     },
   ],
@@ -208,4 +212,4 @@ export default {
   colorMode: {
     fallback: 'light',
   },
-}
+};

@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+git pull
+nvm use
+yarn install --frozen-lockfile

@@ -2,14 +2,19 @@
   <div class="minesweeper">
     <div class="d-grid gap-2 col-12 col-md-6 col-lg-4 mx-auto my-3 text-center">
       <select
-        v-model="currentGamemode"
+        v-model="currentGameModeName"
         class="form-select text-center"
         name="gamemode"
-        @change="onChangedGamemode"
+        @change="onChangedGameMode"
       >
-        <option value="easy" selected>Easy - 9x9 / 10 Mines</option>
-        <option value="normal">Normal - 16x16 / 40 Mines</option>
-        <option value="hard">Hard - 16x30 / 99 Mines</option>
+        <option
+          v-for="gameMode of gameModesSelectionOptions"
+          :key="gameMode.value"
+          :value="gameMode.value"
+          :selected="gameMode.selected"
+        >
+          {{ gameMode.text }}
+        </option>
       </select>
       <button
         id="show-btn"
@@ -34,11 +39,7 @@
         @game-lost="onGameLost"
       ></minesweeper-game>
       <div v-if="!isEnded && !isStopwatchRunning" class="overlay">
-        <button
-          class="btn btn-link btn-icon btn-lg"
-          type="button"
-          @click="toggleStopWatch"
-        >
+        <button class="btn btn-link btn-icon btn-lg" type="button" @click="toggleStopWatch">
           <i class="bi bi-play-circle-fill"></i>
         </button>
       </div>
@@ -63,30 +64,28 @@
           <i class="bi bi-pause-circle-fill"></i>
         </button>
       </div>
-      <span class="badge rounded-pill bg-danger"
-        ><span id="bomb-counter"></span> Mines left</span
-      >
+      <span class="badge rounded-pill bg-danger"><span id="bomb-counter"></span> Mines left</span>
     </div>
 
     <div class="alert alert-info d-flex align-items-center" role="alert">
       <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
 
       <div v-if="$device.isWindows && !$device.isMobile">
-        To place a flag just hold <kbd>Ctrl</kbd> or <kbd>Alt</kbd> while
-        clicking on a field. Or just hold a field to place a flag.
+        To place a flag just hold <kbd>Ctrl</kbd> or <kbd>Alt</kbd> while clicking on a field. Or
+        just hold a field to place a flag.
       </div>
 
       <div v-else-if="$device.isMacOS && !$device.isMobile">
         To place a flag just hold
         <kbd>Cmd <i class="bi bi-command"></i></kbd> or
-        <kbd>Opt <i class="bi bi-option"></i></kbd> while clicking on a field.
-        Or just hold a field to place a flag.
+        <kbd>Opt <i class="bi bi-option"></i></kbd> while clicking on a field. Or just hold a field
+        to place a flag.
       </div>
 
       <div v-else>Just hold a field to place a flag.</div>
     </div>
 
-    <section v-show="currentGamemodeScoreboardEntries.length">
+    <section v-show="currentGameModeScoreboardEntries.length">
       <div class="d-flex gap-2 align-items-center justify-content-between">
         <h2>Personal Scoreboard</h2>
         <button
@@ -111,7 +110,7 @@
             </thead>
             <tbody>
               <tr
-                v-for="(game, index) in currentGamemodeScoreboardEntries.slice(
+                v-for="(game, index) in currentGameModeScoreboardEntries.slice(
                   0,
                   maxScoreboardGamesVisible
                 )"
@@ -136,21 +135,14 @@
                   </button>
                 </td>
               </tr>
-              <tr
-                v-if="
-                  currentGamemodeScoreboardEntries.length >
-                  maxScoreboardGamesVisible
-                "
-              >
+              <tr v-if="currentGameModeScoreboardEntries.length > maxScoreboardGamesVisible">
                 <th colspan="4" scope="row">...</th>
               </tr>
             </tbody>
             <tfoot>
               <tr>
                 <th scope="row">Avg.</th>
-                <td>
-                  ~<TimeString :milliseconds="currentGamemodeAverageDuration" />
-                </td>
+                <td>~<TimeString :milliseconds="currentGameModeAverageDuration" /></td>
                 <td></td>
                 <td></td>
               </tr>
@@ -182,15 +174,10 @@
             ></button>
           </div>
           <div class="modal-body">
-            Are you sure, that you want to restart the game? Any Progress will
-            be lost.
+            Are you sure, that you want to restart the game? Any Progress will be lost.
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-outline-dark"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
               Cancel
             </button>
             <button
@@ -216,9 +203,7 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 id="resetGameHistoryModalLabel" class="modal-title">
-              Reset game history
-            </h5>
+            <h5 id="resetGameHistoryModalLabel" class="modal-title">Reset game history</h5>
             <button
               type="button"
               class="btn-close"
@@ -227,15 +212,11 @@
             ></button>
           </div>
           <div class="modal-body">
-            Are you sure, that you want to reset the entire history (including
-            every gamemode)? This action is irreversible.
+            Are you sure, that you want to reset the entire history (including every game mode)?
+            This action is irreversible.
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-outline-dark"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
               Cancel
             </button>
             <button
@@ -256,70 +237,113 @@
 </template>
 
 <script>
-import { Fireworks } from 'fireworks-js'
-import { liveQuery } from 'dexie'
-import {
-  Chart,
-  ArcElement,
-  DoughnutController,
-  Legend,
-  Title,
-  Tooltip,
-} from 'chart.js'
-import { db } from '~/middleware/db'
-import { timestampToDateString } from '~/util'
-import 'minesweeper-for-web'
+import { capitalize, find, lowerCase, map } from 'lodash-es';
+import { Fireworks } from 'fireworks-js';
+import { liveQuery } from 'dexie';
+import { Chart, ArcElement, DoughnutController, Legend, Title, Tooltip } from 'chart.js';
+import { db } from '~/middleware/db';
+import { timestampToDateString } from '~/util';
+import 'minesweeper-for-web';
 
-Chart.register(ArcElement, DoughnutController, Legend, Title, Tooltip)
+Chart.register(ArcElement, DoughnutController, Legend, Title, Tooltip);
+
+const GAME_MODES = {
+  NOOB: {
+    name: 'noob',
+    fireworkDuration: 2000,
+    config: {
+      columns: 5,
+      rows: 5,
+      bombs: 2,
+    },
+  },
+  EASY: {
+    name: 'easy',
+    fireworkDuration: 10000,
+    config: {
+      columns: 9,
+      rows: 9,
+      bombs: 10,
+    },
+  },
+  NORMAL: {
+    name: 'normal',
+    fireworkDuration: 15000,
+    config: {
+      columns: 16,
+      rows: 16,
+      bombs: 40,
+    },
+  },
+  HARD: {
+    name: 'hard',
+    fireworkDuration: 20000,
+    config: {
+      columns: 30,
+      rows: 16,
+      bombs: 99,
+    },
+  },
+  EXTREME: {
+    name: 'extreme',
+    fireworkDuration: 30000,
+    config: {
+      columns: 30,
+      rows: 30,
+      bombs: 300,
+    },
+  },
+};
 
 export default {
   name: 'MinesweeperWrapper',
   data: () => ({
-    isMounted: false,
     isEnded: true,
     /** @type {Fireworks} */
     fireworks: null,
-    currentGamemode: 'easy',
+    currentGameModeName: GAME_MODES.EASY.name,
     games: [],
     maxScoreboardGamesVisible: 10,
     gamesHistoryChart: null,
   }),
   computed: {
     isStopwatchRunning() {
-      if (!this.isMounted) return
-
-      // this.$refs is available
-      return this.$refs.stopwatch.isRunning
+      try {
+        return this.$refs.stopwatch.isRunning;
+      } catch (error) {
+        return false;
+      }
     },
-    currentGamemodeGames() {
-      return this.games.filter((game) => game.gamemode === this.currentGamemode)
+    currentGameModeGames() {
+      return this.games.filter((game) => game.gamemode === this.currentGameModeName);
     },
-    currentGamemodeScoreboardEntries() {
-      return this.currentGamemodeGames.filter((game) => game.gameIsWon)
+    currentGameModeScoreboardEntries() {
+      return this.currentGameModeGames.filter((game) => game.gameIsWon);
     },
-    currentGamemodeAverageDuration() {
-      const sum = this.currentGamemodeScoreboardEntries
+    currentGameModeAverageDuration() {
+      const sum = this.currentGameModeScoreboardEntries
         .map((game) => game.gameDuration)
-        .reduce((a, b) => a + b, 0)
-      const avg = sum / this.currentGamemodeScoreboardEntries.length || 0
-      return avg
+        .reduce((a, b) => a + b, 0);
+      return sum / this.currentGameModeScoreboardEntries.length || 0;
+    },
+    gameModesSelectionOptions() {
+      return map(GAME_MODES, ({ name, config: { columns, rows, bombs } }) => ({
+        value: lowerCase(name),
+        selected: this.currentGameModeName === name,
+        text: `${capitalize(name)} - ${rows}x${columns} / ${bombs} Mines`,
+      }));
     },
   },
   watch: {
-    currentGamemodeGames() {
-      if (
-        this.currentGamemodeGames.length &&
-        this.$refs['game-history-chart']
-      ) {
-        const wonGames = this.currentGamemodeGames.filter(
-          (game) => game.gameIsWon
-        ).length
-        const lostGames = this.currentGamemodeGames.length - wonGames
+    currentGameModeGames() {
+      if (this.currentGameModeGames.length && this.$refs['game-history-chart']) {
+        const wonGames = this.currentGameModeGames.filter((game) => game.gameIsWon).length;
+        const lostGames = this.currentGameModeGames.length - wonGames;
 
         if (this.gamesHistoryChart) {
-          this.gamesHistoryChart.data.datasets[0].data = [wonGames, lostGames]
-          this.gamesHistoryChart.options.plugins.title.text = `${this.currentGamemodeGames.length} game(s) played in total`
-          this.gamesHistoryChart.update()
+          this.gamesHistoryChart.data.datasets[0].data = [wonGames, lostGames];
+          this.gamesHistoryChart.options.plugins.title.text = `${this.currentGameModeGames.length} game(s) played in total`;
+          this.gamesHistoryChart.update();
         } else {
           const config = {
             type: 'doughnut',
@@ -337,140 +361,102 @@ export default {
             options: {
               plugins: {
                 title: {
-                  text: `${this.currentGamemodeGames.length} game(s) played in total`,
+                  text: `${this.currentGameModeGames.length} game(s) played in total`,
                   display: true,
                   position: 'bottom',
                 },
               },
             },
-          }
+          };
 
-          this.gamesHistoryChart = new Chart(
-            this.$refs['game-history-chart'],
-            config
-          )
+          this.gamesHistoryChart = new Chart(this.$refs['game-history-chart'], config);
         }
       }
     },
   },
   mounted() {
-    this.isMounted = true
-
-    const gameModeConfiguration = this.getGameModeConfiguration()
-    this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration)
+    const gameModeConfiguration = this.getGameModeConfiguration();
+    this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration);
 
     this.fireworks = new Fireworks(this.$refs.firework, {
       acceleration: 1.01,
-    })
+    });
 
     liveQuery(() => db.games.toArray()).subscribe((games) => {
-      this.games = games.sort(
-        (gameA, gameB) => gameA.gameDuration - gameB.gameDuration
-      )
-    })
+      this.games = games.sort((gameA, gameB) => gameA.gameDuration - gameB.gameDuration);
+    });
   },
   methods: {
     timestampToDateString,
-    getGameModeConfiguration() {
-      switch (this.currentGamemode) {
-        case 'hard':
-          return {
-            columns: 30,
-            rows: 16,
-            bombs: 99,
-          }
-        case 'normal':
-          return {
-            columns: 16,
-            rows: 16,
-            bombs: 40,
-          }
-        case 'easy':
-        default:
-          return {
-            columns: 9,
-            rows: 9,
-            bombs: 10,
-          }
-      }
+    getCurrentGameMode() {
+      return find(GAME_MODES, { name: this.currentGameModeName });
     },
-    onChangedGamemode(e) {
-      e.preventDefault()
-      const gameModeConfiguration = this.getGameModeConfiguration()
-      this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration)
-      this.restartGame()
+    getGameModeConfiguration() {
+      return this.getCurrentGameMode().config;
+    },
+    onChangedGameMode(e) {
+      e.preventDefault();
+      const gameModeConfiguration = this.getGameModeConfiguration();
+      this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration);
+      this.restartGame();
     },
     onGameWon() {
-      this.isEnded = true
-      this.$refs.stopwatch.stop()
-      this.fireworks.start()
+      this.isEnded = true;
+      this.$refs.stopwatch.stop();
+      this.fireworks.start();
 
-      this.addDbEntry(true)
-
-      let fireworkDuration
-      switch (this.currentGamemode) {
-        case 'hard':
-          fireworkDuration = 20000
-          break
-        case 'normal':
-          fireworkDuration = 15000
-          break
-        case 'easy':
-        default:
-          fireworkDuration = 10000
-          break
-      }
+      this.addDbEntry(true);
 
       window.setTimeout(() => {
-        this.fireworks.stop()
-      }, fireworkDuration)
+        this.fireworks.stop();
+      }, this.getCurrentGameMode().fireworkDuration);
     },
     onGameLost() {
-      this.isEnded = true
-      this.$refs.stopwatch.stop()
+      this.isEnded = true;
+      this.$refs.stopwatch.stop();
 
-      this.addDbEntry(false)
+      this.addDbEntry(false);
     },
     clickedRestart() {
       if (this.isEnded) {
-        this.restartGame()
+        this.restartGame();
       }
     },
     restartGame() {
-      this.isEnded = true
-      this.fireworks.stop()
-      this.$refs.stopwatch.reset()
-      this.$refs.minesweeper.restartGame()
+      this.isEnded = true;
+      this.fireworks.stop();
+      this.$refs.stopwatch.reset();
+      this.$refs.minesweeper.restartGame();
     },
     handleMinesweeperClick() {
-      this.isEnded = false
+      this.isEnded = false;
       if (!this.$refs.stopwatch.isRunning) {
-        this.$refs.stopwatch.start()
+        this.$refs.stopwatch.start();
       }
     },
     toggleStopWatch() {
       if (this.isStopwatchRunning) {
-        this.$refs.stopwatch.stop()
+        this.$refs.stopwatch.stop();
       } else {
-        this.$refs.stopwatch.start()
+        this.$refs.stopwatch.start();
       }
     },
     resetGameHistory() {
-      db.games.clear()
+      db.games.clear();
     },
     removeScoreboardEntry(gameId) {
-      db.games.delete(gameId)
+      db.games.delete(gameId);
     },
     addDbEntry(isWon) {
       db.games.add({
-        gamemode: this.currentGamemode,
+        gamemode: this.currentGameModeName,
         gameDuration: this.$refs.stopwatch.elapsedTime,
         gameCompletionTimestamp: Date.now(),
         gameIsWon: isWon,
-      })
+      });
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

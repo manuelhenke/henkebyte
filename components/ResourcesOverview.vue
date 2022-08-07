@@ -24,9 +24,9 @@
         class="btn btn-primary d-none d-sm-inline-block"
         type="button"
         title="Toggle grid layout"
-        @click="toggleMasonry"
+        @click="toggleGrid"
       >
-        <i v-if="masonry" class="bi bi-grid"></i>
+        <i v-if="preferGrid" class="bi bi-grid"></i>
         <i v-else class="bi bi-columns-gap"></i>
       </button>
       <button
@@ -40,11 +40,7 @@
       </button>
     </div>
     <div class="error-box">
-      <div
-        v-if="$fetchState.pending"
-        class="spinner-border text-primary"
-        role="status"
-      >
+      <div v-if="$fetchState.pending" class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
       <p v-else-if="$fetchState.error">An error occurred :(</p>
@@ -63,9 +59,7 @@
             v-if="site.fields.imageSrc"
             :src="site.fields.imageSrc"
             class="card-img-top"
-            :alt="`Preview of ${
-              site.fields.title ? site.fields.title : 'the site'
-            }`"
+            :alt="`Preview of ${site.fields.title ? site.fields.title : 'the site'}`"
             onerror="this.style.display='none'"
             @error="layoutMasonry"
           />
@@ -107,9 +101,7 @@
     >
       <!-- categories offcanvas -->
       <div class="offcanvas-header">
-        <h5 id="offcanvasCategoriesLabel" class="offcanvas-title">
-          Categories
-        </h5>
+        <h5 id="offcanvasCategoriesLabel" class="offcanvas-title">Categories</h5>
         <button
           type="button"
           class="btn-close text-reset"
@@ -119,11 +111,7 @@
       </div>
       <div class="offcanvas-body pt-0">
         <form>
-          <div
-            v-for="category in sortedCategories"
-            :key="category.fields.title"
-            class="form-check"
-          >
+          <div v-for="category in sortedCategories" :key="category.fields.title" class="form-check">
             <input
               :id="category.fields.title"
               v-model="checkedCategories"
@@ -166,9 +154,9 @@
 </template>
 
 <script>
-import { isEqual, sortBy } from 'lodash'
-import Masonry from 'masonry-layout'
-import { client } from '~/plugins/contentful.js'
+import { includes, isEqual, sortBy, toLower, trim } from 'lodash-es';
+import Masonry from 'masonry-layout';
+import { client } from '~/plugins/contentful';
 
 export default {
   name: 'ResourcesOverview',
@@ -192,24 +180,27 @@ export default {
         }),
       ])
         .then(([sites, categories]) => {
-          this.sites = sites.items
-          this.categories = categories.items
+          this.sites = sites.items;
+          this.categories = categories.items;
           if (this.checkedCategories.length === 0) {
-            this.checkedCategories = categories.items.map((item) => item.sys.id)
+            this.checkedCategories = categories.items.map((item) => item.sys.id);
           }
         })
         // eslint-disable-next-line no-console
         .catch(console.error)
-    )
+    );
   },
   computed: {
+    preferGrid() {
+      return this.$store.getters['settings/isPreferringGrid'];
+    },
     filteredSites() {
-      let filteredSites = this.sites
+      let filteredSites = this.sites;
       if (this.currentSearchInput) {
-        const lowerCaseSearchInput = this.currentSearchInput.toLowerCase()
+        const lowerCaseSearchInput = toLower(this.currentSearchInput);
         filteredSites = filteredSites.filter((site) =>
-          site.fields.title.toLowerCase().includes(lowerCaseSearchInput)
-        )
+          includes(toLower(site.fields.title), lowerCaseSearchInput)
+        );
       }
 
       filteredSites = filteredSites.filter(
@@ -218,69 +209,69 @@ export default {
           site.fields.categories.some((category) =>
             this.checkedCategories.includes(category.sys.id)
           )
-      )
+      );
 
-      return filteredSites
+      return filteredSites;
     },
     sortedCategories() {
-      return Array.from(this.categories).sort((cat1, cat2) => {
-        return cat1.fields.title.localeCompare(cat2.fields.title)
-      })
+      return Array.from(this.categories).sort((cat1, cat2) =>
+        cat1.fields.title.localeCompare(cat2.fields.title)
+      );
     },
     nothingFoundMessage() {
-      switch (this.currentSearchInput.toLowerCase().trim()) {
+      switch (trim(toLower(this.currentSearchInput))) {
         case 'abi':
         case 'tobias':
         case 'topse':
         case 'tobse':
         case 'tobi':
-          return 'RIP Japan tea cup 2019 :('
+          return 'RIP Japan tea cup 2019 :(';
         case 'winzling':
         case 'hobbit':
         case 'midget':
         case 'pavel':
-          return 'Thats a very HUGE input!'
+          return 'Thats a very HUGE input!';
         case 'kunal':
-          return 'Zzzzzzzzzzzzz...'
+          return 'Zzzzzzzzzzzzz...';
         case 'oguzhan':
         case 'osan':
         case 'osantor':
         case 'berber':
         case 'melih':
-          return 'Gülme vuruşu!'
+          return 'Gülme vuruşu!';
         case 'nami':
         case 'namy':
         case 'sadeghnia':
         case 'namysade':
-          return 'Manuuuuu!'
+          return 'Manuuuuu!';
         case 'bilal':
-          return 'CRYPTO!!!!!'
+          return 'CRYPTO!!!!!';
         case 'niko':
         case 'mestanis':
         case 'nibones':
         case 'grieche':
-          return 'Jaaaaaa, lass mal times...'
+          return 'Jaaaaaa, lass mal times...';
         case 'thao':
-          return 'OOOOOOHHHHH VIETNAM!'
+          return 'OOOOOOHHHHH VIETNAM!';
         case 'henni':
         case 'henricke':
-          return "You're screaming again!"
+          return "You're screaming again!";
         case 'bo':
         case 'boc':
         case 'bad oeynhausen':
-          return 'Winner of the Worlds Best City Award!'
+          return 'Winner of the Worlds Best City Award!';
         case 'maxi':
         case 'verstappen':
-          return '"MAX VERSTAPPEN YOU ARE THE WORLD CHAMPION!"'
+          return '"MAX VERSTAPPEN YOU ARE THE WORLD CHAMPION!"';
         case 'lewis':
         case 'hamilton':
-          return 'Reckless driver!'
+          return 'Reckless driver!';
         case 'perez':
         case 'pérez':
         case 'checko':
-          return 'Mexican Minister of Defence'
+          return 'Mexican Minister of Defence';
         default:
-          return 'Wow, such empty'
+          return 'Wow, such empty';
       }
     },
   },
@@ -288,19 +279,19 @@ export default {
     filteredSites() {
       if (this.masonry) {
         this.$nextTick(() => {
-          this.masonry.reloadItems()
-          this.layoutMasonry()
-        })
+          this.masonry.reloadItems();
+          this.layoutMasonry();
+        });
       }
     },
     currentSearchInput() {
       const query = {
         ...this.$route.query,
-      }
+      };
       if (this.currentSearchInput) {
-        query.q = this.currentSearchInput
+        query.q = this.currentSearchInput;
       } else {
-        delete query.q
+        delete query.q;
       }
 
       // Avoid redundant navigation
@@ -308,63 +299,68 @@ export default {
         this.$router.replace({
           path: this.$route.path,
           query,
-        })
+        });
       }
     },
     checkedCategories() {
       // Categories are still not fetched
-      if (this.categories.length === 0) return
+      if (this.categories.length === 0) return;
 
       const query = {
         ...this.$route.query,
-      }
+      };
       if (
         this.checkedCategories.length > 0 &&
         this.checkedCategories.length < this.categories.length
       ) {
-        query.categories = this.checkedCategories
+        query.categories = this.checkedCategories;
       } else {
-        delete query.categories
+        delete query.categories;
       }
 
       // Avoid redundant navigation
-      if (
-        !isEqual(sortBy(this.$route.query.categories), sortBy(query.categories))
-      ) {
+      if (!isEqual(sortBy(this.$route.query.categories), sortBy(query.categories))) {
         this.$router.replace({
           path: this.$route.path,
           query,
-        })
+        });
+      }
+    },
+    preferGrid() {
+      if (this.preferGrid) {
+        this.disableMasonry();
+      } else {
+        this.enableMasonry();
       }
     },
   },
   mounted() {
-    if (!localStorage.getItem('preferGrid')) {
-      this.enableMasonry()
+    if (!this.preferGrid) {
+      this.enableMasonry();
     }
     if ('q' in this.$route.query) {
-      this.currentSearchInput = this.$route.query.q
+      this.currentSearchInput = this.$route.query.q;
     }
     if ('categories' in this.$route.query) {
       if (Array.isArray(this.$route.query.categories)) {
-        this.checkedCategories = this.$route.query.categories
+        this.checkedCategories = this.$route.query.categories;
       } else {
-        this.checkedCategories = [this.$route.query.categories]
+        this.checkedCategories = [this.$route.query.categories];
       }
     }
   },
   methods: {
     selectAllCategories() {
-      this.checkedCategories = this.categories.map((item) => item.sys.id)
+      this.checkedCategories = this.categories.map((item) => item.sys.id);
     },
     deselectAllCategories() {
-      this.checkedCategories = []
+      this.checkedCategories = [];
     },
-    toggleMasonry() {
-      if (this.masonry) {
-        this.disableMasonry()
+    toggleGrid() {
+      if (this.preferGrid) {
+        this.$store.dispatch('settings/disablePreferGrid');
       } else {
-        this.enableMasonry()
+        this.$store.dispatch('settings/enablePreferGrid');
       }
     },
     enableMasonry() {
@@ -372,27 +368,21 @@ export default {
         // options
         itemSelector: '.col',
         percentPosition: true,
-      })
-      if (process.client) {
-        localStorage.removeItem('preferGrid')
-      }
+      });
     },
     disableMasonry() {
       if (this.masonry) {
-        this.masonry.destroy()
-        this.masonry = undefined
-      }
-      if (process.client) {
-        localStorage.setItem('preferGrid', true)
+        this.masonry.destroy();
+        this.masonry = undefined;
       }
     },
     layoutMasonry() {
       if (this.masonry) {
-        this.masonry.layout()
+        this.masonry.layout();
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

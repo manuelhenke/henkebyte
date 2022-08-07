@@ -16,7 +16,7 @@
 <script>
 export default {
   name: 'CenterLayout',
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -8,8 +8,7 @@
         :title="`Change theme to ${colorMode.name}mode`"
         :aria-label="`Change color mode to ${colorMode.name}`"
         :class="{
-          preferred:
-            !$colorMode.unknown && colorMode.name === $colorMode.preference,
+          preferred: !$colorMode.unknown && colorMode.name === $colorMode.preference,
           // selected: !$colorMode.unknown && colorMode.name === $colorMode.value,
         }"
         @click="changeColorMode(colorMode.name)"
@@ -56,17 +55,15 @@
             aria-label="Close"
           ></button>
         </div>
-        <div class="toast-body">
-          Theme mode changed to: {{ capitalize(colorMode.name) }}
-        </div>
+        <div class="toast-body">Theme mode changed to: {{ capitalize(colorMode.name) }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Toast } from 'bootstrap'
-import { capitalize } from 'lodash'
+import { Toast } from 'bootstrap';
+import { capitalize } from 'lodash-es';
 
 export default {
   name: 'ColorModePicker',
@@ -91,25 +88,23 @@ export default {
     changeColorMode(selectedColorModeName) {
       if (this.$colorMode.preference !== selectedColorModeName) {
         // Set color mode globally
-        this.$colorMode.preference = selectedColorModeName
+        this.$colorMode.preference = selectedColorModeName;
 
         // remove current active toast
         if (this.lastActiveToast) {
-          this.lastActiveToast.dispose()
+          this.lastActiveToast.dispose();
         }
 
-        const toastElement = document.getElementById(
-          `${selectedColorModeName}-toast`
-        )
+        const toastElement = document.getElementById(`${selectedColorModeName}-toast`);
 
         this.lastActiveToast = new Toast(toastElement, {
           delay: 3000,
-        })
-        this.lastActiveToast.show()
+        });
+        this.lastActiveToast.show();
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

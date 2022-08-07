@@ -32,13 +32,13 @@ export default {
   },
   computed: {
     currentYear() {
-      return new Date().getFullYear()
+      return new Date().getFullYear();
     },
     contactOptions() {
-      return this.$store.state.contactOptions
+      return this.$store.state.contactOptions;
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -34,6 +34,6 @@ const routes = {
     to: '/minesweeper',
     name: 'Minesweeper',
   },
-}
+};
 
-module.exports = { routes }
+module.exports = { routes };

@@ -27,9 +27,6 @@
   // modal and offcanvas backdrop overlay should be black as well
   $modal-backdrop-bg: $white;
 
-  // Is default white (so black due to inverting), but it should remain white
-  $kbd-color: $black;
-
   @import '~bootstrap/scss/bootstrap';
   @import 'color-theme';
   @include root-variables($theme-colors, $body-color, $body-bg);

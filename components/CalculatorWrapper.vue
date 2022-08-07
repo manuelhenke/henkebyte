@@ -3,9 +3,9 @@
 </template>
 
 <script>
-import 'ios-calculator-for-web'
+import 'ios-calculator-for-web';
 
 export default {
   name: 'CalculatorWrapper',
-}
+};
 </script>

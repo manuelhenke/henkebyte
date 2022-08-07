@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     sortedEntries() {
-      return this.sortByStars(this.entries)
+      return this.sortByStars(this.entries);
     },
   },
   methods: {
@@ -25,12 +25,10 @@ export default {
       return Array.from(entries)
         .map((entry) => ({
           ...entry,
-          libraries: entry.libraries
-            ? this.sortByStars(entry.libraries)
-            : undefined,
+          libraries: entry.libraries ? this.sortByStars(entry.libraries) : undefined,
         }))
-        .sort((e1, e2) => e2.stars - e1.stars)
+        .sort((e1, e2) => e2.stars - e1.stars);
     },
   },
-}
+};
 </script>

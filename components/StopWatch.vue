@@ -15,24 +15,24 @@ export default {
   }),
   computed: {
     isRunning() {
-      return !!this.timer
+      return !!this.timer;
     },
   },
   methods: {
     start() {
-      clearInterval(this.timer)
+      clearInterval(this.timer);
       this.timer = setInterval(() => {
-        this.elapsedTime += 1000
-      }, 1000)
+        this.elapsedTime += 1000;
+      }, 1000);
     },
     stop() {
-      clearInterval(this.timer)
-      this.timer = undefined
+      clearInterval(this.timer);
+      this.timer = undefined;
     },
     reset() {
-      this.stop()
-      this.elapsedTime = 0
+      this.stop();
+      this.elapsedTime = 0;
     },
   },
-}
+};
 </script>

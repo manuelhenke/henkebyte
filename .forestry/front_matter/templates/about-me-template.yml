@@ -1,171 +1,61 @@
 ---
 label: About Me Template
 hide_body: false
+display_field: title
 fields:
-- type: text
-  name: title
-  label: title
-  config:
-    required: true
+- type: include
+  template: page
+  name: page
+  label: Page
 - type: field_group_list
-  name: meta-tags
-  label: meta-tags
-  fields:
-  - type: text
-    name: key
-    label: key
-    config:
-      required: true
-  - type: textarea
-    name: value
-    label: value
-    config:
-      wysiwyg: false
-      required: true
-    default: ''
-  config:
-    labelField: key
-- type: field_group_list
-  name: educationTimeLineItems
-  label: educationTimeLineItems
-  fields:
-  - type: number
-    name: from
-    label: from
-    config:
-      required: true
-  - type: text
-    name: to
-    label: to
-    default: today
-  - type: text
-    name: role
-    label: role
-    config:
-      required: true
-  - type: text
-    name: place
-    label: place
-    config:
-      required: true
-  - type: text
-    name: description
-    label: description
-    config:
-      required: true
+  name: education_timeline_items
+  label: Educations
   config:
     labelField: role
-- type: field_group_list
-  name: experienceTimeLineItems
-  label: experienceTimeLineItems
   fields:
-  - type: number
-    name: from
-    label: from
-    config:
-      required: true
-  - type: text
-    name: to
-    label: to
-    default: today
-  - type: text
-    name: role
-    label: role
-    config:
-      required: true
-  - type: text
-    name: place
-    label: place
-    config:
-      required: true
-  - type: textarea
-    name: description
-    label: description
-    config:
-      required: true
+  - name: timeline_item
+    type: include
+    template: timeline-item
+    label: Education
+- type: field_group_list
+  name: experience_timeline_items
+  label: Experiences
   config:
-    labelField: place
+    labelField: role
+  fields:
+  - name: timeline_item
+    type: include
+    template: timeline-item
+    label: Experience
 - type: field_group_list
   name: skills
-  label: skills
-  fields:
-  - type: text
-    name: name
-    label: name
-  - type: number
-    name: stars
-    label: stars
-  - type: field_group_list
-    name: libraries
-    label: libraries
-    fields:
-    - type: text
-      name: name
-      label: name
-    - type: number
-      name: stars
-      label: stars
-    - type: field_group_list
-      name: libraries
-      label: libraries
-      fields:
-      - type: text
-        name: name
-        label: name
-      - type: number
-        name: stars
-        label: stars
-      config:
-        labelField: name
-    config:
-      labelField: name
+  label: Skills
   config:
     labelField: name
+  fields:
+  - name: skill_item
+    type: include
+    template: skill-item-nested
+    label: Skill
 - type: field_group_list
   name: languages
-  label: languages
-  fields:
-  - type: text
-    name: name
-    label: name
-  - type: number
-    name: stars
-    label: stars
+  label: Languages
   config:
     labelField: name
+  fields:
+  - name: skill_item
+    type: include
+    template: skill-item-nested
+    label: Language
 - type: field_group_list
   name: tools
-  label: tools
-  fields:
-  - type: text
-    name: name
-    label: name
-  - type: number
-    name: stars
-    label: stars
-  - type: field_group_list
-    name: libraries
-    label: libraries
-    fields:
-    - type: text
-      name: name
-      label: name
-    - type: number
-      name: stars
-      label: stars
-    - type: field_group_list
-      name: libraries
-      label: libraries
-      fields:
-      - type: text
-        name: name
-        label: name
-      - type: number
-        name: stars
-        label: stars
-      config:
-        labelField: name
-    config:
-      labelField: name
+  label: Tools
   config:
     labelField: name
+  fields:
+  - name: skill_item
+    type: include
+    template: skill-item-nested
+    label: Tool
+pages:
+- content/about-me.md

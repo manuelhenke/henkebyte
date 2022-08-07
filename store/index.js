@@ -1,5 +1,6 @@
-import { routes } from './routes'
+import { routes } from '@/util/routes';
 
+// eslint-disable-next-line import/prefer-default-export
 export const state = () => ({
   navigation: [
     routes.HOME,
@@ -9,11 +10,7 @@ export const state = () => ({
     },
     {
       title: 'Projects',
-      links: [
-        routes.HENKEBYTE_WEBSITE,
-        routes.IOS_CALCULATOR,
-        routes.MINESWEEPER,
-      ],
+      links: [routes.HENKEBYTE_WEBSITE, routes.IOS_CALCULATOR, routes.MINESWEEPER],
     },
   ],
   contactOptions: [
@@ -33,4 +30,4 @@ export const state = () => ({
       icon: 'bi bi-envelope',
     },
   ],
-})
+});
