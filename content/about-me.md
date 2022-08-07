@@ -1,7 +1,7 @@
 ---
 title: About Me
-badge-text: ''
-meta-tags:
+badge_text: ''
+meta_tags:
 - key: description
   content: Hey there! I am Manuel Henke, 25 years old and from the heart of Berlin,
     Germany. At the moment I'm in the final phase of my master studies in Information

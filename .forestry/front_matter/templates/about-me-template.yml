@@ -151,3 +151,5 @@ fields:
       labelField: name
   config:
     labelField: name
+pages:
+- content/about-me.md

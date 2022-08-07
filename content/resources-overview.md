@@ -1,7 +1,7 @@
 ---
 title: Resources Overview
-badge-text: ''
-meta-tags:
+badge_text: ''
+meta_tags:
 - key: description
   content: This is a collection of my favorite resources which levitate my development
     workflow.

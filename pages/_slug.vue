@@ -1,7 +1,7 @@
 <template comments>
   <div id="page">
     <!-- #page -->
-    <TheTitle :badge-text="page['badge-text']">{{ page.title }}</TheTitle>
+    <TheTitle :badge-text="page.badge_text">{{ page.title }}</TheTitle>
     <nuxt-content :document="page" />
     <!-- /#page -->
   </div>
@@ -33,9 +33,9 @@ export default {
       meta: [],
     };
 
-    if (isArray(this.page['meta-tags'])) {
+    if (isArray(this.page.meta_tags)) {
       head.meta = flatten(
-        map(this.page['meta-tags'], (metaTag) => [
+        map(this.page.meta_tags, (metaTag) => [
           {
             hid: metaTag.key,
             name: metaTag.key,
