@@ -1,15 +1,16 @@
+/* eslint-disable import/prefer-default-export */
 /**
  *
  * @param {number} timestamp
  * @returns {string}
  */
 export function timestampToDateString(timestamp) {
-  const event = new Date(timestamp)
+  const event = new Date(timestamp);
   const options = {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-  }
-  return event.toLocaleDateString('en-EN', options)
+  };
+  return event.toLocaleDateString('en-EN', options);
 }

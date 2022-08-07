@@ -18,7 +18,13 @@
 </template>
 
 <script>
-import TimelineItem from './TimelineItem.vue'
+import TimelineItem from './TimelineItem.vue';
+
+const ORDER_TYPES = {
+  NONE: 'none',
+  DESC: 'desc',
+  ASC: 'asc',
+};
 
 export default {
   name: 'TimelineMain',
@@ -48,7 +54,10 @@ export default {
     },
     order: {
       type: String,
-      default: '',
+      default: ORDER_TYPES.NONE,
+      validator(value) {
+        return Object.values(ORDER_TYPES).includes(value);
+      },
     },
     dateLocale: {
       type: String,
@@ -57,72 +66,65 @@ export default {
   },
   computed: {
     hasItems() {
-      return !!this.timelineItems.length
+      return !!this.timelineItems.length;
     },
     dataTimeline() {
-      if (this.order === 'desc')
-        return this.orderItems(this.timelineItems, 'desc')
-      if (this.order === 'asc')
-        return this.orderItems(this.timelineItems, 'asc')
-      return this.timelineItems
+      if (this.order === ORDER_TYPES.NONE) {
+        return this.timelineItems;
+      }
+      return this.orderItems(this.timelineItems, this.order);
     },
   },
   methods: {
     wrapperItemClass(timelineIndex) {
-      const isSameYearPreviousAndCurrent =
-        this.checkYearTimelineItem(timelineIndex)
+      const isSameYearPreviousAndCurrent = this.checkYearTimelineItem(timelineIndex);
       const isUniqueYear =
-        this.uniqueYear &&
-        isSameYearPreviousAndCurrent &&
-        this.order !== undefined
+        this.uniqueYear && isSameYearPreviousAndCurrent && this.order !== undefined;
       return {
         'wrapper-item': true,
         'unique-timeline': this.uniqueTimeline || isUniqueYear,
-      }
+      };
     },
     checkYearTimelineItem(timelineIndex) {
-      const previousItem = this.dataTimeline[timelineIndex - 1]
-      const nextItem = this.dataTimeline[timelineIndex + 1]
-      const currentItem = this.dataTimeline[timelineIndex]
+      const previousItem = this.dataTimeline[timelineIndex - 1];
+      const nextItem = this.dataTimeline[timelineIndex + 1];
+      const currentItem = this.dataTimeline[timelineIndex];
       if (!previousItem || !nextItem) {
-        return false
+        return false;
       }
-      const fullPreviousYear = previousItem.from
-      const fullNextYear = nextItem.from
-      const fullCurrentYear = currentItem.from
+      const fullPreviousYear = previousItem.from;
+      const fullNextYear = nextItem.from;
+      const fullCurrentYear = currentItem.from;
       return (
-        (fullPreviousYear === fullCurrentYear &&
-          fullCurrentYear === fullNextYear) ||
+        (fullPreviousYear === fullCurrentYear && fullCurrentYear === fullNextYear) ||
         fullCurrentYear === fullNextYear
-      )
+      );
     },
     getTimelineItemsAssembled(items) {
-      const itemsGroupByYear = []
+      const itemsGroupByYear = [];
       items.forEach((item) => {
-        const fullTime = item.from
+        const fullTime = item.from;
         if (itemsGroupByYear[fullTime]) {
-          return itemsGroupByYear[fullTime].push(item)
+          itemsGroupByYear[fullTime].push(item);
+        } else {
+          itemsGroupByYear[fullTime] = [item];
         }
-        itemsGroupByYear[fullTime] = [item]
-      })
-      return itemsGroupByYear
+      });
+      return itemsGroupByYear;
     },
     orderItems(items, typeOrder) {
-      const itemsGrouped = this.getTimelineItemsAssembled(items)
-      const keysItemsGrouped = Object.keys(itemsGrouped)
+      const itemsGrouped = this.getTimelineItemsAssembled(items);
+      const keysItemsGrouped = Object.keys(itemsGrouped);
       const timeItemsOrdered = keysItemsGrouped.sort((a, b) => {
-        if (typeOrder === 'desc') {
-          return b - a
+        if (typeOrder === ORDER_TYPES.DESC) {
+          return b - a;
         }
-        return a - b
-      })
-      const mappedItems = timeItemsOrdered.map(
-        (timeItem) => itemsGrouped[timeItem]
-      )
-      return [].concat.apply([], mappedItems)
+        return a - b;
+      });
+      return timeItemsOrdered.map((timeItem) => itemsGrouped[timeItem]);
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -22,7 +22,7 @@
 <script>
 export default {
   name: 'ContainerLayout',
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -24,12 +24,9 @@
             'dropdown-center': !navElement.to,
           }"
         >
-          <nuxt-link
-            v-if="navElement.to"
-            class="btn nav-link"
-            :to="navElement.to"
-            >{{ navElement.name }}</nuxt-link
-          >
+          <nuxt-link v-if="navElement.to" class="btn nav-link" :to="navElement.to">{{
+            navElement.name
+          }}</nuxt-link>
           <div v-else class="navbar-dropdown-container">
             <a
               ref="dropdown"
@@ -63,9 +60,9 @@
 </template>
 
 <script>
-import { mixin as clickaway } from 'vue-clickaway'
-import { throttle } from 'lodash-es'
-import { Dropdown } from 'bootstrap'
+import { mixin as clickaway } from 'vue-clickaway';
+import { throttle } from 'lodash-es';
+import { Dropdown } from 'bootstrap';
 
 export default {
   name: 'TheHeader',
@@ -76,57 +73,53 @@ export default {
   }),
   computed: {
     navigation() {
-      return this.$store.state.navigation
+      return this.$store.state.navigation;
     },
   },
   watch: {
     $route(to, from) {
-      this.isMobileMenuVisible = false
+      this.isMobileMenuVisible = false;
       if (Array.isArray(this.$refs.dropdown)) {
         this.$refs.dropdown
           .map((element) => Dropdown.getOrCreateInstance(element))
           .filter((dropdown) => !!dropdown)
           .forEach((dropdown) => {
-            dropdown.hide()
-          })
+            dropdown.hide();
+          });
       }
     },
   },
   mounted() {
-    window.addEventListener('scroll', this.checkIsSticky)
+    window.addEventListener('scroll', this.checkIsSticky);
   },
   destroyed() {
-    window.removeEventListener('scroll', this.checkIsSticky)
+    window.removeEventListener('scroll', this.checkIsSticky);
   },
   methods: {
     hasActiveChild(navElement) {
-      if (
+      return (
         Array.isArray(navElement.links) &&
         navElement.links.some((link) => link.to === this.$route.params.slug)
-      ) {
-        return true
-      }
-
-      return false
+      );
     },
     toggleMobileMenu() {
-      this.isMobileMenuVisible = !this.isMobileMenuVisible
+      this.isMobileMenuVisible = !this.isMobileMenuVisible;
     },
     openMobileMenu() {
-      this.isMobileMenuVisible = true
+      this.isMobileMenuVisible = true;
     },
     closeMobileMenu() {
-      this.isMobileMenuVisible = false
+      this.isMobileMenuVisible = false;
     },
-    checkIsSticky: throttle(function () {
+    checkIsSticky: throttle(function checkIsSticky() {
       if (this.$refs.header.offsetTop > 0) {
-        this.isSticky = true
+        this.isSticky = true;
       } else {
-        this.isSticky = false
+        this.isSticky = false;
       }
     }, 200),
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -2,7 +2,6 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true,
     'jest/globals': true,
   },
   parserOptions: {
@@ -10,13 +9,29 @@ module.exports = {
     requireConfigFile: false,
   },
   extends: [
+    'airbnb-base',
     '@nuxtjs',
     'plugin:jest/recommended',
     'plugin:nuxt/recommended',
+    'plugin:sonarjs/recommended',
     'prettier',
   ],
   ignorePatterns: ['.forestry/**/*', 'static/admin/**/*'],
-  plugins: [],
+  plugins: ['sonarjs'],
   // add your custom rules here
-  rules: {},
-}
+  rules: {
+    'import/extensions': [
+      'error',
+      {
+        js: 'never',
+      },
+    ],
+    'no-param-reassign': [
+      'error',
+      {
+        props: true,
+        ignorePropertyModificationsFor: ['state'],
+      },
+    ],
+  },
+};

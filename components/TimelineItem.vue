@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import { get } from 'lodash-es';
+
 export default {
   name: 'TimelineItem',
   props: {
@@ -40,26 +42,16 @@ export default {
   },
   computed: {
     yearFrom() {
-      if ('from' in this.itemTimeline && this.itemTimeline.from !== undefined) {
-        return this.itemTimeline.from
-      } else {
-        return null
-      }
+      return get(this.itemTimeline, 'from', null);
     },
     yearTo() {
-      if ('to' in this.itemTimeline && this.itemTimeline.to !== undefined) {
-        return this.itemTimeline.to
-      } else {
-        return null
-      }
+      return get(this.itemTimeline, 'to', null);
     },
     backgroundColor() {
-      return this.itemTimeline.color
-        ? `--timeline-item-dot-color: ${this.itemTimeline.color}`
-        : `--timeline-item-dot-color: ${this.colorDots}`
+      return `--timeline-item-dot-color: ${get(this.itemTimeline, 'color', this.colorDots)}`;
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

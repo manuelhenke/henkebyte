@@ -3,9 +3,7 @@
     <h1 class="mb-0 fw-bold display-5">
       <slot></slot>
     </h1>
-    <span v-if="badgeText" :class="`badge fw-bold bg-${badgeColor}`">{{
-      badgeText
-    }}</span>
+    <span v-if="badgeText" :class="`badge fw-bold bg-${badgeColor}`">{{ badgeText }}</span>
   </div>
 </template>
 
@@ -24,5 +22,5 @@ export default {
       default: 'info',
     },
   },
-}
+};
 </script>

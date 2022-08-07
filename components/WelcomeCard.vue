@@ -17,7 +17,7 @@
 <script>
 export default {
   name: 'WelcomeCard',
-}
+};
 </script>
 
 <style lang="scss" scoped>

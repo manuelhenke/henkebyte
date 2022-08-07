@@ -31,11 +31,7 @@
       :id="librariesHtmlId"
       class="libraries collapse mt-2"
     >
-      <AbilityItem
-        v-for="library of entry.libraries"
-        :key="library.name"
-        :entry="library"
-      />
+      <AbilityItem v-for="library of entry.libraries" :key="library.name" :entry="library" />
     </div>
   </div>
 </template>
@@ -51,10 +47,11 @@ export default {
   },
   computed: {
     librariesHtmlId() {
-      return 'libraries-' + this._uid
+      // eslint-disable-next-line no-underscore-dangle
+      return `libraries-${this._uid}`;
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

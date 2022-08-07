@@ -1,10 +1,6 @@
 <template>
   <div class="vstack align-items-center">
-    <div
-      class="btn-group mb-2"
-      role="group"
-      aria-label="Basic outlined example"
-    >
+    <div class="btn-group mb-2" role="group" aria-label="Basic outlined example">
       <button
         v-for="device in devices"
         :key="device"
@@ -48,22 +44,16 @@
 </template>
 
 <script>
-import { DIRECTION, Flicking } from '@egjs/vue-flicking'
-import {
-  Fade,
-  AutoPlay,
-  Arrow,
-  Pagination,
-  PAGINATION,
-} from '@egjs/flicking-plugins'
-import { sample, capitalize } from 'lodash'
-import { routes } from '@/store/routes'
+import { DIRECTION, Flicking } from '@egjs/vue-flicking';
+import { Fade, AutoPlay, Arrow, Pagination, PAGINATION } from '@egjs/flicking-plugins';
+import { sample, capitalize, replace, toLower } from 'lodash-es';
+import { routes } from '~/util/routes';
 
-const deviceTypes = {
+const DEVICE_TYPES = {
   DESKTOP: 'desktop',
   TABLET: 'tablet',
   MOBILE: 'mobile',
-}
+};
 
 export default {
   name: 'WebsiteScreenshotGallery',
@@ -81,51 +71,47 @@ export default {
     },
   },
   data: () => ({
-    devices: Object.values(deviceTypes),
-    selectedDevice: deviceTypes.DESKTOP,
+    devices: Object.values(DEVICE_TYPES),
+    selectedDevice: DEVICE_TYPES.DESKTOP,
     slides: Object.values(routes)
       .filter((route) => route !== routes.HENKEBYTE_WEBSITE)
       .map((route) => ({
-        fileName: route.name.toLocaleLowerCase().replace(' ', '-'),
+        fileName: replace(toLower(route.name), ' ', '-'),
         label: `${route.name} page`,
       })),
-    plugins: [
-      new Fade(),
-      new Pagination({ type: PAGINATION.TYPE.SCROLL }),
-      new Arrow(),
-    ],
+    plugins: [new Fade(), new Pagination({ type: PAGINATION.TYPE.SCROLL }), new Arrow()],
   }),
   computed: {
     imagesPath() {
-      return `/images/website-story/${this.selectedDevice}/${this.$colorMode.value}/`
+      return `/images/website-story/${this.selectedDevice}/${this.$colorMode.value}/`;
     },
     slidePanelWidthClass() {
       switch (this.selectedDevice) {
-        case deviceTypes.DESKTOP:
-          return 'w-75'
-        case deviceTypes.TABLET:
-          return 'w-50'
-        case deviceTypes.MOBILE:
-          return 'w-25'
+        case DEVICE_TYPES.DESKTOP:
+          return 'w-75';
+        case DEVICE_TYPES.TABLET:
+          return 'w-50';
+        case DEVICE_TYPES.MOBILE:
+          return 'w-25';
         default:
-          return 'w-100'
+          return 'w-100';
       }
     },
   },
   watch: {
     selectedDevice() {
-      this.$refs.flicking.resize()
+      this.$refs.flicking.resize();
     },
   },
   mounted() {
     if (this.$device.isMobile) {
-      this.selectedDevice = deviceTypes.MOBILE
+      this.selectedDevice = DEVICE_TYPES.MOBILE;
     } else if (this.$device.isTablet) {
-      this.selectedDevice = deviceTypes.TABLET
+      this.selectedDevice = DEVICE_TYPES.TABLET;
     } else if (this.$device.isDesktop) {
-      this.selectedDevice = deviceTypes.DESKTOP
+      this.selectedDevice = DEVICE_TYPES.DESKTOP;
     } else {
-      this.selectedDevice = sample(this.devices)
+      this.selectedDevice = sample(this.devices);
     }
 
     if (!this.disableAutoPlay) {
@@ -135,13 +121,13 @@ export default {
           direction: DIRECTION.NEXT,
           stopOnHover: true,
         })
-      )
+      );
     }
   },
   methods: {
     capitalize,
   },
-}
+};
 </script>
 
 <style lang="scss">

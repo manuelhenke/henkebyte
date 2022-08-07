@@ -16,11 +16,7 @@
 
     <div class="text-center mt-3">
       <!-- https://unsplash.com/photos/fDaUCTp28dA -->
-      <img
-        src="~/assets/images/sad-lego.jpg"
-        class="img-fluid"
-        alt="Sad Robot"
-      />
+      <img src="~/assets/images/sad-lego.jpg" class="img-fluid" alt="Sad Robot" />
     </div>
     <!-- /#error-page -->
   </div>
@@ -49,19 +45,18 @@ export default {
         hid: 'description',
         name: 'description',
         property: 'og:description',
-        content:
-          'This is the fallback site if the requested page does not exist.',
+        content: 'This is the fallback site if the requested page does not exist.',
       },
     ],
   },
   computed: {
     errorMessage() {
-      let errorMessage = this.error.message
+      let errorMessage = this.error.message;
       if (!errorMessage.endWith('.')) {
-        errorMessage += '.'
+        errorMessage += '.';
       }
-      return errorMessage
+      return errorMessage;
     },
   },
-}
+};
 </script>

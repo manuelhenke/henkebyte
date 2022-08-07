@@ -15,10 +15,10 @@ export default {
   name: 'FloatingContactButtons',
   computed: {
     contactOptions() {
-      return this.$store.state.contactOptions
+      return this.$store.state.contactOptions;
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
