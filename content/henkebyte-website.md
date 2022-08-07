@@ -3,7 +3,7 @@ title: HenkeByte Website
 badge_text: New
 meta_tags:
 - key: description
-  value: Description to this project website including used (dev-)tools, hosting,
+  content: Description to this project website including used (dev-)tools, hosting,
     deployment and content management.
 
 ---
