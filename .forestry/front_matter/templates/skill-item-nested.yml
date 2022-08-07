@@ -1,5 +1,5 @@
 ---
-label: Skill Item
+label: Skill Item Nested
 hide_body: true
 display_field: name
 fields:
