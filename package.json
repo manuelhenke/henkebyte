@@ -1,7 +1,7 @@
 {
   "name": "henkebyte-website",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "description": "A showcase website for different open source web projects including an iOS-Calculator and Minesweeper.",
   "license": "MIT",
   "author": "Manuel Henke",

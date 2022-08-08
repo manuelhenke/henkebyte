@@ -1,23 +1,23 @@
 <template>
   <div class="color-mode-picker">
-    <ul>
-      <li
+    <div class="color-mode-picker-buttons">
+      <button
         v-for="colorMode of colorModes"
         :id="`${colorMode.name}-mode-trigger`"
         :key="colorMode.name"
         :title="`Change theme to ${colorMode.name}mode`"
         :aria-label="`Change color mode to ${colorMode.name}`"
+        class="btn btn-link"
         :class="{
           preferred: !$colorMode.unknown && colorMode.name === $colorMode.preference,
-          // selected: !$colorMode.unknown && colorMode.name === $colorMode.value,
+          selected: !$colorMode.unknown && colorMode.name === $colorMode.value,
         }"
+        type="button"
         @click="changeColorMode(colorMode.name)"
       >
-        <div class="feather">
-          <i :class="`bi bi-${colorMode.icon}`"></i>
-        </div>
-      </li>
-    </ul>
+        <i :class="`bi bi-${colorMode.icon}`"></i>
+      </button>
+    </div>
     <p v-if="showCurrentColorSchemeText">
       <ColorScheme placeholder="..." tag="span">
         Color mode: <b>{{ $colorMode.preference }}</b>
@@ -112,44 +112,34 @@ export default {
 
 $transition-distance: 0.2rem;
 
-ul {
+.color-mode-picker-buttons {
   display: flex;
   gap: map-get($spacers, 1);
-  list-style: none;
   padding: map-get($spacers, 0);
   // padding-top: $transition-distance;
   margin: map-get($spacers, 0);
 
-  li {
-    display: inline-block;
-    padding: map-get($spacers, 0);
-  }
-}
-
-.feather {
-  position: relative;
-  top: 0;
-  cursor: pointer;
-  padding: map-get($spacers, 2);
-  margin: map-get($spacers, 0);
-  transition: top 0.1s ease;
-  /* background-color: var(--bs-light);
+  button {
+    color: var(--bs-body-color);
+    position: relative;
+    top: 0;
+    transition: top 0.1s ease;
+    /* background-color: var(--bs-light);
   border: map-get($border-width, 2) solid var(--bs-body-color);
   border-radius: $border-radius; */
 
-  &:hover {
-    top: -$transition-distance;
+    &:hover {
+      top: -$transition-distance;
+    }
+
+    &.preferred {
+      color: var(--bs-primary);
+    }
+
+    &.selected {
+      /* color: var(--bs-primary); */
+    }
   }
-}
-
-.preferred .feather {
-  border-color: var(--bs-primary);
-  color: var(--bs-primary);
-  // top: -$transition-distance;
-}
-
-.selected .feather {
-  color: var(--bs-primary);
 }
 
 p {
