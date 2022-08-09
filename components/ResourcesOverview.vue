@@ -180,7 +180,7 @@ export default {
         }),
       ])
         .then(([sites, categories]) => {
-          this.sites = sites.items;
+          this.sites = shuffle(sites.items);
           this.categories = categories.items;
           if (this.checkedCategories.length === 0) {
             this.checkedCategories = categories.items.map((item) => item.sys.id);
@@ -195,7 +195,7 @@ export default {
       return this.$store.getters['settings/isPreferringGrid'];
     },
     filteredSites() {
-      let filteredSites = shuffle(this.sites);
+      let filteredSites = this.sites;
       if (this.currentSearchInput) {
         const lowerCaseSearchInput = toLower(this.currentSearchInput);
         filteredSites = filteredSites.filter((site) =>
