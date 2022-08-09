@@ -1,35 +1,32 @@
 <template comments>
-  <ToastProvider>
-    <LayoutRoot id="default-layout" class="container-lg">
-      <!-- #default-layout -->
-      <div class="card bg-light shadow">
-        <!-- .card -->
-        <TheHeader class="header" />
-        <div class="container">
-          <main>
-            <!-- main -->
-            <Nuxt />
-            <!-- /main -->
-          </main>
-          <TheFooter class="footer" />
-        </div>
-        <!-- /.card -->
+  <LayoutRoot id="default-layout" class="container-lg">
+    <!-- #default-layout -->
+    <div class="card bg-light shadow">
+      <!-- .card -->
+      <TheHeader class="header" />
+      <div class="container">
+        <main>
+          <!-- main -->
+          <Nuxt />
+          <!-- /main -->
+        </main>
+        <TheFooter class="footer" />
       </div>
-      <aside>
-        <FloatingContactButtons />
-      </aside>
-      <!-- /#default-layout -->
-    </LayoutRoot>
-  </ToastProvider>
+      <!-- /.card -->
+    </div>
+    <aside>
+      <FloatingContactButtons />
+    </aside>
+    <!-- /#default-layout -->
+  </LayoutRoot>
 </template>
 
 <script>
 import LayoutRoot from './fragments/layout-root.vue';
-import ToastProvider from './fragments/toast-provider.vue';
 
 export default {
   name: 'DefaultLayout',
-  components: { LayoutRoot, ToastProvider },
+  components: { LayoutRoot },
 };
 </script>
 

@@ -55,9 +55,16 @@ export default {
       // Set color mode globally
       this.$colorMode.preference = this.selectedColorMode.name;
 
-      this.$store.dispatch('toasts/addElement', {
-        id: `${this.selectedColorMode.name}-toast`,
-        body: `Theme mode changed to: ${capitalize(this.selectedColorMode.name)}`,
+      this.$nextTick().then(() => {
+        let notificationBody = `Theme mode changed to: ${capitalize(this.selectedColorMode.name)}`;
+        if (this.selectedColorMode.name === 'system') {
+          notificationBody += ` (${capitalize(this.$colorMode.value)})`;
+        }
+
+        this.$store.dispatch('toasts/addElement', {
+          id: `${this.selectedColorMode.name}-toast`,
+          body: notificationBody,
+        });
       });
     },
   },

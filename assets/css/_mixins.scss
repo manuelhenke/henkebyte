@@ -13,11 +13,6 @@
   }
 }
 
-@mixin layout-root {
-  position: relative;
-  min-height: 100vh;
-}
-
 @mixin padding-main-x() {
   --padding-x: #{$container-padding-x};
   padding-left: var(--padding-x);

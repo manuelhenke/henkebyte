@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="toast-provider">
     <slot></slot>
     <div
       v-if="toast"
@@ -47,11 +47,11 @@ export default {
   watch: {
     toast(newToast, oldToast) {
       if (
-        newToast === oldToast ||
-        (!isNil(newToast) && !isNil(oldToast) && newToast.id === oldToast.id)
-      )
-        return;
-      this.displayToast(this.toast);
+        (newToast !== oldToast && isNil(oldToast)) ||
+        (isObject(newToast) && isObject(oldToast) && newToast.id !== oldToast.id)
+      ) {
+        this.displayToast(this.toast);
+      }
     },
   },
   methods: {

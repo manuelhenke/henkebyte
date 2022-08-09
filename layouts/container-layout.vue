@@ -1,33 +1,30 @@
 <template comments>
-  <ToastProvider>
-    <LayoutRoot id="container-layout" class="bg-light">
-      <!-- #container-layout -->
-      <TheHeader />
-      <div class="container">
-        <!-- .container -->
-        <main>
-          <!-- main -->
-          <Nuxt />
-          <!-- /main -->
-        </main>
-        <TheFooter class="footer" />
-        <!-- /.container -->
-      </div>
-      <aside>
-        <FloatingContactButtons />
-      </aside>
-      <!-- /#container-layout -->
-    </LayoutRoot>
-  </ToastProvider>
+  <LayoutRoot id="container-layout" class="bg-light">
+    <!-- #container-layout -->
+    <TheHeader />
+    <div class="container">
+      <!-- .container -->
+      <main>
+        <!-- main -->
+        <Nuxt />
+        <!-- /main -->
+      </main>
+      <TheFooter class="footer" />
+      <!-- /.container -->
+    </div>
+    <aside>
+      <FloatingContactButtons />
+    </aside>
+    <!-- /#container-layout -->
+  </LayoutRoot>
 </template>
 
 <script>
 import LayoutRoot from './fragments/layout-root.vue';
-import ToastProvider from './fragments/toast-provider.vue';
 
 export default {
   name: 'ContainerLayout',
-  components: { LayoutRoot, ToastProvider },
+  components: { LayoutRoot },
 };
 </script>
 
@@ -38,7 +35,7 @@ export default {
   .container {
     @include stretch;
     .footer {
-      margin-top: map-get($spacers, 5);
+      margin-inline: map-get($spacers, 5);
     }
   }
 }
