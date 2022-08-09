@@ -1,30 +1,34 @@
 <template comments>
-  <div id="center-layout" class="layout-root">
-    <!-- #center-layout -->
-    <main class="content-container">
-      <!-- main.content-container -->
-      <Nuxt />
-      <!-- /main.content-container -->
-    </main>
-    <aside>
-      <FloatingContactButtons />
-    </aside>
-    <!-- /#center-layout -->
-  </div>
+  <ToastProvider>
+    <LayoutRoot id="center-layout">
+      <!-- #center-layout -->
+      <main class="content-container">
+        <!-- main.content-container -->
+        <Nuxt />
+        <!-- /main.content-container -->
+      </main>
+      <aside>
+        <FloatingContactButtons />
+      </aside>
+      <!-- /#center-layout -->
+    </LayoutRoot>
+  </ToastProvider>
 </template>
 
 <script>
+import LayoutRoot from './fragments/layout-root.vue';
+import ToastProvider from './fragments/toast-provider.vue';
+
 export default {
   name: 'CenterLayout',
+  components: { LayoutRoot, ToastProvider },
 };
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/css/bootstrap-mixins.scss';
 
-.layout-root {
-  @include layout-root;
-
+#center-layout {
   display: flex;
   place-content: center;
   place-items: center;

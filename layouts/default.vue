@@ -1,38 +1,42 @@
 <template comments>
-  <div id="default-layout" class="layout-root container-lg">
-    <!-- #default-layout -->
-    <div class="card bg-light shadow">
-      <!-- .card -->
-      <TheHeader class="header" />
-      <div class="container">
-        <main>
-          <!-- main -->
-          <Nuxt />
-          <!-- /main -->
-        </main>
-        <TheFooter class="footer" />
+  <ToastProvider>
+    <LayoutRoot id="default-layout" class="container-lg">
+      <!-- #default-layout -->
+      <div class="card bg-light shadow">
+        <!-- .card -->
+        <TheHeader class="header" />
+        <div class="container">
+          <main>
+            <!-- main -->
+            <Nuxt />
+            <!-- /main -->
+          </main>
+          <TheFooter class="footer" />
+        </div>
+        <!-- /.card -->
       </div>
-      <!-- /.card -->
-    </div>
-    <aside>
-      <FloatingContactButtons />
-    </aside>
-    <!-- /#default-layout -->
-  </div>
+      <aside>
+        <FloatingContactButtons />
+      </aside>
+      <!-- /#default-layout -->
+    </LayoutRoot>
+  </ToastProvider>
 </template>
 
 <script>
+import LayoutRoot from './fragments/layout-root.vue';
+import ToastProvider from './fragments/toast-provider.vue';
+
 export default {
   name: 'DefaultLayout',
+  components: { LayoutRoot, ToastProvider },
 };
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/css/bootstrap-mixins.scss';
 
-.layout-root {
-  @include layout-root;
-
+#default-layout {
   .card {
     border: none;
     .container {

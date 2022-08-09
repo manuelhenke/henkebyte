@@ -1,35 +1,40 @@
 <template comments>
-  <div id="container-layout" class="layout-root bg-light">
-    <!-- #container-layout -->
-    <div class="container">
-      <!-- .container -->
+  <ToastProvider>
+    <LayoutRoot id="container-layout" class="bg-light">
+      <!-- #container-layout -->
       <TheHeader />
-      <main>
-        <!-- main -->
-        <Nuxt />
-        <!-- /main -->
-      </main>
-      <TheFooter class="footer" />
-      <!-- /.container -->
-    </div>
-    <aside>
-      <FloatingContactButtons />
-    </aside>
-    <!-- /#container-layout -->
-  </div>
+      <div class="container">
+        <!-- .container -->
+        <main>
+          <!-- main -->
+          <Nuxt />
+          <!-- /main -->
+        </main>
+        <TheFooter class="footer" />
+        <!-- /.container -->
+      </div>
+      <aside>
+        <FloatingContactButtons />
+      </aside>
+      <!-- /#container-layout -->
+    </LayoutRoot>
+  </ToastProvider>
 </template>
 
 <script>
+import LayoutRoot from './fragments/layout-root.vue';
+import ToastProvider from './fragments/toast-provider.vue';
+
 export default {
   name: 'ContainerLayout',
+  components: { LayoutRoot, ToastProvider },
 };
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/css/bootstrap-mixins.scss';
 
-.layout-root {
-  @include layout-root;
+#container-layout {
   .container {
     @include stretch;
     .footer {

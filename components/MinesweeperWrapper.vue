@@ -415,6 +415,13 @@ export default {
       this.isEnded = true;
       this.$refs.stopwatch.stop();
 
+      this.$store.dispatch('toasts/addElement', {
+        body: `Unfortunately, you lost this round of Minesweeper. Just try again!`,
+        options: {
+          delay: 6000,
+        },
+      });
+
       this.addDbEntry(false);
     },
     clickedRestart() {
