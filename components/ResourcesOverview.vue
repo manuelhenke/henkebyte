@@ -154,7 +154,7 @@
 </template>
 
 <script>
-import { includes, isEqual, sortBy, toLower, trim } from 'lodash-es';
+import { includes, isEqual, shuffle, sortBy, toLower, trim } from 'lodash-es';
 import Masonry from 'masonry-layout';
 import { client } from '~/plugins/contentful';
 
@@ -195,7 +195,7 @@ export default {
       return this.$store.getters['settings/isPreferringGrid'];
     },
     filteredSites() {
-      let filteredSites = this.sites;
+      let filteredSites = shuffle(this.sites);
       if (this.currentSearchInput) {
         const lowerCaseSearchInput = toLower(this.currentSearchInput);
         filteredSites = filteredSites.filter((site) =>

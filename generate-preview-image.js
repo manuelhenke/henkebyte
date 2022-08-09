@@ -48,10 +48,11 @@ async function goToPage(context, url) {
     page.waitForLoadState('load'),
     page.waitForLoadState('domcontentloaded'),
     page.waitForSelector('img'),
-    page.waitForTimeout(500), // TODO: replace with better selector
+    page.waitForTimeout(1000), // TODO: replace with better selector
   ];
   if (url.includes('resources-overview')) {
     // waitForPromises.push(page.waitForEvent('layoutComplete'));
+    waitForPromises.push(page.waitForSelector('article.card'));
   }
   await Promise.all(waitForPromises);
   return page;
