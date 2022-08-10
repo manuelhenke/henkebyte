@@ -191,7 +191,7 @@ Chart.register(ArcElement, DoughnutController, Legend, Title, Tooltip);
 const GAME_MODES = {
   NOOB: {
     name: 'noob',
-    endAnimationDuration: 2000,
+    endAnimationDuration: 5000,
     config: {
       columns: 5,
       rows: 5,
@@ -242,6 +242,7 @@ export default {
     isEnded: true,
     /** @type {Fireworks} */
     fireworks: null,
+    endAnimationTimeoutId: null,
     currentGameModeName: GAME_MODES.EASY.name,
     games: [],
     maxScoreboardGamesVisible: 10,
@@ -362,7 +363,7 @@ export default {
 
       this.addDbEntry(true);
 
-      window.setTimeout(() => {
+      this.endAnimationTimeoutId = window.setTimeout(() => {
         this.fireworks.stop();
       }, this.getCurrentGameMode().endAnimationDuration);
     },
@@ -381,7 +382,7 @@ export default {
 
       this.addDbEntry(false);
 
-      window.setTimeout(() => {
+      this.endAnimationTimeoutId = window.setTimeout(() => {
         this.$refs.rain.clear();
       }, this.getCurrentGameMode().endAnimationDuration);
     },
@@ -394,6 +395,7 @@ export default {
       this.isEnded = true;
       this.fireworks.stop();
       this.$refs.rain.clear();
+      window.clearTimeout(this.endAnimationTimeoutId);
       this.$refs.stopwatch.reset();
       this.$nuxt.$emit(REMOVE_NOTIFICATION, this.notificationId);
       this.$refs.minesweeper.restartGame();
