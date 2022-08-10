@@ -28,6 +28,7 @@
 <script>
 import { random } from 'lodash-es';
 
+// Heavily based on: https://codepen.io/arickle/pen/XKjMZY
 export default {
   name: 'RainOverlay',
   props: {
