@@ -357,7 +357,7 @@ export default {
         id: this.notificationId,
         body: `Congratulations, you have won!`,
         options: {
-          delay: 6000,
+          delay: GAME_MODES.NOOB.endAnimationDuration,
         },
       });
 
@@ -376,7 +376,7 @@ export default {
         id: this.notificationId,
         body: `Unfortunately, you lost this round of Minesweeper. Just try again!`,
         options: {
-          delay: 6000,
+          delay: GAME_MODES.NOOB.endAnimationDuration,
         },
       });
 
