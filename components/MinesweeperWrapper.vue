@@ -110,14 +110,11 @@
             </thead>
             <tbody>
               <tr
-                v-for="(game, index) in currentGameModeScoreboardEntries.slice(
-                  0,
-                  maxScoreboardGamesVisible
-                )"
-                :key="index"
+                v-for="game in currentGameModeScoreboardEntries.slice(0, maxScoreboardGamesVisible)"
+                :key="game.rank"
                 class="scoreboard-row"
               >
-                <th scope="row">{{ index + 1 }}</th>
+                <th scope="row">{{ game.rank }}</th>
                 <td>
                   <TimeString :milliseconds="game.gameDuration" />
                 </td>
@@ -141,7 +138,7 @@
             </tbody>
             <tfoot>
               <tr>
-                <th scope="row">Avg.</th>
+                <th scope="row">&sum; {{ currentGameModeScoreboardEntries.length }}</th>
                 <td>~<TimeString :milliseconds="currentGameModeAverageDuration" /></td>
                 <td></td>
                 <td></td>
@@ -178,7 +175,7 @@
 </template>
 
 <script>
-import { capitalize, find, lowerCase, map } from 'lodash-es';
+import { capitalize, filter, find, lowerCase, map, meanBy, reverse, size, sortBy } from 'lodash-es';
 import { Fireworks } from 'fireworks-js';
 import { liveQuery } from 'dexie';
 import { Chart, ArcElement, DoughnutController, Legend, Title, Tooltip } from 'chart.js';
@@ -250,6 +247,7 @@ export default {
     maxScoreboardGamesVisible: 10,
     gamesHistoryChart: null,
     notificationId: 'minesweeper-notification',
+    sortGamesByDuration: false,
   }),
   computed: {
     isStopwatchRunning() {
@@ -260,16 +258,18 @@ export default {
       }
     },
     currentGameModeGames() {
-      return this.games.filter((game) => game.gamemode === this.currentGameModeName);
+      return filter(this.games, { gamemode: this.currentGameModeName });
     },
     currentGameModeScoreboardEntries() {
-      return this.currentGameModeGames.filter((game) => game.gameIsWon);
+      const games = map(filter(this.currentGameModeGames, 'gameIsWon'), (game, index) => ({
+        rank: index + 1,
+        ...game,
+      }));
+
+      return this.sortGamesByDuration ? games : reverse(sortBy(games, 'gameCompletionTimestamp'));
     },
     currentGameModeAverageDuration() {
-      const sum = this.currentGameModeScoreboardEntries
-        .map((game) => game.gameDuration)
-        .reduce((a, b) => a + b, 0);
-      return sum / this.currentGameModeScoreboardEntries.length || 0;
+      return meanBy(this.currentGameModeScoreboardEntries, 'gameDuration');
     },
     gameModesSelectionOptions() {
       return map(GAME_MODES, ({ name, config: { columns, rows, bombs } }) => ({
@@ -282,12 +282,14 @@ export default {
   watch: {
     currentGameModeGames() {
       if (this.currentGameModeGames.length && this.$refs['game-history-chart']) {
-        const wonGames = this.currentGameModeGames.filter((game) => game.gameIsWon).length;
-        const lostGames = this.currentGameModeGames.length - wonGames;
+        const wonGames = size(filter(this.currentGameModeGames, 'gameIsWon'));
+        const lostGames = size(this.currentGameModeGames) - wonGames;
 
         if (this.gamesHistoryChart) {
           this.gamesHistoryChart.data.datasets[0].data = [wonGames, lostGames];
-          this.gamesHistoryChart.options.plugins.title.text = `${this.currentGameModeGames.length} game(s) played in total`;
+          this.gamesHistoryChart.options.plugins.title.text = `${size(
+            this.currentGameModeGames
+          )} game(s) played in total`;
           this.gamesHistoryChart.update();
         } else {
           const config = {
@@ -306,7 +308,7 @@ export default {
             options: {
               plugins: {
                 title: {
-                  text: `${this.currentGameModeGames.length} game(s) played in total`,
+                  text: `${size(this.currentGameModeGames)} game(s) played in total`,
                   display: true,
                   position: 'bottom',
                 },
@@ -328,7 +330,7 @@ export default {
     });
 
     liveQuery(() => db.games.toArray()).subscribe((games) => {
-      this.games = games.sort((gameA, gameB) => gameA.gameDuration - gameB.gameDuration);
+      this.games = sortBy(games, 'gameDuration');
     });
   },
   methods: {
