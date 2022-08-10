@@ -71,7 +71,7 @@ export default {
     });
 
     this.$nuxt.$on(REMOVE_NOTIFICATION, (toastId) => {
-      if (this.lastActiveToast.id === toastId) {
+      if (hasIn(this.lastActiveToast, 'id') && this.lastActiveToast.id === toastId) {
         this.removeToast();
       }
     });
