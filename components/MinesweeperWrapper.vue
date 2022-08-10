@@ -232,6 +232,7 @@
       </div>
     </div>
 
+    <RainOverlay ref="rain" no-init-rain />
     <div ref="firework" class="firework-container"></div>
   </div>
 </template>
@@ -250,7 +251,7 @@ Chart.register(ArcElement, DoughnutController, Legend, Title, Tooltip);
 const GAME_MODES = {
   NOOB: {
     name: 'noob',
-    fireworkDuration: 2000,
+    endAnimationDuration: 2000,
     config: {
       columns: 5,
       rows: 5,
@@ -259,7 +260,7 @@ const GAME_MODES = {
   },
   EASY: {
     name: 'easy',
-    fireworkDuration: 10000,
+    endAnimationDuration: 10000,
     config: {
       columns: 9,
       rows: 9,
@@ -268,7 +269,7 @@ const GAME_MODES = {
   },
   NORMAL: {
     name: 'normal',
-    fireworkDuration: 15000,
+    endAnimationDuration: 15000,
     config: {
       columns: 16,
       rows: 16,
@@ -277,7 +278,7 @@ const GAME_MODES = {
   },
   HARD: {
     name: 'hard',
-    fireworkDuration: 20000,
+    endAnimationDuration: 20000,
     config: {
       columns: 30,
       rows: 16,
@@ -286,7 +287,7 @@ const GAME_MODES = {
   },
   EXTREME: {
     name: 'extreme',
-    fireworkDuration: 30000,
+    endAnimationDuration: 30000,
     config: {
       columns: 30,
       rows: 30,
@@ -409,11 +410,12 @@ export default {
 
       window.setTimeout(() => {
         this.fireworks.stop();
-      }, this.getCurrentGameMode().fireworkDuration);
+      }, this.getCurrentGameMode().endAnimationDuration);
     },
     onGameLost() {
       this.isEnded = true;
       this.$refs.stopwatch.stop();
+      this.$refs.rain.start();
 
       this.$store.dispatch('toasts/addElement', {
         body: `Unfortunately, you lost this round of Minesweeper. Just try again!`,
@@ -423,6 +425,10 @@ export default {
       });
 
       this.addDbEntry(false);
+
+      window.setTimeout(() => {
+        this.$refs.rain.clear();
+      }, this.getCurrentGameMode().endAnimationDuration);
     },
     clickedRestart() {
       if (this.isEnded) {
@@ -432,6 +438,7 @@ export default {
     restartGame() {
       this.isEnded = true;
       this.fireworks.stop();
+      this.$refs.rain.clear();
       this.$refs.stopwatch.reset();
       this.$refs.minesweeper.restartGame();
     },

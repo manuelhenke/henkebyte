@@ -4,11 +4,17 @@
     --#{$variable-prefix}#{$color}: #{$value};
   }
 
+  --#{$variable-prefix}black: #{$black};
+  --#{$variable-prefix}white: #{$white};
+
   /* redefine theme color rgb vars (used for bg- colors) */
   $theme-colors-rgb: map-loop($theme-colors, to-rgb, '$value');
   @each $color, $value in $theme-colors-rgb {
     --#{$variable-prefix}#{$color}-rgb: #{$value};
   }
+
+  --#{$variable-prefix}black-rgb: #{to-rgb($black)};
+  --#{$variable-prefix}white-rgb: #{to-rgb($white)};
 
   --#{$variable-prefix}body-color: #{$body-color};
   --#{$variable-prefix}body-bg: #{$body-bg};
