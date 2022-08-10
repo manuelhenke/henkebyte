@@ -138,7 +138,7 @@
             </tbody>
             <tfoot>
               <tr>
-                <th scope="row">&sum; {{ currentGameModeScoreboardEntries.length }}</th>
+                <th scope="row ">&sum;&nbsp;{{ currentGameModeScoreboardEntries.length }}</th>
                 <td>~<TimeString :milliseconds="currentGameModeAverageDuration" /></td>
                 <td></td>
                 <td></td>
@@ -247,7 +247,7 @@ export default {
     maxScoreboardGamesVisible: 10,
     gamesHistoryChart: null,
     notificationId: 'minesweeper-notification',
-    sortGamesByDuration: false,
+    sortGamesByDuration: true,
   }),
   computed: {
     isStopwatchRunning() {
