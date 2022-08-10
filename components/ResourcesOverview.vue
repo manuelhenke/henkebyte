@@ -156,7 +156,7 @@
 <script>
 import { includes, isEqual, shuffle, sortBy, toLower, trim } from 'lodash-es';
 import Masonry from 'masonry-layout';
-import { client } from '~/plugins/contentful';
+import { client } from '@/plugins/contentful';
 
 export default {
   name: 'ResourcesOverview',

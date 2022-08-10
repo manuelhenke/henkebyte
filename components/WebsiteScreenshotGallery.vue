@@ -47,7 +47,7 @@
 import { DIRECTION, Flicking } from '@egjs/vue-flicking';
 import { Fade, AutoPlay, Arrow, Pagination, PAGINATION } from '@egjs/flicking-plugins';
 import { sample, capitalize, replace, toLower } from 'lodash-es';
-import { routes } from '~/util/routes';
+import { routes } from '@/util/routes';
 
 const DEVICE_TYPES = {
   DESKTOP: 'desktop',

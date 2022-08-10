@@ -31,6 +31,9 @@
 
 <script>
 import { capitalize } from 'lodash-es';
+import globalEventNames from '@/util/globalEventNames';
+
+const { DISPLAY_NOTIFICATION } = globalEventNames;
 
 export default {
   name: 'ColorModePicker',
@@ -61,7 +64,7 @@ export default {
           notificationBody += ` (${capitalize(this.$colorMode.value)})`;
         }
 
-        this.$store.dispatch('toasts/addElement', {
+        this.$nuxt.$emit(DISPLAY_NOTIFICATION, {
           id: `${this.selectedColorMode.name}-toast`,
           body: notificationBody,
         });

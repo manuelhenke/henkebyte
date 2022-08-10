@@ -78,6 +78,7 @@ export default {
       default: false,
     },
   },
+  emits: ['confirm', 'cancel'],
   computed: {
     titleId() {
       return uniqueId('modal-');

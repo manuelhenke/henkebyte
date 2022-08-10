@@ -182,9 +182,12 @@ import { capitalize, find, lowerCase, map } from 'lodash-es';
 import { Fireworks } from 'fireworks-js';
 import { liveQuery } from 'dexie';
 import { Chart, ArcElement, DoughnutController, Legend, Title, Tooltip } from 'chart.js';
-import { db } from '~/middleware/db';
-import { timestampToDateString } from '~/util';
+import { db } from '@/middleware/db';
+import { timestampToDateString } from '@/util';
+import globalEventNames from '@/util/globalEventNames';
 import 'minesweeper-for-web';
+
+const { DISPLAY_NOTIFICATION, REMOVE_NOTIFICATION } = globalEventNames;
 
 Chart.register(ArcElement, DoughnutController, Legend, Title, Tooltip);
 
@@ -246,6 +249,7 @@ export default {
     games: [],
     maxScoreboardGamesVisible: 10,
     gamesHistoryChart: null,
+    notificationId: 'minesweeper-notification',
   }),
   computed: {
     isStopwatchRunning() {
@@ -346,6 +350,14 @@ export default {
       this.$refs.stopwatch.stop();
       this.fireworks.start();
 
+      this.$nuxt.$emit(DISPLAY_NOTIFICATION, {
+        id: this.notificationId,
+        body: `Congratulations, you have won!`,
+        options: {
+          delay: 6000,
+        },
+      });
+
       this.addDbEntry(true);
 
       window.setTimeout(() => {
@@ -357,7 +369,8 @@ export default {
       this.$refs.stopwatch.stop();
       this.$refs.rain.start();
 
-      this.$store.dispatch('toasts/addElement', {
+      this.$nuxt.$emit(DISPLAY_NOTIFICATION, {
+        id: this.notificationId,
         body: `Unfortunately, you lost this round of Minesweeper. Just try again!`,
         options: {
           delay: 6000,
@@ -380,6 +393,7 @@ export default {
       this.fireworks.stop();
       this.$refs.rain.clear();
       this.$refs.stopwatch.reset();
+      this.$nuxt.$emit(REMOVE_NOTIFICATION, this.notificationId);
       this.$refs.minesweeper.restartGame();
     },
     handleMinesweeperClick() {
