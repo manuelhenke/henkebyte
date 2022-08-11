@@ -20,12 +20,6 @@ on:
       - 'LICENSE'
       - 'README.md'
 
-env:
-  TARGET_FOLDER: ./dist
-  AWS_REGION: eu-central-1
-  AWS_S3_BUCKET_URI: s3://henkebyte.com
-  AWS_CLOUDFRONT_DISTRIBUTION_ID: E1GEYIE2ZCH07U
-
 jobs:
   build:
     name: Build
