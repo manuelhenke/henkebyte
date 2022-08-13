@@ -1,3 +1,4 @@
+import { str } from 'envalid';
 import { getRoutes, mapRoutes } from './util/routesUtils';
 
 const buildDescription = (target) =>
@@ -119,6 +120,7 @@ export default {
     '@nuxtjs/stylelint-module',
     // https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+    '~/modules/nuxt-envalid.js',
     // https://sitemap.nuxtjs.org/
     '@nuxtjs/sitemap',
     // https://github.com/nuxt-community/robots-module
@@ -211,5 +213,13 @@ export default {
   // https://color-mode.nuxtjs.org/
   colorMode: {
     fallback: 'light',
+  },
+
+  envalid: {
+    validators: {
+      CTF_SPACE_ID: str(),
+      CTF_CDA_ACCESS_TOKEN: str(),
+      CTF_ENVIRONMENT: str({ default: '' }),
+    },
   },
 };
