@@ -8933,6 +8933,13 @@ num2fraction@^1.2.2:
   resolved "https://registry.yarnpkg.com/num2fraction/-/num2fraction-1.2.2.tgz#6f682b6a027a4e9ddfa4564cd2589d1d4e669ede"
   integrity sha512-Y1wZESM7VUThYY+4W+X4ySH2maqcA+p7UR+w8VWNWVAd6lwuXXWz/w/Cz43J/dI2I+PS6wD5N+bJUF+gjWvIqg==
 
+nuxt-envalid@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/nuxt-envalid/-/nuxt-envalid-0.0.2.tgz#d8a677c877437e819ad0a1a475e7ee66e14703f1"
+  integrity sha512-nkaldWGzNnqRXA6gKnqhrVtkl/A6J5epQRdRJd+AdA+nVi9m4VlVGbWwVNecAiVG4PcXSYhw2Bgm3z7qdpJ1NA==
+  dependencies:
+    envalid "^7.3.1"
+
 nuxt@^2.15.8:
   version "2.15.8"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-2.15.8.tgz#946cba46bdaaf0e3918aa27fd9ea0fed8ed303b0"
