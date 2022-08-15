@@ -5889,10 +5889,10 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
-fireworks-js@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/fireworks-js/-/fireworks-js-2.0.0.tgz#c3355bfc3a92ccb3fddf626013954d49e763e461"
-  integrity sha512-HtTwD7EHsJ1jwiz/e3/nERLnApcczhRBRXE6CZfs58jU9qvuMXhnykcCdxX8LyFW2v/vKDXPBMKMKLkILTW3Tw==
+fireworks-js@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/fireworks-js/-/fireworks-js-2.0.1.tgz#21f50f5a8e23284f94dc6bd1b4ca7f9ecf8cafb9"
+  integrity sha512-kXJdeY9LH07B87kqkKR4MqQa7m/qm0RbHZrv25Nw/sm273hJk7AtMAW7vry7qNT3Bz/3j958rpAOs/w/HG1d/g==
 
 fizzy-ui-utils@^2.0.0:
   version "2.0.7"
