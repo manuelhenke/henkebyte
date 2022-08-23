@@ -6,11 +6,7 @@ export default ({ store }) => {
   new VuexPersistence({
     storage: window.localStorage,
     reducer: (state) => {
-      const stateToSave = {};
-      modulesToPersist.forEach((module) => {
-        stateToSave[module] = state[module];
-      });
-      return stateToSave;
+      return Object.fromEntries(modulesToPersist.map((module) => [module, state[module]]));
     },
   }).plugin(store);
 };

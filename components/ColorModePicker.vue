@@ -31,7 +31,7 @@
 
 <script>
 import { capitalize } from 'lodash-es';
-import globalEventNames from '@/util/globalEventNames';
+import globalEventNames from '@/util/global-event-names.js';
 
 const { DISPLAY_NOTIFICATION } = globalEventNames;
 
@@ -45,7 +45,7 @@ export default {
     },
   },
   data: () => ({
-    selectedColorMode: null,
+    selectedColorMode: undefined,
     colorModes: [
       { name: 'system', icon: 'gear-fill' },
       { name: 'light', icon: 'sun-fill' },

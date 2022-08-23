@@ -20,8 +20,8 @@
         id="show-btn"
         class="btn btn-outline-primary"
         type="button"
-        :data-bs-toggle="isEnded ? null : 'modal'"
-        :data-bs-target="isEnded ? null : '#restart-modal'"
+        :data-bs-toggle="isEnded ? undefined : 'modal'"
+        :data-bs-target="isEnded ? undefined : '#restart-modal'"
         @click="clickedRestart"
       >
         Restart
@@ -85,7 +85,7 @@
       <div v-else>Just hold a field to place a flag.</div>
     </div>
 
-    <section v-show="currentGameModeScoreboardEntries.length">
+    <section v-show="currentGameModeScoreboardEntries.length > 0">
       <div class="d-flex gap-2 align-items-center justify-content-between">
         <h2>Personal Scoreboard</h2>
         <button
@@ -179,9 +179,9 @@ import { capitalize, filter, find, lowerCase, map, meanBy, reverse, size, sortBy
 import { Fireworks } from 'fireworks-js';
 import { liveQuery } from 'dexie';
 import { Chart, ArcElement, DoughnutController, Legend, Title, Tooltip } from 'chart.js';
-import { db } from '@/middleware/db';
-import { timestampToDateString } from '@/util';
-import globalEventNames from '@/util/globalEventNames';
+import { database } from '@/middleware/database.js';
+import { timestampToDateString } from '@/util/index.js';
+import globalEventNames from '@/util/global-event-names.js';
 import 'minesweeper-for-web';
 
 const { DISPLAY_NOTIFICATION, REMOVE_NOTIFICATION } = globalEventNames;
@@ -200,7 +200,7 @@ const GAME_MODES = {
   },
   EASY: {
     name: 'easy',
-    endAnimationDuration: 10000,
+    endAnimationDuration: 10_000,
     config: {
       columns: 9,
       rows: 9,
@@ -209,7 +209,7 @@ const GAME_MODES = {
   },
   NORMAL: {
     name: 'normal',
-    endAnimationDuration: 15000,
+    endAnimationDuration: 15_000,
     config: {
       columns: 16,
       rows: 16,
@@ -218,7 +218,7 @@ const GAME_MODES = {
   },
   HARD: {
     name: 'hard',
-    endAnimationDuration: 20000,
+    endAnimationDuration: 20_000,
     config: {
       columns: 30,
       rows: 16,
@@ -227,7 +227,7 @@ const GAME_MODES = {
   },
   EXTREME: {
     name: 'extreme',
-    endAnimationDuration: 30000,
+    endAnimationDuration: 30_000,
     config: {
       columns: 30,
       rows: 30,
@@ -241,12 +241,12 @@ export default {
   data: () => ({
     isEnded: true,
     /** @type {Fireworks} */
-    fireworks: null,
-    endAnimationTimeoutId: null,
+    fireworks: undefined,
+    endAnimationTimeoutId: undefined,
     currentGameModeName: GAME_MODES.EASY.name,
     games: [],
     maxScoreboardGamesVisible: 10,
-    gamesHistoryChart: null,
+    gamesHistoryChart: undefined,
     notificationId: 'minesweeper-notification',
     sortGamesByDuration: true,
   }),
@@ -254,7 +254,7 @@ export default {
     isStopwatchRunning() {
       try {
         return this.$refs.stopwatch.isRunning;
-      } catch (error) {
+      } catch {
         return false;
       }
     },
@@ -282,7 +282,7 @@ export default {
   },
   watch: {
     currentGameModeGames() {
-      if (this.currentGameModeGames.length && this.$refs['game-history-chart']) {
+      if (this.currentGameModeGames.length > 0 && this.$refs['game-history-chart']) {
         const wonGames = size(filter(this.currentGameModeGames, 'gameIsWon'));
         const lostGames = size(this.currentGameModeGames) - wonGames;
 
@@ -330,7 +330,7 @@ export default {
       acceleration: 1.01,
     });
 
-    liveQuery(() => db.games.toArray()).subscribe((games) => {
+    liveQuery(() => database.games.toArray()).subscribe((games) => {
       this.games = sortBy(games, 'gameDuration');
     });
   },
@@ -342,8 +342,8 @@ export default {
     getGameModeConfiguration() {
       return this.getCurrentGameMode().config;
     },
-    onChangedGameMode(e) {
-      e.preventDefault();
+    onChangedGameMode(event) {
+      event.preventDefault();
       const gameModeConfiguration = this.getGameModeConfiguration();
       this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration);
       this.restartGame();
@@ -414,13 +414,13 @@ export default {
       }
     },
     resetGameHistory() {
-      db.games.clear();
+      database.games.clear();
     },
     removeScoreboardEntry(gameId) {
-      db.games.delete(gameId);
+      database.games.delete(gameId);
     },
     addDbEntry(isWon) {
-      db.games.add({
+      database.games.add({
         gamemode: this.currentGameModeName,
         gameDuration: this.$refs.stopwatch.elapsedTime,
         gameCompletionTimestamp: Date.now(),

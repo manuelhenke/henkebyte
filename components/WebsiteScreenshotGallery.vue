@@ -47,7 +47,7 @@
 import { DIRECTION, Flicking } from '@egjs/vue-flicking';
 import { Fade, AutoPlay, Arrow, Pagination, PAGINATION } from '@egjs/flicking-plugins';
 import { sample, capitalize, replace, toLower } from 'lodash-es';
-import { routes } from '@/util/routes';
+import { routes } from '@/util/routes.cjs';
 
 const DEVICE_TYPES = {
   DESKTOP: 'desktop',
@@ -67,7 +67,7 @@ export default {
     autoPlayDuration: {
       type: Number,
       required: false,
-      default: 10000,
+      default: 10_000,
     },
   },
   data: () => ({

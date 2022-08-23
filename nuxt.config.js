@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { str } from 'nuxt-envalid';
-import { getRoutes, mapRoutes } from './util/routesUtils';
+import { getRoutes, mapRoutes } from './util/routes-utils.js';
 
 const buildDescription = (target) =>
   `A showcase ${target} for different open source web projects including an iOS-Calculator and Minesweeper.`;
@@ -23,7 +23,8 @@ export default {
     // Recommended length: 60 characters
     title: 'HenkeByte',
     meta: [
-      { charset: 'utf-8' },
+      // eslint-disable-next-line unicorn/text-encoding-identifier-case
+      { charset: 'UTF-8' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       {
         name: 'viewport',
@@ -180,7 +181,7 @@ export default {
   // Router Configuration: https://nuxtjs.org/docs/configuration-glossary/configuration-router
   router: {
     trailingSlash: false,
-    middleware: 'trailingSlashRedirect',
+    middleware: 'trailing-slash-redirect',
     linkActiveClass: 'child-active',
     linkExactActiveClass: 'active',
   },
@@ -204,6 +205,9 @@ export default {
     transpile: ['@nuxtjs/color-mode'],
     postcss: {
       plugins: [],
+    },
+    babel: {
+      babelrc: true,
     },
   },
 

@@ -38,7 +38,7 @@
 <script>
 import { Toast } from 'bootstrap';
 import { defaultsDeep, hasIn, uniqueId } from 'lodash-es';
-import globalEventNames from '@/util/globalEventNames';
+import globalEventNames from '@/util/global-event-names.js';
 
 const { DISPLAY_NOTIFICATION, REMOVE_NOTIFICATION } = globalEventNames;
 
@@ -46,7 +46,7 @@ export default {
   name: 'ToastProvider',
   props: {},
   data: () => ({
-    lastActiveToast: null,
+    lastActiveToast: undefined,
   }),
   beforeMount() {
     this.$nuxt.$on(DISPLAY_NOTIFICATION, (toast) => {
@@ -80,7 +80,7 @@ export default {
     async displayToast(toast) {
       this.lastActiveToast = toast;
       await this.$nextTick();
-      const toastElement = document.getElementById(toast.id);
+      const toastElement = document.querySelector(`#${toast.id}`);
 
       if (toastElement) {
         this.lastActiveToast.element = new Toast(toastElement, toast.options);
@@ -91,7 +91,7 @@ export default {
       if (hasIn(this.lastActiveToast, 'element')) {
         try {
           this.lastActiveToast.element.dispose();
-        } catch (error) {}
+        } catch {}
       }
     },
   },

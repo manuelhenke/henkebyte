@@ -7,31 +7,40 @@
   },
   "parserOptions": {
     "parser": "@babel/eslint-parser",
+    "requireConfigFile": true,
     "sourceType": "module"
   },
   "extends": [
     "airbnb-base",
+    "airbnb-babel",
     "@nuxtjs",
     "plugin:jest/recommended",
     "plugin:nuxt/recommended",
     "plugin:sonarjs/recommended",
+    "plugin:unicorn/recommended",
     "plugin:prettier/recommended"
   ],
   "ignorePatterns": [".forestry/**/*", "static/admin/**/*"],
-  "plugins": ["sonarjs"],
+  "plugins": ["@babel", "no-only-tests", "no-secrets"],
   // add your custom rules here
   "rules": {
-    "import/extensions": [
-      "error",
-      {
-        "js": "never"
-      }
-    ],
+    "import/extensions": ["error", "ignorePackages"],
     "no-param-reassign": [
       "error",
       {
         "props": true,
         "ignorePropertyModificationsFor": ["state"]
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "no-only-tests/no-only-tests": "error",
+    "no-secrets/no-secrets": "error",
+    "unicorn/no-array-for-each": "off",
+    "unicorn/filename-case": [
+      "error",
+      {
+        "case": "kebabCase",
+        "ignore": [".vue$"]
       }
     ]
   }

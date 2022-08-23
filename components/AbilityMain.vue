@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import { isArray, isEmpty, map, orderBy } from 'lodash-es';
+
 export default {
   name: 'AbilityMain',
   props: {
@@ -22,12 +24,17 @@ export default {
   },
   methods: {
     sortByStars(entries) {
-      return Array.from(entries)
-        .map((entry) => ({
+      return orderBy(
+        map(entries, (entry) => ({
           ...entry,
-          libraries: entry.libraries ? this.sortByStars(entry.libraries) : undefined,
-        }))
-        .sort((e1, e2) => e2.stars - e1.stars);
+          libraries:
+            isArray(entry.libraries) && !isEmpty(entry.libraries)
+              ? this.sortByStars(entry.libraries)
+              : undefined,
+        })),
+        ['stars', 'name'],
+        ['desc', 'asc']
+      );
     },
   },
 };

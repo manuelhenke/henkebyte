@@ -71,7 +71,7 @@ export default {
   mixins: [clickaway],
   data: () => ({
     isMobileMenuVisible: false,
-    isSticky: null,
+    isSticky: undefined,
   }),
   computed: {
     navigation() {
@@ -114,11 +114,7 @@ export default {
       this.isMobileMenuVisible = false;
     },
     checkIsSticky: throttle(function checkIsSticky() {
-      if (this.$refs.header.offsetTop > 0) {
-        this.isSticky = true;
-      } else {
-        this.isSticky = false;
-      }
+      this.isSticky = this.$refs.header.offsetTop > 0;
     }, 200),
   },
 };
