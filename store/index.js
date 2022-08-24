@@ -6,7 +6,7 @@ export const state = () => ({
     routes.HOME,
     {
       title: 'General',
-      links: [routes.ABOUT_ME, routes.RESOURCES_OVERVIEW],
+      links: [routes.ABOUT_ME, routes.RESOURCES_OVERVIEW, routes.F1_COUNTDOWN],
     },
     {
       title: 'Projects',
