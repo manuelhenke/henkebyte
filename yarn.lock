@@ -2247,9 +2247,9 @@
     "@types/node" "*"
 
 "@types/bootstrap@^5.2.2":
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/@types/bootstrap/-/bootstrap-5.2.2.tgz#74c7b37383909a7658a0eaf8992a5ec6a64c8a8d"
-  integrity sha512-Vzsa2RWFE9emGSlbFp9zgIhzBQ0gsWHD6oD0Qy/N1mPmMbm2yumAYfcaTMj3iHJhWBAshJWHJsscY3KbkKEu5w==
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/@types/bootstrap/-/bootstrap-5.2.3.tgz#562defe61dac6c9598843d4088de8007a36607bd"
+  integrity sha512-r2SE9NYaaI7B/jJk8gqRtXzlhgFL6dlXBResJkCbQa8ept619WeiOIO4zBQxdmUFzkKNWLK5ZOyYGI3QZoaqbQ==
   dependencies:
     "@popperjs/core" "^2.9.2"
 
@@ -2492,9 +2492,9 @@
     "@types/node" "*"
 
 "@types/node@*", "@types/node@>=12":
-  version "18.7.11"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.11.tgz#486e72cfccde88da24e1f23ff1b7d8bfb64e6250"
-  integrity sha512-KZhFpSLlmK/sdocfSAjqPETTMd0ug6HIMIAwkwUpU79olnZdQtMxpQP+G1wDzCH7na+FltSIhbaZuKdwZ8RDrw==
+  version "18.7.13"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.13.tgz#23e6c5168333480d454243378b69e861ab5c011a"
+  integrity sha512-46yIhxSe5xEaJZXWdIBP7GU4HDTG8/eo0qd9atdiL+lFpA03y8KS+lkTN834TWJj5767GbWv4n/P6efyTFt1Dw==
 
 "@types/node@12.20.12":
   version "12.20.12"
@@ -8988,10 +8988,10 @@ num2fraction@^1.2.2:
   resolved "https://registry.yarnpkg.com/num2fraction/-/num2fraction-1.2.2.tgz#6f682b6a027a4e9ddfa4564cd2589d1d4e669ede"
   integrity sha512-Y1wZESM7VUThYY+4W+X4ySH2maqcA+p7UR+w8VWNWVAd6lwuXXWz/w/Cz43J/dI2I+PS6wD5N+bJUF+gjWvIqg==
 
-nuxt-envalid@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/nuxt-envalid/-/nuxt-envalid-0.0.2.tgz#d8a677c877437e819ad0a1a475e7ee66e14703f1"
-  integrity sha512-nkaldWGzNnqRXA6gKnqhrVtkl/A6J5epQRdRJd+AdA+nVi9m4VlVGbWwVNecAiVG4PcXSYhw2Bgm3z7qdpJ1NA==
+nuxt-envalid@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/nuxt-envalid/-/nuxt-envalid-0.0.3.tgz#c8bbd92df0ec033a41ba6bcba197b54357b07ed9"
+  integrity sha512-EJoKj85N2MvLn/RZVa7m51i5hJKPVPqGC5zYieliXuZQW+2HcrkMDp7Ax/wNEVoeF5OFmoDkXTZd3KDNdn6Kmg==
   dependencies:
     envalid "^7.3.1"
 
