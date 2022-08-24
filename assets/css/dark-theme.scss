@@ -1,0 +1,33 @@
+@import 'variables';
+
+.dark-mode {
+  $info: #7a00f3;
+  $light: #121212;
+  $dark: #212529;
+
+  $modal-content-bg: $light;
+  $body-color: rgba(255, 255, 255, 0.87);
+  $btn-primary-color: #000;
+  $input-bg: $light;
+
+  // invert black and white
+  $black: #fff;
+  $white: #000;
+
+  // Colors stays the same, but increased opacity
+  $toast-header-background-color: $white;
+  $toast-background-color: rgba($white, 0.98);
+
+  // still use black box-shadow inset of white ones (due to inverting black and white)
+  $box-shadow: 0 0.5rem 1rem rgba($white, 0.15);
+  $box-shadow-sm: 0 0.125rem 0.25rem rgba($white, 0.075);
+  $box-shadow-lg: 0 1rem 3rem rgba($white, 0.175);
+  $box-shadow-inset: inset 0 1px 2px rgba($white, 0.075);
+
+  // modal and offcanvas backdrop overlay should be black as well
+  $modal-backdrop-bg: $white;
+
+  @import '~bootstrap/scss/bootstrap';
+  @import 'color-theme';
+  @include root-variables($theme-colors, $body-color, $body-bg);
+}

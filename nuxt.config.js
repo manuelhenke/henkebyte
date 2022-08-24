@@ -1,5 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import { str } from 'nuxt-envalid';
+import { getRoutes, mapRoutes } from './util/routes-utils.js';
+
 const buildDescription = (target) =>
-  `A showcase ${target} for different open source web projects including an iOS-Calculator and Minesweeper.`
+  `A showcase ${target} for different open source web projects including an iOS-Calculator and Minesweeper.`;
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -8,13 +12,19 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  // server: {
+  //   // To make the application available in the local network
+  //   host: '0.0.0.0',
+  // },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   // Test meta config here: https://www.opengraph.xyz/
   head: {
     // Recommended length: 60 characters
     title: 'HenkeByte',
     meta: [
-      { charset: 'utf-8' },
+      // eslint-disable-next-line unicorn/text-encoding-identifier-case
+      { charset: 'UTF-8' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       {
         name: 'viewport',
@@ -35,17 +45,68 @@ export default {
         property: 'og:title',
         content: 'HenkeByte',
       },
+      // This doesn't work along well with the theme selection inside the web app
+      // TODO: set theme-color dynamic based on the selected theme
+      /* {
+        hid: 'theme-color-light',
+        name: 'theme-color',
+        media: '(prefers-color-scheme: light)',
+        content: '#55df82',
+      },
+      {
+        hid: 'theme-color-dark',
+        name: 'theme-color',
+        media: '(prefers-color-scheme: dark)',
+        content: '#000000',
+      }, */
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      {
+        rel: 'apple-touch-icon',
+        sizes: '120x120',
+        href: '/apple-touch-icon.png?v=1',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/favicon-32x32.png?v=1',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/favicon-16x16.png?v=1',
+      },
+      {
+        rel: 'mask-icon',
+        href: '/safari-pinned-tab.svg?v=1',
+        color: '#55df82',
+      },
+      { rel: 'shortcut icon', href: '/favicon.ico?v=1' },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['@/assets/css/main.scss'],
+  css: [
+    '@/assets/css/main.scss',
+    '@/assets/css/light-theme.scss',
+    '@/assets/css/dark-theme.scss',
+    '@/assets/css/sepia-theme.scss',
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     {
       src: '@/plugins/bootstrap.js',
+      mode: 'client',
+    },
+    {
+      src: '@/plugins/contentful.js',
+      mode: 'client',
+    },
+    {
+      src: '@//plugins/vuex-persist.js',
       mode: 'client',
     },
   ],
@@ -59,6 +120,14 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
+    // https://github.com/nuxt-community/dotenv-module
+    '@nuxtjs/dotenv',
+    // https://github.com/manuelhenke/nuxt-envalid
+    'nuxt-envalid',
+    // https://sitemap.nuxtjs.org/
+    '@nuxtjs/sitemap',
+    // https://github.com/nuxt-community/robots-module
+    '@nuxtjs/robots',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -67,8 +136,12 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    // https://sitemap.nuxtjs.org/
-    '@nuxtjs/sitemap',
+    // https://github.com/nuxt-community/device-module
+    '@nuxtjs/device',
+    // https://color-mode.nuxtjs.org/
+    '@nuxtjs/color-mode',
+    // https://content.nuxtjs.org/
+    '@nuxt/content',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -82,7 +155,6 @@ export default {
     meta: {
       name: 'HenkeByte',
       author: 'Manuel Henke',
-      theme_color: '#55df82',
       lang: 'en',
       ogHost: 'https://henkebyte.com',
       ogImage: {
@@ -101,6 +173,7 @@ export default {
       short_name: 'HenkeByte',
       description: buildDescription('PWA'),
       background_color: '#55df82',
+      // theme_color: '#55df82',
       lang: 'en',
     },
   },
@@ -108,36 +181,51 @@ export default {
   // Router Configuration: https://nuxtjs.org/docs/configuration-glossary/configuration-router
   router: {
     trailingSlash: false,
-    middleware: 'trailingSlashRedirect',
+    middleware: 'trailing-slash-redirect',
+    linkActiveClass: 'child-active',
+    linkExactActiveClass: 'active',
   },
 
   // Sitemap Configuration: https://sitemap.nuxtjs.org/guide/configuration
   sitemap: {
     hostname: 'https://henkebyte.com',
     gzip: true,
-    exclude: ['/secret', '/admin/**'],
-    filter: ({ routes, options }) => {
-      // object containing [routeName]: [priority] pairs
-      const priorities = {
-        index: 1,
-        minesweeper: 0.8,
-        calculator: 0.7,
-      }
-      return routes.map((route) => {
-        return {
-          ...route,
-          lastmod: new Date(),
-          priority: priorities[route.name] || 0.5,
-        }
-      })
-    },
+    exclude: ['/secret', '/admin/**', '/_nuxt/**'],
+    routes: getRoutes,
+    filter: mapRoutes,
+  },
+
+  // Robots Configuration: https://github.com/nuxt-community/robots-module
+  robots: {
+    Sitemap: 'https://henkebyte.com/sitemap.xml',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    transpile: ['@nuxtjs/color-mode'],
+    postcss: {
+      plugins: [],
+    },
+    babel: {
+      babelrc: true,
+    },
+  },
 
   // Loading Configuration: https://nuxtjs.org/docs/features/loading/
   loading: {
     color: '#139187',
   },
-}
+
+  // https://color-mode.nuxtjs.org/
+  colorMode: {
+    fallback: 'light',
+  },
+
+  envalid: {
+    specs: {
+      CTF_SPACE_ID: str(),
+      CTF_CDA_ACCESS_TOKEN: str(),
+      CTF_ENVIRONMENT: str({ default: '' }),
+    },
+  },
+};

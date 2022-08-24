@@ -1,39 +1,65 @@
-<template>
-  <footer
-    class="text-center d-flex gap-3 flex-column justify-content-center align-items-center"
-  >
-    <div class="d-flex d-md-none gap-2 small">
+<template comments>
+  <footer>
+    <!-- footer -->
+    <div class="upper-footer d-md-none">
       <ContactButton
-        text="LinkedIn"
-        href="https://www.linkedin.com/in/manuel-henke/"
-        icon="bi bi-linkedin"
-      />
-      <ContactButton
-        text="GitHub"
-        href="https://github.com/manuelhenke"
-        icon="bi bi-github"
-      />
-      <ContactButton
-        text="E-Mail"
-        href="mailto:contact@henkebyte.com"
-        icon="bi bi-envelope"
+        v-for="contactOption of contactOptions"
+        :key="contactOption.text"
+        :text="contactOption.text"
+        :href="contactOption.href"
+        :icon="contactOption.icon"
       />
     </div>
-    <div class="d-flex gap-2 small">
+    <div class="lower-footer">
       <!-- <nuxt-link to="/imprint">Imprint</nuxt-link>
       <i class="bi bi-slash"></i> -->
-      <span>&copy; {{ currentYear }} Copyright Manuel Henke</span>
+      <small>&copy; {{ currentYear }} Copyright Manuel Henke</small>
     </div>
+    <ColorModePicker v-if="!noColorModePicker" />
+    <!-- /footer -->
   </footer>
 </template>
 
 <script>
 export default {
   name: 'TheFooter',
-  computed: {
-    currentYear() {
-      return new Date().getFullYear()
+  props: {
+    noColorModePicker: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
-}
+  computed: {
+    currentYear() {
+      return new Date().getFullYear();
+    },
+    contactOptions() {
+      return this.$store.state.contactOptions;
+    },
+  },
+};
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/css/bootstrap-mixins.scss';
+
+footer {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  place-items: center;
+  gap: map-get($gutters, 2);
+
+  .upper-footer {
+    display: flex;
+    gap: map-get($gutters, 1);
+  }
+
+  .lower-footer {
+    display: flex;
+    gap: map-get($gutters, 2);
+  }
+}
+</style>

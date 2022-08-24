@@ -1,0 +1,42 @@
+---
+label: Page
+hide_body: false
+display_field: title
+fields:
+- type: text
+  name: title
+  label: Title
+  description: The &lt;h1&gt; on the page and the fallback for &lt;title&gt;.
+  config:
+    required: true
+    min: 2
+    max: 60
+- type: text
+  name: badge_text
+  label: Badge text
+  description: Leave empty to hide the badge on the page.
+- type: field_group_list
+  name: meta_tags
+  label: Meta Tags
+  description: Will be used for name="&lt;key&gt;" and property="og:&lt;key&gt;"
+  fields:
+  - type: text
+    name: key
+    label: Key
+    description: Fills the name and property (prefixed with "og:") attribute.
+    config:
+      required: true
+  - type: textarea
+    name: content
+    label: Content
+    description: Fills the content attribute.
+    config:
+      required: true
+    default: ''
+  config:
+    labelField: key
+pages:
+- content/henkebyte-website.md
+- content/ios-calculator.md
+- content/minesweeper.md
+- content/resources-overview.md

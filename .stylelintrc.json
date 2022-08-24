@@ -1,0 +1,10 @@
+{
+  "customSyntax": "postcss-html",
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recommended-vue",
+    "stylelint-config-prettier"
+  ],
+  "rules": {},
+  "ignoreFiles": [".forestry/**/*", "static/admin/**/*"]
+}

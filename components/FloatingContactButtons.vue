@@ -1,19 +1,11 @@
 <template>
-  <div class="contact-button-container d-none d-md-flex">
+  <div class="floating-contact-buttons d-none d-md-flex">
     <ContactButton
-      text="LinkedIn"
-      href="https://www.linkedin.com/in/manuel-henke/"
-      icon="bi bi-linkedin"
-    />
-    <ContactButton
-      text="GitHub"
-      href="https://github.com/manuelhenke"
-      icon="bi bi-github"
-    />
-    <ContactButton
-      text="E-Mail"
-      href="mailto:contact@henkebyte.com"
-      icon="bi bi-envelope"
+      v-for="contactOption of contactOptions"
+      :key="contactOption.text"
+      :text="contactOption.text"
+      :href="contactOption.href"
+      :icon="contactOption.icon"
     />
   </div>
 </template>
@@ -21,18 +13,25 @@
 <script>
 export default {
   name: 'FloatingContactButtons',
-}
+  computed: {
+    contactOptions() {
+      return this.$store.state.contactOptions;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.contact-button-container {
+@import '@/assets/css/bootstrap-mixins.scss';
+
+.floating-contact-buttons {
   position: fixed;
-  bottom: 15px;
-  right: 15px;
+  bottom: map-get($spacers, 3);
+  right: map-get($spacers, 3);
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 5px;
+  place-items: flex-end;
+  place-content: center;
+  gap: map-get($spacers, 1);
 }
 </style>

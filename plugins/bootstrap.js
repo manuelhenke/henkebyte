@@ -1,3 +1,3 @@
-import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import * as bootstrap from 'bootstrap';
 
-export default bootstrap
+export default bootstrap;

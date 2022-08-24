@@ -1,0 +1,26 @@
+---
+new_page_extension: md
+auto_deploy: false
+admin_path: "/static/admin"
+webhook_url: 
+sections:
+- type: directory
+  path: content
+  label: Pages
+  create: documents
+  match: "**/*"
+  templates:
+  - about-me-template
+  - page
+upload_dir: static
+public_path: ''
+front_matter_path: ''
+use_front_matter_path: false
+file_template: ":filename:"
+build:
+  preview_output_directory: dist
+  install_dependencies_command: yarn install --frozen-lockfile
+  preview_docker_image: forestryio/node:16
+  mount_path: "/srv"
+  working_dir: "/srv"
+  instant_preview_command: yarn dev

@@ -1,0 +1,18 @@
+@import 'variables';
+
+.sepia-mode {
+  $light: #f1e7d0;
+  $body-color: #433422;
+  $body-bg: #ffd596;
+
+  $btn-primary-color: $light;
+  $card-bg: rgba($body-bg, 0.1);
+  $modal-content-bg: $light;
+  $input-bg: $light;
+  $toast-header-background-color: $light;
+  $toast-background-color: rgba($light, 0.98);
+
+  @import '~bootstrap/scss/bootstrap';
+  @import 'color-theme';
+  @include root-variables($theme-colors, $body-color, $body-bg);
+}
