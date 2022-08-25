@@ -65,7 +65,7 @@ jobs:
 
       - name: Build 🛠
         run: yarn build
-        with:
+        env:
           ROUTER_BASE: /${{ env.PREVIEW_BRANCH }}/pr-${{ github.event.number }}/
 
       - name: Disable husky hooks ❌
