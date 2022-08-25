@@ -1,0 +1,85 @@
+name: 'Deploy Preview'
+
+on:
+  pull_request:
+    branches: ['main']
+    paths-ignore:
+      - '.forestry/**'
+      - '.husky/**'
+      - '.env.example'
+      - '.gitignore'
+      - 'LICENSE'
+      - 'README.md'
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  TARGET_FOLDER: ./dist/
+  HOST_NAME: https://preview.henkebyte.com
+  UMBRELLA_DIR: pr-preview
+  PREVIEW_BRANCH: gh-pages
+
+concurrency: preview-${{ github.ref }}
+
+jobs:
+  deploy-preview:
+    name: Deploy Preview
+    runs-on: ubuntu-latest
+    environment:
+      name: preview
+      url: ${{ env.HOST_NAME }}/${{ env.UMBRELLA_DIR }}/pr-${{ github.event.number }}/
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Setup node env 🏗
+        if: github.event.pull_request.merged != 'true'
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Get yarn cache directory path 🔃
+        if: github.event.pull_request.merged != 'true'
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node_modules 📦
+        if: github.event.pull_request.merged != 'true'
+        uses: actions/cache@v3.0.8
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies 👨🏻‍💻
+        if: github.event.pull_request.merged != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: Build 🛠
+        if: github.event.pull_request.merged != 'true'
+        run: yarn build
+        env:
+          CTF_SPACE_ID: ${{ secrets.CTF_SPACE_ID }}
+          CTF_CDA_ACCESS_TOKEN: ${{ secrets.CTF_CDA_ACCESS_TOKEN }}
+          HOST_NAME: ${{ env.HOST_NAME }}
+          BASE_PATH: /${{ env.UMBRELLA_DIR }}/pr-${{ github.event.number }}/
+
+      - name: Disable husky hooks ❌
+        run: git config --unset core.hooksPath
+
+      - name: Deploy preview 📨
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          preview-branch: ${{ env.PREVIEW_BRANCH }}
+          source-dir: ${{ env.TARGET_FOLDER }}
+          umbrella-dir: ${{ env.UMBRELLA_DIR }}

@@ -8,9 +8,9 @@
         visible: isMobileMenuVisible,
       }"
     >
-      <nuxt-link class="navbar-brand" to="/">
+      <NuxtLink class="navbar-brand" to="/">
         <TheLogo />
-      </nuxt-link>
+      </NuxtLink>
 
       <button class="btn navbar-toggle" type="button" @click="toggleMobileMenu">
         <i v-if="isMobileMenuVisible" class="bi bi-x-lg"></i>
@@ -26,9 +26,9 @@
             'dropdown-center': !navElement.to,
           }"
         >
-          <nuxt-link v-if="navElement.to" class="btn nav-link" :to="navElement.to">{{
+          <NuxtLink v-if="navElement.to" class="btn nav-link" :to="navElement.to">{{
             navElement.name
-          }}</nuxt-link>
+          }}</NuxtLink>
           <div v-else class="navbar-dropdown-container">
             <a
               ref="dropdown"
@@ -45,11 +45,11 @@
             </a>
             <ul class="dropdown-menu">
               <li v-for="link in navElement.links" :key="link.to">
-                <nuxt-link
+                <NuxtLink
                   class="btn nav-link"
                   :to="link.to"
                   :aria-current="$route.params.slug === link.to"
-                  >{{ link.name }}</nuxt-link
+                  >{{ link.name }}</NuxtLink
                 >
               </li>
             </ul>
