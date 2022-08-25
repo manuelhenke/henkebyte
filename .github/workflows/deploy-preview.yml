@@ -57,15 +57,12 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: yarn install --frozen-lockfile
 
-      - name: create env file 📄
-        run: |
-          touch .env
-          echo CTF_SPACE_ID=${{ secrets.CTF_SPACE_ID }} >> .env
-          echo CTF_CDA_ACCESS_TOKEN=${{ secrets.CTF_CDA_ACCESS_TOKEN }} >> .env
-
       - name: Build 🛠
         run: yarn build
         env:
+          CTF_SPACE_ID: ${{ secrets.CTF_SPACE_ID }}
+          CTF_CDA_ACCESS_TOKEN: ${{ secrets.CTF_CDA_ACCESS_TOKEN }}
+          HOST_NAME: https://preview.henkebyte.com
           ROUTER_BASE: /${{ env.PREVIEW_BRANCH }}/pr-${{ github.event.number }}/
 
       - name: Disable husky hooks ❌

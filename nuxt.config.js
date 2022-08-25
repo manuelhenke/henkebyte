@@ -5,6 +5,9 @@ import { getRoutes, mapRoutes } from './util/routes-utils.js';
 const buildDescription = (target) =>
   `A showcase ${target} for different open source web projects including an iOS-Calculator and Minesweeper.`;
 
+const HOST_NAME = process.env.HOST_NAME || 'https://henkebyte.com';
+const BASE_PATH = process.env.ROUTER_BASE || '/';
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -64,26 +67,26 @@ export default {
       {
         rel: 'apple-touch-icon',
         sizes: '120x120',
-        href: '/apple-touch-icon.png?v=1',
+        href: `${BASE_PATH}apple-touch-icon.png?v=1`,
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '32x32',
-        href: '/favicon-32x32.png?v=1',
+        href: `${BASE_PATH}favicon-32x32.png?v=1`,
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '16x16',
-        href: '/favicon-16x16.png?v=1',
+        href: `${BASE_PATH}favicon-16x16.png?v=1`,
       },
       {
         rel: 'mask-icon',
-        href: '/safari-pinned-tab.svg?v=1',
+        href: `${BASE_PATH}safari-pinned-tab.svg?v=1`,
         color: '#55df82',
       },
-      { rel: 'shortcut icon', href: '/favicon.ico?v=1' },
+      { rel: 'shortcut icon', href: `${BASE_PATH}favicon.ico?v=1` },
     ],
   },
 
@@ -147,7 +150,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: BASE_PATH,
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -156,10 +159,10 @@ export default {
       name: 'HenkeByte',
       author: 'Manuel Henke',
       lang: 'en',
-      ogHost: 'https://henkebyte.com',
+      ogHost: HOST_NAME,
       ogImage: {
         // Recommended dimension: 1200 x 630
-        path: '/preview.png',
+        path: `${BASE_PATH}preview.png`,
         width: 1200,
         height: 630,
         type: 'image/png',
@@ -180,7 +183,7 @@ export default {
 
   // Router Configuration: https://nuxtjs.org/docs/configuration-glossary/configuration-router
   router: {
-    base: process.env.ROUTER_BASE || '/',
+    base: BASE_PATH,
     trailingSlash: false,
     middleware: 'trailing-slash-redirect',
     linkActiveClass: 'child-active',
@@ -189,16 +192,16 @@ export default {
 
   // Sitemap Configuration: https://sitemap.nuxtjs.org/guide/configuration
   sitemap: {
-    hostname: 'https://henkebyte.com',
+    hostname: HOST_NAME,
     gzip: true,
-    exclude: ['/secret', '/admin/**', '/_nuxt/**'],
+    exclude: [`${BASE_PATH}secret`, `${BASE_PATH}admin/**`, `${BASE_PATH}_nuxt/**`],
     routes: getRoutes,
     filter: mapRoutes,
   },
 
   // Robots Configuration: https://github.com/nuxt-community/robots-module
   robots: {
-    Sitemap: 'https://henkebyte.com/sitemap.xml',
+    Sitemap: `${HOST_NAME}${BASE_PATH}sitemap.xml`,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
