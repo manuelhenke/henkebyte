@@ -21,6 +21,7 @@ on:
 
 env:
   TARGET_FOLDER: ./dist/
+  HOST_NAME: https://preview.henkebyte.com
   UMBRELLA_DIR: pr-preview
   PREVIEW_BRANCH: gh-pages
 
@@ -30,7 +31,9 @@ jobs:
   deploy-preview:
     name: Deploy Preview
     runs-on: ubuntu-latest
-    environment: preview
+    environment:
+      name: preview
+      url: ${{ env.HOST_NAME }}/${{ env.UMBRELLA_DIR }}/pr-${{ github.event.number }}/
     timeout-minutes: 5
 
     steps:
@@ -63,7 +66,7 @@ jobs:
         env:
           CTF_SPACE_ID: ${{ secrets.CTF_SPACE_ID }}
           CTF_CDA_ACCESS_TOKEN: ${{ secrets.CTF_CDA_ACCESS_TOKEN }}
-          HOST_NAME: https://preview.henkebyte.com
+          HOST_NAME: ${{ env.HOST_NAME }}
           BASE_PATH: /${{ env.UMBRELLA_DIR }}/pr-${{ github.event.number }}/
 
       - name: Disable husky hooks ❌
