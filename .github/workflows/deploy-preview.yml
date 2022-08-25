@@ -61,8 +61,11 @@ jobs:
       - name: Build 🛠
         run: yarn build
 
+      - name: Disable husky hooks ❌
+        run: git config --unset core.hooksPath
+
       - name: Deploy preview 📨
         uses: rossjrw/pr-preview-action@v1
         with:
-          preview-branch: 'pr-previews'
+          preview-branch: pr-previews
           source-dir: ./dist/
