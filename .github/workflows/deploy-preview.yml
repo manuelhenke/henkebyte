@@ -21,7 +21,8 @@ on:
 
 env:
   TARGET_FOLDER: ./dist/
-  PREVIEW_BRANCH: pr-previews
+  UMBRELLA_DIR: pr-preview
+  PREVIEW_BRANCH: gh-pages
 
 concurrency: preview-${{ github.ref }}
 
@@ -63,7 +64,7 @@ jobs:
           CTF_SPACE_ID: ${{ secrets.CTF_SPACE_ID }}
           CTF_CDA_ACCESS_TOKEN: ${{ secrets.CTF_CDA_ACCESS_TOKEN }}
           HOST_NAME: https://preview.henkebyte.com
-          ROUTER_BASE: /${{ env.PREVIEW_BRANCH }}/pr-${{ github.event.number }}/
+          ROUTER_BASE: /${{ env.UMBRELLA_DIR }}/pr-${{ github.event.number }}/
 
       - name: Disable husky hooks ❌
         run: git config --unset core.hooksPath
@@ -73,3 +74,4 @@ jobs:
         with:
           preview-branch: ${{ env.PREVIEW_BRANCH }}
           source-dir: ${{ env.TARGET_FOLDER }}
+          umbrella-dir: ${{ env.UMBRELLA_DIR }}
