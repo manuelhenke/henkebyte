@@ -1,6 +1,7 @@
 [![CI](https://github.com/manuelhenke/henkebyte/actions/workflows/ci.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/ci.yml)
 [![CD](https://github.com/manuelhenke/henkebyte/actions/workflows/cd.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/cd.yml)
 [![CodeQL](https://github.com/manuelhenke/henkebyte/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/manuelhenke/henkebyte/actions/workflows/codeql-analysis.yml)
+[![Website henkebyte.com](https://img.shields.io/website-up-down-green-red/https/henkebyte.com.svg)](https://henkebyte.com/)
 [![License](https://img.shields.io/github/license/manuelhenke/henkebyte)](./LICENSE)
 
 # HenkeByte
