@@ -28,7 +28,7 @@
           :key="slide.fileName"
           :class="`slide-panel slide-panel-${selectedDevice}`"
         >
-          <img
+          <nuxt-img
             :src="`${imagesPath}${slide.fileName}.png`"
             class="d-block w-100"
             :alt="`${slide.label} of the website henkebyte.com`"

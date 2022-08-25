@@ -13,7 +13,7 @@
         aria-atomic="true"
       >
         <div class="toast-header">
-          <img
+          <nuxt-img
             v-if="lastActiveToast.icon"
             :src="lastActiveToast.icon.src"
             class="rounded me-2"

@@ -6,7 +6,7 @@ const buildDescription = (target) =>
   `A showcase ${target} for different open source web projects including an iOS-Calculator and Minesweeper.`;
 
 const HOST_NAME = process.env.HOST_NAME || 'https://henkebyte.com';
-const BASE_PATH = process.env.ROUTER_BASE || '/';
+const BASE_PATH = process.env.BASE_PATH || '/';
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -131,6 +131,8 @@ export default {
     '@nuxtjs/sitemap',
     // https://github.com/nuxt-community/robots-module
     '@nuxtjs/robots',
+    // https://image.nuxtjs.org/
+    '@nuxt/image',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -210,9 +212,11 @@ export default {
     postcss: {
       plugins: [],
     },
-    babel: {
-      babelrc: true,
-    },
+  },
+
+  // Generate Configuration: https://nuxtjs.org/docs/configuration-glossary/configuration-generate/
+  generate: {
+    fallback: true,
   },
 
   // Loading Configuration: https://nuxtjs.org/docs/features/loading/
@@ -231,5 +235,9 @@ export default {
       CTF_CDA_ACCESS_TOKEN: str(),
       CTF_ENVIRONMENT: str({ default: '' }),
     },
+  },
+
+  image: {
+    provider: 'static',
   },
 };

@@ -64,7 +64,7 @@ jobs:
           CTF_SPACE_ID: ${{ secrets.CTF_SPACE_ID }}
           CTF_CDA_ACCESS_TOKEN: ${{ secrets.CTF_CDA_ACCESS_TOKEN }}
           HOST_NAME: https://preview.henkebyte.com
-          ROUTER_BASE: /${{ env.UMBRELLA_DIR }}/pr-${{ github.event.number }}/
+          BASE_PATH: /${{ env.UMBRELLA_DIR }}/pr-${{ github.event.number }}/
 
       - name: Disable husky hooks ❌
         run: git config --unset core.hooksPath

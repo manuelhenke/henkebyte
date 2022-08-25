@@ -245,7 +245,7 @@ tools:
       </p>
     </div>
     <div class="col-8 col-sm-4 col-md-3">
-      <img
+      <nuxt-img
         src="/images/manuel-henke.jpg"
         class="img-fluid rounded-circle"
         alt="Picture of Manuel Henke"
