@@ -1,0 +1,72 @@
+name: 'Deploy Preview'
+
+on:
+  pull_request:
+    branches: ['main']
+    paths-ignore:
+      - '.forestry/**'
+      - '.husky/**'
+      - '.env.example'
+      - '.gitignore'
+      - 'LICENSE'
+      - 'README.md'
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+concurrency: preview-${{ github.ref }}
+
+jobs:
+  deploy-preview:
+    name: Deploy Preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Get yarn cache directory path 🔃
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node_modules 📦
+        uses: actions/cache@v3.0.8
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies 👨🏻‍💻
+        run: yarn install --frozen-lockfile
+
+      - name: create env file 📄
+        run: |
+          touch .env
+          echo CTF_SPACE_ID=${{ secrets.CTF_SPACE_ID }} >> .env
+          echo CTF_CDA_ACCESS_TOKEN=${{ secrets.CTF_CDA_ACCESS_TOKEN }} >> .env
+
+      - name: Build 🛠
+        run: yarn build
+
+      - name: Deploy preview 📨
+        uses: rossjrw/pr-preview-action@v1
+        # If you're changing the branch from main,
+        # also change the `main` in `refs/heads/main`
+        # below accordingly.
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          preview-branch: 'pr-previews'
+          source-dir: ./dist/
