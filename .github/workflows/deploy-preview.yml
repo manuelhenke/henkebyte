@@ -41,15 +41,18 @@ jobs:
         uses: actions/checkout@master
 
       - name: Setup node env 🏗
+        if: github.event.pull_request.merged != 'true'
         uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
 
       - name: Get yarn cache directory path 🔃
+        if: github.event.pull_request.merged != 'true'
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Cache node_modules 📦
+        if: github.event.pull_request.merged != 'true'
         uses: actions/cache@v3.0.8
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
@@ -59,9 +62,11 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies 👨🏻‍💻
+        if: github.event.pull_request.merged != 'true'
         run: yarn install --frozen-lockfile
 
       - name: Build 🛠
+        if: github.event.pull_request.merged != 'true'
         run: yarn build
         env:
           CTF_SPACE_ID: ${{ secrets.CTF_SPACE_ID }}
