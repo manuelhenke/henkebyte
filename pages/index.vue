@@ -17,7 +17,7 @@
           </h2>
           <ul>
             <li v-for="link in navElement.links" :key="link.to">
-              <nuxt-link class="link-primary fs-5" :to="link.to">{{ link.name }}</nuxt-link>
+              <NuxtLink class="link-primary fs-5" :to="link.to">{{ link.name }}</NuxtLink>
             </li>
           </ul>
         </div>
