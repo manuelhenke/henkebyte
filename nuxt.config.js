@@ -7,6 +7,7 @@ const buildDescription = (target) =>
 
 const HOST_NAME = process.env.HOST_NAME || 'https://henkebyte.com';
 const BASE_PATH = process.env.BASE_PATH || '/';
+const ROBOTS_META_CONTENT = process.env.ROBOTS_META_CONTENT || 'index,follow';
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -34,7 +35,7 @@ export default {
         content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
       },
       { name: 'format-detection', content: 'telephone=no' },
-      { name: 'robots', content: 'index, follow' },
+      { name: 'robots', content: ROBOTS_META_CONTENT },
       {
         hid: 'description',
         name: 'description',
