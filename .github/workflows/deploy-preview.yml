@@ -1,33 +1,39 @@
-name: 'Continuous Deployment'
+name: 'Deploy Preview'
 
 on:
-  workflow_run:
-    workflows: ['Continuous Integration']
+  pull_request:
     branches: ['main']
+    paths-ignore:
+      - '.forestry/**'
+      - '.husky/**'
+      - '.env.example'
+      - '.gitignore'
+      - 'LICENSE'
+      - 'README.md'
     types:
-      - completed
+      - opened
+      - reopened
+      - synchronize
+      - closed
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 env:
-  TARGET_FOLDER: ./dist
-  AWS_REGION: eu-central-1
-  AWS_S3_BUCKET_URI: s3://henkebyte.com
-  AWS_CLOUDFRONT_DISTRIBUTION_ID: E1GEYIE2ZCH07U
+  TARGET_FOLDER: ./dist/
+  HOST_NAME: https://preview.henkebyte.com
+  UMBRELLA_DIR: pr-preview
+  PREVIEW_BRANCH: gh-pages
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.workflow_run.head_branch }}
-  cancel-in-progress: true
+concurrency: preview-${{ github.ref }}
 
 jobs:
-  deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    name: Deploy
+  deploy-preview:
+    name: Deploy Preview
     runs-on: ubuntu-latest
     environment:
-      name: production
-      url: https://henkebyte.com
+      name: preview
+      url: ${{ env.HOST_NAME }}/${{ env.UMBRELLA_DIR }}/pr-${{ github.event.number }}/
     timeout-minutes: 5
 
     steps:
@@ -60,16 +66,15 @@ jobs:
         env:
           CTF_SPACE_ID: ${{ secrets.CTF_SPACE_ID }}
           CTF_CDA_ACCESS_TOKEN: ${{ secrets.CTF_CDA_ACCESS_TOKEN }}
+          HOST_NAME: ${{ env.HOST_NAME }}
+          BASE_PATH: /${{ env.UMBRELLA_DIR }}/pr-${{ github.event.number }}/
 
-      - name: Configure AWS credentials ⚙️
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: Disable husky hooks ❌
+        run: git config --unset core.hooksPath
+
+      - name: Deploy preview 📨
+        uses: rossjrw/pr-preview-action@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
-
-      - name: Deploy 📨
-        run: aws s3 sync ${{ env.TARGET_FOLDER }} ${{ env.AWS_S3_BUCKET_URI }} --delete
-
-      - name: Invalidate ❌
-        run: aws cloudfront create-invalidation --distribution-id ${{ env.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+          preview-branch: ${{ env.PREVIEW_BRANCH }}
+          source-dir: ${{ env.TARGET_FOLDER }}
+          umbrella-dir: ${{ env.UMBRELLA_DIR }}

@@ -1,5 +1,5 @@
 <template>
-  <img src="~/assets/images/henkebyte-icon.png" class="img-fluid" alt="Logo of henkebyte" />
+  <img src="~/assets/images/henkebyte-icon.png" class="img-fluid" alt="Icon of HenkeByte" />
 </template>
 
 <script>
