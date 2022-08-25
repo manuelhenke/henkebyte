@@ -13,13 +13,7 @@
         aria-atomic="true"
       >
         <div class="toast-header">
-          <nuxt-img
-            v-if="lastActiveToast.icon"
-            :src="lastActiveToast.icon.src"
-            class="rounded me-2"
-            width="25"
-            :alt="lastActiveToast.icon.alt"
-          />
+          <TheIcon class="rounded me-2" width="25" />
           <strong class="me-auto">{{ lastActiveToast.author }}</strong>
           <small class="text-muted">{{ lastActiveToast.date }}</small>
           <button
@@ -54,10 +48,6 @@ export default {
         id: uniqueId(),
         author: 'HenkeByte',
         date: 'just now',
-        icon: {
-          src: '/icon.png',
-          alt: 'Icon of HenkeByte',
-        },
         options: {
           delay: 3000,
           autohide: true,

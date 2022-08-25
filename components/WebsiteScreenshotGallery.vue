@@ -28,7 +28,7 @@
           :key="slide.fileName"
           :class="`slide-panel slide-panel-${selectedDevice}`"
         >
-          <nuxt-img
+          <DynamicImage
             :src="`${imagesPath}${slide.fileName}.png`"
             class="d-block w-100"
             :alt="`${slide.label} of the website henkebyte.com`"
@@ -83,7 +83,7 @@ export default {
   }),
   computed: {
     imagesPath() {
-      return `/images/website-story/${this.selectedDevice}/${this.$colorMode.value}/`;
+      return `images/website-story/${this.selectedDevice}/${this.$colorMode.value}/`;
     },
     slidePanelWidthClass() {
       switch (this.selectedDevice) {

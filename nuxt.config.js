@@ -131,8 +131,6 @@ export default {
     '@nuxtjs/sitemap',
     // https://github.com/nuxt-community/robots-module
     '@nuxtjs/robots',
-    // https://image.nuxtjs.org/
-    '@nuxt/image',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -235,9 +233,5 @@ export default {
       CTF_CDA_ACCESS_TOKEN: str(),
       CTF_ENVIRONMENT: str({ default: '' }),
     },
-  },
-
-  image: {
-    provider: 'static',
   },
 };
