@@ -8,7 +8,9 @@
         visible: isMobileMenuVisible,
       }"
     >
-      <nuxt-link class="navbar-brand" to="/"><TheLogo /></nuxt-link>
+      <nuxt-link class="navbar-brand" to="/">
+        <TheLogo />
+      </nuxt-link>
 
       <button class="btn navbar-toggle" type="button" @click="toggleMobileMenu">
         <i v-if="isMobileMenuVisible" class="bi bi-x-lg"></i>
@@ -69,7 +71,7 @@ export default {
   mixins: [clickaway],
   data: () => ({
     isMobileMenuVisible: false,
-    isSticky: null,
+    isSticky: undefined,
   }),
   computed: {
     navigation() {
@@ -77,7 +79,7 @@ export default {
     },
   },
   watch: {
-    $route(to, from) {
+    $route(_to, _from) {
       this.isMobileMenuVisible = false;
       if (Array.isArray(this.$refs.dropdown)) {
         this.$refs.dropdown
@@ -112,11 +114,7 @@ export default {
       this.isMobileMenuVisible = false;
     },
     checkIsSticky: throttle(function checkIsSticky() {
-      if (this.$refs.header.offsetTop > 0) {
-        this.isSticky = true;
-      } else {
-        this.isSticky = false;
-      }
+      this.isSticky = this.$refs.header.offsetTop > 0;
     }, 200),
   },
 };
@@ -127,7 +125,7 @@ export default {
 $navbar-breakpoint: sm;
 
 header {
-  transition: box-shadow 0.2s ease-in;
+  transition: box-shadow 0.1s linear;
   &.is-sticky {
     box-shadow: $box-shadow-sm;
   }
@@ -141,8 +139,8 @@ nav {
   user-select: none;
   flex-flow: row wrap;
   @include padding-main-x;
-  padding-top: map-get($spacers, 2);
-  padding-bottom: map-get($spacers, 2);
+  padding-top: map-get($spacers, 1);
+  padding-bottom: map-get($spacers, 1);
 
   .navbar-toggle {
     margin-left: auto;

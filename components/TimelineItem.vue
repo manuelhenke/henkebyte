@@ -42,10 +42,10 @@ export default {
   },
   computed: {
     yearFrom() {
-      return get(this.itemTimeline, 'from', null);
+      return get(this.itemTimeline, 'from');
     },
     yearTo() {
-      return get(this.itemTimeline, 'to', null);
+      return get(this.itemTimeline, 'to');
     },
     backgroundColor() {
       return `--timeline-item-dot-color: ${get(this.itemTimeline, 'color', this.colorDots)}`;

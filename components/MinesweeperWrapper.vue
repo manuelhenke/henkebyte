@@ -20,8 +20,8 @@
         id="show-btn"
         class="btn btn-outline-primary"
         type="button"
-        :data-bs-toggle="isEnded ? null : 'modal'"
-        :data-bs-target="isEnded ? null : '#restart-modal'"
+        :data-bs-toggle="isEnded ? undefined : 'modal'"
+        :data-bs-target="isEnded ? undefined : '#restart-modal'"
         @click="clickedRestart"
       >
         Restart
@@ -85,7 +85,7 @@
       <div v-else>Just hold a field to place a flag.</div>
     </div>
 
-    <section v-show="currentGameModeScoreboardEntries.length">
+    <section v-show="currentGameModeScoreboardEntries.length > 0">
       <div class="d-flex gap-2 align-items-center justify-content-between">
         <h2>Personal Scoreboard</h2>
         <button
@@ -110,14 +110,11 @@
             </thead>
             <tbody>
               <tr
-                v-for="(game, index) in currentGameModeScoreboardEntries.slice(
-                  0,
-                  maxScoreboardGamesVisible
-                )"
-                :key="index"
+                v-for="game in currentGameModeScoreboardEntries.slice(0, maxScoreboardGamesVisible)"
+                :key="game.rank"
                 class="scoreboard-row"
               >
-                <th scope="row">{{ index + 1 }}</th>
+                <th scope="row">{{ game.rank }}</th>
                 <td>
                   <TimeString :milliseconds="game.gameDuration" />
                 </td>
@@ -141,7 +138,7 @@
             </tbody>
             <tfoot>
               <tr>
-                <th scope="row">Avg.</th>
+                <th scope="row ">&sum;&nbsp;{{ currentGameModeScoreboardEntries.length }}</th>
                 <td>~<TimeString :milliseconds="currentGameModeAverageDuration" /></td>
                 <td></td>
                 <td></td>
@@ -155,82 +152,22 @@
       </div>
     </section>
 
-    <div
+    <ConfirmModal
       id="restart-modal"
-      class="modal fade"
-      tabindex="-1"
-      aria-labelledby="restartModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 id="restartModalLabel" class="modal-title">Restart the game</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            Are you sure, that you want to restart the game? Any Progress will be lost.
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
-              Cancel
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-dismiss="modal"
-              @click="restartGame"
-            >
-              Yes, restart
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+      title="Restart the game"
+      body="Are you sure, that you want to restart the game? Any Progress will be lost."
+      confirm-button-text="Yes, restart"
+      @confirm="restartGame"
+    />
 
-    <div
+    <ConfirmModal
       id="reset-game-history-modal"
-      class="modal fade"
-      tabindex="-1"
-      aria-labelledby="resetGameHistoryModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 id="resetGameHistoryModalLabel" class="modal-title">Reset game history</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            Are you sure, that you want to reset the entire history (including every game mode)?
-            This action is irreversible.
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
-              Cancel
-            </button>
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-bs-dismiss="modal"
-              @click="resetGameHistory"
-            >
-              Yes, reset
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+      title="Reset game history"
+      body="Are you sure, that you want to reset the entire history (including every game mode)? This action is irreversible."
+      confirm-button-text="Yes, reset"
+      confirm-button-type="btn-danger"
+      @confirm="resetGameHistory"
+    />
 
     <RainOverlay ref="rain" no-init-rain />
     <div ref="firework" class="firework-container"></div>
@@ -238,20 +175,23 @@
 </template>
 
 <script>
-import { capitalize, find, lowerCase, map } from 'lodash-es';
+import { capitalize, filter, find, lowerCase, map, meanBy, reverse, size, sortBy } from 'lodash-es';
 import { Fireworks } from 'fireworks-js';
 import { liveQuery } from 'dexie';
 import { Chart, ArcElement, DoughnutController, Legend, Title, Tooltip } from 'chart.js';
-import { db } from '~/middleware/db';
-import { timestampToDateString } from '~/util';
+import { database } from '@/middleware/database.js';
+import { timestampToDateString } from '@/util/index.js';
+import globalEventNames from '@/util/global-event-names.js';
 import 'minesweeper-for-web';
+
+const { DISPLAY_NOTIFICATION, REMOVE_NOTIFICATION } = globalEventNames;
 
 Chart.register(ArcElement, DoughnutController, Legend, Title, Tooltip);
 
 const GAME_MODES = {
   NOOB: {
     name: 'noob',
-    endAnimationDuration: 2000,
+    endAnimationDuration: 5000,
     config: {
       columns: 5,
       rows: 5,
@@ -260,7 +200,7 @@ const GAME_MODES = {
   },
   EASY: {
     name: 'easy',
-    endAnimationDuration: 10000,
+    endAnimationDuration: 10_000,
     config: {
       columns: 9,
       rows: 9,
@@ -269,7 +209,7 @@ const GAME_MODES = {
   },
   NORMAL: {
     name: 'normal',
-    endAnimationDuration: 15000,
+    endAnimationDuration: 15_000,
     config: {
       columns: 16,
       rows: 16,
@@ -278,7 +218,7 @@ const GAME_MODES = {
   },
   HARD: {
     name: 'hard',
-    endAnimationDuration: 20000,
+    endAnimationDuration: 20_000,
     config: {
       columns: 30,
       rows: 16,
@@ -287,7 +227,7 @@ const GAME_MODES = {
   },
   EXTREME: {
     name: 'extreme',
-    endAnimationDuration: 30000,
+    endAnimationDuration: 30_000,
     config: {
       columns: 30,
       rows: 30,
@@ -301,31 +241,36 @@ export default {
   data: () => ({
     isEnded: true,
     /** @type {Fireworks} */
-    fireworks: null,
+    fireworks: undefined,
+    endAnimationTimeoutId: undefined,
     currentGameModeName: GAME_MODES.EASY.name,
     games: [],
     maxScoreboardGamesVisible: 10,
-    gamesHistoryChart: null,
+    gamesHistoryChart: undefined,
+    notificationId: 'minesweeper-notification',
+    sortGamesByDuration: true,
   }),
   computed: {
     isStopwatchRunning() {
       try {
         return this.$refs.stopwatch.isRunning;
-      } catch (error) {
+      } catch {
         return false;
       }
     },
     currentGameModeGames() {
-      return this.games.filter((game) => game.gamemode === this.currentGameModeName);
+      return filter(this.games, { gamemode: this.currentGameModeName });
     },
     currentGameModeScoreboardEntries() {
-      return this.currentGameModeGames.filter((game) => game.gameIsWon);
+      const games = map(filter(this.currentGameModeGames, 'gameIsWon'), (game, index) => ({
+        rank: index + 1,
+        ...game,
+      }));
+
+      return this.sortGamesByDuration ? games : reverse(sortBy(games, 'gameCompletionTimestamp'));
     },
     currentGameModeAverageDuration() {
-      const sum = this.currentGameModeScoreboardEntries
-        .map((game) => game.gameDuration)
-        .reduce((a, b) => a + b, 0);
-      return sum / this.currentGameModeScoreboardEntries.length || 0;
+      return meanBy(this.currentGameModeScoreboardEntries, 'gameDuration');
     },
     gameModesSelectionOptions() {
       return map(GAME_MODES, ({ name, config: { columns, rows, bombs } }) => ({
@@ -337,13 +282,15 @@ export default {
   },
   watch: {
     currentGameModeGames() {
-      if (this.currentGameModeGames.length && this.$refs['game-history-chart']) {
-        const wonGames = this.currentGameModeGames.filter((game) => game.gameIsWon).length;
-        const lostGames = this.currentGameModeGames.length - wonGames;
+      if (this.currentGameModeGames.length > 0 && this.$refs['game-history-chart']) {
+        const wonGames = size(filter(this.currentGameModeGames, 'gameIsWon'));
+        const lostGames = size(this.currentGameModeGames) - wonGames;
 
         if (this.gamesHistoryChart) {
           this.gamesHistoryChart.data.datasets[0].data = [wonGames, lostGames];
-          this.gamesHistoryChart.options.plugins.title.text = `${this.currentGameModeGames.length} game(s) played in total`;
+          this.gamesHistoryChart.options.plugins.title.text = `${size(
+            this.currentGameModeGames
+          )} game(s) played in total`;
           this.gamesHistoryChart.update();
         } else {
           const config = {
@@ -362,7 +309,7 @@ export default {
             options: {
               plugins: {
                 title: {
-                  text: `${this.currentGameModeGames.length} game(s) played in total`,
+                  text: `${size(this.currentGameModeGames)} game(s) played in total`,
                   display: true,
                   position: 'bottom',
                 },
@@ -383,8 +330,8 @@ export default {
       acceleration: 1.01,
     });
 
-    liveQuery(() => db.games.toArray()).subscribe((games) => {
-      this.games = games.sort((gameA, gameB) => gameA.gameDuration - gameB.gameDuration);
+    liveQuery(() => database.games.toArray()).subscribe((games) => {
+      this.games = sortBy(games, 'gameDuration');
     });
   },
   methods: {
@@ -395,8 +342,8 @@ export default {
     getGameModeConfiguration() {
       return this.getCurrentGameMode().config;
     },
-    onChangedGameMode(e) {
-      e.preventDefault();
+    onChangedGameMode(event) {
+      event.preventDefault();
       const gameModeConfiguration = this.getGameModeConfiguration();
       this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration);
       this.restartGame();
@@ -406,9 +353,17 @@ export default {
       this.$refs.stopwatch.stop();
       this.fireworks.start();
 
+      this.$nuxt.$emit(DISPLAY_NOTIFICATION, {
+        id: this.notificationId,
+        body: `Congratulations, you have won!`,
+        options: {
+          delay: GAME_MODES.NOOB.endAnimationDuration,
+        },
+      });
+
       this.addDbEntry(true);
 
-      window.setTimeout(() => {
+      this.endAnimationTimeoutId = window.setTimeout(() => {
         this.fireworks.stop();
       }, this.getCurrentGameMode().endAnimationDuration);
     },
@@ -417,16 +372,17 @@ export default {
       this.$refs.stopwatch.stop();
       this.$refs.rain.start();
 
-      this.$store.dispatch('toasts/addElement', {
+      this.$nuxt.$emit(DISPLAY_NOTIFICATION, {
+        id: this.notificationId,
         body: `Unfortunately, you lost this round of Minesweeper. Just try again!`,
         options: {
-          delay: 6000,
+          delay: GAME_MODES.NOOB.endAnimationDuration,
         },
       });
 
       this.addDbEntry(false);
 
-      window.setTimeout(() => {
+      this.endAnimationTimeoutId = window.setTimeout(() => {
         this.$refs.rain.clear();
       }, this.getCurrentGameMode().endAnimationDuration);
     },
@@ -439,7 +395,9 @@ export default {
       this.isEnded = true;
       this.fireworks.stop();
       this.$refs.rain.clear();
+      window.clearTimeout(this.endAnimationTimeoutId);
       this.$refs.stopwatch.reset();
+      this.$nuxt.$emit(REMOVE_NOTIFICATION, this.notificationId);
       this.$refs.minesweeper.restartGame();
     },
     handleMinesweeperClick() {
@@ -456,13 +414,13 @@ export default {
       }
     },
     resetGameHistory() {
-      db.games.clear();
+      database.games.clear();
     },
     removeScoreboardEntry(gameId) {
-      db.games.delete(gameId);
+      database.games.delete(gameId);
     },
     addDbEntry(isWon) {
-      db.games.add({
+      database.games.add({
         gamemode: this.currentGameModeName,
         gameDuration: this.$refs.stopwatch.elapsedTime,
         gameCompletionTimestamp: Date.now(),

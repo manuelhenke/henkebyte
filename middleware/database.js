@@ -1,11 +1,12 @@
 import Dexie from 'dexie';
 
-export const db = new Dexie('minesweeper-database');
-db.version(1).stores({
+export const database = new Dexie('minesweeper-database');
+database.version(1).stores({
   games: '++id, gamemode, gameDuration, gameCompletionTimestamp', // Primary key and indexed props
 });
 
-db.version(2)
+database
+  .version(2)
   .stores({
     games: '++id, gamemode, gameDuration, gameCompletionTimestamp, gameIsWon',
   })
@@ -25,4 +26,4 @@ db.version(2)
     })
   );
 
-export default db;
+export default database;

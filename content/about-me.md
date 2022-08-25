@@ -60,17 +60,17 @@ skills:
   - name: WebComponents
     stars: 4
     libraries: []
-  - name: Electron
-    stars: 3
-    libraries: []
   - name: TypeScript
-    stars: 3
+    stars: 4
     libraries: []
   - name: Jest
-    stars: 3
+    stars: 4
     libraries: []
   - name: React
     stars: 4
+    libraries: []
+  - name: Electron
+    stars: 2
     libraries: []
   - name: Angular
     stars: 1
@@ -222,8 +222,11 @@ tools:
   stars: 3
   libraries: []
 - name: Kubernetes
-  stars: 2
-  libraries: []
+  stars: 3
+  libraries:
+  - name: Helm
+    stars: 3
+    libraries: []
 
 ---
 <section id="introduction">

@@ -156,7 +156,7 @@
 <script>
 import { includes, isEqual, shuffle, sortBy, toLower, trim } from 'lodash-es';
 import Masonry from 'masonry-layout';
-import { client } from '~/plugins/contentful';
+import { client } from '@/plugins/contentful.js';
 
 export default {
   name: 'ResourcesOverview',
@@ -214,7 +214,7 @@ export default {
       return filteredSites;
     },
     sortedCategories() {
-      return Array.from(this.categories).sort((cat1, cat2) =>
+      return [...this.categories].sort((cat1, cat2) =>
         cat1.fields.title.localeCompare(cat2.fields.title)
       );
     },
@@ -342,11 +342,9 @@ export default {
       this.currentSearchInput = this.$route.query.q;
     }
     if ('categories' in this.$route.query) {
-      if (Array.isArray(this.$route.query.categories)) {
-        this.checkedCategories = this.$route.query.categories;
-      } else {
-        this.checkedCategories = [this.$route.query.categories];
-      }
+      this.checkedCategories = Array.isArray(this.$route.query.categories)
+        ? this.$route.query.categories
+        : [this.$route.query.categories];
     }
   },
   methods: {

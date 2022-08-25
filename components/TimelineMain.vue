@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { flatMap, groupBy, keys } from 'lodash-es';
+
 import TimelineItem from './TimelineItem.vue';
 
 const ORDER_TYPES = {
@@ -54,7 +56,7 @@ export default {
     },
     order: {
       type: String,
-      default: ORDER_TYPES.NONE,
+      default: ORDER_TYPES.DESC,
       validator(value) {
         return Object.values(ORDER_TYPES).includes(value);
       },
@@ -66,7 +68,7 @@ export default {
   },
   computed: {
     hasItems() {
-      return !!this.timelineItems.length;
+      return this.timelineItems.length > 0;
     },
     dataTimeline() {
       if (this.order === ORDER_TYPES.NONE) {
@@ -100,28 +102,15 @@ export default {
         fullCurrentYear === fullNextYear
       );
     },
-    getTimelineItemsAssembled(items) {
-      const itemsGroupByYear = [];
-      items.forEach((item) => {
-        const fullTime = item.from;
-        if (itemsGroupByYear[fullTime]) {
-          itemsGroupByYear[fullTime].push(item);
-        } else {
-          itemsGroupByYear[fullTime] = [item];
-        }
-      });
-      return itemsGroupByYear;
-    },
     orderItems(items, typeOrder) {
-      const itemsGrouped = this.getTimelineItemsAssembled(items);
-      const keysItemsGrouped = Object.keys(itemsGrouped);
-      const timeItemsOrdered = keysItemsGrouped.sort((a, b) => {
+      const itemsGrouped = groupBy(items, 'from');
+      const timeItemsOrdered = keys(itemsGrouped).sort((a, b) => {
         if (typeOrder === ORDER_TYPES.DESC) {
           return b - a;
         }
         return a - b;
       });
-      return timeItemsOrdered.map((timeItem) => itemsGrouped[timeItem]);
+      return flatMap(timeItemsOrdered, (timeItem) => itemsGrouped[timeItem]);
     },
   },
 };

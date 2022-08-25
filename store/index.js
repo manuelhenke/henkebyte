@@ -1,4 +1,4 @@
-import { routes } from '@/util/routes';
+import { routes } from '@/util/routes.cjs';
 
 // eslint-disable-next-line import/prefer-default-export
 export const state = () => ({

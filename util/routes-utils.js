@@ -1,8 +1,8 @@
-const { statSync } = require('fs');
-const { resolve } = require('path');
+import { statSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 export async function getRoutes() {
-  // eslint-disable-next-line global-require
+  // eslint-disable-next-line global-require, unicorn/prefer-module
   const { $content } = require('@nuxt/content');
   const files = await $content({ deep: true }).only(['path']).fetch();
   return files.map((file) => (file.path === '/index' ? '/' : file.path));
@@ -24,9 +24,11 @@ export function mapRoutes({ routes, options }) {
     '/minesweeper': 0.6,
     '/ios-calculator': 0.6,
   };
+
   return routes.map((route) => {
     let lastmod = new Date();
     try {
+      // eslint-disable-next-line unicorn/prefer-module
       const path = route.component ?? resolve(__dirname, `../content${route.url}.md`);
       const stats = statSync(path);
       lastmod = stats.mtime;

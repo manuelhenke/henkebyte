@@ -9,29 +9,15 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
-name: "CodeQL"
+name: 'CodeQL'
 
 on:
   push:
-    branches: ["main"]
-    paths-ignore:
-      - '.forestry/**'
-      - '.husky/**'
-      - '.env.example'
-      - '.gitignore'
-      - 'LICENSE'
-      - 'README.md'
+    branches: ['main']
   pull_request:
-    branches: ["main"]
-    paths-ignore:
-      - '.forestry/**'
-      - '.husky/**'
-      - '.env.example'
-      - '.gitignore'
-      - 'LICENSE'
-      - 'README.md'
+    branches: ['main']
   schedule:
-    - cron: "34 20 * * 3"
+    - cron: '34 20 * * 3'
 
 jobs:
   analyze:
@@ -45,7 +31,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: ["javascript"]
+        language: ['javascript']
         # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 

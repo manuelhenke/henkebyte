@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": false,
+    "strictFunctionTypes": true,
+    "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["./*"],

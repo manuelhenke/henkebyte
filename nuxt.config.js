@@ -1,4 +1,6 @@
-import { getRoutes, mapRoutes } from './util/routesUtils';
+/* eslint-disable import/no-extraneous-dependencies */
+import { str } from 'nuxt-envalid';
+import { getRoutes, mapRoutes } from './util/routes-utils.js';
 
 const buildDescription = (target) =>
   `A showcase ${target} for different open source web projects including an iOS-Calculator and Minesweeper.`;
@@ -21,7 +23,8 @@ export default {
     // Recommended length: 60 characters
     title: 'HenkeByte',
     meta: [
-      { charset: 'utf-8' },
+      // eslint-disable-next-line unicorn/text-encoding-identifier-case
+      { charset: 'UTF-8' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       {
         name: 'viewport',
@@ -119,6 +122,8 @@ export default {
     '@nuxtjs/stylelint-module',
     // https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+    // https://github.com/manuelhenke/nuxt-envalid
+    'nuxt-envalid',
     // https://sitemap.nuxtjs.org/
     '@nuxtjs/sitemap',
     // https://github.com/nuxt-community/robots-module
@@ -176,7 +181,7 @@ export default {
   // Router Configuration: https://nuxtjs.org/docs/configuration-glossary/configuration-router
   router: {
     trailingSlash: false,
-    middleware: 'trailingSlashRedirect',
+    middleware: 'trailing-slash-redirect',
     linkActiveClass: 'child-active',
     linkExactActiveClass: 'active',
   },
@@ -201,6 +206,9 @@ export default {
     postcss: {
       plugins: [],
     },
+    babel: {
+      babelrc: true,
+    },
   },
 
   // Loading Configuration: https://nuxtjs.org/docs/features/loading/
@@ -211,5 +219,13 @@ export default {
   // https://color-mode.nuxtjs.org/
   colorMode: {
     fallback: 'light',
+  },
+
+  envalid: {
+    specs: {
+      CTF_SPACE_ID: str(),
+      CTF_CDA_ACCESS_TOKEN: str(),
+      CTF_ENVIRONMENT: str({ default: '' }),
+    },
   },
 };

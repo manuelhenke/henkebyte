@@ -1,9 +1,10 @@
+/* eslint-disable unicorn/no-array-method-this-argument */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 const async = require('async');
 const { replace, toLower } = require('lodash');
 const playwright = require('playwright');
-const { routes: routeObject } = require('./util/routes');
+const { routes: routeObject } = require('./util/routes.cjs');
 
 const routes = Object.values(routeObject);
 
@@ -43,7 +44,7 @@ async function goToPage(context, url) {
   const waitForPromises = [
     page.goto(url, {
       waitUntil: 'networkidle',
-      timeout: 20000,
+      timeout: 30_000,
     }),
     page.waitForLoadState('load'),
     page.waitForLoadState('domcontentloaded'),
@@ -71,7 +72,7 @@ async function screenshotPage(context, url, path) {
   await page.close();
 }
 
-(async () => {
+async function generate() {
   let port = process.argv[2];
   if (!port) port = '3000';
 
@@ -121,7 +122,11 @@ async function screenshotPage(context, url, path) {
   } finally {
     await browser.close();
   }
+}
 
+// eslint-disable-next-line unicorn/prefer-top-level-await
+generate().then(() => {
   // force exit as Nuxt server is still listening...
+  // eslint-disable-next-line unicorn/no-process-exit
   process.exit(0);
-})();
+});
