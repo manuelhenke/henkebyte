@@ -19,12 +19,17 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  TARGET_FOLDER: ./dist/
+  PREVIEW_BRANCH: pr-previews
+
 concurrency: preview-${{ github.ref }}
 
 jobs:
   deploy-preview:
     name: Deploy Preview
     runs-on: ubuntu-latest
+    environment: github-pages
     timeout-minutes: 5
 
     steps:
@@ -60,6 +65,8 @@ jobs:
 
       - name: Build 🛠
         run: yarn build
+        with:
+          ROUTER_BASE: /${{ env.PREVIEW_BRANCH }}/pr-${{ github.event.number }}/
 
       - name: Disable husky hooks ❌
         run: git config --unset core.hooksPath
@@ -67,5 +74,5 @@ jobs:
       - name: Deploy preview 📨
         uses: rossjrw/pr-preview-action@v1
         with:
-          preview-branch: pr-previews
-          source-dir: ./dist/
+          preview-branch: ${{ env.PREVIEW_BRANCH }}
+          source-dir: ${{ env.TARGET_FOLDER }}

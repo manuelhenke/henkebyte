@@ -180,6 +180,7 @@ export default {
 
   // Router Configuration: https://nuxtjs.org/docs/configuration-glossary/configuration-router
   router: {
+    base: process.env.ROUTER_BASE || '/',
     trailingSlash: false,
     middleware: 'trailing-slash-redirect',
     linkActiveClass: 'child-active',
