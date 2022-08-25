@@ -89,7 +89,7 @@ export default {
       },
       { rel: 'shortcut icon', href: `${BASE_PATH}favicon.ico?v=1` },
     ],
-    script: [{ src: '/decode-query-path.js' }],
+    script: [{ src: `${BASE_PATH}decode-query-path.js` }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
