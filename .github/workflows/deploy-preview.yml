@@ -29,7 +29,7 @@ jobs:
   deploy-preview:
     name: Deploy Preview
     runs-on: ubuntu-latest
-    environment: github-pages
+    environment: preview
     timeout-minutes: 5
 
     steps:
