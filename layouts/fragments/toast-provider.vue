@@ -42,6 +42,11 @@ export default {
   data: () => ({
     lastActiveToast: undefined,
   }),
+  watch: {
+    $route(_to, _from) {
+      this.removeToast();
+    },
+  },
   beforeMount() {
     this.$nuxt.$on(DISPLAY_NOTIFICATION, (toast) => {
       const newToast = defaultsDeep(toast, {

@@ -11,7 +11,7 @@
       />
     </div>
     <div class="lower-footer">
-      <!-- <nuxt-link to="/imprint">Imprint</nuxt-link>
+      <!-- <NuxtLink to="/imprint">Imprint</NuxtLink>
       <i class="bi bi-slash"></i> -->
       <small>&copy; {{ currentYear }} Copyright Manuel Henke</small>
     </div>
