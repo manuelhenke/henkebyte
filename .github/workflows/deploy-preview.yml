@@ -73,6 +73,7 @@ jobs:
           CTF_CDA_ACCESS_TOKEN: ${{ secrets.CTF_CDA_ACCESS_TOKEN }}
           HOST_NAME: ${{ env.HOST_NAME }}
           BASE_PATH: /${{ env.UMBRELLA_DIR }}/pr-${{ github.event.number }}/
+          ROBOTS_META_CONTENT: 'noindex,nofollow'
 
       - name: Disable husky hooks ❌
         run: git config --unset core.hooksPath
