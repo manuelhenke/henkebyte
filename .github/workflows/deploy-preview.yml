@@ -19,6 +19,11 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# Sets permissions of the GITHUB_TOKEN to allow commiting to repo
+permissions:
+  metadata: read
+  contents: write
+
 env:
   TARGET_FOLDER: ./dist/
   HOST_NAME: https://preview.henkebyte.com
@@ -31,9 +36,6 @@ jobs:
   deploy-preview:
     name: Deploy Preview
     runs-on: ubuntu-latest
-    # Sets permissions of the GITHUB_TOKEN to allow commiting to repo
-    permissions:
-      contents: write
     environment:
       name: preview
       url: ${{ env.HOST_NAME }}/${{ env.UMBRELLA_DIR }}/pr-${{ github.event.number }}/
