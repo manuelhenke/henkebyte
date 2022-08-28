@@ -27,7 +27,7 @@
         @click="toggleGrid"
       >
         <i v-if="preferGrid" class="bi bi-grid"></i>
-        <i v-else class="bi bi-columns-gap"></i>
+        <i v-else class="bi bi-bold bi-columns-gap"></i>
       </button>
       <button
         class="btn btn-primary w-100"
@@ -36,7 +36,7 @@
         data-bs-target="#offcanvasCategories"
         aria-controls="offcanvasCategories"
       >
-        Filter<i class="bi bi-funnel ms-2"></i>
+        Filter<i class="bi bi-bold bi-funnel ms-2"></i>
       </button>
     </div>
     <div class="error-box">
@@ -86,7 +86,7 @@
               :href="site.fields.url"
               class="btn btn-primary"
               target="_blank"
-              >Visit<i class="bi bi-box-arrow-up-right ms-2"></i
+              >Visit<i class="bi bi-bold bi-box-arrow-up-right ms-2"></i
             ></a>
           </div>
         </article>
