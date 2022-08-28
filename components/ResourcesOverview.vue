@@ -26,7 +26,7 @@
         title="Toggle grid layout"
         @click="toggleGrid"
       >
-        <i v-if="preferGrid" class="bi bi-grid"></i>
+        <i v-if="preferGrid" class="bi bi-bold bi-grid"></i>
         <i v-else class="bi bi-bold bi-columns-gap"></i>
       </button>
       <button
