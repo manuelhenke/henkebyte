@@ -19,10 +19,12 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow commiting to repo
+# Sets permissions of the GITHUB_TOKEN to allow committing to repo
 permissions:
-  metadata: read
+  # To push the preview code to the gh-pages branch
   contents: write
+  # To comment on the pr the preview url
+  pull-requests: write
 
 env:
   TARGET_FOLDER: ./dist/
