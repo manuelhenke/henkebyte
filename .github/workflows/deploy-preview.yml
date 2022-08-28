@@ -19,11 +19,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# Sets permissions of the GITHUB_TOKEN to allow commiting to repo
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 env:
   TARGET_FOLDER: ./dist/
