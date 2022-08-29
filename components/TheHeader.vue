@@ -29,6 +29,13 @@
           <NuxtLink v-if="navElement.to" class="btn nav-link" :to="navElement.to">{{
             navElement.name
           }}</NuxtLink>
+          <a
+            v-else-if="navElement.href"
+            class="btn nav-link"
+            :href="navElement.href"
+            target="_blank"
+            >{{ navElement.name }}</a
+          >
           <div v-else class="navbar-dropdown-container">
             <a
               ref="dropdown"
@@ -44,12 +51,20 @@
               {{ navElement.title }}<i class="bi bi-chevron-down"></i>
             </a>
             <ul class="dropdown-menu">
-              <li v-for="link in navElement.links" :key="link.to">
+              <li v-for="link in navElement.links" :key="link.name">
                 <NuxtLink
+                  v-if="link.to"
                   class="btn nav-link"
                   :to="link.to"
                   :aria-current="$route.params.slug === link.to"
                   >{{ link.name }}</NuxtLink
+                >
+                <a
+                  v-else-if="link.href"
+                  class="btn nav-link blank-icon"
+                  :href="link.href"
+                  target="_blank"
+                  >{{ link.name }}</a
                 >
               </li>
             </ul>

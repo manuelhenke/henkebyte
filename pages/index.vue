@@ -16,8 +16,17 @@
             {{ navElement.title }}
           </h2>
           <ul>
-            <li v-for="link in navElement.links" :key="link.to">
-              <NuxtLink class="link-primary fs-5" :to="link.to">{{ link.name }}</NuxtLink>
+            <li v-for="link in navElement.links" :key="link.name">
+              <NuxtLink v-if="link.to" class="link-primary fs-5" :to="link.to">{{
+                link.name
+              }}</NuxtLink>
+              <a
+                v-else-if="link.href"
+                class="link-primary fs-5"
+                :href="link.href"
+                target="_blank"
+                >{{ link.name }}</a
+              >
             </li>
           </ul>
         </div>
