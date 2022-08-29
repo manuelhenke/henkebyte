@@ -60,7 +60,7 @@
     "@babel/eslint-plugin": "^7.18.10",
     "@babel/plugin-proposal-pipeline-operator": "^7.18.9",
     "@babel/preset-env": "^7.18.10",
-    "@commitlint/cli": "^17.0.3",
+    "@commitlint/cli": "^17.1.1",
     "@commitlint/config-conventional": "^17.0.3",
     "@nuxt/test-utils": "^0.2.2",
     "@nuxtjs/dotenv": "^1.4.1",
