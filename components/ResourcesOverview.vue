@@ -55,14 +55,14 @@
     >
       <div v-for="site in filteredSites" :key="site.fields.title" class="col">
         <article class="card">
-          <img
+          <iframe
             v-if="site.fields.imageSrc"
-            :src="site.fields.imageSrc"
-            class="card-img-top"
-            :alt="`Preview of ${site.fields.title ? site.fields.title : 'the site'}`"
-            onerror="this.style.display='none'"
-            @error="layoutMasonry"
-          />
+            :aria-label="`Preview of ${site.fields.title ? site.fields.title : 'the site'}`"
+            role="img"
+            frameborder="0"
+            sandbox
+            :src="`data:text/html,<style>body{background:url('${site.fields.imageSrc}') center/cover no-repeat;padding:0;margin:0;overflow:hidden}</style>`"
+          ></iframe>
           <div class="card-body">
             <h2 v-if="site.fields.title" class="card-title">
               {{ site.fields.title }}
@@ -441,7 +441,8 @@ export default {
 }
 
 .card {
-  img {
+  img,
+  iframe {
     background-color: white;
     aspect-ratio: 1200 / 630;
     object-fit: cover;
