@@ -9005,10 +9005,10 @@ num2fraction@^1.2.2:
   resolved "https://registry.yarnpkg.com/num2fraction/-/num2fraction-1.2.2.tgz#6f682b6a027a4e9ddfa4564cd2589d1d4e669ede"
   integrity sha512-Y1wZESM7VUThYY+4W+X4ySH2maqcA+p7UR+w8VWNWVAd6lwuXXWz/w/Cz43J/dI2I+PS6wD5N+bJUF+gjWvIqg==
 
-nuxt-envalid@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/nuxt-envalid/-/nuxt-envalid-0.0.5.tgz#4e5734c1958d964ffa107cd9b17a6f193ecc6183"
-  integrity sha512-2eDq8BqgVFccWlxqxjJrre/skWbmFuGaJZj6pL5GGIHrbIbgA+A0+LfYS2YMKXPsNSyrisQ+urByhOApXKjTuw==
+nuxt-envalid@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/nuxt-envalid/-/nuxt-envalid-0.0.6.tgz#dd6e16e122a4b290f92488029727e9c5f9d5ce54"
+  integrity sha512-Nl5k5wRgVH3dzVzuhfWNypoNiHXwhWtdbMb5+2pSWKUGSgK6aCPIQUwL7z9WECCnigtDJqyht0hTzV/I/3NCig==
   dependencies:
     envalid "^7.3.1"
 
