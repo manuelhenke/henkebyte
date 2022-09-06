@@ -6943,10 +6943,10 @@ internal-slot@^1.0.3:
     has "^1.0.3"
     side-channel "^1.0.4"
 
-ios-calculator-for-web@^1.2.4:
-  version "1.2.12"
-  resolved "https://registry.yarnpkg.com/ios-calculator-for-web/-/ios-calculator-for-web-1.2.12.tgz#7c48579dc460f7496a10b8a0215c9ff92c89f839"
-  integrity sha512-eZXPfOA8couz9alNnXrwAaJCuElYmd5KMDRGNb1izIHFbrpiz1Y+9omisS3TAsXn89wOh3kkiGxNIdjlcrXJ/Q==
+ios-calculator-for-web@^1.2.13:
+  version "1.2.13"
+  resolved "https://registry.yarnpkg.com/ios-calculator-for-web/-/ios-calculator-for-web-1.2.13.tgz#886eaa8d1c1d9236c2ad1814adf429d7183adf5b"
+  integrity sha512-XtB5Rb3s30Va01jGtMlupeAYmsYTxauySf8zzT4Si15uSrMOt9h1qDCjfAVDm4SiZ2xqh2AV0TePGBD0Y34gig==
 
 ip@^1.1.5:
   version "1.1.8"

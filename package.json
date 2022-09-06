@@ -46,7 +46,7 @@
     "contentful": "^9.1.34",
     "dexie": "^3.2.1",
     "fireworks-js": "^2.0.2",
-    "ios-calculator-for-web": "^1.2.4",
+    "ios-calculator-for-web": "^1.2.13",
     "lodash-es": "^4.17.21",
     "masonry-layout": "^4.2.2",
     "minesweeper-for-web": "^2.1.14",
