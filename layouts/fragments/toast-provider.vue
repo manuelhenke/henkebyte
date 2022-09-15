@@ -98,5 +98,6 @@ export default {
 
 .toast-container {
   max-width: calc(100vw - map-get($spacers, 2) * 2);
+  z-index: $zindex-toast;
 }
 </style>
