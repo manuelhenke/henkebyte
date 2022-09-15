@@ -1,6 +1,6 @@
 @import 'variables';
 @import 'mixins';
-@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
 html {
@@ -14,15 +14,19 @@ body,
   padding-right: map-get($spacers, 0) !important;
 }
 
-i.bi {
-  &[class^='bi-'],
-  &[class*=' bi-'] {
-    line-height: 1;
+.bi,
+[class^='bi-'],
+[class*=' bi-'] {
+  line-height: 1;
+
+  &.bi-bold::before {
+    font-weight: bold !important;
   }
 }
 
 // Display special icon for links which will open in another tab
-a:not(.btn) {
+a:not(.btn),
+a.blank-icon {
   &[target='_blank'],
   &[target='_window'] {
     &::after {

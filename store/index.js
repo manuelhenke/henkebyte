@@ -10,7 +10,15 @@ export const state = () => ({
     },
     {
       title: 'Projects',
-      links: [routes.HENKEBYTE_WEBSITE, routes.IOS_CALCULATOR, routes.MINESWEEPER],
+      links: [
+        routes.HENKEBYTE_WEBSITE,
+        routes.IOS_CALCULATOR,
+        routes.MINESWEEPER,
+        {
+          href: 'https://nuxt-envalid.henkebyte.com',
+          name: 'nuxt-envalid',
+        },
+      ],
     },
   ],
   contactOptions: [
@@ -27,7 +35,7 @@ export const state = () => ({
     {
       text: 'E-Mail',
       href: 'mailto:contact@henkebyte.com',
-      icon: 'bi bi-envelope',
+      icon: 'bi bi-bold bi-envelope',
     },
   ],
 });
