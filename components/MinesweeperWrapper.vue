@@ -1,31 +1,55 @@
 <template>
   <div class="minesweeper">
-    <div class="d-grid gap-2 col-12 col-md-6 col-lg-4 mx-auto my-3 text-center">
-      <select
-        v-model="currentGameModeName"
-        class="form-select text-center"
-        name="gamemode"
-        @change="onChangedGameMode"
-      >
-        <option
-          v-for="gameMode of gameModesSelectionOptions"
-          :key="gameMode.value"
-          :value="gameMode.value"
-          :selected="gameMode.selected"
+    <div class="row my-3 text-center g-2 justify-content-center">
+      <div class="col-12 col-sm-8 col-md-5 col-lg-4">
+        <select
+          v-model="currentGameModeName"
+          class="form-select text-center"
+          name="gamemode"
+          @change="onChangedGameMode"
         >
-          {{ gameMode.text }}
-        </option>
-      </select>
-      <button
-        id="show-btn"
-        class="btn btn-outline-primary"
-        type="button"
-        :data-bs-toggle="isEnded ? undefined : 'modal'"
-        :data-bs-target="isEnded ? undefined : '#restart-modal'"
-        @click="clickedRestart"
-      >
-        Restart
-      </button>
+          <option
+            v-for="gameMode of gameModesSelectionOptions"
+            :key="gameMode.value"
+            :value="gameMode.value"
+            :selected="gameMode.selected"
+          >
+            {{ gameMode.text }}
+          </option>
+        </select>
+      </div>
+      <div class="col-12 col-sm-8 col-md-5 col-lg-4 d-grid">
+        <button
+          id="show-btn"
+          class="btn btn-outline-primary"
+          type="button"
+          :data-bs-toggle="isEnded ? undefined : 'modal'"
+          :data-bs-target="isEnded ? undefined : '#restart-modal'"
+          @click="clickedRestart"
+        >
+          Restart
+        </button>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center my-3">
+      <div class="form-check form-switch">
+        <input
+          id="flagPlacementMode"
+          v-model="flagPlacementMode"
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+        />
+        <label class="form-check-label" for="flagPlacementMode">Place flags</label>
+        <i
+          id="flagPlacementTooltip"
+          class="bi bi-info-circle"
+          data-bs-toggle="tooltip"
+          data-bs-html="true"
+          data-bs-title="<em>Tooltip</em> <u>with</u> <b>HTML</b>"
+        ></i>
+      </div>
     </div>
 
     <div class="text-center my-3 position-relative">
@@ -34,6 +58,7 @@
         ref="minesweeper"
         class="d-inline-block"
         bomb-counter-selector="#bomb-counter"
+        :flag-placement-mode="flagPlacementMode"
         @field-click="handleMinesweeperClick"
         @game-won="onGameWon"
         @game-lost="onGameLost"
@@ -75,7 +100,7 @@
         just hold a field to place a flag.
       </div>
 
-      <div v-else-if="$device.isMacOS && !$device.isMobile">
+      <div v-else-if="$device.isMacOS && !$device.isMobile && !$device.isTablet">
         To place a flag just hold
         <kbd>Cmd <i class="bi bi-command"></i></kbd> or
         <kbd>Opt <i class="bi bi-option"></i></kbd> while clicking on a field. Or just hold a field
@@ -175,6 +200,7 @@
 </template>
 
 <script>
+import { Tooltip as BootstrapTooltip } from 'bootstrap';
 import { capitalize, filter, find, lowerCase, map, meanBy, reverse, size, sortBy } from 'lodash-es';
 import { Fireworks } from 'fireworks-js';
 import { liveQuery } from 'dexie';
@@ -249,6 +275,7 @@ export default {
     gamesHistoryChart: undefined,
     notificationId: 'minesweeper-notification',
     sortGamesByDuration: true,
+    flagPlacementMode: false,
   }),
   computed: {
     isStopwatchRunning() {
@@ -329,6 +356,10 @@ export default {
     this.fireworks = new Fireworks(this.$refs.firework, {
       acceleration: 1.01,
     });
+
+    const flagTooltip = document.querySelector(`#flagPlacementTooltip`);
+    // eslint-disable-next-line no-unused-vars
+    const tooltip = new BootstrapTooltip(flagTooltip);
 
     liveQuery(() => database.games.toArray()).subscribe((games) => {
       this.games = sortBy(games, 'gameDuration');
