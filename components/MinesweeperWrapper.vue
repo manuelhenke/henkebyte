@@ -1,7 +1,9 @@
 <template>
-  <div class="minesweeper">
+  <div ref="minesweeper-wrapper" class="minesweeper-wrapper">
+    <div v-if="isInFullscreen" class="h1 display-1 text-center">Minesweeper</div>
+
     <div class="row my-3 text-center gy-2 justify-content-center">
-      <div class="col-12 col-sm-8 col-md-5 col-lg-4">
+      <div class="col-12 col-sm-8 col-md-5 col-lg-4 col-xl-3">
         <select
           v-model="currentGameModeName"
           class="form-select text-center"
@@ -18,7 +20,7 @@
           </option>
         </select>
       </div>
-      <div class="col-12 col-sm-8 col-md-5 col-lg-4 d-grid">
+      <div class="col-12 col-sm-8 col-md-5 col-lg-4 col-xl-3 d-grid">
         <button
           id="show-btn"
           class="btn btn-outline-primary"
@@ -76,7 +78,7 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-center align-items-center my-3">
+    <div class="d-flex justify-content-center align-items-center my-3 gap-2">
       <div class="form-check form-switch">
         <input
           id="flagPlacementMode"
@@ -88,14 +90,25 @@
         <label class="form-check-label" for="flagPlacementMode">Place flags</label>
       </div>
       <button
-        class="btn btn-link btn-icon btn-lg ms-2"
+        class="btn btn-link btn-icon btn-lg"
         type="button"
+        title="Show further information about flag placement"
         data-bs-toggle="collapse"
         data-bs-target="#flagPlacementInfo"
         aria-expanded="false"
         aria-controls="flagPlacementInfo"
       >
         <i class="bi bi-info-circle-fill"></i>
+      </button>
+      <div class="vr d-none d-sm-inline-block"></div>
+      <button
+        class="btn btn-link btn-icon btn-lg d-none d-sm-inline-block"
+        type="button"
+        title="Toggle fullscreen"
+        @click="toggleFullscreen"
+      >
+        <i v-if="isInFullscreen" class="bi bi-fullscreen-exit"></i>
+        <i v-else class="bi bi-fullscreen"></i>
       </button>
     </div>
 
@@ -265,7 +278,7 @@ const GAME_MODES = {
     config: {
       columns: 30,
       rows: 30,
-      bombs: 300,
+      bombs: 200,
     },
   },
 };
@@ -284,6 +297,7 @@ export default {
     notificationId: 'minesweeper-notification',
     sortGamesByDuration: true,
     flagPlacementMode: false,
+    isInFullscreen: false,
   }),
   computed: {
     isStopwatchRunning() {
@@ -371,6 +385,21 @@ export default {
   },
   methods: {
     timestampToDateString,
+    toggleFullscreen() {
+      if (this.isInFullscreen) {
+        document.exitFullscreen().catch((error) => console.error(error));
+      } else {
+        /** @type {HTMLElement} */
+        const targetElement = this.$refs['minesweeper-wrapper'];
+        targetElement
+          .requestFullscreen({
+            navigationUI: this.isInFullscreen ? 'hide' : 'show',
+          })
+          .catch((error) => console.error(error));
+      }
+
+      this.isInFullscreen = !this.isInFullscreen;
+    },
     getCurrentGameMode() {
       return find(GAME_MODES, { name: this.currentGameModeName });
     },
@@ -468,6 +497,16 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/css/bootstrap-mixins.scss';
+
+.minesweeper-wrapper {
+  &:fullscreen {
+    padding: map-get($spacers, 2);
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 100vw;
+    background-color: rgb(var(--bs-light-rgb));
+  }
+}
 
 $border-width: map-get($border-widths, 4);
 

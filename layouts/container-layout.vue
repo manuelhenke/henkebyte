@@ -34,6 +34,10 @@ export default {
 #container-layout {
   .container {
     @include stretch;
+
+    padding-top: map-get($spacers, 3);
+    padding-bottom: map-get($spacers, 3);
+
     .footer {
       margin-inline: map-get($spacers, 5);
     }

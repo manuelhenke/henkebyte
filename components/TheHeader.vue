@@ -116,7 +116,7 @@ export default {
     hasActiveChild(navElement) {
       return (
         Array.isArray(navElement.links) &&
-        navElement.links.some((link) => link.to === this.$route.params.slug)
+        navElement.links.some((link) => link.to === this.$route.path)
       );
     },
     toggleMobileMenu() {
