@@ -1,5 +1,5 @@
 <template>
-  <span class="time-string">{{ formattedElapsedTime }}</span>
+  <span :style="timeStringStyle">{{ formattedElapsedTime }}</span>
 </template>
 
 <script>
@@ -18,6 +18,13 @@ export default {
       const seconds = overallSeconds % 60;
 
       return `${minutes}:${String(seconds).padStart(2, '0')}`;
+    },
+    timeStringStyle() {
+      // avoid bumping on often number change, e.g. when used together with StopWatch
+      return {
+        display: 'inline-block',
+        'min-width': `${this.formattedElapsedTime.toString().length}ch`,
+      };
     },
   },
 };
