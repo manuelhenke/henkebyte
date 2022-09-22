@@ -68,6 +68,7 @@
         bomb-counter-selector="#bomb-counter"
         :flag-placement-mode="flagPlacementMode"
         @field-click="handleMinesweeperClick"
+        @field-long-press="handleMinesweeperClick"
         @game-won="onGameWon"
         @game-lost="onGameLost"
       ></minesweeper-game>
@@ -328,6 +329,9 @@ export default {
         text: `${capitalize(name)} - ${rows}x${columns} / ${bombs} Mines`,
       }));
     },
+    fullscreenTargetElement() {
+      return this.$refs['minesweeper-wrapper'];
+    },
   },
   watch: {
     currentGameModeGames() {
@@ -382,6 +386,10 @@ export default {
     liveQuery(() => database.games.toArray()).subscribe((games) => {
       this.games = sortBy(games, 'gameDuration');
     });
+
+    this.fullscreenTargetElement.addEventListener('fullscreenchange', () => {
+      this.isInFullscreen = document.fullscreenElement;
+    });
   },
   methods: {
     timestampToDateString,
@@ -389,16 +397,12 @@ export default {
       if (this.isInFullscreen) {
         document.exitFullscreen().catch((error) => console.error(error));
       } else {
-        /** @type {HTMLElement} */
-        const targetElement = this.$refs['minesweeper-wrapper'];
-        targetElement
+        this.fullscreenTargetElement
           .requestFullscreen({
             navigationUI: this.isInFullscreen ? 'hide' : 'show',
           })
           .catch((error) => console.error(error));
       }
-
-      this.isInFullscreen = !this.isInFullscreen;
     },
     getCurrentGameMode() {
       return find(GAME_MODES, { name: this.currentGameModeName });
