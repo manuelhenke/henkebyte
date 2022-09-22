@@ -1,6 +1,6 @@
 <template>
   <div class="minesweeper">
-    <div class="row my-3 text-center g-2 justify-content-center">
+    <div class="row my-3 text-center gy-2 justify-content-center">
       <div class="col-12 col-sm-8 col-md-5 col-lg-4">
         <select
           v-model="currentGameModeName"
@@ -32,23 +32,29 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-center my-3">
-      <div class="form-check form-switch">
-        <input
-          id="flagPlacementMode"
-          v-model="flagPlacementMode"
-          class="form-check-input"
-          type="checkbox"
-          role="switch"
-        />
-        <label class="form-check-label" for="flagPlacementMode">Place flags</label>
-        <i
-          id="flagPlacementTooltip"
-          class="bi bi-info-circle"
-          data-bs-toggle="tooltip"
-          data-bs-html="true"
-          data-bs-title="<em>Tooltip</em> <u>with</u> <b>HTML</b>"
-        ></i>
+    <div class="my-3 row">
+      <div class="col-6 d-flex align-items-center justify-content-end">
+        <span class="badge rounded-pill bg-danger"><span id="bomb-counter"></span> Mines left</span>
+      </div>
+      <div class="col-6 d-flex gap-2 align-items-center justify-content-start">
+        <span>
+          <i class="bi bi-stopwatch"></i>
+          <StopWatch ref="stopwatch">
+            <template #default="{ elapsedTime }">
+              <TimeString :milliseconds="elapsedTime" />
+            </template>
+          </StopWatch>
+        </span>
+        <button
+          class="btn btn-link btn-icon btn-lg"
+          :class="{
+            invisible: isEnded || !isStopwatchRunning,
+          }"
+          type="button"
+          @click="toggleStopWatch"
+        >
+          <i class="bi bi-pause-circle-fill"></i>
+        </button>
       </div>
     </div>
 
@@ -70,44 +76,47 @@
       </div>
     </div>
 
-    <div class="my-3 d-flex gap-5 align-items-center justify-content-center">
-      <div class="d-flex gap-2 align-items-center justify-content-center">
-        <span>
-          <i class="bi bi-stopwatch"></i>
-          <StopWatch ref="stopwatch">
-            <template #default="{ elapsedTime }">
-              <TimeString :milliseconds="elapsedTime" />
-            </template>
-          </StopWatch>
-        </span>
-        <button
-          v-if="!isEnded && isStopwatchRunning"
-          class="btn btn-link btn-icon btn-lg"
-          type="button"
-          @click="toggleStopWatch"
-        >
-          <i class="bi bi-pause-circle-fill"></i>
-        </button>
+    <div class="d-flex justify-content-center align-items-center my-3">
+      <div class="form-check form-switch">
+        <input
+          id="flagPlacementMode"
+          v-model="flagPlacementMode"
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+        />
+        <label class="form-check-label" for="flagPlacementMode">Place flags</label>
       </div>
-      <span class="badge rounded-pill bg-danger"><span id="bomb-counter"></span> Mines left</span>
+      <button
+        class="btn btn-link btn-icon btn-lg ms-2"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#flagPlacementInfo"
+        aria-expanded="false"
+        aria-controls="flagPlacementInfo"
+      >
+        <i class="bi bi-info-circle-fill"></i>
+      </button>
     </div>
 
-    <div class="alert alert-info d-flex align-items-center" role="alert">
-      <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
+    <div id="flagPlacementInfo" class="collapse my-3">
+      <div class="alert alert-info d-flex align-items-center mb-0" role="alert">
+        <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
 
-      <div v-if="$device.isWindows && !$device.isMobile">
-        To place a flag just hold <kbd>Ctrl</kbd> or <kbd>Alt</kbd> while clicking on a field. Or
-        just hold a field to place a flag.
+        <div v-if="$device.isWindows && !$device.isMobile">
+          To place a flag just hold <kbd>Ctrl</kbd> or <kbd>Alt</kbd> while clicking on a field. Or
+          just hold a field to place a flag.
+        </div>
+
+        <div v-else-if="$device.isMacOS && !$device.isMobile && !$device.isTablet">
+          To place a flag just hold
+          <kbd>Cmd <i class="bi bi-command"></i></kbd> or
+          <kbd>Opt <i class="bi bi-option"></i></kbd> while clicking on a field. Or just hold a
+          field to place a flag.
+        </div>
+
+        <div v-else>Just hold a field to place a flag.</div>
       </div>
-
-      <div v-else-if="$device.isMacOS && !$device.isMobile && !$device.isTablet">
-        To place a flag just hold
-        <kbd>Cmd <i class="bi bi-command"></i></kbd> or
-        <kbd>Opt <i class="bi bi-option"></i></kbd> while clicking on a field. Or just hold a field
-        to place a flag.
-      </div>
-
-      <div v-else>Just hold a field to place a flag.</div>
     </div>
 
     <section v-show="currentGameModeScoreboardEntries.length > 0">
@@ -200,7 +209,6 @@
 </template>
 
 <script>
-import { Tooltip as BootstrapTooltip } from 'bootstrap';
 import { capitalize, filter, find, lowerCase, map, meanBy, reverse, size, sortBy } from 'lodash-es';
 import { Fireworks } from 'fireworks-js';
 import { liveQuery } from 'dexie';
@@ -323,7 +331,7 @@ export default {
           const config = {
             type: 'doughnut',
             data: {
-              labels: ['Won', 'Lost'],
+              labels: [' Won', ' Lost'],
               datasets: [
                 {
                   label: 'Games History',
@@ -356,10 +364,6 @@ export default {
     this.fireworks = new Fireworks(this.$refs.firework, {
       acceleration: 1.01,
     });
-
-    const flagTooltip = document.querySelector(`#flagPlacementTooltip`);
-    // eslint-disable-next-line no-unused-vars
-    const tooltip = new BootstrapTooltip(flagTooltip);
 
     liveQuery(() => database.games.toArray()).subscribe((games) => {
       this.games = sortBy(games, 'gameDuration');
