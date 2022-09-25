@@ -38,7 +38,7 @@
       <div class="col-6 d-flex align-items-center justify-content-end">
         <span class="badge rounded-pill bg-danger"><span id="bomb-counter"></span> Mines left</span>
       </div>
-      <div class="col-6 d-flex gap-2 align-items-center justify-content-start">
+      <div class="col-6 d-flex gap-1 align-items-center justify-content-start">
         <span>
           <i class="bi bi-stopwatch"></i>
           <StopWatch ref="stopwatch">
@@ -79,57 +79,77 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-center align-items-center my-3 gap-2">
-      <div class="form-check form-switch">
-        <input
-          id="flagPlacementMode"
-          v-model="flagPlacementMode"
-          class="form-check-input"
-          type="checkbox"
-          role="switch"
-        />
-        <label class="form-check-label" for="flagPlacementMode">Place flags</label>
+    <div class="d-flex justify-content-center align-items-center my-3 gap-3">
+      <div class="d-flex justify-content-center align-items-center gap-2">
+        <div class="form-check form-switch">
+          <input
+            id="flagPlacementMode"
+            v-model="flagPlacementMode"
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+          />
+          <label class="form-check-label" for="flagPlacementMode">Place flags</label>
+        </div>
+        <button
+          class="btn btn-link btn-icon btn-lg"
+          type="button"
+          title="Show further information about flag placement"
+          data-bs-toggle="collapse"
+          data-bs-target="#flagPlacementInfo"
+          aria-expanded="false"
+          aria-controls="flagPlacementInfo"
+        >
+          <i class="bi bi-info-circle-fill"></i>
+        </button>
       </div>
-      <button
-        class="btn btn-link btn-icon btn-lg"
-        type="button"
-        title="Show further information about flag placement"
-        data-bs-toggle="collapse"
-        data-bs-target="#flagPlacementInfo"
-        aria-expanded="false"
-        aria-controls="flagPlacementInfo"
-      >
-        <i class="bi bi-info-circle-fill"></i>
-      </button>
       <div class="vr d-none d-sm-inline-block"></div>
-      <button
-        class="btn btn-link btn-icon btn-lg d-none d-sm-inline-block"
-        type="button"
-        title="Toggle fullscreen"
-        @click="toggleFullscreen"
-      >
-        <i v-if="isInFullscreen" class="bi bi-fullscreen-exit"></i>
-        <i v-else class="bi bi-fullscreen"></i>
-      </button>
+      <div class="d-none d-sm-inline-block">
+        <button
+          class="btn btn-link p-0"
+          type="button"
+          title="Toggle fullscreen"
+          @click="toggleFullscreen"
+        >
+          <i v-if="isInFullscreen" class="bi bi-fullscreen-exit"></i>
+          <i v-else class="bi bi-fullscreen"></i>
+          Fullscreen
+        </button>
+      </div>
     </div>
 
     <div id="flagPlacementInfo" class="collapse my-3">
-      <div class="alert alert-info d-flex align-items-center mb-0" role="alert">
-        <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
-
-        <div v-if="$device.isWindows && !$device.isMobile">
-          To place a flag just hold <kbd>Ctrl</kbd> or <kbd>Alt</kbd> while clicking on a field. Or
-          just hold a field to place a flag.
-        </div>
-
-        <div v-else-if="$device.isMacOS && !$device.isMobile && !$device.isTablet">
-          To place a flag just hold
-          <kbd>Cmd <i class="bi bi-command"></i></kbd> or
-          <kbd>Opt <i class="bi bi-option"></i></kbd> while clicking on a field. Or just hold a
-          field to place a flag.
-        </div>
-
-        <div v-else>Just hold a field to place a flag.</div>
+      <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Information: Flags</h4>
+        <p>
+          Flags are there to indicate an underlying bomb. Therefore, fields with flags cannot be
+          clicked to uncover the field.
+          <strong
+            >The maximum number of flags that can be placed is the number of bombs hidden.</strong
+          >
+        </p>
+        <hr />
+        <p>
+          In addition to activating the flag placement mode, there are different ways to place flags
+          (and question marks) depending on your device type:
+        </p>
+        <ul class="mb-0">
+          <li>Long press a field (>0.5 sec)</li>
+          <li v-if="$device.isWindows && !$device.isMobile">
+            Hold
+            <kbd>Ctrl</kbd>
+            or
+            <kbd>Alt</kbd>
+            while clicking on a field
+          </li>
+          <li v-if="$device.isMacOS && !$device.isMobile && !$device.isTablet">
+            Hold
+            <kbd>Cmd <i class="bi bi-command"></i></kbd>
+            or
+            <kbd>Opt <i class="bi bi-option"></i></kbd>
+            while clicking on a field
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -390,6 +410,8 @@ export default {
     this.fullscreenTargetElement.addEventListener('fullscreenchange', () => {
       this.isInFullscreen = document.fullscreenElement;
     });
+
+    // TODO: on navigation access if the user is sure, while the game is running
   },
   methods: {
     timestampToDateString,
@@ -470,6 +492,7 @@ export default {
     },
     handleMinesweeperClick() {
       this.isEnded = false;
+
       if (!this.$refs.stopwatch.isRunning) {
         this.$refs.stopwatch.start();
       }
