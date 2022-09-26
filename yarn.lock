@@ -8657,10 +8657,10 @@ min-indent@^1.0.0:
   resolved "https://registry.yarnpkg.com/min-indent/-/min-indent-1.0.1.tgz#a63f681673b30571fbe8bc25686ae746eefa9869"
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
-minesweeper-for-web@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/minesweeper-for-web/-/minesweeper-for-web-3.0.0.tgz#c81112101042d07e1ce60721d91f99e030e17dbc"
-  integrity sha512-8RRdbXW0XW0hDCRH+J/JDVmVUwGtO+2XaaojyVd7fVzJpctEImcZyRukTmjxtdwzQgD87lsusvwOOlJ8LVU1vg==
+minesweeper-for-web@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/minesweeper-for-web/-/minesweeper-for-web-3.0.1.tgz#7e0746173205e53e023f75f95fff01e00a945a18"
+  integrity sha512-z+d6N+DMmRqChpXVwM23iW8wVnI9dMq87ougEE84EpFQF9MJ+hT3eFTNXyE5CmzoryHXDd6YmYuHNNRbdGdt/A==
   dependencies:
     lit "^2.2.0"
 
