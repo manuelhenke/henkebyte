@@ -27,10 +27,49 @@
           type="button"
           :data-bs-toggle="isEnded ? undefined : 'modal'"
           :data-bs-target="isEnded ? undefined : '#restart-modal'"
-          @click="clickedRestart"
+          @click="handleRestart"
         >
           Restart
         </button>
+      </div>
+    </div>
+
+    <div v-if="currentGameModeName === 'custom'" class="hstack gap-3 justify-content-center">
+      <div>
+        <label for="custom-rows" class="form-label">Rows</label>
+        <input
+          id="custom-rows"
+          v-model="customRows"
+          type="range"
+          class="form-range"
+          min="1"
+          max="100"
+          step="1"
+        />
+      </div>
+      <div>
+        <label for="custom-columns" class="form-label">Columns</label>
+        <input
+          id="custom-columns"
+          v-model="customColumns"
+          type="range"
+          class="form-range"
+          min="1"
+          max="100"
+          step="1"
+        />
+      </div>
+      <div>
+        <label for="custom-bombs" class="form-label">Bombs</label>
+        <input
+          id="custom-bombs"
+          v-model="customBombs"
+          type="range"
+          class="form-range"
+          min="1"
+          :max="customColumns * customRows"
+          step="1"
+        />
       </div>
     </div>
 
@@ -67,10 +106,10 @@
         class="d-inline-block"
         bomb-counter-selector="#bomb-counter"
         :flag-placement-mode="flagPlacementMode"
-        @field-click="handleMinesweeperClick"
-        @field-long-press="handleMinesweeperClick"
-        @game-won="onGameWon"
-        @game-lost="onGameLost"
+        @minesweeper:field-click="handleMinesweeperClick"
+        @minesweeper:field-long-press="handleMinesweeperClick"
+        @minesweeper:game-won="onGameWon"
+        @minesweeper:game-lost="onGameLost"
       ></minesweeper-game>
       <div v-if="!isEnded && !isStopwatchRunning" class="overlay">
         <button class="btn btn-link btn-icon btn-lg" type="button" @click="toggleStopWatch">
@@ -243,7 +282,18 @@
 </template>
 
 <script>
-import { capitalize, filter, find, lowerCase, map, meanBy, reverse, size, sortBy } from 'lodash-es';
+import {
+  capitalize,
+  filter,
+  find,
+  lowerCase,
+  map,
+  meanBy,
+  reverse,
+  size,
+  sortBy,
+  toNumber,
+} from 'lodash-es';
 import { Fireworks } from 'fireworks-js';
 import { liveQuery } from 'dexie';
 import { Chart, ArcElement, DoughnutController, Legend, Title, Tooltip } from 'chart.js';
@@ -259,7 +309,6 @@ Chart.register(ArcElement, DoughnutController, Legend, Title, Tooltip);
 const GAME_MODES = {
   NOOB: {
     name: 'noob',
-    endAnimationDuration: 5000,
     config: {
       columns: 5,
       rows: 5,
@@ -268,7 +317,6 @@ const GAME_MODES = {
   },
   EASY: {
     name: 'easy',
-    endAnimationDuration: 10_000,
     config: {
       columns: 9,
       rows: 9,
@@ -277,7 +325,6 @@ const GAME_MODES = {
   },
   NORMAL: {
     name: 'normal',
-    endAnimationDuration: 15_000,
     config: {
       columns: 16,
       rows: 16,
@@ -286,7 +333,6 @@ const GAME_MODES = {
   },
   HARD: {
     name: 'hard',
-    endAnimationDuration: 20_000,
     config: {
       columns: 30,
       rows: 16,
@@ -295,13 +341,19 @@ const GAME_MODES = {
   },
   EXTREME: {
     name: 'extreme',
-    endAnimationDuration: 30_000,
     config: {
       columns: 30,
       rows: 30,
       bombs: 200,
     },
   },
+};
+
+const calculateAnimationDuration = (config) => {
+  const fields = config.rows * config.columns;
+  const bombsPerField = config.bombs / fields;
+
+  return Math.round((fields / bombsPerField) * 10);
 };
 
 export default {
@@ -319,6 +371,9 @@ export default {
     sortGamesByDuration: true,
     flagPlacementMode: false,
     isInFullscreen: false,
+    customRows: 20,
+    customColumns: 20,
+    customBombs: 50,
   }),
   computed: {
     isStopwatchRunning() {
@@ -342,8 +397,21 @@ export default {
     currentGameModeAverageDuration() {
       return meanBy(this.currentGameModeScoreboardEntries, 'gameDuration');
     },
+    gameModes() {
+      return {
+        ...GAME_MODES,
+        CUSTOM: {
+          name: 'custom',
+          config: {
+            columns: toNumber(this.customColumns),
+            rows: toNumber(this.customRows),
+            bombs: toNumber(this.customBombs),
+          },
+        },
+      };
+    },
     gameModesSelectionOptions() {
-      return map(GAME_MODES, ({ name, config: { columns, rows, bombs } }) => ({
+      return map(this.gameModes, ({ name, config: { columns, rows, bombs } }) => ({
         value: lowerCase(name),
         selected: this.currentGameModeName === name,
         text: `${capitalize(name)} - ${rows}x${columns} / ${bombs} Mines`,
@@ -351,6 +419,9 @@ export default {
     },
     fullscreenTargetElement() {
       return this.$refs['minesweeper-wrapper'];
+    },
+    currentGameMode() {
+      return find(this.gameModes, { name: this.currentGameModeName });
     },
   },
   watch: {
@@ -396,7 +467,7 @@ export default {
     },
   },
   mounted() {
-    const gameModeConfiguration = this.getGameModeConfiguration();
+    const gameModeConfiguration = this.currentGameMode.config;
     this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration);
 
     this.fireworks = new Fireworks(this.$refs.firework, {
@@ -421,21 +492,13 @@ export default {
       } else {
         this.fullscreenTargetElement
           .requestFullscreen({
-            navigationUI: this.isInFullscreen ? 'hide' : 'show',
+            navigationUI: 'show',
           })
           .catch((error) => console.error(error));
       }
     },
-    getCurrentGameMode() {
-      return find(GAME_MODES, { name: this.currentGameModeName });
-    },
-    getGameModeConfiguration() {
-      return this.getCurrentGameMode().config;
-    },
     onChangedGameMode(event) {
       event.preventDefault();
-      const gameModeConfiguration = this.getGameModeConfiguration();
-      this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration);
       this.restartGame();
     },
     onGameWon() {
@@ -447,7 +510,7 @@ export default {
         id: this.notificationId,
         body: `Congratulations, you have won!`,
         options: {
-          delay: GAME_MODES.NOOB.endAnimationDuration,
+          delay: 5000,
         },
       });
 
@@ -455,7 +518,7 @@ export default {
 
       this.endAnimationTimeoutId = window.setTimeout(() => {
         this.fireworks.stop();
-      }, this.getCurrentGameMode().endAnimationDuration);
+      }, calculateAnimationDuration(this.currentGameMode.config));
     },
     onGameLost() {
       this.isEnded = true;
@@ -466,7 +529,7 @@ export default {
         id: this.notificationId,
         body: `Unfortunately, you lost this round of Minesweeper. Just try again!`,
         options: {
-          delay: GAME_MODES.NOOB.endAnimationDuration,
+          delay: 5000,
         },
       });
 
@@ -474,9 +537,9 @@ export default {
 
       this.endAnimationTimeoutId = window.setTimeout(() => {
         this.$refs.rain.clear();
-      }, this.getCurrentGameMode().endAnimationDuration);
+      }, calculateAnimationDuration(this.currentGameMode.config));
     },
-    clickedRestart() {
+    handleRestart() {
       if (this.isEnded) {
         this.restartGame();
       }
@@ -488,6 +551,9 @@ export default {
       window.clearTimeout(this.endAnimationTimeoutId);
       this.$refs.stopwatch.reset();
       this.$nuxt.$emit(REMOVE_NOTIFICATION, this.notificationId);
+
+      const gameModeConfiguration = this.currentGameMode.config;
+      this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration);
       this.$refs.minesweeper.restartGame();
     },
     handleMinesweeperClick() {
