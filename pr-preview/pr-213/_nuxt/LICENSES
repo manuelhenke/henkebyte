@@ -1,25 +1,4 @@
 /*!
- * Masonry v4.2.2
- * Cascading grid layout library
- * https://masonry.desandro.com
- * MIT License
- * by David DeSandro
- */
-
-/*!
- * Outlayer v2.1.1
- * the brains and guts of a layout library
- * MIT license
- */
-
-/*!
- * getSize v2.0.3
- * measure size of elements
- * MIT license
- */
-
-
-/*!
  * Vue.js v2.7.10
  * (c) 2014-2022 Evan You
  * Released under the MIT License.
@@ -107,6 +86,27 @@ PERFORMANCE OF THIS SOFTWARE.
 
 
 /*!
+ * Masonry v4.2.2
+ * Cascading grid layout library
+ * https://masonry.desandro.com
+ * MIT License
+ * by David DeSandro
+ */
+
+/*!
+ * Outlayer v2.1.1
+ * the brains and guts of a layout library
+ * MIT license
+ */
+
+/*!
+ * getSize v2.0.3
+ * measure size of elements
+ * MIT license
+ */
+
+
+/*!
  * @kurkle/color v0.2.1
  * https://github.com/kurkle/color#readme
  * (c) 2022 Jukka Kurkela
@@ -120,4 +120,20 @@ PERFORMANCE OF THIS SOFTWARE.
  * Released under the MIT License
  */
 
-/*! For license information please see custom-element.min.js.LICENSE.txt */
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+
+/**
+ * @license
+ * Copyright 2021 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
