@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <div v-if="currentGameModeName === 'custom'" class="hstack gap-3 justify-content-center">
+    <div v-if="isCustomGameMode" class="hstack gap-3 justify-content-center">
       <div>
         <label for="custom-rows" class="form-label">Rows</label>
         <input
@@ -75,7 +75,11 @@
 
     <div class="my-3 row">
       <div class="col-6 d-flex align-items-center justify-content-end">
-        <span class="badge rounded-pill bg-danger"><span id="bomb-counter"></span> Mines left</span>
+        <ShakeElement ref="bomb-counter-shake-wrapper">
+          <span class="badge rounded-pill bg-danger"
+            ><span id="bomb-counter"></span> Mines left</span
+          >
+        </ShakeElement>
       </div>
       <div class="col-6 d-flex gap-1 align-items-center justify-content-start">
         <span>
@@ -99,15 +103,14 @@
       </div>
     </div>
 
-    <div class="text-center my-3 position-relative">
+    <div class="d-flex justify-content-center my-3 position-relative mw-100">
       <minesweeper-game
         id="minesweeper"
         ref="minesweeper"
         class="d-inline-block"
         bomb-counter-selector="#bomb-counter"
         :flag-placement-mode="flagPlacementMode"
-        @minesweeper:field-click="handleMinesweeperClick"
-        @minesweeper:field-long-press="handleMinesweeperClick"
+        @minesweeper:field-interaction="handleMinesweeperClick"
         @minesweeper:game-won="onGameWon"
         @minesweeper:game-lost="onGameLost"
       ></minesweeper-game>
@@ -192,7 +195,7 @@
       </div>
     </div>
 
-    <section v-show="currentGameModeScoreboardEntries.length > 0">
+    <section v-show="currentGameModeScoreboardEntries.length > 0 && !isCustomGameMode">
       <div class="d-flex gap-2 align-items-center justify-content-between">
         <h2>Personal Scoreboard</h2>
         <button
@@ -210,8 +213,8 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Game Duration</th>
-                <th scope="col">Played on</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Completion date</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -297,10 +300,11 @@ import {
 import { Fireworks } from 'fireworks-js';
 import { liveQuery } from 'dexie';
 import { Chart, ArcElement, DoughnutController, Legend, Title, Tooltip } from 'chart.js';
+import 'minesweeper-for-web';
+import { ActionType, FieldInteractionType, FieldKey } from 'minesweeper-for-web/lib-esm/src/index';
 import { database } from '@/middleware/database.js';
 import { timestampToDateString } from '@/util/index.js';
 import globalEventNames from '@/util/global-event-names.js';
-import 'minesweeper-for-web';
 
 const { DISPLAY_NOTIFICATION, REMOVE_NOTIFICATION } = globalEventNames;
 
@@ -349,11 +353,13 @@ const GAME_MODES = {
   },
 };
 
-const calculateAnimationDuration = (config) => {
-  const fields = config.rows * config.columns;
-  const bombsPerField = config.bombs / fields;
+const customGameModeName = 'custom';
 
-  return Math.round((fields / bombsPerField) * 10);
+// in ms
+const minimumAnimationDuration = 2000;
+
+const indexToPercentage = (index, length) => {
+  return `${(index / length) * 100}%`;
 };
 
 export default {
@@ -401,7 +407,7 @@ export default {
       return {
         ...GAME_MODES,
         CUSTOM: {
-          name: 'custom',
+          name: customGameModeName,
           config: {
             columns: toNumber(this.customColumns),
             rows: toNumber(this.customRows),
@@ -422,6 +428,9 @@ export default {
     },
     currentGameMode() {
       return find(this.gameModes, { name: this.currentGameModeName });
+    },
+    isCustomGameMode() {
+      return this.currentGameModeName === customGameModeName;
     },
   },
   watch: {
@@ -501,6 +510,15 @@ export default {
       event.preventDefault();
       this.restartGame();
     },
+    calculateAnimationDuration() {
+      const { rows, columns, bombs } = this.currentGameMode.config;
+      const fields = rows * columns;
+      const bombsPerField = bombs / fields;
+
+      const baseDuration = Math.round((fields / bombsPerField) * 10);
+      const hintsAdjustedDuration = baseDuration - this.hintCounter * 1000;
+      return Math.max(hintsAdjustedDuration, minimumAnimationDuration);
+    },
     onGameWon() {
       this.isEnded = true;
       this.$refs.stopwatch.stop();
@@ -518,7 +536,7 @@ export default {
 
       this.endAnimationTimeoutId = window.setTimeout(() => {
         this.fireworks.stop();
-      }, calculateAnimationDuration(this.currentGameMode.config));
+      }, this.calculateAnimationDuration());
     },
     onGameLost() {
       this.isEnded = true;
@@ -537,7 +555,7 @@ export default {
 
       this.endAnimationTimeoutId = window.setTimeout(() => {
         this.$refs.rain.clear();
-      }, calculateAnimationDuration(this.currentGameMode.config));
+      }, this.calculateAnimationDuration());
     },
     handleRestart() {
       if (this.isEnded) {
@@ -556,7 +574,21 @@ export default {
       this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration);
       this.$refs.minesweeper.restartGame();
     },
-    handleMinesweeperClick() {
+    /**
+     * @param {import('minesweeper-for-web/lib-esm/src').FieldInteractionEvent} event
+     */
+    handleMinesweeperClick(event) {
+      const { interaction } = event.detail;
+      if (
+        interaction.type === FieldInteractionType.FlagAction &&
+        interaction.action === ActionType.NoChange
+      ) {
+        this.$refs['bomb-counter-shake-wrapper'].shake();
+      }
+      this.hintToDisplay = undefined;
+      this.startGame();
+    },
+    startGame() {
       this.isEnded = false;
 
       if (!this.$refs.stopwatch.isRunning) {
