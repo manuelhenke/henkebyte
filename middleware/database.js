@@ -26,4 +26,18 @@ database
     })
   );
 
+database
+  .version(3)
+  .stores({
+    games: '++id, gamemode, gameDuration, gameCompletionTimestamp, gameIsWon, usedHints',
+  })
+  .upgrade((trans) =>
+    trans.games.toCollection().modify((game) => {
+      if (!('usedHints' in game)) {
+        // eslint-disable-next-line no-param-reassign
+        game.usedHints = 0;
+      }
+    })
+  );
+
 export default database;

@@ -104,16 +104,21 @@
     </div>
 
     <div class="d-flex justify-content-center my-3 position-relative mw-100">
-      <minesweeper-game
-        id="minesweeper"
-        ref="minesweeper"
-        class="d-inline-block"
-        bomb-counter-selector="#bomb-counter"
-        :flag-placement-mode="flagPlacementMode"
-        @minesweeper:field-interaction="handleMinesweeperClick"
-        @minesweeper:game-won="onGameWon"
-        @minesweeper:game-lost="onGameLost"
-      ></minesweeper-game>
+      <div class="position-relative mw-100">
+        <minesweeper-game
+          id="minesweeper"
+          ref="minesweeper"
+          class="d-inline-block"
+          bomb-counter-selector="#bomb-counter"
+          :flag-placement-mode="flagPlacementMode"
+          @minesweeper:field-interaction="handleMinesweeperClick"
+          @minesweeper:game-won="onGameWon"
+          @minesweeper:game-lost="onGameLost"
+        ></minesweeper-game>
+        <div v-if="hintToDisplay" class="hint-container">
+          <div class="hint-element" :style="hintElementStyle"></div>
+        </div>
+      </div>
       <div v-if="!isEnded && !isStopwatchRunning" class="overlay">
         <button class="btn btn-link btn-icon btn-lg" type="button" @click="toggleStopWatch">
           <i class="bi bi-play-circle-fill"></i>
@@ -145,6 +150,24 @@
           <i class="bi bi-info-circle-fill"></i>
         </button>
       </div>
+      <div class="vr"></div>
+      <button
+        class="btn btn-primary position-relative"
+        type="button"
+        title="Get a hint"
+        :disabled="isEnded"
+        @click="displayHint"
+      >
+        <i class="bi bi-lightbulb-fill"></i>
+        Hint
+        <span
+          v-if="hintCounter > 0"
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+        >
+          {{ hintCounter }}
+          <span class="visually-hidden">used hints</span>
+        </span>
+      </button>
       <div class="vr d-none d-sm-inline-block"></div>
       <div class="d-none d-sm-inline-block">
         <button
@@ -215,6 +238,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Duration</th>
                 <th scope="col">Completion date</th>
+                <th scope="col">Hints</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -231,6 +255,9 @@
                 <td>
                   {{ timestampToDateString(game.gameCompletionTimestamp) }}
                 </td>
+                <td>
+                  {{ game.usedHints }}
+                </td>
                 <td class="scoreboard-action">
                   <button
                     class="btn btn-link btn-icon btn-lg"
@@ -243,13 +270,14 @@
                 </td>
               </tr>
               <tr v-if="currentGameModeScoreboardEntries.length > maxScoreboardGamesVisible">
-                <th colspan="4" scope="row">...</th>
+                <th colspan="5" scope="row">...</th>
               </tr>
             </tbody>
             <tfoot>
               <tr>
                 <th scope="row ">&sum;&nbsp;{{ currentGameModeScoreboardEntries.length }}</th>
                 <td>~<TimeString :milliseconds="currentGameModeAverageDuration" /></td>
+                <td></td>
                 <td></td>
                 <td></td>
               </tr>
@@ -289,10 +317,13 @@ import {
   capitalize,
   filter,
   find,
+  head,
   lowerCase,
   map,
   meanBy,
+  range,
   reverse,
+  shuffle,
   size,
   sortBy,
   toNumber,
@@ -380,6 +411,8 @@ export default {
     customRows: 20,
     customColumns: 20,
     customBombs: 50,
+    hintToDisplay: undefined,
+    hintCounter: 0,
   }),
   computed: {
     isStopwatchRunning() {
@@ -431,6 +464,20 @@ export default {
     },
     isCustomGameMode() {
       return this.currentGameModeName === customGameModeName;
+    },
+    hintElementStyle() {
+      if (!this.hintToDisplay) {
+        return {};
+      }
+
+      const fieldDimension = indexToPercentage(1, this.currentGameMode.config.rows);
+
+      return {
+        top: indexToPercentage(this.hintToDisplay.row, this.currentGameMode.config.rows),
+        left: indexToPercentage(this.hintToDisplay.column, this.currentGameMode.config.columns),
+        height: fieldDimension,
+        width: fieldDimension,
+      };
     },
   },
   watch: {
@@ -506,6 +553,47 @@ export default {
           .catch((error) => console.error(error));
       }
     },
+    displayHint() {
+      if (this.isEnded) {
+        return;
+      }
+
+      const { rows, columns, positions, flags, revealedFields } =
+        this.$refs.minesweeper.engine.board;
+
+      const rowIndices = range(rows);
+      const columnIndices = range(columns);
+
+      const allFields = rowIndices.flatMap((row) =>
+        columnIndices.map((column) => ({
+          row,
+          column,
+        }))
+      );
+
+      const getHint = (avoidFlags = true) => {
+        const possibleHints = allFields.filter(
+          ({ row, column }) =>
+            positions[row][column] !== FieldKey.BOMB &&
+            !revealedFields[row][column] &&
+            (!flags[row][column] || !avoidFlags)
+        );
+
+        return head(shuffle(possibleHints));
+      };
+
+      let hint = getHint();
+
+      if (!hint) {
+        hint = getHint(false);
+      }
+
+      if (hint) {
+        this.startGame();
+        this.hintCounter += 1;
+        this.hintToDisplay = hint;
+      }
+    },
     onChangedGameMode(event) {
       event.preventDefault();
       this.restartGame();
@@ -570,6 +658,9 @@ export default {
       this.$refs.stopwatch.reset();
       this.$nuxt.$emit(REMOVE_NOTIFICATION, this.notificationId);
 
+      this.hintCounter = 0;
+      this.hintToDisplay = undefined;
+
       const gameModeConfiguration = this.currentGameMode.config;
       this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration);
       this.$refs.minesweeper.restartGame();
@@ -614,6 +705,7 @@ export default {
         gameDuration: this.$refs.stopwatch.elapsedTime,
         gameCompletionTimestamp: Date.now(),
         gameIsWon: isWon,
+        usedHints: this.hintCounter,
       });
     },
   },
@@ -633,17 +725,9 @@ export default {
   }
 }
 
-$border-width: map-get($border-widths, 4);
-
 #minesweeper {
-  border-width: $border-width;
-}
-
-@include media-breakpoint-down(sm) {
-  #minesweeper {
-    border-width: 0;
-    outline: $border-width solid rgb(189, 189, 189);
-  }
+  border-width: 0;
+  outline: map-get($border-widths, 4) solid rgb(189, 189, 189);
 }
 
 .firework-container {
@@ -651,6 +735,18 @@ $border-width: map-get($border-widths, 4);
   inset: 0;
   pointer-events: none;
   z-index: $zindex-fixed;
+}
+
+.hint-container {
+  pointer-events: none;
+  position: absolute;
+  // 3px due to border with of sweeper-container in shadow-dom
+  inset: 3px;
+
+  .hint-element {
+    position: absolute;
+    background-color: rgba(var(--bs-info-rgb), 0.25);
+  }
 }
 
 .overlay {
