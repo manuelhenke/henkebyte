@@ -45,7 +45,7 @@
     "chart.js": "^3.9.1",
     "contentful": "^9.2.5",
     "dexie": "^3.2.1",
-    "fireworks-js": "^2.0.2",
+    "fireworks-js": "^2.3.0",
     "ios-calculator-for-web": "^1.2.13",
     "lodash-es": "^4.17.21",
     "masonry-layout": "^4.2.2",

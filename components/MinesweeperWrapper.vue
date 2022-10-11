@@ -512,10 +512,8 @@ export default {
       const { rows, columns, bombs } = this.currentGameMode.config;
       const fields = rows * columns;
       const bombsPerField = bombs / fields;
-
       const baseDuration = Math.round((fields / bombsPerField) * 10);
-      const hintsAdjustedDuration = baseDuration - this.hintCounter * 1000;
-      return Math.max(hintsAdjustedDuration, minimumAnimationDuration);
+      return Math.max(baseDuration, minimumAnimationDuration);
     },
     onGameWon() {
       this.isEnded = true;
