@@ -87,14 +87,18 @@ export default {
     },
     slidePanelWidthClass() {
       switch (this.selectedDevice) {
-        case DEVICE_TYPES.DESKTOP:
+        case DEVICE_TYPES.DESKTOP: {
           return 'w-75';
-        case DEVICE_TYPES.TABLET:
+        }
+        case DEVICE_TYPES.TABLET: {
           return 'w-50';
-        case DEVICE_TYPES.MOBILE:
+        }
+        case DEVICE_TYPES.MOBILE: {
           return 'w-25';
-        default:
+        }
+        default: {
           return 'w-100';
+        }
       }
     },
   },
