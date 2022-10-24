@@ -224,54 +224,68 @@ export default {
         case 'tobias':
         case 'topse':
         case 'tobse':
-        case 'tobi':
+        case 'tobi': {
           return 'RIP Japan tea cup 2019 :(';
+        }
         case 'winzling':
         case 'hobbit':
         case 'midget':
-        case 'pavel':
+        case 'pavel': {
           return 'Thats a very HUGE input!';
-        case 'kunal':
+        }
+        case 'kunal': {
           return 'Zzzzzzzzzzzzz...';
+        }
         case 'oguzhan':
         case 'osan':
         case 'osantor':
         case 'berber':
-        case 'melih':
+        case 'melih': {
           return 'Gülme vuruşu!';
+        }
         case 'nami':
         case 'namy':
         case 'sadeghnia':
-        case 'namysade':
+        case 'namysade': {
           return 'Manuuuuu!';
-        case 'bilal':
+        }
+        case 'bilal': {
           return 'CRYPTO!!!!!';
+        }
         case 'niko':
         case 'mestanis':
         case 'nibones':
-        case 'grieche':
+        case 'grieche': {
           return 'Jaaaaaa, lass mal times...';
-        case 'thao':
+        }
+        case 'thao': {
           return 'OOOOOOHHHHH VIETNAM!';
+        }
         case 'henni':
-        case 'henricke':
+        case 'henricke': {
           return "You're screaming again!";
+        }
         case 'bo':
         case 'boc':
-        case 'bad oeynhausen':
+        case 'bad oeynhausen': {
           return 'Winner of the Worlds Best City Award!';
+        }
         case 'maxi':
-        case 'verstappen':
+        case 'verstappen': {
           return '"MAX VERSTAPPEN YOU ARE THE WORLD CHAMPION!"';
+        }
         case 'lewis':
-        case 'hamilton':
+        case 'hamilton': {
           return 'Reckless driver!';
+        }
         case 'perez':
         case 'pérez':
-        case 'checko':
+        case 'checko': {
           return 'Mexican Minister of Defence';
-        default:
+        }
+        default: {
           return 'Wow, such empty';
+        }
       }
     },
   },
