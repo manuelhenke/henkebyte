@@ -32,6 +32,7 @@
     "generate-preview-screenshot": "node ./generate-preview-image.cjs"
   },
   "dependencies": {
+    "@chenfengyuan/vue-countdown": "^1.1.5",
     "@egjs/flicking-plugins": "^4.4.0",
     "@egjs/vue-flicking": "^4.10.0",
     "@nuxt/content": "^1.15.1",

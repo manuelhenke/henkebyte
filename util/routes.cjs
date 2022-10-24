@@ -34,6 +34,10 @@ const routes = {
     to: '/minesweeper',
     name: 'Minesweeper',
   },
+  F1_COUNTDOWN: {
+    to: '/f1-countdown',
+    name: 'F1 Countdown',
+  },
 };
 
 module.exports = { routes };
