@@ -1253,10 +1253,10 @@
   resolved "https://registry.yarnpkg.com/@egjs/flicking-plugins/-/flicking-plugins-4.4.0.tgz#05405b6536efefaa1dd09de5cb12ecc9c69e96d2"
   integrity sha512-PhhA9XB8145QxLAhIPDfzSszMvW02Be5ZbJFUkwgfkzt/A1QvJ56W02Nv4yAwjLIl48hI8MF0enG0RL3AuP3Uw==
 
-"@egjs/flicking@~4.10.0":
-  version "4.10.0"
-  resolved "https://registry.yarnpkg.com/@egjs/flicking/-/flicking-4.10.0.tgz#bcff7c2a6562b70c83da59e414e2c60ee95a01fc"
-  integrity sha512-bCGwItS1efiK+dh9s2BFmb+erwgh9t8aUmepeY07YWFinZrYn4IzsgwCmO6iEPV3XzMHx7MNEiYVcWQ8yYwUnQ==
+"@egjs/flicking@~4.10.1":
+  version "4.10.1"
+  resolved "https://registry.yarnpkg.com/@egjs/flicking/-/flicking-4.10.1.tgz#89a90c9e1dc60d2d0a3a201f04648390fce2c7cf"
+  integrity sha512-SSh7jBixPT6zWr19yGr5Ru49OBB5V03xvXmeaBonbA6iwPAWe/SeBVE5cirlc+Keq6jB8JQG5bviDN63QA0cRg==
   dependencies:
     "@egjs/axes" "^3.8.1"
     "@egjs/component" "^3.0.1"
@@ -1275,12 +1275,12 @@
   resolved "https://registry.yarnpkg.com/@egjs/list-differ/-/list-differ-1.0.0.tgz#2277aff52e3e4bd9318d5c30ffc3ba3b6216f05e"
   integrity sha512-HsbMKc0ZAQH+EUeCmI/2PvTYSybmkaWwakU8QGDYYgMVIg9BQ5sM0A0Nnombjxo2+JzXHxmH+jw//yGX+y6GYw==
 
-"@egjs/vue-flicking@^4.10.0":
-  version "4.10.0"
-  resolved "https://registry.yarnpkg.com/@egjs/vue-flicking/-/vue-flicking-4.10.0.tgz#d0226e614643758e562c8010a3ac991eabe09231"
-  integrity sha512-BfTgMJDg986FlCLnGx/n59r+okS1XMQdQ8xUUVe6bDxsOGp1RDHB4BM+Z4yUqMznThO4sFGkSW0KAl2Bwc1ThQ==
+"@egjs/vue-flicking@^4.10.1":
+  version "4.10.1"
+  resolved "https://registry.yarnpkg.com/@egjs/vue-flicking/-/vue-flicking-4.10.1.tgz#6b94594fb11942db2d46f4c64421883b3e72c39c"
+  integrity sha512-JbrYjsDhY/ncibqx3DgZm78omtoDc7CdnRNBYMNaOJGUQyyMBTKbDj78mF3TdXF3tzLvVEKKtrkdnErfTGoYqw==
   dependencies:
-    "@egjs/flicking" "~4.10.0"
+    "@egjs/flicking" "~4.10.1"
     "@egjs/list-differ" "^1.0.0"
 
 "@eslint/eslintrc@^1.3.3":
