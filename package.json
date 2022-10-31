@@ -43,7 +43,7 @@
     "bootstrap": "^5.2.2",
     "bootstrap-icons": "^1.8.1",
     "chart.js": "^3.9.1",
-    "contentful": "^9.2.7",
+    "contentful": "^9.2.9",
     "dexie": "^3.2.1",
     "fireworks-js": "^2.5.1",
     "ios-calculator-for-web": "^1.2.13",
