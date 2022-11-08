@@ -74,7 +74,7 @@
     "@types/masonry-layout": "^4.2.5",
     "@types/vue-clickaway": "^2.2.0",
     "async": "^3.2.4",
-    "babel-jest": "^29.2.2",
+    "babel-jest": "^29.3.0",
     "eslint": "^8.27.0",
     "eslint-config-airbnb-babel": "^0.2.2",
     "eslint-config-airbnb-base": "^15.0.0",
