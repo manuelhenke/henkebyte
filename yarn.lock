@@ -1260,20 +1260,20 @@
   resolved "https://registry.yarnpkg.com/@egjs/flicking-plugins/-/flicking-plugins-4.5.0.tgz#9e78a8039fd6794dcedf8b778d59129f7f18f99a"
   integrity sha512-JRo5ozfYLvIM2sxGHUDj4yyRP/0WVU4QL99Mg1NScrFKXwmX53B9Jz4Xtm6zU9JaWFV2YN0wLNruEhDrBSEHAw==
 
-"@egjs/flicking@~4.10.2":
-  version "4.10.2"
-  resolved "https://registry.yarnpkg.com/@egjs/flicking/-/flicking-4.10.2.tgz#f29d65e24fbdc66c3298af5ce579a5af5b5d5950"
-  integrity sha512-zGPohW8Q2LzXajSqra0A+2DmXOb9igVF47Ap1nn+IZz7Ahau+vLdZ16QasV31fUbItUSCx8NmQYN38mcqYieoA==
+"@egjs/flicking@~4.10.3":
+  version "4.10.3"
+  resolved "https://registry.yarnpkg.com/@egjs/flicking/-/flicking-4.10.3.tgz#d22e791b42d1c208858bb1f8941504dde7dde39f"
+  integrity sha512-Ygdv94zmpUFszD6fIZgP0+FO132213XjUGvLUb3egN+oJEetcVjivjWQ9pXmUUdvvmN61b95fRJBvd2ieIgM9Q==
   dependencies:
     "@egjs/axes" "^3.8.1"
     "@egjs/component" "^3.0.1"
-    "@egjs/imready" "^1.1.3"
+    "@egjs/imready" "^1.3.1"
     "@egjs/list-differ" "^1.0.0"
 
-"@egjs/imready@^1.1.3":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@egjs/imready/-/imready-1.3.0.tgz#76a7df9d1a77c008bcd33942d207d39d0ce2f6fa"
-  integrity sha512-h6qxQup/ZJxEJkDMuyR6yuJ9jsuVan7EyQ8Xa0WkTWAr3HtUYjtDHOCjJvhFg50Xv3C+TkfYj4Mxmkz7zNePSA==
+"@egjs/imready@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@egjs/imready/-/imready-1.3.1.tgz#00d6008a07a0ae7eb1865e7aedcedb964c60c567"
+  integrity sha512-ReDNST6BEt65lApC4e241jZjexKPn1FvtDEIctuJ/I4uHG6Qm9KBVrHiZhLcPCRYAQPkYkphP/0v8nAVzT69qw==
   dependencies:
     "@egjs/component" "^3.0.1"
 
@@ -1282,12 +1282,12 @@
   resolved "https://registry.yarnpkg.com/@egjs/list-differ/-/list-differ-1.0.0.tgz#2277aff52e3e4bd9318d5c30ffc3ba3b6216f05e"
   integrity sha512-HsbMKc0ZAQH+EUeCmI/2PvTYSybmkaWwakU8QGDYYgMVIg9BQ5sM0A0Nnombjxo2+JzXHxmH+jw//yGX+y6GYw==
 
-"@egjs/vue-flicking@^4.10.2":
-  version "4.10.2"
-  resolved "https://registry.yarnpkg.com/@egjs/vue-flicking/-/vue-flicking-4.10.2.tgz#ec9fd26779f949a5a0e4246a578b8b791e8782d7"
-  integrity sha512-DTvuA0bvVPGVad6ZV6uyNaXK/o8PFJkKsjDR4E4xGSo4378m8x588QTVySl4s3thq0vTVlDPy3Z1IV/Ok7ecZQ==
+"@egjs/vue-flicking@^4.10.3":
+  version "4.10.3"
+  resolved "https://registry.yarnpkg.com/@egjs/vue-flicking/-/vue-flicking-4.10.3.tgz#a0487a77060aeff573c66db53281f7eebf7a45ed"
+  integrity sha512-ggjWPxs/HF/T2cobH/s89zEamBo4hIQ30M8uXC9P7hyuPqOWK15zhKa75sH+NlVgzImOi+oZkXPjRwH4QCnqHw==
   dependencies:
-    "@egjs/flicking" "~4.10.2"
+    "@egjs/flicking" "~4.10.3"
     "@egjs/list-differ" "^1.0.0"
 
 "@eslint/eslintrc@^1.3.3":
