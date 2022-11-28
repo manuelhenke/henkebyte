@@ -14,7 +14,9 @@ education_timeline_items:
   to: today
   role: Information Systems Management (MSc)
   place: Technische Universität Berlin
-  description: 'Thesis: ...'
+  description: 'Thesis: Implementation of a use case mapper for CCAM
+    based mobility solutions in the platform economy
+    framework'
 - from: "2016"
   to: "2020"
   role: Wirtschaftsinformatik (BSc)
