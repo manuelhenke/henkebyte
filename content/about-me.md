@@ -3,7 +3,7 @@ title: About Me
 badge_text: ''
 meta_tags:
 - key: description
-  content: Hey there! I am Manuel Henke, 25 years old and from the heart of Berlin,
+  content: Hey there! I am Manuel Henke, 26 years old and from the heart of Berlin,
     Germany. At the moment I'm in the final phase of my master studies in Information
     Systems Management. I also work as a student trainee in software development in
     the area of web development and cloud computing. Privately I'm just starting to
@@ -237,7 +237,7 @@ tools:
   <div class="row justify-content-center">
     <div class="col-12 col-sm-8 col-md-9">
       <p class="lead">
-        Hey there! I am Manuel Henke, 25 years old and from
+        Hey there! I am Manuel Henke, 26 years old and from
         the heart of Berlin, Germany. At the moment I'm in the final phase
         of my master studies in Information Systems Management. I also work
         as a student trainee in software development in the area of web
