@@ -444,13 +444,13 @@ export default {
           )} game(s) played in total`;
           this.gamesHistoryChart.update();
         } else {
-          const config = {
+          this.gamesHistoryChart = new Chart(this.$refs['game-history-chart'], {
             type: 'doughnut',
             data: {
-              labels: [' Won', ' Lost'],
+              labels: ['Won', 'Lost'],
               datasets: [
                 {
-                  label: 'Games History',
+                  label: ' Amount',
                   data: [wonGames, lostGames],
                   backgroundColor: ['#198754', '#dc3545'],
                   hoverOffset: 4,
@@ -466,9 +466,7 @@ export default {
                 },
               },
             },
-          };
-
-          this.gamesHistoryChart = new Chart(this.$refs['game-history-chart'], config);
+          });
         }
       }
     },
