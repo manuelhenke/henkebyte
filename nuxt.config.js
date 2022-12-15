@@ -208,7 +208,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ['@nuxtjs/color-mode', 'fireworks-js'],
+    transpile: ['@nuxtjs/color-mode', 'fireworks-js', 'chart.js'],
     postcss: {
       plugins: [],
     },
