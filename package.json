@@ -42,7 +42,7 @@
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.2",
-    "chart.js": "^4.0.1",
+    "chart.js": "^4.1.1",
     "contentful": "^9.2.14",
     "dexie": "^3.2.1",
     "fireworks-js": "^2.10.0",
