@@ -1,16 +1,18 @@
 <template comments>
   <div class="layout-root">
     <slot></slot>
-    <ToastProvider></ToastProvider>
+    <ToastProvider />
+    <CookieBanner />
   </div>
 </template>
 
 <script>
 import ToastProvider from './toast-provider.vue';
+import CookieBanner from './cookie-banner.vue';
 
 export default {
   name: 'LayoutRoot',
-  components: { ToastProvider },
+  components: { ToastProvider, CookieBanner },
 };
 </script>
 
