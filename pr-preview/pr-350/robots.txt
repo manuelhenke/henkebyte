@@ -1,3 +1,0 @@
-User-agent: *
-Disallow: 
-Sitemap: https://preview.henkebyte.com/pr-preview/pr-350/sitemap.xml
