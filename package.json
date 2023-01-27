@@ -44,7 +44,7 @@
     "bootstrap-icons": "^1.10.3",
     "chart.js": "^4.2.0",
     "contentful": "^9.2.20",
-    "dexie": "^3.2.1",
+    "dexie": "^3.2.3",
     "fireworks-js": "^2.10.1",
     "ios-calculator-for-web": "^1.2.14",
     "lodash-es": "^4.17.21",
