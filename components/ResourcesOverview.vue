@@ -243,6 +243,9 @@ export default {
         case 'melih': {
           return 'Gülme vuruşu!';
         }
+        case 'murat': {
+          return 'Gesundheit abi!';
+        }
         case 'nami':
         case 'namy':
         case 'sadeghnia':
