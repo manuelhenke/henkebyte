@@ -622,25 +622,23 @@ export default {
     async shareScoreboardEntry(game) {
       const gameMode = find(Object.values(GAME_MODES), { name: game.gamemode });
       const gameUrl = `${hostName + routes.MINESWEEPER.to}?${queryGameModeKey}=${gameMode.name}`;
-      let sharingText = `I've just beaten Minesweeper on ${gameMode.name} (${gameModeConfigToText(
+      const sharingText = `I've just beaten Minesweeper on ${gameMode.name} (${gameModeConfigToText(
         gameMode.config
-      )}) in ${millisecondsToTimeString(game.gameDuration)}.`;
+      )}) in ${millisecondsToTimeString(game.gameDuration)}.\nTry it yourself on ${gameUrl}`;
 
       const NOTIFICATION_ID = 'sharing-notification';
       if (isFunction(navigator?.share)) {
         try {
           await navigator.share({
-            title: 'Minesweeper',
+            title: 'Minesweeper Result',
             text: sharingText,
-            url: gameUrl,
           });
           return;
         } catch (error) {
+          if (error.name === 'AbortError') return;
           console.error(error);
         }
       }
-
-      sharingText += `\nTry it yourself on ${gameUrl}`;
 
       if (isFunction(navigator?.clipboard?.writeText)) {
         try {
