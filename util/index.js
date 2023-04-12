@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 /**
  *
  * @param {number} timestamp
@@ -13,4 +12,23 @@ export function timestampToDateString(timestamp) {
     day: 'numeric',
   };
   return event.toLocaleDateString('en-EN', options);
+}
+
+/**
+ *
+ * @param {number} milliseconds
+ * @returns {string}
+ */
+export function millisecondsToTimeString(milliseconds) {
+  const overallSeconds = Math.floor(milliseconds / 1000);
+  const minutes = Math.floor(overallSeconds / 60);
+  const seconds = overallSeconds % 60;
+
+  let timeString = `${String(seconds).padStart(2, '0')}s`;
+
+  if (minutes) {
+    timeString = `${minutes}m ${timeString}`;
+  }
+
+  return timeString;
 }

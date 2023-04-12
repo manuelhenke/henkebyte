@@ -4,12 +4,7 @@
 
     <div class="row my-3 text-center gy-2 justify-content-center">
       <div class="col-12 col-sm-8 col-md-5 col-lg-4 col-xl-3">
-        <select
-          v-model="currentGameModeName"
-          class="form-select text-center"
-          name="gamemode"
-          @change="onChangedGameMode"
-        >
+        <select v-model="currentGameModeName" class="form-select text-center" name="gamemode">
           <option
             v-for="gameMode of gameModesSelectionOptions"
             :key="gameMode.value"
@@ -237,6 +232,14 @@
                   <button
                     class="btn btn-link btn-icon btn-lg"
                     type="button"
+                    title="Share entry"
+                    @click="shareScoreboardEntry(game)"
+                  >
+                    <i class="bi bi-share-fill"></i>
+                  </button>
+                  <button
+                    class="btn btn-link btn-icon btn-lg"
+                    type="button"
                     title="Remove entry"
                     @click="removeScoreboardEntry(game.id)"
                   >
@@ -298,6 +301,7 @@ import {
   size,
   sortBy,
   toNumber,
+  isFunction,
 } from 'lodash-es';
 import { Fireworks } from 'fireworks-js';
 import { liveQuery } from 'dexie';
@@ -305,8 +309,9 @@ import { Chart, ArcElement, DoughnutController, Legend, Title, Tooltip } from 'c
 import 'minesweeper-for-web';
 import { ActionType, FieldInteractionType } from 'minesweeper-for-web/lib-esm/src';
 import { database } from '@/middleware/database.js';
-import { timestampToDateString } from '@/util/index.js';
+import { timestampToDateString, millisecondsToTimeString } from '@/util/index.js';
 import globalEventNames from '@/util/global-event-names.js';
+import { routes } from '@/util/routes.cjs';
 
 const { DISPLAY_NOTIFICATION, REMOVE_NOTIFICATION } = globalEventNames;
 
@@ -357,6 +362,13 @@ const GAME_MODES = {
 
 const customGameModeName = 'custom';
 
+const queryGameModeKey = 'gameMode';
+
+function gameModeConfigToText({ columns, rows, bombs }) {
+  return `${rows}x${columns} / ${bombs} Mines`;
+}
+const hostName = process.env.HOST_NAME || 'https://henkebyte.com';
+
 // in ms
 const minimumAnimationDuration = 2000;
 
@@ -367,7 +379,7 @@ export default {
     /** @type {Fireworks} */
     fireworks: undefined,
     endAnimationTimeoutId: undefined,
-    currentGameModeName: GAME_MODES.EASY.name,
+    currentGameModeName: undefined,
     games: [],
     maxScoreboardGamesVisible: 10,
     gamesHistoryChart: undefined,
@@ -415,10 +427,10 @@ export default {
       };
     },
     gameModesSelectionOptions() {
-      return map(this.gameModes, ({ name, config: { columns, rows, bombs } }) => ({
+      return map(this.gameModes, ({ name, config }) => ({
         value: lowerCase(name),
         selected: this.currentGameModeName === name,
-        text: `${capitalize(name)} - ${rows}x${columns} / ${bombs} Mines`,
+        text: `${capitalize(name)} - ${gameModeConfigToText(config)}`,
       }));
     },
     fullscreenTargetElement() {
@@ -432,6 +444,10 @@ export default {
     },
   },
   watch: {
+    currentGameMode(gameMode) {
+      this.$router.push({ query: { [queryGameModeKey]: gameMode.name } });
+      this.restartGame();
+    },
     currentGameModeGames() {
       if (this.currentGameModeGames.length > 0 && this.$refs['game-history-chart']) {
         const wonGames = size(filter(this.currentGameModeGames, 'gameIsWon'));
@@ -472,8 +488,12 @@ export default {
     },
   },
   mounted() {
-    const gameModeConfiguration = this.currentGameMode.config;
-    this.$refs.minesweeper.setGameModeConfiguration(gameModeConfiguration);
+    const queryGameModeName = this.$route.query[queryGameModeKey];
+    this.currentGameModeName = Object.values(GAME_MODES).some(
+      ({ name }) => queryGameModeName === name
+    )
+      ? queryGameModeName
+      : GAME_MODES.EASY.name;
 
     this.fireworks = new Fireworks(this.$refs.firework, {
       acceleration: 1.01,
@@ -501,10 +521,6 @@ export default {
           })
           .catch((error) => console.error(error));
       }
-    },
-    onChangedGameMode(event) {
-      event.preventDefault();
-      this.restartGame();
     },
     calculateAnimationDuration() {
       const { rows, columns, bombs } = this.currentGameMode.config;
@@ -602,6 +618,53 @@ export default {
     },
     removeScoreboardEntry(gameId) {
       database.games.delete(gameId);
+    },
+    async shareScoreboardEntry(game) {
+      const gameMode = find(Object.values(GAME_MODES), { name: game.gamemode });
+      const gameUrl = `${hostName + routes.MINESWEEPER.to}?${queryGameModeKey}=${gameMode.name}`;
+      let sharingText = `I've just beaten Minesweeper on ${gameMode.name} (${gameModeConfigToText(
+        gameMode.config
+      )}) in ${millisecondsToTimeString(game.gameDuration)}.`;
+
+      const NOTIFICATION_ID = 'sharing-notification';
+      if (isFunction(navigator?.share)) {
+        try {
+          await navigator.share({
+            title: 'Minesweeper',
+            text: sharingText,
+            url: gameUrl,
+          });
+          return;
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      sharingText += `\nTry it yourself on ${gameUrl}`;
+
+      if (isFunction(navigator?.clipboard?.writeText)) {
+        try {
+          await navigator.clipboard.writeText(sharingText);
+          this.$nuxt.$emit(DISPLAY_NOTIFICATION, {
+            id: NOTIFICATION_ID,
+            body: `Copied result to clipboard!`,
+            options: {
+              delay: 5000,
+            },
+          });
+          return;
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      this.$nuxt.$emit(DISPLAY_NOTIFICATION, {
+        id: NOTIFICATION_ID,
+        body: `Sharing not possible!`,
+        options: {
+          delay: 5000,
+        },
+      });
     },
     addDbEntry(isWon) {
       database.games.add({
