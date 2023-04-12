@@ -36,6 +36,7 @@
     "no-only-tests/no-only-tests": "error",
     "no-secrets/no-secrets": "error",
     "unicorn/no-array-for-each": "off",
+    "unicorn/no-useless-undefined": "off",
     "unicorn/filename-case": [
       "error",
       {

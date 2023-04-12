@@ -1,12 +1,11 @@
 import { routes } from '@/util/routes.cjs';
 
-// eslint-disable-next-line import/prefer-default-export
 export const state = () => ({
   navigation: [
     routes.HOME,
     {
       title: 'General',
-      links: [routes.ABOUT_ME, routes.RESOURCES_OVERVIEW],
+      links: [routes.ABOUT_ME, routes.RESOURCES_OVERVIEW, routes.SPOTIFY_ARCHIVE],
     },
     {
       title: 'Projects',

@@ -22,6 +22,10 @@ const routes = {
     to: '/resources-overview',
     name: 'Resources Overview',
   },
+  SPOTIFY_ARCHIVE: {
+    to: '/spotify-archive',
+    name: 'Spotify Archive',
+  },
   HENKEBYTE_WEBSITE: {
     to: '/henkebyte-website',
     name: 'HenkeByte Website',

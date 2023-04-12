@@ -1,6 +1,6 @@
 import VuexPersistence from 'vuex-persist';
 
-const modulesToPersist = ['settings'];
+const modulesToPersist = ['settings', 'spotifyArchive'];
 
 export default ({ store }) => {
   new VuexPersistence({
