@@ -534,9 +534,17 @@ export default {
       this.$refs.stopwatch.stop();
       this.fireworks.start();
 
+      const isNewHighScore = this.currentGameModeScoreboardEntries.every(
+        (entry) => entry.gameDuration > this.$refs.stopwatch.elapsedTime
+      );
+
+      const notificationBody = isNewHighScore
+        ? `New highscore, share it right from the scoreboard!`
+        : `Congratulations, you have won!`;
+
       this.$nuxt.$emit(DISPLAY_NOTIFICATION, {
         id: this.notificationId,
-        body: `Congratulations, you have won!`,
+        body: notificationBody,
         options: {
           delay: 5000,
         },
