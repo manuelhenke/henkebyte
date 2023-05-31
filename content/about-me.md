@@ -68,7 +68,7 @@ skills:
     stars: 4
     libraries: []
   - name: React
-    stars: 4
+    stars: 5
     libraries: []
   - name: Electron
     stars: 2
@@ -238,9 +238,7 @@ tools:
       <p class="lead">
         Hey there! I am Manuel Henke, 26 years old and from
         the heart of Berlin, Germany. At the moment I'm in the final phase
-        of my master studies in Information Systems Management. I also work
-        as a student trainee in software development in the area of web
-        development and cloud computing. Privately I'm just starting to get
+        of my master studies in Information Systems Management. Privately I'm just starting to get
         involved with open source development and have already started some
         small projects which are presented on this website.
       </p>
