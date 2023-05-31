@@ -10,7 +10,7 @@ meta_tags:
     projects which are presented on this website.
 education_timeline_items:
 - from: "2020"
-  to: "2023"
+  to: "today"
   role: Information Systems Management (MSc)
   place: Technische Universität Berlin
   description: 'Thesis: Implementation of a use case mapper for CCAM
@@ -24,7 +24,7 @@ education_timeline_items:
     for automated home accessibility assessment as an iOS app'
 experience_timeline_items:
 - from: "2019"
-  to: today
+  to: "2023"
   role: Cloud Fullstack-Developer (Student Employee)
   place: OEV Online Dienste GmbH - ein Unternehmen der S-Finanzgruppe
   description: Designing, developing, and managing applications in the cloud, including
