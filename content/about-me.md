@@ -10,7 +10,7 @@ meta_tags:
     projects which are presented on this website.
 education_timeline_items:
 - from: "2020"
-  to: "today"
+  to: "2023"
   role: Information Systems Management (MSc)
   place: Technische Universität Berlin
   description: 'Thesis: Implementation of a use case mapper for CCAM
