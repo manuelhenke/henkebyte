@@ -23,6 +23,11 @@ education_timeline_items:
   description: 'Thesis: Design and development of a cloud-based solution approach
     for automated home accessibility assessment as an iOS app'
 experience_timeline_items:
+- from: "2023"
+  to: "today"
+  role: Researcher
+  place: GT-ARC (Technische Universität Berlin)
+  description: Researching future mobility solutions in the context of Cooperative, Connected and Automated Mobility (CCAM) and the platform economy.
 - from: "2019"
   to: "2023"
   role: Cloud Fullstack-Developer (Student Employee)
