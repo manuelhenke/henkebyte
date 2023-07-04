@@ -258,18 +258,18 @@ tools:
   <!-- /#introduction -->
 </section>
 
-<section id="education">
-  <!-- #education -->
-  <h2>Education</h2>
-  <timeline-main :timeline-items="education_timeline_items" unique-timeline></timeline-main>
-  <!-- /#education -->
-</section>
-
 <section id="experience">
   <!-- #experience -->
   <h2>Experience</h2>
   <timeline-main :timeline-items="experience_timeline_items" unique-timeline /></timeline-main>
   <!-- /#experience -->
+</section>
+
+<section id="education">
+  <!-- #education -->
+  <h2>Education</h2>
+  <timeline-main :timeline-items="education_timeline_items" unique-timeline></timeline-main>
+  <!-- /#education -->
 </section>
 
 <section id="abilities">
