@@ -242,8 +242,7 @@ tools:
     <div class="col-12 col-sm-8 col-md-9">
       <p class="lead">
         Hey there! I am Manuel Henke, 26 years old and from
-        the heart of Berlin, Germany. At the moment I'm in the final phase
-        of my master studies in Information Systems Management. Privately I'm just starting to get
+        the heart of Berlin, Germany. At the moment I'm working as a researcher at the Technische Universität Berlin. Privately I'm just starting to get
         involved with open source development and have already started some
         small projects which are presented on this website.
       </p>
