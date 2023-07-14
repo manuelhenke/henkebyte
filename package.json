@@ -70,7 +70,7 @@
     "@nuxtjs/sitemap": "^2.4.0",
     "@nuxtjs/stylelint-module": "^4.1.0",
     "@types/bootstrap": "^5.2.6",
-    "@types/lodash-es": "^4.17.6",
+    "@types/lodash-es": "^4.17.8",
     "@types/masonry-layout": "^4.2.5",
     "@types/vue-clickaway": "^2.2.0",
     "async": "^3.2.4",
