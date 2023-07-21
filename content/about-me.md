@@ -26,7 +26,7 @@ experience_timeline_items:
 - from: "2023"
   to: "today"
   role: Researcher
-  place: GT-ARC (Technische Universität Berlin)
+  place: GT-ARC (TU Berlin)
   description: Researching future mobility solutions in the context of Cooperative, Connected and Automated Mobility (CCAM) and the platform economy.
 - from: "2019"
   to: "2023"
