@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
-    "@babel/eslint-parser": "^7.21.8",
+    "@babel/eslint-parser": "^7.22.11",
     "@babel/eslint-plugin": "^7.19.1",
     "@babel/plugin-proposal-pipeline-operator": "^7.22.5",
     "@babel/preset-env": "^7.20.2",
