@@ -1,6 +1,6 @@
 ---
 title: HenkeByte Website
-badge_text: New
+badge_text: ''
 meta_tags:
 - key: description
   content: Description to this project website including used (dev-)tools, hosting,

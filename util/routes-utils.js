@@ -22,6 +22,7 @@ export function mapRoutes({ routes, options }) {
     '/': 1,
     '/henkebyte-website': 0.7,
     '/minesweeper': 0.6,
+    '/2048': 0.6,
     '/ios-calculator': 0.6,
   };
 

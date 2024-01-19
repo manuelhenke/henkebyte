@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"2048-webcomponent@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/2048-webcomponent/-/2048-webcomponent-1.0.0.tgz#5b71723687632091b787c4064d3347833bac001a"
+  integrity sha512-iwaIZe1tVL03l94aa2I1yv6yWhqscgFdKso2oIcM7Bh0oCY1W7Rcenft8BAhaUfG1C64Qx4ENe4nPFmhNSLs/g==
+  dependencies:
+    lit "^2.2.0"
+
 "@ampproject/remapping@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@ampproject/remapping/-/remapping-2.2.0.tgz#56c133824780de3174aed5ab6834f3026790154d"
