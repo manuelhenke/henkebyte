@@ -34,6 +34,10 @@ const routes = {
     to: '/minesweeper',
     name: 'Minesweeper',
   },
+  2048: {
+    to: '/2048',
+    name: '2048',
+  },
 };
 
 module.exports = { routes };

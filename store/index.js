@@ -1,6 +1,5 @@
 import { routes } from '@/util/routes.cjs';
 
-// eslint-disable-next-line import/prefer-default-export
 export const state = () => ({
   navigation: [
     routes.HOME,
@@ -14,6 +13,7 @@ export const state = () => ({
         routes.HENKEBYTE_WEBSITE,
         routes.IOS_CALCULATOR,
         routes.MINESWEEPER,
+        routes['2048'],
         {
           href: 'https://nuxt-envalid.henkebyte.com',
           name: 'nuxt-envalid',

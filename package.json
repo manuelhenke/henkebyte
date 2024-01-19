@@ -32,6 +32,7 @@
     "generate-preview-screenshot": "node ./generate-preview-image.cjs"
   },
   "dependencies": {
+    "2048-webcomponent": "^1.0.0",
     "@egjs/flicking-plugins": "^4.7.0",
     "@egjs/vue-flicking": "^4.10.6",
     "@nuxt/content": "^1.15.1",
