@@ -19,7 +19,7 @@
 
     <div class="d-flex my-3 gap-3 text-center gy-2 justify-content-center">
       <div class="p-1">
-        Score<br /><span class="fw-bold">{{ gameState.score }}</span>
+        Score<br /><span class="fw-bold">{{ gameState?.score || 0 }}</span>
       </div>
       <div class="p-1">
         Best<br /><span class="fw-bold">{{ bestScore }}</span>
