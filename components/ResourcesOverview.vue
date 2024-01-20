@@ -220,6 +220,12 @@ export default {
     },
     nothingFoundMessage() {
       switch (trim(toLower(this.currentSearchInput))) {
+        case 'anja':
+        case 'av':
+        case 'sophia':
+        case 'anja-sophia': {
+          return 'Gorgeous!!!';
+        }
         case 'abi':
         case 'tobias':
         case 'topse':
@@ -263,10 +269,6 @@ export default {
         }
         case 'thao': {
           return 'OOOOOOHHHHH VIETNAM!';
-        }
-        case 'henni':
-        case 'henricke': {
-          return "You're screaming again!";
         }
         case 'bo':
         case 'boc':

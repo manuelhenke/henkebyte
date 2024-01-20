@@ -17,12 +17,22 @@
       </div>
     </div>
 
+    <div class="d-flex my-3 gap-3 text-center gy-2 justify-content-center">
+      <div class="p-1">
+        Score<br /><span class="fw-bold">{{ gameState.score }}</span>
+      </div>
+      <div class="p-1">
+        Best<br /><span class="fw-bold">{{ bestScore }}</span>
+      </div>
+    </div>
+
     <div class="d-flex justify-content-center my-3 position-relative mw-100">
       <game-2048
         id="game-2048"
         ref="game-2048"
         class="d-inline-block"
         @2048:move="handle2048Move"
+        @2048:score="onScore"
         @2048:game-won="onGameWon"
         @2048:game-lost="onGameLost"
       ></game-2048>
@@ -98,8 +108,15 @@ export default {
     endAnimationTimeoutId: undefined,
     notificationId: 'game-2048-notification',
     isInFullscreen: false,
+    isMounted: false,
   }),
   computed: {
+    gameState() {
+      return this.$store.getters['2048/getGameState'];
+    },
+    bestScore() {
+      return this.$store.getters['2048/getBestScore'];
+    },
     isStopwatchRunning() {
       try {
         return this.$refs.stopwatch.isRunning;
@@ -120,6 +137,18 @@ export default {
       this.isInFullscreen = document.fullscreenElement;
     });
 
+    if (this.gameState && this.gameState.positions) {
+      this.$refs['game-2048'].setGameModeConfiguration({
+        columns: 4,
+        rows: 4,
+        state: {
+          positions: this.gameState.positions.map((row) => row.map((cell) => cell || undefined)),
+          score: this.gameState.score,
+        },
+      });
+    }
+
+    this.isMounted = true;
     // TODO: on navigation access if the user is sure, while the game is running
   },
   methods: {
@@ -133,6 +162,18 @@ export default {
           })
           .catch((error) => console.error(error));
       }
+    },
+    /**
+     * @param {import('2048-webcomponent/lib-cjs/src').ScoreEvent} event
+     */
+    onScore(event) {
+      if (!this.isMounted) {
+        return;
+      }
+      this.$store.dispatch('2048/saveGameState', {
+        positions: event.detail.positions,
+        score: event.detail.newScore,
+      });
     },
     onGameWon() {
       this.isEnded = true;
@@ -180,7 +221,7 @@ export default {
       window.clearTimeout(this.endAnimationTimeoutId);
       this.$refs.stopwatch.reset();
       this.$nuxt.$emit(REMOVE_NOTIFICATION, this.notificationId);
-
+      this.$store.dispatch('2048/clearGameState');
       this.$refs['game-2048'].restartGame();
     },
     handle2048Move() {
