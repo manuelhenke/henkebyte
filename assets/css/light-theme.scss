@@ -9,5 +9,5 @@
 
   @import '~bootstrap/scss/bootstrap';
   @import 'color-theme';
-  @include root-variables($theme-colors, $body-color, $secondary);
+  @include root-variables($theme-colors, $body-color, $body-bg);
 }

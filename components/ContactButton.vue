@@ -1,5 +1,5 @@
 <template>
-  <a pill class="contact-button btn btn-primary" :href="href" target="_blank"
+  <a pill class="contact-button btn btn-secondary" :href="href" target="_blank"
     ><i :class="icon"></i><span class="button-text">{{ text }}</span></a
   >
 </template>
