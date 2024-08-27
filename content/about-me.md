@@ -214,12 +214,18 @@ tools:
   libraries: []
 - name: DevOps
   stars: 4
-  libraries: []
+  libraries:
+  - name: GitHub Actions
+    stars: 4
+    libraries: []
+  - name: GitLab Pipelines
+    stars: 4
+    libraries: []
 - name: Confluence
   stars: 4
   libraries: []
 - name: Docker
-  stars: 3
+  stars: 4
   libraries:
   - name: Docker Compose
     stars: 5
@@ -227,8 +233,14 @@ tools:
 - name: Postman
   stars: 3
   libraries: []
-- name: Kubernetes
+- name: Keycloak
   stars: 3
+  libraries: []
+- name: Kafka
+  stars: 4
+  libraries: []
+- name: Kubernetes
+  stars: 4
   libraries:
   - name: Helm
     stars: 3
