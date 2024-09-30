@@ -3,11 +3,7 @@ title: About Me
 badge_text: ''
 meta_tags:
 - key: description
-  content: Hey there! I am Manuel Henke, 27 years old and from the heart of Berlin,
-    Germany. At the moment, I'm in the final phase of my master studies in Information
-    Systems Management. Privately I'm just starting to
-    get involved with open source development and have already started some small
-    projects which are presented on this website.
+  content: Hello everyone! I am Manuel Henke, 27 years old and from the heart of Berlin, Germany. Currently, I'm working as a researcher at the Technical University of Berlin. On a personal level, I'm just starting to get involved with open source development and have already started some small projects that are presented on this website.
 education_timeline_items:
 - from: "2020"
   to: "2023"
@@ -25,7 +21,7 @@ education_timeline_items:
 experience_timeline_items:
 - from: "2023"
   to: "today"
-  role: Researcher
+  role: Researcher, Software Developer and Team Lead
   place: GT-ARC (TU Berlin)
   description: Researching future mobility solutions in the context of Cooperative, Connected and Automated Mobility (CCAM) and the platform economy.
 - from: "2019"
@@ -253,10 +249,7 @@ tools:
   <div class="row justify-content-center">
     <div class="col-12 col-sm-8 col-md-9">
       <p class="lead">
-        Hey there! I am Manuel Henke, 27 years old and from
-        the heart of Berlin, Germany. At the moment I'm working as a researcher at the Technische Universität Berlin. Privately I'm just starting to get
-        involved with open source development and have already started some
-        small projects which are presented on this website.
+        Hello everyone! I am Manuel Henke, 27 years old and from the heart of Berlin, Germany. Currently, I'm working as a researcher at the Technical University of Berlin. On a personal level, I'm just starting to get involved with open source development and have already started some small projects that are presented on this website.
       </p>
     </div>
     <div class="col-8 col-sm-4 col-md-3">
