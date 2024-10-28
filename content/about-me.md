@@ -3,24 +3,24 @@ title: About Me
 badge_text: ''
 meta_tags:
 - key: description
-  content: Hello everyone! I am Manuel Henke, 27 years old and from the heart of Berlin, Germany. Currently, I'm working as a researcher at the Technical University of Berlin. On a personal level, I'm just starting to get involved with open source development and have already started some small projects that are presented on this website.
+  content: Hello everyone! I am Manuel Henke, 27 years old and from the heart of Berlin, Germany. I am a full-stack developer with expertise in AWS, application architecture design, DevOps and team management. Specialized in building web applications with React and Node.js that are written in TypeScript and deployed to Docker or Kubernetes environments using CI/CD pipelines.
 education_timeline_items:
 - from: "2020"
   to: "2023"
-  role: Information Systems Management (MSc)
-  place: Technische Universität Berlin
+  role: Information Systems Management (M.Sc.)
+  place: Technical University of Berlin
   description: 'Thesis: Implementation of a use case mapper for CCAM
     based mobility solutions in the platform economy
     framework'
 - from: "2016"
   to: "2020"
-  role: Wirtschaftsinformatik (BSc)
-  place: Technische Universität Berlin
+  role: Information Systems Management (BSc)
+  place: Technical University of Berlin
   description: 'Thesis: Design and development of a cloud-based solution approach
     for automated home accessibility assessment as an iOS app'
 experience_timeline_items:
 - from: "2023"
-  to: "today"
+  to: "2024"
   role: Researcher, Software Developer and Team Lead
   place: GT-ARC (TU Berlin)
   description: Researching future mobility solutions in the context of Cooperative, Connected and Automated Mobility (CCAM) and the platform economy.
@@ -249,7 +249,7 @@ tools:
   <div class="row justify-content-center">
     <div class="col-12 col-sm-8 col-md-9">
       <p class="lead">
-        Hello everyone! I am Manuel Henke, 27 years old and from the heart of Berlin, Germany. Currently, I'm working as a researcher at the Technical University of Berlin. On a personal level, I'm just starting to get involved with open source development and have already started some small projects that are presented on this website.
+        Hello everyone! I am Manuel Henke, 27 years old and from the heart of Berlin, Germany. I am a full-stack developer with expertise in AWS, application architecture design, DevOps and team management. Specialized in building web applications with React and Node.js that are written in TypeScript and deployed to Docker or Kubernetes environments using CI/CD pipelines.
       </p>
     </div>
     <div class="col-8 col-sm-4 col-md-3">
