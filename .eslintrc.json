@@ -32,6 +32,7 @@
         "ignorePropertyModificationsFor": ["state"]
       }
     ],
+    "no-console": ["error", { "allow": ["error", "warn", "info"] }],
     "import/prefer-default-export": "off",
     "no-only-tests/no-only-tests": "error",
     "no-secrets/no-secrets": "error",
