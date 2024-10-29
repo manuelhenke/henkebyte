@@ -43,13 +43,19 @@ skills:
   stars: 5
   libraries:
   - name: Vue.js
-    stars: 5
+    stars: 4
     libraries:
     - name: Nuxt.js
       stars: 4
   - name: Node.js
-    stars: 5
-    libraries: []
+    stars: 4
+    libraries:
+    - name: Prisma
+      stars: 4
+    - name: Express.js
+      stars: 4
+    - name: Fastify
+      stars: 4
   - name: Webpack
     stars: 4
     libraries: []
@@ -63,13 +69,20 @@ skills:
     stars: 4
     libraries: []
   - name: TypeScript
-    stars: 4
+    stars: 5
     libraries: []
   - name: Jest
-    stars: 4
+    stars: 3
     libraries: []
   - name: React
     stars: 5
+    libraries:
+    - name: MUI
+      stars: 5
+    - name: Formik
+      stars: 4
+  - name: Socket.io
+    stars: 4
     libraries: []
   - name: Electron
     stars: 2
@@ -108,19 +121,22 @@ skills:
     stars: 2
     libraries: []
 - name: PHP
-  stars: 3
+  stars: 2
   libraries:
   - name: Wordpress
     stars: 4
     libraries: []
 - name: SQL
   stars: 3
-  libraries: []
+  libraries:
+  - name: Postgres
+    stars: 4
+    libraries: []
+  - name: MySQL
+    stars: 4
+    libraries: []
 - name: Python
   stars: 2
-  libraries: []
-- name: R
-  stars: 1
   libraries: []
 - name: Go
   stars: 1
@@ -135,18 +151,9 @@ languages:
 - name: Spanish
   stars: 1
   libraries: []
-- name: Binary
-  stars: '0'
-  libraries: []
 tools:
 - name: Git
   stars: 5
-  libraries: []
-- name: VSCode
-  stars: 5
-  libraries: []
-- name: IntelliJ
-  stars: 3
   libraries: []
 - name: Jira
   stars: 4
@@ -205,9 +212,6 @@ tools:
   - name: EKS
     stars: 2
     libraries: []
-- name: Scrum
-  stars: 4
-  libraries: []
 - name: DevOps
   stars: 4
   libraries:
@@ -226,9 +230,6 @@ tools:
   - name: Docker Compose
     stars: 5
     libraries: []
-- name: Postman
-  stars: 3
-  libraries: []
 - name: Keycloak
   stars: 3
   libraries: []
@@ -236,7 +237,7 @@ tools:
   stars: 4
   libraries: []
 - name: Kubernetes
-  stars: 4
+  stars: 3
   libraries:
   - name: Helm
     stars: 3
@@ -251,6 +252,7 @@ tools:
       <p class="lead">
         Hello everyone! I am Manuel Henke, 27 years old and from the heart of Berlin, Germany. I am a full-stack developer with expertise in AWS, application architecture design, DevOps and team management. Specialized in building web applications with React and Node.js that are written in TypeScript and deployed to Docker or Kubernetes environments using CI/CD pipelines.
       </p>
+      <a class="btn btn-primary" href="/documents/cv-manuel-henke.pdf" target="_blank">Open CV</a>
     </div>
     <div class="col-8 col-sm-4 col-md-3">
       <dynamic-image
