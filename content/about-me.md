@@ -19,6 +19,11 @@ education_timeline_items:
   description: 'Thesis: Design and development of a cloud-based solution approach
     for automated home accessibility assessment as an iOS app'
 experience_timeline_items:
+- from: "2024"
+  to: "today"
+  role: Senior Software Engineer
+  place: facilioo
+  description: Building cross-platform apps using Angular and Iconic as well as improving CI/CD pipelines and releases cycles.
 - from: "2023"
   to: "2024"
   role: Researcher, Software Developer and Team Lead
@@ -74,6 +79,13 @@ skills:
   - name: Jest
     stars: 3
     libraries: []
+  - name: Angular
+    stars: 4
+    libraries:
+    - name: Ionic
+      stars: 4
+    - name: Capacitor
+      stars: 4
   - name: React
     stars: 5
     libraries:
@@ -86,9 +98,6 @@ skills:
     libraries: []
   - name: Electron
     stars: 2
-    libraries: []
-  - name: Angular
-    stars: 1
     libraries: []
 - name: CSS
   stars: 5
