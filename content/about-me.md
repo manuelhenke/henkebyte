@@ -3,7 +3,7 @@ title: About Me
 badge_text: ''
 meta_tags:
 - key: description
-  content: Hello everyone! I am Manuel Henke, 27 years old and from the heart of Berlin, Germany. I am a full-stack developer with expertise in AWS, application architecture design, DevOps and team management. Specialized in building web applications with React and Node.js that are written in TypeScript and deployed to Docker or Kubernetes environments using CI/CD pipelines.
+  content: Hello everyone! I am Manuel Henke, 28 years old and from the heart of Berlin, Germany. I am a senior full-stack developer with expertise in AWS, application architecture design, DevOps and team management. Specialized in building web applications with React and Node.js that are written in TypeScript and deployed to Docker or Kubernetes environments using CI/CD pipelines.
 education_timeline_items:
 - from: "2020"
   to: "2023"
@@ -259,7 +259,7 @@ tools:
   <div class="row justify-content-center">
     <div class="col-12 col-sm-8 col-md-9">
       <p class="lead">
-        Hello everyone! I am Manuel Henke, 27 years old and from the heart of Berlin, Germany. I am a full-stack developer with expertise in AWS, application architecture design, DevOps and team management. Specialized in building web applications with React and Node.js that are written in TypeScript and deployed to Docker or Kubernetes environments using CI/CD pipelines.
+        Hello everyone! I am Manuel Henke, 28 years old and from the heart of Berlin, Germany. I am a senior full-stack developer with expertise in AWS, application architecture design, DevOps and team management. Specialized in building web applications with Angular/React/Vue.js and Node.js that are written in TypeScript and deployed to Docker or Kubernetes environments using CI/CD pipelines.
       </p>
       <a class="btn btn-primary" href="/documents/cv-manuel-henke.pdf" target="_blank">Open CV</a>
     </div>
