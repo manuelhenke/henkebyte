@@ -23,7 +23,7 @@ experience_timeline_items:
   to: "today"
   role: Senior Software Engineer
   place: facilioo
-  description: Building cross-platform apps using Angular and Iconic as well as improving CI/CD pipelines and releases cycles.
+  description: Building cross-platform apps using Angular and Iconic as well as improving CI/CD pipelines and release cycles.
 - from: "2023"
   to: "2024"
   role: Researcher, Software Developer and Team Lead
