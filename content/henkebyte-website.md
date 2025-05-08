@@ -51,7 +51,7 @@ Other less commonly used tools are:
 </dl>
 </p>
 <p>
-<small class="text-muted">Get a complete overview <a href="https://github.com/manuelhenke/henkebyte/blob/main/package.json#L34-L56" target="_blank">here</a></small>
+<small class="text-muted">Get a complete overview <a href="https://github.com/manuelhenke/henkebyte/blob/main/package.json#L34-L57" target="_blank">here</a></small>
 </p>
 <!-- /#libraries-and-frameworks -->
 </section>
@@ -63,7 +63,7 @@ Other less commonly used tools are:
 <em>Coming soon...</em>
 </p>
 <p>
-<small class="text-muted">Get a complete overview <a href="https://github.com/manuelhenke/henkebyte/blob/main/package.json#L57-L103" target="_blank">here</a></small>
+<small class="text-muted">Get a complete overview <a href="https://github.com/manuelhenke/henkebyte/blob/main/package.json#L58-L104" target="_blank">here</a></small>
 </p>
 <!-- /#dev-toolchain -->
 </section>
